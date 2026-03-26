@@ -66,6 +66,8 @@ The Toolhouse Agents API enables execution of deployed AI agents via simple HTTP
 - [YouTube](https://youtube.com/@toolhouseai)
 - [Support](https://help.toolhouse.ai/)
 - [Status](https://toolhouse.betteruptime.com/)
+- [JSON-LD](json-ld/toolhouse-context.jsonld)
+- [JSONSchema](json-schema/toolhouse-agent-schema.json)
 
 ## Maintainers
 

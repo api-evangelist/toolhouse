@@ -13,7 +13,7 @@ apis:
     properties:
       - url: https://docs.toolhouse.ai/toolhouse
         type: Documentation
-      - url: https://api.toolhouse.ai/openapi.json
+      - url: openapi/toolhouse-openapi-original.yml
         type: OpenAPI
     description: >-
       The Toolhouse Platform API provides management and orchestration
@@ -110,6 +110,14 @@ common:
     name: Toolhouse Status
     type: Status
     description: 'null'
+  - url: json-ld/toolhouse-context.jsonld
+    name: Toolhouse JSON-LD Context
+    type: JSON-LD
+    description: 'JSON-LD context defining Toolhouse domain vocabulary and linked data mappings.'
+  - url: json-schema/toolhouse-agent-schema.json
+    name: Toolhouse Agent Schema
+    type: JSON-Schema
+    description: 'JSON Schema describing the Toolhouse agent entity model and related types.'
 created: '2026-03-26'
 modified: '2026-03-26'
 position: Consumer

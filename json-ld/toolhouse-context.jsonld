@@ -1,0 +1,170 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "toolhouse": "https://toolhouse.ai/ns/",
+    "schema": "https://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dcterms": "http://purl.org/dc/terms/",
+
+    "Agent": {
+      "@id": "toolhouse:Agent",
+      "@context": {
+        "agentId": "toolhouse:agentId",
+        "name": "schema:name",
+        "description": "schema:description",
+        "slug": "toolhouse:slug",
+        "model": "toolhouse:model",
+        "systemPrompt": "toolhouse:systemPrompt",
+        "tools": {
+          "@id": "toolhouse:tools",
+          "@container": "@set"
+        },
+        "bundles": {
+          "@id": "toolhouse:bundles",
+          "@container": "@set"
+        },
+        "files": {
+          "@id": "toolhouse:files",
+          "@container": "@set"
+        },
+        "schedules": {
+          "@id": "toolhouse:schedules",
+          "@container": "@set"
+        },
+        "isPublic": "toolhouse:isPublic",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "AgentRun": {
+      "@id": "toolhouse:AgentRun",
+      "@context": {
+        "runId": "toolhouse:runId",
+        "agentId": "toolhouse:agentId",
+        "status": "toolhouse:executionStatus",
+        "logs": {
+          "@id": "toolhouse:logs",
+          "@container": "@list"
+        },
+        "mcpServerLogs": {
+          "@id": "toolhouse:mcpServerLogs",
+          "@container": "@list"
+        },
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Tool": {
+      "@id": "toolhouse:Tool",
+      "@context": {
+        "toolId": "toolhouse:toolId",
+        "name": "schema:name",
+        "description": "schema:description",
+        "toolName": "toolhouse:toolName",
+        "category": "schema:category",
+        "tags": {
+          "@id": "schema:keywords",
+          "@container": "@set"
+        },
+        "inputs": "toolhouse:inputs",
+        "outputs": "toolhouse:outputs"
+      }
+    },
+
+    "ToolExecution": {
+      "@id": "toolhouse:ToolExecution",
+      "@context": {
+        "executionId": "toolhouse:executionId",
+        "toolName": "toolhouse:toolName",
+        "status": "toolhouse:executionStatus",
+        "result": "toolhouse:result",
+        "creditsUsed": "toolhouse:creditsUsed",
+        "executedAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "Bundle": {
+      "@id": "toolhouse:Bundle",
+      "@context": {
+        "bundleId": "toolhouse:bundleId",
+        "name": "schema:name",
+        "description": "schema:description",
+        "tools": {
+          "@id": "toolhouse:tools",
+          "@container": "@set"
+        }
+      }
+    },
+
+    "Schedule": {
+      "@id": "toolhouse:Schedule",
+      "@context": {
+        "scheduleId": "toolhouse:scheduleId",
+        "agentId": "toolhouse:agentId",
+        "cronExpression": "toolhouse:cronExpression",
+        "isActive": "toolhouse:isActive",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "ApiKey": {
+      "@id": "toolhouse:ApiKey",
+      "@context": {
+        "apiKeyId": "toolhouse:apiKeyId",
+        "name": "schema:name",
+        "isDefault": "toolhouse:isDefault",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "UserProfile": {
+      "@id": "toolhouse:UserProfile",
+      "@context": {
+        "userId": "toolhouse:userId",
+        "email": "schema:email",
+        "credits": "toolhouse:credits",
+        "tier": "toolhouse:tier",
+        "billing": "toolhouse:billing"
+      }
+    },
+
+    "KeyValueEntry": {
+      "@id": "toolhouse:KeyValueEntry",
+      "@context": {
+        "key": "toolhouse:key",
+        "value": "toolhouse:value"
+      }
+    },
+
+    "McpServer": {
+      "@id": "toolhouse:McpServer",
+      "@context": {
+        "serverId": "toolhouse:serverId",
+        "name": "schema:name",
+        "connections": {
+          "@id": "toolhouse:connections",
+          "@container": "@set"
+        }
+      }
+    }
+  }
+}
