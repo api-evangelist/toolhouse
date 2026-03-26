@@ -1,0 +1,132 @@
+aid: toolhouse
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/toolhouse/refs/heads/main/apis.yml
+apis:
+  - aid: toolhouse:platform-api
+    name: Toolhouse Platform API
+    tags:
+      - AI Agents
+      - Tools
+      - Agent Runs
+      - Management
+    humanURL: https://docs.toolhouse.ai/toolhouse
+    properties:
+      - url: https://docs.toolhouse.ai/toolhouse
+        type: Documentation
+      - url: https://api.toolhouse.ai/openapi.json
+        type: OpenAPI
+    description: >-
+      The Toolhouse Platform API provides management and orchestration
+      capabilities for AI agents and tools. It includes endpoints for user
+      profile management, billing, API key administration, tool discovery
+      and execution, agent run management with pagination, Agent Studio
+      chat sessions, and scheduled agent execution via cron expressions.
+      Authentication uses HTTPBearer JWT tokens.
+  - aid: toolhouse:agents-api
+    name: Toolhouse Agents API
+    tags:
+      - AI Agents
+      - Execution
+      - Streaming
+      - Conversations
+    humanURL: https://docs.toolhouse.ai/toolhouse/advanced-concepts/publish-and-run-your-agents
+    properties:
+      - url: https://docs.toolhouse.ai/toolhouse/advanced-concepts/publish-and-run-your-agents
+        type: Documentation
+    description: >-
+      The Toolhouse Agents API enables execution of deployed AI agents via
+      simple HTTP endpoints. Agents defined as code can be deployed and
+      accessed through REST calls that support streaming responses,
+      conversation continuation via run IDs, and full conversation history
+      retrieval. Public agents require no authentication while private
+      agents use Bearer token authorization.
+name: Toolhouse
+tags:
+  - AI Agents
+  - Tools
+  - Backend as a Service
+  - Agent Infrastructure
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+access: 3rd-Party
+common:
+  - url: https://toolhouse.ai/
+    name: Toolhouse Website
+    type: Website
+    description: 'null'
+  - url: https://docs.toolhouse.ai/toolhouse
+    name: Toolhouse Documentation
+    type: Documentation
+    description: 'null'
+  - url: https://toolhouse.ai/blog
+    name: Toolhouse Blog
+    type: Blog
+    description: 'null'
+  - url: https://toolhouse.ai/pricing
+    name: Toolhouse Pricing
+    type: Pricing
+    description: 'null'
+  - url: https://app.toolhouse.ai
+    name: Toolhouse Login
+    type: Login
+    description: 'null'
+  - url: https://toolhouse.ai/about
+    name: Toolhouse About
+    type: About
+    description: 'null'
+  - url: https://github.com/toolhouseai
+    name: Toolhouse GitHub
+    type: GitHubOrganization
+    description: 'null'
+  - url: https://toolhouse.ai/privacy
+    name: Toolhouse Privacy Policy
+    type: PrivacyPolicy
+    description: 'null'
+  - url: https://toolhouse.ai/tos
+    name: Toolhouse Terms of Service
+    type: TermsOfService
+    description: 'null'
+  - url: https://x.com/toolhouseai
+    name: Toolhouse Twitter
+    type: Twitter
+    description: 'null'
+  - url: https://www.linkedin.com/company/toolhouseai
+    name: Toolhouse LinkedIn
+    type: LinkedIn
+    description: 'null'
+  - url: https://discord.com/invite/xPvyBxhHtu
+    name: Toolhouse Discord
+    type: Discord
+    description: 'null'
+  - url: https://youtube.com/@toolhouseai
+    name: Toolhouse YouTube
+    type: YouTube
+    description: 'null'
+  - url: https://help.toolhouse.ai/
+    name: Toolhouse Support
+    type: Support
+    description: 'null'
+  - url: https://toolhouse.betteruptime.com/
+    name: Toolhouse Status
+    type: Status
+    description: 'null'
+created: '2026-03-26'
+modified: '2026-03-26'
+position: Consumer
+segments:
+  - AI Agents
+  - Tools
+  - Agent Infrastructure
+description: >-
+  Toolhouse is a Backend-as-a-Service platform for building, deploying, and
+  managing AI agents. Developers define agents as code and deploy them as APIs
+  with a single command. Agents are automatically connected to over 40 pre-built
+  tools including RAG, memory, code execution, browser automation, web scraping,
+  and database connections. The platform provides SDKs for Python and TypeScript,
+  integrations with Vercel AI SDK, LlamaIndex, MCP servers, n8n, Zapier, and
+  Make.com, and supports major LLM providers including OpenAI, Anthropic, and
+  Groq. Trusted by Cloudflare, NVIDIA, Groq, and Snowflake.
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+specificationVersion: '0.19'
