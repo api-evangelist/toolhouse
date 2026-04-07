@@ -7,8 +7,8 @@ paths:
   /me/agent-runs:
     get:
       tags:
-        - User API
         - Agent Runs
+        - User API
       summary: Toolhouse Get User Agent Runs
       description: User Installed Tools
       operationId: get_user_agent_runs_me_agent_runs_get
@@ -49,8 +49,8 @@ paths:
   /me/agent-runs/{run_id}:
     get:
       tags:
-        - User API
         - Agent Runs
+        - User API
       summary: Toolhouse Get User Agent Run
       description: User Installed Tools
       operationId: get_user_agent_run_me_agent_runs__run_id__get
@@ -84,8 +84,8 @@ paths:
   /me/agent-runs/{run_id}/mcp-server-logs:
     get:
       tags:
-        - User API
         - Agent Runs
+        - User API
       summary: Toolhouse Get User Agent Run Mcp Server Logs
       description: User Installed Tools
       operationId: get_user_agent_run_mcp_server_logs_me_agent_runs__run_id__mcp_server_logs_get
@@ -120,8 +120,8 @@ paths:
   /me/agent-runs/{run_id}/logs:
     get:
       tags:
-        - User API
         - Agent Runs
+        - User API
       summary: Toolhouse Get User Agent Run Logs
       description: User Installed Tools
       operationId: get_user_agent_run_logs_me_agent_runs__run_id__logs_get
@@ -983,8 +983,8 @@ paths:
   /me/api-keys:
     get:
       tags:
-        - User API
         - API Keys
+        - User API
       summary: Toolhouse Get Api Keys
       description: Get all API Keys
       operationId: get_api_keys_me_api_keys_get
@@ -1004,8 +1004,8 @@ paths:
         - HTTPBearer: []
     post:
       tags:
-        - User API
         - API Keys
+        - User API
       summary: Toolhouse Post Create Api Key
       description: Create API Key
       operationId: post_create_api_key_me_api_keys_post
@@ -1035,8 +1035,8 @@ paths:
   /me/api-keys/default:
     get:
       tags:
-        - User API
         - API Keys
+        - User API
       summary: Toolhouse Get Default Api Key
       description: Get default API Key
       operationId: get_default_api_key_me_api_keys_default_get
@@ -1054,8 +1054,8 @@ paths:
   /me/api-keys/{api_key_id}:
     get:
       tags:
-        - User API
         - API Keys
+        - User API
       summary: Toolhouse Get Api Key
       description: Get API Key by ID
       operationId: get_api_key_me_api_keys__api_key_id__get
@@ -1087,8 +1087,8 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
     delete:
       tags:
-        - User API
         - API Keys
+        - User API
       summary: Toolhouse Delete Api Key
       description: Delete API Key
       operationId: delete_api_key_me_api_keys__api_key_id__delete
@@ -1851,8 +1851,8 @@ paths:
   /me/executions:
     get:
       tags:
-        - User API
         - Logs
+        - User API
       summary: Toolhouse Get User Logs
       description: User Installed Tools
       operationId: get_user_logs_me_executions_get
@@ -1893,8 +1893,8 @@ paths:
   /me/executions/{log_id}:
     get:
       tags:
-        - User API
         - Logs
+        - User API
       summary: Toolhouse Get User Log By Id
       description: User Installed Tools
       operationId: get_user_log_by_id_me_executions__log_id__get
@@ -4626,7 +4626,7 @@ paths:
   /public/integrations/{auth_config_id}/connect:
     get:
       tags:
-        - public
+        - Public
       summary: Toolhouse Connect Integration
       operationId: connect_integration_public_integrations__auth_config_id__connect_get
       parameters:
@@ -4675,7 +4675,7 @@ paths:
   /public/integrations/callback:
     get:
       tags:
-        - public
+        - Public
       summary: Toolhouse Callback
       operationId: callback_public_integrations_callback_get
       parameters:
@@ -4736,7 +4736,7 @@ paths:
   /v2/tools/list:
     get:
       tags:
-        - v2
+        - V2
       summary: Toolhouse List Tools
       operationId: list_tools_v2_tools_list_get
       responses:
@@ -4754,7 +4754,7 @@ paths:
   /v2/tools/search:
     get:
       tags:
-        - v2
+        - V2
       summary: Toolhouse Search Tools
       operationId: search_tools_v2_tools_search_get
       parameters:
@@ -4813,7 +4813,7 @@ paths:
   /v2/tools/run/{tool_name}:
     post:
       tags:
-        - v2
+        - V2
       summary: Toolhouse Run Tool
       operationId: run_tool_v2_tools_run__tool_name__post
       security:
@@ -4871,7 +4871,7 @@ paths:
   /v2/toolsets/list:
     get:
       tags:
-        - v2
+        - V2
       summary: Toolhouse List Toolsets
       operationId: list_toolsets_v2_toolsets_list_get
       responses:
@@ -4889,7 +4889,7 @@ paths:
   /v2/toolsets/{toolset_name}:
     get:
       tags:
-        - v2
+        - V2
       summary: Toolhouse Get Toolset
       operationId: get_toolset_v2_toolsets__toolset_name__get
       parameters:
@@ -4919,7 +4919,7 @@ paths:
   /v2/mcp:
     post:
       tags:
-        - v2
+        - V2
       summary: Toolhouse Mcp Server
       operationId: mcp_server_v2_mcp_post
       security:
@@ -9095,3 +9095,12 @@ components:
     HTTPBearer:
       type: http
       scheme: bearer
+tags:
+  - name: Agent Runs
+  - name: API Keys
+  - name: Backoffice
+  - name: Logs
+  - name: Public
+  - name: SDK API
+  - name: User API
+  - name: V2

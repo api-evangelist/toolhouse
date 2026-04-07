@@ -5,10 +5,10 @@ apis:
   - aid: toolhouse:platform-api
     name: Toolhouse Platform API
     tags:
-      - AI Agents
-      - Tools
       - Agent Runs
+      - AI Agents
       - Management
+      - Tools
     humanURL: https://docs.toolhouse.ai/toolhouse
     properties:
       - url: https://docs.toolhouse.ai/toolhouse
@@ -26,14 +26,12 @@ apis:
     name: Toolhouse Agents API
     tags:
       - AI Agents
+      - Conversations
       - Execution
       - Streaming
-      - Conversations
-    humanURL: 
-      https://docs.toolhouse.ai/toolhouse/advanced-concepts/publish-and-run-your-agents
+    humanURL: https://docs.toolhouse.ai/toolhouse/advanced-concepts/publish-and-run-your-agents
     properties:
-      - url: 
-          https://docs.toolhouse.ai/toolhouse/advanced-concepts/publish-and-run-your-agents
+      - url: https://docs.toolhouse.ai/toolhouse/advanced-concepts/publish-and-run-your-agents
         type: Documentation
     description: >-
       The Toolhouse Agents API enables execution of deployed AI agents via
@@ -44,10 +42,10 @@ apis:
       agents use Bearer token authorization.
 name: Toolhouse
 tags:
-  - AI Agents
-  - Tools
-  - Backend as a Service
   - Agent Infrastructure
+  - AI Agents
+  - Backend as a Service
+  - Tools
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 access: 3rd-Party
@@ -115,13 +113,11 @@ common:
   - url: json-ld/toolhouse-context.jsonld
     name: Toolhouse JSON-LD Context
     type: JSON-LD
-    description: 'JSON-LD context defining Toolhouse domain vocabulary and linked
-      data mappings.'
+    description: 'JSON-LD context defining Toolhouse domain vocabulary and linked data mappings.'
   - url: json-schema/toolhouse-agent-schema.json
     name: Toolhouse Agent Schema
     type: JSON-Schema
-    description: 'JSON Schema describing the Toolhouse agent entity model and related
-      types.'
+    description: 'JSON Schema describing the Toolhouse agent entity model and related types.'
 created: '2026-03-26'
 modified: '2026-03-26'
 position: Consumer
