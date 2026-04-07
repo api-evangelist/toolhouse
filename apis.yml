@@ -29,9 +29,11 @@ apis:
       - Execution
       - Streaming
       - Conversations
-    humanURL: https://docs.toolhouse.ai/toolhouse/advanced-concepts/publish-and-run-your-agents
+    humanURL: 
+      https://docs.toolhouse.ai/toolhouse/advanced-concepts/publish-and-run-your-agents
     properties:
-      - url: https://docs.toolhouse.ai/toolhouse/advanced-concepts/publish-and-run-your-agents
+      - url: 
+          https://docs.toolhouse.ai/toolhouse/advanced-concepts/publish-and-run-your-agents
         type: Documentation
     description: >-
       The Toolhouse Agents API enables execution of deployed AI agents via
@@ -113,11 +115,13 @@ common:
   - url: json-ld/toolhouse-context.jsonld
     name: Toolhouse JSON-LD Context
     type: JSON-LD
-    description: 'JSON-LD context defining Toolhouse domain vocabulary and linked data mappings.'
+    description: 'JSON-LD context defining Toolhouse domain vocabulary and linked
+      data mappings.'
   - url: json-schema/toolhouse-agent-schema.json
     name: Toolhouse Agent Schema
     type: JSON-Schema
-    description: 'JSON Schema describing the Toolhouse agent entity model and related types.'
+    description: 'JSON Schema describing the Toolhouse agent entity model and related
+      types.'
 created: '2026-03-26'
 modified: '2026-03-26'
 position: Consumer
@@ -126,14 +130,10 @@ segments:
   - Tools
   - Agent Infrastructure
 description: >-
-  Toolhouse is a Backend-as-a-Service platform for building, deploying, and
-  managing AI agents. Developers define agents as code and deploy them as APIs
-  with a single command. Agents are automatically connected to over 40 pre-built
-  tools including RAG, memory, code execution, browser automation, web scraping,
-  and database connections. The platform provides SDKs for Python and TypeScript,
-  integrations with Vercel AI SDK, LlamaIndex, MCP servers, n8n, Zapier, and
-  Make.com, and supports major LLM providers including OpenAI, Anthropic, and
-  Groq. Trusted by Cloudflare, NVIDIA, Groq, and Snowflake.
+  Toolhouse is a Backend-as-a-Service platform for building, deploying, and managing
+  AI agents. Developers define agents as code and deploy them as APIs with a single
+  command. Agents are automatically connected to over 40 pre-built tools including
+  RAG, memory, code execution, browser automation, web scraping, and database connections.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
