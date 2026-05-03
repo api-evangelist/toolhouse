@@ -1,0 +1,57 @@
+{
+  "title": "Toolhouse List Agents - Example Response",
+  "description": "Example response from GET /me/agents showing a list of deployed AI agents.",
+  "request": {
+    "method": "GET",
+    "url": "https://api.toolhouse.ai/me/agents",
+    "headers": {
+      "Authorization": "Bearer {TOOLHOUSE_API_KEY}",
+      "Content-Type": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": [
+      {
+        "agentId": "3f9a1b2e-4c5d-6e7f-8a9b-0c1d2e3f4a5b",
+        "name": "Customer Support Assistant",
+        "description": "An AI agent that handles customer support queries using internal knowledge base.",
+        "slug": "customer-support-assistant",
+        "model": "claude-3-5-sonnet",
+        "systemPrompt": "You are a helpful customer support assistant. Use the available tools to look up account information and resolve customer issues efficiently.",
+        "isPublic": false,
+        "tools": ["rag-memory", "web-search", "send-email"],
+        "bundles": ["customer-support-bundle"],
+        "files": [],
+        "schedules": [],
+        "createdAt": "2026-04-01T09:00:00Z",
+        "updatedAt": "2026-05-01T14:30:00Z"
+      },
+      {
+        "agentId": "7d8e9f0a-1b2c-3d4e-5f6a-7b8c9d0e1f2a",
+        "name": "Daily Report Generator",
+        "description": "Generates and emails a daily business metrics report every morning.",
+        "slug": "daily-report-generator",
+        "model": "gpt-4o",
+        "systemPrompt": "You are a business analyst assistant. Each morning, compile the daily metrics report from connected data sources and send it to the team.",
+        "isPublic": false,
+        "tools": ["code-execution", "web-scraper", "send-email"],
+        "bundles": [],
+        "files": [],
+        "schedules": [
+          {
+            "scheduleId": "sched-001",
+            "cronExpression": "0 8 * * 1-5",
+            "isActive": true,
+            "createdAt": "2026-03-15T10:00:00Z"
+          }
+        ],
+        "createdAt": "2026-03-15T10:00:00Z",
+        "updatedAt": "2026-04-28T08:00:00Z"
+      }
+    ]
+  }
+}

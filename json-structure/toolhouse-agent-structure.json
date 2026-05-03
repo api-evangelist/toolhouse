@@ -1,0 +1,132 @@
+{
+  "name": "ToolhouseAgent",
+  "description": "Structure of a Toolhouse AI agent object returned from the Platform API.",
+  "type": "object",
+  "fields": [
+    {
+      "name": "agentId",
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the agent.",
+      "required": true
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "description": "Display name of the agent.",
+      "required": true
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": "Human-readable description of the agent's purpose.",
+      "required": false
+    },
+    {
+      "name": "slug",
+      "type": "string",
+      "description": "URL-friendly identifier for the agent (vanity slug).",
+      "required": false
+    },
+    {
+      "name": "model",
+      "type": "string",
+      "description": "The LLM model identifier used by the agent (e.g., gpt-4o, claude-3-5-sonnet).",
+      "required": false
+    },
+    {
+      "name": "systemPrompt",
+      "type": "string",
+      "description": "System prompt defining the agent's behavior and personality.",
+      "required": false
+    },
+    {
+      "name": "isPublic",
+      "type": "boolean",
+      "description": "Whether the agent is publicly accessible without authentication.",
+      "required": false
+    },
+    {
+      "name": "tools",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Tool name/identifier."
+      },
+      "description": "List of Toolhouse tool identifiers attached to this agent.",
+      "required": false
+    },
+    {
+      "name": "bundles",
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Bundle identifier."
+      },
+      "description": "List of tool bundle identifiers attached to this agent.",
+      "required": false
+    },
+    {
+      "name": "files",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AgentFile"
+      },
+      "description": "Files attached to this agent for RAG or context.",
+      "required": false
+    },
+    {
+      "name": "schedules",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AgentSchedule"
+      },
+      "description": "Cron schedules configured for autonomous agent execution.",
+      "required": false
+    },
+    {
+      "name": "createdAt",
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the agent was created.",
+      "required": false
+    },
+    {
+      "name": "updatedAt",
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the agent was last modified.",
+      "required": false
+    }
+  ],
+  "definitions": {
+    "AgentFile": {
+      "type": "object",
+      "fields": [
+        { "name": "fileId", "type": "string", "format": "uuid", "description": "File identifier." },
+        { "name": "name", "type": "string", "description": "File name." },
+        { "name": "url", "type": "string", "description": "File URL or storage reference." },
+        { "name": "position", "type": "integer", "description": "Ordering position of the file." }
+      ]
+    },
+    "AgentSchedule": {
+      "type": "object",
+      "fields": [
+        { "name": "scheduleId", "type": "string", "description": "Schedule identifier." },
+        { "name": "cronExpression", "type": "string", "description": "Cron expression (e.g., '0 9 * * 1-5')." },
+        { "name": "isActive", "type": "boolean", "description": "Whether the schedule is currently active." },
+        { "name": "createdAt", "type": "string", "format": "date-time", "description": "When the schedule was created." }
+      ]
+    },
+    "AgentRun": {
+      "type": "object",
+      "fields": [
+        { "name": "runId", "type": "string", "format": "uuid", "description": "Unique run identifier." },
+        { "name": "agentId", "type": "string", "description": "The agent that executed this run." },
+        { "name": "status", "type": "string", "enum": ["pending", "running", "completed", "failed"], "description": "Execution status." },
+        { "name": "logs", "type": "array", "description": "Execution log entries." },
+        { "name": "createdAt", "type": "string", "format": "date-time", "description": "When the run started." }
+      ]
+    }
+  }
+}

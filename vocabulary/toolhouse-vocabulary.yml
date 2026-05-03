@@ -1,0 +1,225 @@
+vocabulary:
+  name: Toolhouse Vocabulary
+  description: >-
+    Domain vocabulary and taxonomy for the Toolhouse AI agent platform.
+    Covers agent lifecycle management, tool ecosystem, execution model,
+    and platform concepts used across the Toolhouse Platform API.
+  provider: Toolhouse
+  url: https://toolhouse.ai
+  version: "1.0"
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+terms:
+  # Core Platform Concepts
+  - term: Agent
+    definition: >-
+      An AI-powered application defined as code and deployed to Toolhouse.
+      Agents combine a system prompt, LLM model selection, and a set of
+      tools or bundles. Deployed agents are accessible via REST endpoints.
+    tags:
+      - Core
+      - AI Agents
+    relatedTerms:
+      - Agent Run
+      - Agent Studio
+      - Bundle
+
+  - term: Agent Run
+    definition: >-
+      A single execution instance of a deployed Toolhouse agent. Captured
+      as a record with unique run ID, timestamps, status, execution logs,
+      and MCP server interaction logs.
+    tags:
+      - Core
+      - Execution
+    relatedTerms:
+      - Agent
+      - MCP Server Log
+      - Log
+
+  - term: Agent Studio
+    definition: >-
+      Toolhouse's visual, browser-based environment for interactively
+      building and testing agents. Agent Studio chats are persistent
+      sessions that capture conversation history.
+    tags:
+      - Development Tools
+    relatedTerms:
+      - Agent
+      - Chat Session
+
+  - term: Tool
+    definition: >-
+      A pre-built capability available in the Toolhouse tool library that
+      agents can invoke. Tools include RAG memory, web search, code
+      execution, browser automation, web scraping, database connectors,
+      and communication tools like email and Slack.
+    tags:
+      - Core
+      - Tools
+    relatedTerms:
+      - Bundle
+      - Tool Execution
+      - MCP Server
+
+  - term: Bundle
+    definition: >-
+      A named, reusable collection of tools grouped together for a
+      specific purpose. Bundles can be shared across multiple agents and
+      published to the Toolhouse marketplace.
+    tags:
+      - Core
+      - Tools
+    relatedTerms:
+      - Tool
+      - Agent
+
+  - term: MCP Server
+    definition: >-
+      The Toolhouse Model Context Protocol server that exposes the full
+      tool library to any MCP-compatible AI client or agent framework.
+      Allows external AI clients to call Toolhouse tools natively.
+    tags:
+      - Protocol
+      - Integration
+    relatedTerms:
+      - Tool
+      - MCP Server Log
+
+  - term: MCP Server Log
+    definition: >-
+      A recorded log entry capturing interactions between an agent run
+      and the Toolhouse MCP server, including tool calls, parameters,
+      and results.
+    tags:
+      - Observability
+    relatedTerms:
+      - MCP Server
+      - Agent Run
+
+  - term: Schedule
+    definition: >-
+      A cron-based trigger configured on an agent that causes it to
+      execute autonomously at specified times without manual invocation.
+    tags:
+      - Automation
+      - Scheduling
+    relatedTerms:
+      - Agent
+      - Cron Expression
+
+  - term: Cron Expression
+    definition: >-
+      A standard five-field time expression (minute hour day month weekday)
+      used to specify when a scheduled agent should execute automatically.
+    tags:
+      - Scheduling
+    example: "0 9 * * 1-5 (every weekday at 9am)"
+    relatedTerms:
+      - Schedule
+
+  - term: API Key
+    definition: >-
+      An authentication credential created in Toolhouse Settings that is
+      passed as an HTTPBearer token to authorize access to the Platform API.
+    tags:
+      - Authentication
+      - Security
+    relatedTerms:
+      - HTTPBearer
+
+  - term: HTTPBearer
+    definition: >-
+      The authentication scheme used by the Toolhouse Platform API. API keys
+      are passed in the Authorization header as "Bearer {token}".
+    tags:
+      - Authentication
+    relatedTerms:
+      - API Key
+
+  - term: Agent File
+    definition: >-
+      A file (document, data, code) attached to an agent for use in RAG
+      (retrieval augmented generation) or as contextual input. Files can
+      be uploaded and managed per agent.
+    tags:
+      - Files
+      - RAG
+    relatedTerms:
+      - Agent
+      - RAG Memory
+
+  - term: RAG Memory
+    definition: >-
+      A Toolhouse built-in tool providing Retrieval Augmented Generation
+      capability. Enables agents to store and retrieve information from a
+      persistent vector store across runs.
+    tags:
+      - Tools
+      - Memory
+    relatedTerms:
+      - Tool
+      - Agent File
+
+  - term: Slug
+    definition: >-
+      A URL-friendly identifier automatically generated from an agent's
+      name, used in public agent URLs (e.g., toolhouse.ai/agents/{slug}).
+      Custom slugs can be set via the vanity slug endpoint.
+    tags:
+      - Identity
+    relatedTerms:
+      - Agent
+
+  - term: Agent Subscription
+    definition: >-
+      A billing arrangement allowing users to access paid agents published
+      by other Toolhouse users. Managed via Stripe checkout sessions.
+    tags:
+      - Billing
+      - Marketplace
+    relatedTerms:
+      - Agent
+
+  - term: Sandbox Tier
+    definition: >-
+      The free tier of Toolhouse access with restrictions such as limited
+      private agent creation and restricted Agent Studio functionality.
+    tags:
+      - Billing
+      - Tiers
+    relatedTerms:
+      - Agent
+
+  - term: Theme Preference
+    definition: >-
+      Visual customization settings for an agent's public-facing interface,
+      including color scheme and branding. Configured via the theme endpoint.
+    tags:
+      - Customization
+    relatedTerms:
+      - Agent
+
+tags:
+  - Core
+  - AI Agents
+  - Authentication
+  - Automation
+  - Billing
+  - Customization
+  - Development Tools
+  - Execution
+  - Files
+  - Identity
+  - Integration
+  - Marketplace
+  - Memory
+  - MCP
+  - Observability
+  - Protocol
+  - RAG
+  - Scheduling
+  - Security
+  - Tiers
+  - Tools

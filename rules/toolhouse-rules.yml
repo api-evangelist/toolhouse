@@ -1,0 +1,105 @@
+extends: spectral:oas
+
+rules:
+  # Toolhouse API uses Title Case summaries with "Toolhouse" prefix
+  toolhouse-operation-summary-title-case:
+    description: Operation summaries must use Title Case and start with "Toolhouse"
+    message: "Operation summary '{{value}}' should start with 'Toolhouse' and use Title Case"
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^Toolhouse [A-Z]"
+
+  # All operationIds should follow snake_case style (auto-generated FastAPI pattern)
+  toolhouse-operation-id-snake-case:
+    description: OperationIds should be lowercase snake_case
+    message: "OperationId '{{value}}' should be snake_case"
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-z0-9_]+$"
+
+  # All operations must have operationId
+  toolhouse-operation-id-required:
+    description: All operations must have an operationId
+    message: "Operation is missing an operationId"
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: operationId
+      function: truthy
+
+  # All operations must have a summary
+  toolhouse-operation-summary-required:
+    description: All operations must have a summary
+    message: "Operation is missing a summary"
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: summary
+      function: truthy
+
+  # Bearer token authentication must be defined consistently
+  toolhouse-security-bearer-auth:
+    description: API uses HTTPBearer authentication - security scheme should be defined
+    message: "Security scheme HTTPBearer must be defined in components.securitySchemes"
+    severity: error
+    given: "$.components.securitySchemes"
+    then:
+      field: HTTPBearer
+      function: truthy
+
+  # Paths under /me/ are user-scoped - should follow /me/{resource} pattern
+  toolhouse-me-path-structure:
+    description: User-scoped paths should follow /me/{resource} pattern
+    message: "Path '{{value}}' under /me/ should follow /me/{resource} convention"
+    severity: hint
+    given: "$.paths"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/me/[a-z]"
+
+  # UUIDs used as path parameters should be typed as uuid format
+  toolhouse-uuid-path-param-format:
+    description: Path parameters ending in _id that use UUID values should have format uuid
+    message: "Path parameter '{{path}}' appears to be a UUID but may be missing format: uuid"
+    severity: warn
+    given: "$.paths[*][*].parameters[?(@.in=='path')][?(@.name=~/_id$/)]"
+    then:
+      field: schema.format
+      function: truthy
+
+  # Responses should document 422 Validation Error for POST/PUT/PATCH
+  toolhouse-validation-error-documented:
+    description: POST/PUT/PATCH operations should document 422 Validation Error response
+    message: "Operation is missing 422 Validation Error response"
+    severity: warn
+    given: "$.paths[*][post,put,patch].responses"
+    then:
+      field: "422"
+      function: truthy
+
+  # Tags should be defined globally when used on operations
+  toolhouse-tags-defined:
+    description: Tags used on operations should be defined at the top level
+    message: "Top-level tags array should be defined"
+    severity: warn
+    given: "$"
+    then:
+      field: tags
+      function: truthy
+
+  # Request bodies for POST/PUT/PATCH must be marked required
+  toolhouse-request-body-required:
+    description: Request bodies should be marked as required for POST/PUT/PATCH
+    message: "Request body should be marked as required"
+    severity: warn
+    given: "$.paths[*][post,put,patch].requestBody"
+    then:
+      field: required
+      function: truthy

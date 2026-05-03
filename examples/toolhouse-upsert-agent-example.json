@@ -1,0 +1,42 @@
+{
+  "title": "Toolhouse Upsert Agent - Example Request and Response",
+  "description": "Example of creating a new AI agent via POST /me/agents on Toolhouse.",
+  "request": {
+    "method": "POST",
+    "url": "https://api.toolhouse.ai/me/agents",
+    "headers": {
+      "Authorization": "Bearer {TOOLHOUSE_API_KEY}",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "Competitive Research Agent",
+      "description": "Continuously monitors competitor websites and summarizes key changes.",
+      "model": "claude-3-5-sonnet",
+      "systemPrompt": "You are a competitive intelligence analyst. Monitor competitor websites for product updates, pricing changes, and news. Provide concise summaries of findings.",
+      "isPublic": false,
+      "tools": ["web-scraper", "web-search", "rag-memory", "send-email"],
+      "bundles": []
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "agentId": "5b6c7d8e-9f0a-1b2c-3d4e-5f6a7b8c9d0e",
+      "name": "Competitive Research Agent",
+      "description": "Continuously monitors competitor websites and summarizes key changes.",
+      "slug": "competitive-research-agent",
+      "model": "claude-3-5-sonnet",
+      "systemPrompt": "You are a competitive intelligence analyst. Monitor competitor websites for product updates, pricing changes, and news. Provide concise summaries of findings.",
+      "isPublic": false,
+      "tools": ["web-scraper", "web-search", "rag-memory", "send-email"],
+      "bundles": [],
+      "files": [],
+      "schedules": [],
+      "createdAt": "2026-05-03T12:00:00Z",
+      "updatedAt": "2026-05-03T12:00:00Z"
+    }
+  }
+}
