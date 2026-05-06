@@ -1,299 +1,542 @@
-naftiko: "1.0.0-alpha1"
-
+naftiko: 1.0.0-alpha2
 info:
-  label: "Toolhouse Agent Management"
-  description: "Workflow capability for managing the full AI agent lifecycle on Toolhouse — from agent creation and tool configuration to execution monitoring, Agent Studio sessions, and scheduled runs."
+  label: Toolhouse Agent Management
+  description: Workflow capability for managing the full AI agent lifecycle on Toolhouse — from agent creation and tool configuration
+    to execution monitoring, Agent Studio sessions, and scheduled runs.
   tags:
-    - AI Agents
-    - Agent Infrastructure
-    - Backend As A Service
-    - MCP
-    - Tools
-    - Toolhouse
-  created: "2026-05-03"
-  modified: "2026-05-03"
-
+  - AI Agents
+  - Agent Infrastructure
+  - Backend As A Service
+  - MCP
+  - Tools
+  - Toolhouse
+  created: '2026-05-03'
+  modified: '2026-05-06'
 binds:
-  - namespace: env
-    keys:
-      TOOLHOUSE_API_KEY: TOOLHOUSE_API_KEY
-
+- namespace: env
+  keys:
+    TOOLHOUSE_API_KEY: TOOLHOUSE_API_KEY
 capability:
   consumes:
-    - import: toolhouse-platform
-      location: ./shared/toolhouse-platform.yaml
-
+  - type: http
+    namespace: toolhouse-platform
+    baseUri: https://api.toolhouse.ai
+    description: Toolhouse Platform API for managing AI agents, tools, and agent execution.
+    authentication:
+      type: bearer
+      token: '{{TOOLHOUSE_API_KEY}}'
+    resources:
+    - name: agent-runs
+      path: /me/agent-runs
+      description: Manage and retrieve AI agent run history and execution logs.
+      operations:
+      - name: list-agent-runs
+        method: GET
+        description: List all agent runs for the authenticated user with pagination.
+        inputParameters:
+        - name: next_cursor
+          in: query
+          type: string
+          required: false
+          description: Pagination cursor for next page.
+        - name: limit
+          in: query
+          type: integer
+          required: false
+          description: Number of results to return (default 30).
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-agent-run
+        method: GET
+        description: Get details of a specific agent run by run ID.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+          description: The UUID of the agent run.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: get-agent-run-logs
+        method: GET
+        description: Retrieve execution logs for a specific agent run.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+          description: The UUID of the agent run.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: array
+          value: $.
+      - name: get-agent-run-mcp-logs
+        method: GET
+        description: Retrieve MCP server logs for a specific agent run.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+          description: The UUID of the agent run.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: array
+          value: $.
+    - name: agents
+      path: /me/agents
+      description: Create, manage, and configure AI agents.
+      operations:
+      - name: list-agents
+        method: GET
+        description: Get all agents for the authenticated user.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: array
+          value: $.
+      - name: upsert-agent
+        method: POST
+        description: Create or update an AI agent.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            description: '{{tools.description}}'
+            model: '{{tools.model}}'
+            systemPrompt: '{{tools.systemPrompt}}'
+      - name: get-agent
+        method: GET
+        description: Get details of a specific agent.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+          description: The agent identifier.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: subscribe-to-agent
+        method: POST
+        description: Subscribe to a paid agent.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+          description: The agent identifier.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: unsubscribe-from-agent
+        method: POST
+        description: Unsubscribe from a paid agent.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+          description: The agent identifier.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: agent-studio-chats
+      path: /me/agent-studio-chats
+      description: Manage Agent Studio chat sessions.
+      operations:
+      - name: list-studio-chats
+        method: GET
+        description: Get all Agent Studio chats for the authenticated user.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: array
+          value: $.
+      - name: create-studio-chat
+        method: POST
+        description: Create a new Agent Studio chat session.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            agentId: '{{tools.agentId}}'
+            runId: '{{tools.runId}}'
+      - name: get-studio-chat
+        method: GET
+        description: Get a specific Agent Studio chat by run ID.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+          description: The run/chat identifier.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: delete-studio-chat
+        method: DELETE
+        description: Delete an Agent Studio chat session.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+          description: The run/chat identifier.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: api-keys
+      path: /me/api-keys
+      description: Manage API keys for the authenticated user.
+      operations:
+      - name: list-api-keys
+        method: GET
+        description: Get all API keys for the authenticated user.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: array
+          value: $.
+      - name: create-api-key
+        method: POST
+        description: Create a new API key.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+    - name: tools
+      path: /me/tools
+      description: Browse and manage available Toolhouse tools.
+      operations:
+      - name: list-tools
+        method: GET
+        description: List all available tools in the Toolhouse tool library.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: array
+          value: $.
+    - name: bundles
+      path: /me/bundles
+      description: Manage tool bundles for organizing and sharing tool sets.
+      operations:
+      - name: list-bundles
+        method: GET
+        description: List all tool bundles for the authenticated user.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: array
+          value: $.
+      - name: create-bundle
+        method: POST
+        description: Create a new tool bundle.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        body:
+          type: json
+          data:
+            name: '{{tools.name}}'
+            tools: '{{tools.tools}}'
   exposes:
-    - type: rest
-      port: 8080
-      namespace: toolhouse-agent-management-api
-      description: "Unified REST API for the full Toolhouse agent lifecycle management workflow."
-      resources:
-        - path: /v1/agents
-          name: agents
-          description: "Manage AI agents."
-          operations:
-            - method: GET
-              name: list-agents
-              description: "List all agents for the authenticated user."
-              call: "toolhouse-platform.list-agents"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-agent
-              description: "Create or update an AI agent."
-              call: "toolhouse-platform.upsert-agent"
-              with:
-                name: "rest.name"
-                description: "rest.description"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/agents/{agent_id}
-          name: agent
-          description: "Get a specific agent."
-          operations:
-            - method: GET
-              name: get-agent
-              description: "Get details of a specific agent."
-              call: "toolhouse-platform.get-agent"
-              with:
-                agent_id: "rest.agent_id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/agent-runs
-          name: agent-runs
-          description: "Agent execution history."
-          operations:
-            - method: GET
-              name: list-agent-runs
-              description: "List all agent execution runs."
-              call: "toolhouse-platform.list-agent-runs"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/agent-runs/{run_id}
-          name: agent-run
-          description: "Get a specific agent run."
-          operations:
-            - method: GET
-              name: get-agent-run
-              description: "Get details and status of a specific agent run."
-              call: "toolhouse-platform.get-agent-run"
-              with:
-                run_id: "rest.run_id"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/tools
-          name: tools
-          description: "Available tools in the Toolhouse library."
-          operations:
-            - method: GET
-              name: list-tools
-              description: "List all available tools."
-              call: "toolhouse-platform.list-tools"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/bundles
-          name: bundles
-          description: "Tool bundles for grouping tools."
-          operations:
-            - method: GET
-              name: list-bundles
-              description: "List all tool bundles."
-              call: "toolhouse-platform.list-bundles"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-bundle
-              description: "Create a new tool bundle."
-              call: "toolhouse-platform.create-bundle"
-              with:
-                name: "rest.name"
-                tools: "rest.tools"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/studio-chats
-          name: studio-chats
-          description: "Agent Studio chat sessions."
-          operations:
-            - method: GET
-              name: list-studio-chats
-              description: "List all Agent Studio chat sessions."
-              call: "toolhouse-platform.list-studio-chats"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-            - method: POST
-              name: create-studio-chat
-              description: "Start a new Agent Studio chat session."
-              call: "toolhouse-platform.create-studio-chat"
-              with:
-                agentId: "rest.agentId"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-        - path: /v1/api-keys
-          name: api-keys
-          description: "API key management."
-          operations:
-            - method: GET
-              name: list-api-keys
-              description: "List all API keys for the authenticated user."
-              call: "toolhouse-platform.list-api-keys"
-              outputParameters:
-                - type: object
-                  mapping: "$."
-
-    - type: mcp
-      port: 9090
-      namespace: toolhouse-agent-management-mcp
-      transport: http
-      description: "MCP server for AI-assisted Toolhouse agent lifecycle management."
-      tools:
-        - name: list-agents
-          description: "List all Toolhouse AI agents for the authenticated user."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "toolhouse-platform.list-agents"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-agent
-          description: "Get the full configuration and details of a specific Toolhouse agent."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "toolhouse-platform.get-agent"
-          with:
-            agent_id: "tools.agent_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-agent
-          description: "Create or update a Toolhouse AI agent definition with tools, bundles, and system prompt."
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "toolhouse-platform.upsert-agent"
-          with:
-            name: "tools.name"
-            description: "tools.description"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-agent-runs
-          description: "List historical execution runs for Toolhouse agents with pagination."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "toolhouse-platform.list-agent-runs"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-agent-run
-          description: "Get the details, status, and results of a specific Toolhouse agent run."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "toolhouse-platform.get-agent-run"
-          with:
-            run_id: "tools.run_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: get-agent-run-logs
-          description: "Retrieve the execution logs for a specific Toolhouse agent run."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "toolhouse-platform.get-agent-run-logs"
-          with:
-            run_id: "tools.run_id"
-          outputParameters:
-            - type: array
-              mapping: "$."
-        - name: list-tools
-          description: "List all available tools in the Toolhouse tool library."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "toolhouse-platform.list-tools"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-bundles
-          description: "List all tool bundles configured for the authenticated user."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "toolhouse-platform.list-bundles"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-bundle
-          description: "Create a new tool bundle grouping specific tools together."
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "toolhouse-platform.create-bundle"
-          with:
-            name: "tools.name"
-            tools: "tools.tools"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-studio-chats
-          description: "List all Agent Studio chat sessions for visual agent development."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "toolhouse-platform.list-studio-chats"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: create-studio-chat
-          description: "Create a new Agent Studio chat session for interactive agent development."
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "toolhouse-platform.create-studio-chat"
-          with:
-            agentId: "tools.agentId"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: list-api-keys
-          description: "List all API keys for the authenticated Toolhouse user."
-          hints:
-            readOnly: true
-            idempotent: true
-          call: "toolhouse-platform.list-api-keys"
-          outputParameters:
-            - type: object
-              mapping: "$."
-        - name: subscribe-to-agent
-          description: "Subscribe to a paid Toolhouse agent to enable access."
-          hints:
-            readOnly: false
-            idempotent: false
-          call: "toolhouse-platform.subscribe-to-agent"
-          with:
-            agent_id: "tools.agent_id"
-          outputParameters:
-            - type: object
-              mapping: "$."
+  - type: rest
+    port: 8080
+    namespace: toolhouse-agent-management-api
+    description: Unified REST API for the full Toolhouse agent lifecycle management workflow.
+    resources:
+    - path: /v1/agents
+      name: agents
+      description: Manage AI agents.
+      operations:
+      - method: GET
+        name: list-agents
+        description: List all agents for the authenticated user.
+        call: toolhouse-platform.list-agents
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-agent
+        description: Create or update an AI agent.
+        call: toolhouse-platform.upsert-agent
+        with:
+          name: rest.name
+          description: rest.description
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agents/{agent_id}
+      name: agent
+      description: Get a specific agent.
+      operations:
+      - method: GET
+        name: get-agent
+        description: Get details of a specific agent.
+        call: toolhouse-platform.get-agent
+        with:
+          agent_id: rest.agent_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agent-runs
+      name: agent-runs
+      description: Agent execution history.
+      operations:
+      - method: GET
+        name: list-agent-runs
+        description: List all agent execution runs.
+        call: toolhouse-platform.list-agent-runs
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/agent-runs/{run_id}
+      name: agent-run
+      description: Get a specific agent run.
+      operations:
+      - method: GET
+        name: get-agent-run
+        description: Get details and status of a specific agent run.
+        call: toolhouse-platform.get-agent-run
+        with:
+          run_id: rest.run_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tools
+      name: tools
+      description: Available tools in the Toolhouse library.
+      operations:
+      - method: GET
+        name: list-tools
+        description: List all available tools.
+        call: toolhouse-platform.list-tools
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/bundles
+      name: bundles
+      description: Tool bundles for grouping tools.
+      operations:
+      - method: GET
+        name: list-bundles
+        description: List all tool bundles.
+        call: toolhouse-platform.list-bundles
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-bundle
+        description: Create a new tool bundle.
+        call: toolhouse-platform.create-bundle
+        with:
+          name: rest.name
+          tools: rest.tools
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/studio-chats
+      name: studio-chats
+      description: Agent Studio chat sessions.
+      operations:
+      - method: GET
+        name: list-studio-chats
+        description: List all Agent Studio chat sessions.
+        call: toolhouse-platform.list-studio-chats
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: create-studio-chat
+        description: Start a new Agent Studio chat session.
+        call: toolhouse-platform.create-studio-chat
+        with:
+          agentId: rest.agentId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api-keys
+      name: api-keys
+      description: API key management.
+      operations:
+      - method: GET
+        name: list-api-keys
+        description: List all API keys for the authenticated user.
+        call: toolhouse-platform.list-api-keys
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    port: 9090
+    namespace: toolhouse-agent-management-mcp
+    transport: http
+    description: MCP server for AI-assisted Toolhouse agent lifecycle management.
+    tools:
+    - name: list-agents
+      description: List all Toolhouse AI agents for the authenticated user.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: toolhouse-platform.list-agents
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent
+      description: Get the full configuration and details of a specific Toolhouse agent.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: toolhouse-platform.get-agent
+      with:
+        agent_id: tools.agent_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-agent
+      description: Create or update a Toolhouse AI agent definition with tools, bundles, and system prompt.
+      hints:
+        readOnly: false
+        idempotent: false
+      call: toolhouse-platform.upsert-agent
+      with:
+        name: tools.name
+        description: tools.description
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-agent-runs
+      description: List historical execution runs for Toolhouse agents with pagination.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: toolhouse-platform.list-agent-runs
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-run
+      description: Get the details, status, and results of a specific Toolhouse agent run.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: toolhouse-platform.get-agent-run
+      with:
+        run_id: tools.run_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-run-logs
+      description: Retrieve the execution logs for a specific Toolhouse agent run.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: toolhouse-platform.get-agent-run-logs
+      with:
+        run_id: tools.run_id
+      outputParameters:
+      - type: array
+        mapping: $.
+    - name: list-tools
+      description: List all available tools in the Toolhouse tool library.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: toolhouse-platform.list-tools
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-bundles
+      description: List all tool bundles configured for the authenticated user.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: toolhouse-platform.list-bundles
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-bundle
+      description: Create a new tool bundle grouping specific tools together.
+      hints:
+        readOnly: false
+        idempotent: false
+      call: toolhouse-platform.create-bundle
+      with:
+        name: tools.name
+        tools: tools.tools
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-studio-chats
+      description: List all Agent Studio chat sessions for visual agent development.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: toolhouse-platform.list-studio-chats
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-studio-chat
+      description: Create a new Agent Studio chat session for interactive agent development.
+      hints:
+        readOnly: false
+        idempotent: false
+      call: toolhouse-platform.create-studio-chat
+      with:
+        agentId: tools.agentId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-api-keys
+      description: List all API keys for the authenticated Toolhouse user.
+      hints:
+        readOnly: true
+        idempotent: true
+      call: toolhouse-platform.list-api-keys
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: subscribe-to-agent
+      description: Subscribe to a paid Toolhouse agent to enable access.
+      hints:
+        readOnly: false
+        idempotent: false
+      call: toolhouse-platform.subscribe-to-agent
+      with:
+        agent_id: tools.agent_id
+      outputParameters:
+      - type: object
+        mapping: $.
