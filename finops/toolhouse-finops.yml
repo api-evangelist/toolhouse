@@ -11,10 +11,14 @@ providerId: toolhouse
 publisherName: Toolhouse
 serviceCategory: API
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-15'
+reconciled: true
+reconciledOn: '2026-05-15'
+reconciledAgainst: https://toolhouse.ai/pricing
 tags:
   - Agent Infrastructure
   - AI Agents
+  - AI Workers
   - Backend as a Service
   - MCP
   - Tools
@@ -22,7 +26,9 @@ tags:
   - Cost Management
   - FOCUS
 description: FinOps framework definition for the Toolhouse API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
+  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs. Toolhouse
+  meters consumption in "credits" (one credit per agent run) rather than per-request, so the primary
+  billable meter below is agent_run_credits.
 principles:
   - name: Visibility
     description: Make API consumption costs visible to engineering, product, and finance teams in near
@@ -80,13 +86,24 @@ focusColumns:
   ProviderName: Toolhouse
   PublisherName: Toolhouse
   InvoiceIssuerName: Toolhouse
-  PricingCategory: Usage-Based
-  PricingUnit: request
+  PricingCategory: Subscription with Included Quota
+  PricingUnit: credit
   BillingCurrency: USD
   ChargeCategory: Usage
 meters:
+  - name: agent_run_credits
+    description: Primary Toolhouse billable meter. One credit corresponds to one agent run on the Toolhouse
+      runtime. Monthly credit allowance is set by the subscribed plan (Basic 15, Pro 100, Business 15000).
+    unit: credit
+    aggregation: sum
+    dimensions:
+      - api
+      - agent
+      - tier
+      - region
+      - consumer
   - name: api_requests
-    description: Count of billable API requests
+    description: Count of HTTP API requests (operational telemetry; not directly billed per request).
     unit: request
     aggregation: sum
     dimensions:
@@ -96,7 +113,7 @@ meters:
       - region
       - consumer
   - name: data_egress
-    description: Bytes returned over the network in API responses
+    description: Bytes returned over the network in API responses (operational telemetry).
     unit: GB
     aggregation: sum
     dimensions:
@@ -104,7 +121,8 @@ meters:
       - region
       - consumer
   - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
+    description: Server-side compute consumed by an agent run on the Virtual Computer sandbox or other
+      Toolhouse runtime (operational telemetry).
     unit: second
     aggregation: sum
     dimensions:
@@ -135,12 +153,18 @@ apis:
     serviceName: Toolhouse Agents API
     serviceCategory: API
 unitEconomics:
+  - name: Cost per Agent Run (Credit)
+    metric: billed_cost / agent_run_credits
+    target: '0.10 (Pro), 0.0333 (Business)'
   - name: Cost per 1K Requests
     metric: billed_cost / (api_requests / 1000)
     target: TBD
   - name: Cost per Active Consumer
     metric: billed_cost / active_consumers
     target: TBD
+  - name: Credit Utilization
+    metric: agent_run_credits_consumed / agent_run_credits_allocated
+    target: '> 0.50'
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com

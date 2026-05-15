@@ -4,19 +4,25 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Toolhouse
 providerId: toolhouse
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-15'
+reconciled: true
+reconciledOn: '2026-05-15'
+reconciledAgainst: https://toolhouse.ai/pricing
 tags:
   - Agent Infrastructure
   - AI Agents
+  - AI Workers
   - Backend as a Service
   - MCP
   - Tools
   - Rate Limiting
   - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the Toolhouse API surface. Captures per-tier
-  quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values to
-  be replaced with published provider limits.
+  - Credits
+description: Machine-readable rate limit definitions for the Toolhouse API surface. Toolhouse's published
+  pricing page meters consumption as monthly "credits" (one credit per agent run) rather than per-second
+  HTTP rate caps. Per-tier monthly credit budgets are confirmed from the live pricing page; the per-minute
+  rate values below are scaffold defaults for HTTP throttling and have not been independently published
+  by the provider.
 headers:
   limit: X-RateLimit-Limit
   remaining: X-RateLimit-Remaining
@@ -28,8 +34,17 @@ responseCodes:
   quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
+  - tier: basic
+    name: Basic Tier Monthly Credit Quota
+    scope: api-key
+    metric: credits_per_month
+    limit: 15
+    timeFrame: month
+    applies:
+      - Toolhouse Platform API
+      - Toolhouse Agents API
+  - tier: basic
+    name: Basic Tier Per-Minute Default
     scope: api-key
     metric: requests_per_minute
     limit: 10
@@ -38,31 +53,41 @@ limits:
     applies:
       - Toolhouse Platform API
       - Toolhouse Agents API
-  - tier: free
-    name: Free Tier Monthly Quota
+  - tier: pro
+    name: Pro Tier Monthly Credit Quota
     scope: api-key
-    metric: requests_per_month
-    limit: 1000
+    metric: credits_per_month
+    limit: 100
     timeFrame: month
     applies:
       - Toolhouse Platform API
       - Toolhouse Agents API
-  - tier: professional
-    name: Professional Tier Default
+  - tier: pro
+    name: Pro Tier Per-Minute Default
     scope: api-key
     metric: requests_per_minute
-    limit: 100
-    burst: 200
+    limit: 60
+    burst: 120
     timeFrame: minute
     applies:
       - Toolhouse Platform API
       - Toolhouse Agents API
-  - tier: professional
-    name: Professional Tier Monthly Quota
+  - tier: business
+    name: Business Tier Monthly Credit Quota
     scope: api-key
-    metric: requests_per_month
-    limit: 100000
+    metric: credits_per_month
+    limit: 15000
     timeFrame: month
+    applies:
+      - Toolhouse Platform API
+      - Toolhouse Agents API
+  - tier: business
+    name: Business Tier Per-Minute Default
+    scope: api-key
+    metric: requests_per_minute
+    limit: 300
+    burst: 600
+    timeFrame: minute
     applies:
       - Toolhouse Platform API
       - Toolhouse Agents API
@@ -77,6 +102,10 @@ limits:
       - Toolhouse Platform API
       - Toolhouse Agents API
 policies:
+  - name: Credit Metering
+    description: Consumption is primarily metered in credits, not raw HTTP request counts. One credit
+      represents one agent run on the Toolhouse runtime; Toolhouse-provided tool invocations within an
+      agent run are not separately credited on paid tiers.
   - name: Backoff Strategy
     description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
       when present.
@@ -84,8 +113,7 @@ policies:
     description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
       before throttling engages.
   - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
+    description: Monthly credit quotas reset at the start of each calendar month in UTC.
   - name: Fair Use
     description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
       may be subject to fair-use throttling.

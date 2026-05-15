@@ -4,113 +4,160 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Toolhouse
 providerId: toolhouse
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-15'
+reconciled: true
+reconciledOn: '2026-05-15'
+reconciledAgainst: https://toolhouse.ai/pricing
 tags:
   - Agent Infrastructure
   - AI Agents
+  - AI Workers
   - Backend as a Service
   - MCP
   - Tools
-description: Machine-readable plans and pricing scaffold for this API provider. Conforms to the API Commons
-  Plans schema. Tier limits and prices are scaffold defaults; replace with provider-published values.
+description: Machine-readable plans and pricing for the Toolhouse API surface, reconciled against the
+  published pricing page at toolhouse.ai/pricing. Toolhouse meters consumption in "credits" rather than
+  raw API requests; a credit represents one agent run / one unit of agent work on the Toolhouse runtime.
 plans:
-  - id: toolhouse-free
-    name: Free
+  - id: toolhouse-basic
+    name: Basic
     type: freemium
-    description: Free entry tier for the Toolhouse API surface. Intended for evaluation, prototyping,
-      and low-volume integrations. Real limits and pricing must be reconciled with the provider's published
-      plan documentation.
+    price: '0.00'
+    priceUnit: USD/month
+    description: Free entry tier for evaluating Toolhouse. Designed for getting started with public projects
+      and unlimited agent definitions on a small monthly credit budget.
     entries:
-      - label: API Requests
-        description: Monthly API request quota across all included endpoints
-        name: api_requests
+      - label: Credits
+        description: Monthly credit allowance. One credit corresponds to one agent run on the Toolhouse
+          runtime.
+        name: credits
         type: quota
-        metric: requests
-        limit: 1000
+        metric: credits
+        limit: 15
         timeFrame: month
         geo: global
         domains: []
         unit: 1
         price: '0.00'
         userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the free tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 10
-        timeFrame: minute
+      - label: Agents
+        description: Number of agents a user may define on the Basic tier.
+        name: agents
+        type: quota
+        metric: agents
+        limit: -1
+        timeFrame: lifetime
         geo: global
         domains: []
         unit: 1
         price: '0.00'
         userMultiplied: false
     elements:
-      - name: Public Documentation
-      - name: Community Support
-      - name: Sandbox Access
+      - name: Public Projects
+      - name: Unlimited Agents
       - name: Toolhouse Platform API
-      - name: Toolhouse Agents API
+      - name: Toolhouse Agents API (Workers API)
+      - name: Community Support
   - id: toolhouse-pro
-    name: Professional
+    name: Pro
     type: paid
-    description: Production tier for Toolhouse. Provides higher quotas, priority support, and access to
-      the broader API portfolio. Pricing placeholder; align with the provider's pricing page.
+    price: '10.00'
+    priceUnit: USD/month
+    description: Production tier for individuals and startups. Includes 100 credits per month, the full
+      pre-integrated tool stack (scraping, web search, file upload), and workflow integrations with Zapier
+      and n8n.
     entries:
-      - label: API Requests
-        description: Monthly API request quota
-        name: api_requests
+      - label: Credits
+        description: Monthly credit allowance for agent runs.
+        name: credits
         type: quota
-        metric: requests
-        limit: 100000
+        metric: credits
+        limit: 100
         timeFrame: month
         geo: global
         domains: []
         unit: 1
-        price: TBD
+        price: '0.10'
         userMultiplied: false
-      - label: Rate Limit
-        description: Maximum requests per minute on the professional tier
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 100
-        timeFrame: minute
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-      - label: Overage
-        description: Per-request price after monthly quota is exceeded
-        name: overage
-        type: metered
-        metric: requests
+      - label: Tool Usage
+        description: Toolhouse pre-integrated tool calls (scraping, web search, etc.) are unlimited within
+          the agent run.
+        name: tool_usage
+        type: quota
+        metric: tool_calls
         limit: -1
         timeFrame: month
         geo: global
         domains: []
-        unit: 1000
-        price: TBD
+        unit: 1
+        price: '0.00'
         userMultiplied: false
     elements:
-      - name: All Production Endpoints
-      - name: Email Support
-      - name: SLA Targets
-      - name: Webhook Subscriptions
+      - name: Powerful Scraping and Web Search
+      - name: Unlimited Tool Usage
+      - name: Upload Files to AI Workers
+      - name: Zapier Integration
+      - name: n8n Integration (Toolhouse n8n Nodes)
       - name: Toolhouse Platform API
-      - name: Toolhouse Agents API
+      - name: Toolhouse Agents API (Workers API)
+      - name: Streaming Responses
+  - id: toolhouse-business
+    name: Business
+    type: paid
+    price: '500.00'
+    priceUnit: USD/month
+    description: Tier for established companies running production AI workers at scale. Includes 15,000
+      credits per month, Agent Studio access, choice of more powerful models, advanced customization,
+      human-in-the-loop, and white-glove onboarding with priority support over phone and Slack.
+    entries:
+      - label: Credits
+        description: Monthly credit allowance for agent runs.
+        name: credits
+        type: quota
+        metric: credits
+        limit: 15000
+        timeFrame: month
+        geo: global
+        domains: []
+        unit: 1
+        price: '0.0333'
+        userMultiplied: false
+      - label: Tool Usage
+        description: Pre-integrated tool calls are unlimited within agent runs.
+        name: tool_usage
+        type: quota
+        metric: tool_calls
+        limit: -1
+        timeFrame: month
+        geo: global
+        domains: []
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+    elements:
+      - name: Everything in Pro
+      - name: White-Glove Onboarding
+      - name: Priority Support via Phone and Slack
+      - name: Agent Studio Access
+      - name: More Powerful Models
+      - name: Advanced Customization Options
+      - name: Human-in-the-Loop
+      - name: Toolhouse Platform API
+      - name: Toolhouse Agents API (Workers API)
   - id: toolhouse-enterprise
     name: Enterprise
     type: enterprise
-    description: Custom-negotiated tier for Toolhouse. Includes dedicated capacity, contractual SLAs,
-      security review, data residency options, and named technical account management.
+    price: custom
+    priceUnit: custom
+    description: Custom-negotiated tier for Toolhouse covering dedicated capacity, contractual SLAs, security
+      review, data residency options, and named technical account management. Inferred from the published
+      tier ladder; contact Toolhouse sales for current terms.
     entries:
-      - label: API Requests
-        description: Negotiated request volume; -1 indicates uncapped subject to fair use
-        name: api_requests
+      - label: Credits
+        description: Negotiated credit volume; -1 indicates uncapped subject to fair use.
+        name: credits
         type: quota
-        metric: requests
+        metric: credits
         limit: -1
         timeFrame: month
         geo: configurable
@@ -119,7 +166,7 @@ plans:
         price: custom
         userMultiplied: false
       - label: Rate Limit
-        description: Negotiated burst and steady-state rate
+        description: Negotiated burst and steady-state rate.
         name: rate_limit
         type: rate
         metric: requests_per_minute
@@ -138,7 +185,11 @@ plans:
       - name: Dedicated Account Manager
       - name: Custom Data Residency
       - name: Toolhouse Platform API
-      - name: Toolhouse Agents API
+      - name: Toolhouse Agents API (Workers API)
+notes:
+  - Toolhouse meters usage in "credits"; the pricing page does not publish per-request rate limits or
+    overage pricing for paid tiers.
+  - Pricing reconciled against https://toolhouse.ai/pricing on 2026-05-15.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
