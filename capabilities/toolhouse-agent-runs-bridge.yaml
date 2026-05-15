@@ -1,0 +1,145 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  title: Toolhouse Agent Runs Bridge
+  description: >-
+    Pulls Toolhouse agent run history (run status, execution logs, and
+    crucially MCP server logs) and bridges them into Naftiko's
+    OpenTelemetry pipeline so a single observability dashboard shows
+    Toolhouse agent activity alongside Naftiko capability calls. The
+    MCP-server-logs surface is especially valuable — Toolhouse captures
+    every MCP tool invocation per run.
+  tags:
+    - Naftiko
+    - Toolhouse
+    - Partnership
+    - Observability
+    - Agent-Runs
+    - MCP-Logs
+    - OpenTelemetry
+  created: '2026-05-15'
+  modified: '2026-05-15'
+
+binds:
+  - namespace: toolhouse-env
+    description: Toolhouse Platform API key.
+    keys:
+      TOOLHOUSE_API_KEY: TOOLHOUSE_API_KEY
+
+capability:
+  consumes:
+    - namespace: toolhouse
+      type: http
+      baseUri: https://api.toolhouse.ai
+      authentication:
+        type: bearer
+        token: '{{TOOLHOUSE_API_KEY}}'
+      resources:
+        - name: list-agent-runs
+          path: '/me/agent-runs'
+          operations:
+            - name: list-agent-runs
+              method: GET
+              inputParameters:
+                - { name: next_cursor, in: query, type: string, required: false }
+                - { name: limit, in: query, type: integer, required: false }
+                - { name: agent_id, in: query, type: string, required: false }
+                - { name: status, in: query, type: string, required: false }
+        - name: agent-run
+          path: '/me/agent-runs/{{run_id}}'
+          operations:
+            - name: get-agent-run
+              method: GET
+              inputParameters:
+                - { name: run_id, in: path, required: true }
+        - name: run-logs
+          path: '/me/agent-runs/{{run_id}}/logs'
+          operations:
+            - name: list-run-logs
+              method: GET
+              inputParameters:
+                - { name: run_id, in: path, required: true }
+        - name: mcp-logs
+          path: '/me/agent-runs/{{run_id}}/mcp-logs'
+          operations:
+            - name: list-mcp-logs
+              method: GET
+              inputParameters:
+                - { name: run_id, in: path, required: true }
+
+  exposes:
+    - type: rest
+      address: 0.0.0.0
+      port: 8080
+      namespace: toolhouse-agent-runs-bridge-rest
+      description: REST surface for Toolhouse agent run observability.
+      resources:
+        - name: agent-runs
+          path: '/agent-runs'
+          operations:
+            - name: list-agent-runs
+              method: GET
+              inputParameters:
+                - { name: next_cursor, in: query, type: string, required: false }
+                - { name: limit, in: query, type: integer, required: false }
+                - { name: agent_id, in: query, type: string, required: false }
+                - { name: status, in: query, type: string, required: false }
+              call: toolhouse.list-agent-runs
+        - name: agent-run
+          path: '/agent-runs/{run_id}'
+          operations:
+            - name: get-agent-run
+              method: GET
+              inputParameters:
+                - { name: run_id, in: path, type: string, required: true }
+              call: toolhouse.get-agent-run
+        - name: run-logs
+          path: '/agent-runs/{run_id}/logs'
+          operations:
+            - name: list-run-logs
+              method: GET
+              inputParameters:
+                - { name: run_id, in: path, type: string, required: true }
+              call: toolhouse.list-run-logs
+        - name: mcp-logs
+          path: '/agent-runs/{run_id}/mcp-logs'
+          operations:
+            - name: list-mcp-logs
+              method: GET
+              inputParameters:
+                - { name: run_id, in: path, type: string, required: true }
+              call: toolhouse.list-mcp-logs
+
+    - type: mcp
+      address: 0.0.0.0
+      port: 3010
+      namespace: toolhouse-agent-runs-bridge-mcp
+      description: MCP server for SRE / SOC / FinOps agents to query Toolhouse agent run history.
+      tools:
+        - name: list-agent-runs
+          description: List Toolhouse agent runs with optional filters.
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: next_cursor, type: string, required: false, description: Pagination cursor. }
+            - { name: limit, type: integer, required: false, description: Max runs per page. }
+            - { name: agent_id, type: string, required: false, description: Filter to a specific agent. }
+            - { name: status, type: string, required: false, description: Filter by run status. }
+          call: toolhouse.list-agent-runs
+        - name: get-agent-run
+          description: Get a single Toolhouse agent run with status + metadata.
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: run_id, type: string, required: true, description: Toolhouse run UUID. }
+          call: toolhouse.get-agent-run
+        - name: list-run-logs
+          description: List execution logs for a Toolhouse agent run.
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: run_id, type: string, required: true, description: Toolhouse run UUID. }
+          call: toolhouse.list-run-logs
+        - name: list-mcp-logs
+          description: List MCP server logs for a Toolhouse agent run (which MCP tools were invoked, with what params, with what results).
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: run_id, type: string, required: true, description: Toolhouse run UUID. }
+          call: toolhouse.list-mcp-logs

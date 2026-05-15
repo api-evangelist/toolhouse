@@ -1,0 +1,95 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  title: Toolhouse Agent Invoke
+  description: >-
+    Invokes a deployed Toolhouse agent via the Workers API as a governed
+    Naftiko operation — pass-through with streaming + conversation
+    continuity (run_id), with the Naftiko engine layering Spectral / OPA /
+    OpenTelemetry guards on top of Toolhouse's managed agent runtime.
+  tags:
+    - Naftiko
+    - Toolhouse
+    - Partnership
+    - Agent-Invoke
+    - Workers-API
+    - Streaming
+  created: '2026-05-15'
+  modified: '2026-05-15'
+
+binds:
+  - namespace: toolhouse-env
+    description: Toolhouse Platform API key + Workers base URL.
+    keys:
+      TOOLHOUSE_API_KEY: TOOLHOUSE_API_KEY
+      TOOLHOUSE_WORKERS_BASE: TOOLHOUSE_WORKERS_BASE
+
+capability:
+  consumes:
+    - namespace: toolhouse-workers
+      type: http
+      baseUri: '{{TOOLHOUSE_WORKERS_BASE}}'
+      authentication:
+        type: bearer
+        token: '{{TOOLHOUSE_API_KEY}}'
+      resources:
+        - name: invoke-agent
+          path: '/agents/{{slug}}'
+          operations:
+            - name: invoke-agent
+              method: POST
+              inputParameters:
+                - { name: slug, in: path, required: true }
+        - name: invoke-agent-with-run
+          path: '/agents/{{slug}}/runs/{{run_id}}'
+          operations:
+            - name: continue-agent-run
+              method: POST
+              inputParameters:
+                - { name: slug, in: path, required: true }
+                - { name: run_id, in: path, required: true }
+
+  exposes:
+    - type: rest
+      address: 0.0.0.0
+      port: 8080
+      namespace: toolhouse-agent-invoke-rest
+      description: REST surface for invoking Toolhouse-deployed agents.
+      resources:
+        - name: invoke-agent
+          path: '/agents/{slug}'
+          operations:
+            - name: invoke-agent
+              method: POST
+              inputParameters:
+                - { name: slug, in: path, type: string, required: true }
+              call: toolhouse-workers.invoke-agent
+        - name: continue-agent-run
+          path: '/agents/{slug}/runs/{run_id}'
+          operations:
+            - name: continue-agent-run
+              method: POST
+              inputParameters:
+                - { name: slug, in: path, type: string, required: true }
+                - { name: run_id, in: path, type: string, required: true }
+              call: toolhouse-workers.continue-agent-run
+
+    - type: mcp
+      address: 0.0.0.0
+      port: 3010
+      namespace: toolhouse-agent-invoke-mcp
+      description: MCP server for invoking Toolhouse agents from other agents.
+      tools:
+        - name: invoke-agent
+          description: Invoke a deployed Toolhouse agent by slug (supports streaming + multi-turn).
+          hints: { destructiveHint: true }
+          inputParameters:
+            - { name: slug, type: string, required: true, description: Toolhouse agent vanity slug. }
+          call: toolhouse-workers.invoke-agent
+        - name: continue-agent-run
+          description: Continue an existing Toolhouse agent run (stateful conversation by run_id).
+          hints: { destructiveHint: true }
+          inputParameters:
+            - { name: slug, type: string, required: true, description: Toolhouse agent vanity slug. }
+            - { name: run_id, type: string, required: true, description: Toolhouse run UUID. }
+          call: toolhouse-workers.continue-agent-run

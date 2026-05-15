@@ -1,0 +1,117 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  title: Toolhouse FinOps Bridge
+  description: >-
+    Pulls Toolhouse credit usage (per-run, per-agent, per-month) and
+    correlates with Naftiko's per-call cost attribution (Kubecost labels)
+    to produce a unified FOCUS-aligned cost view across both systems.
+    Output: "this team consumed X Toolhouse credits worth $Y, plus Z
+    Naftiko-routed calls worth $W."
+  tags:
+    - Naftiko
+    - Toolhouse
+    - Partnership
+    - FinOps
+    - Cost
+    - FOCUS
+    - Credits
+  created: '2026-05-15'
+  modified: '2026-05-15'
+
+binds:
+  - namespace: toolhouse-env
+    description: Toolhouse Platform API key.
+    keys:
+      TOOLHOUSE_API_KEY: TOOLHOUSE_API_KEY
+
+capability:
+  consumes:
+    - namespace: toolhouse
+      type: http
+      baseUri: https://api.toolhouse.ai
+      authentication:
+        type: bearer
+        token: '{{TOOLHOUSE_API_KEY}}'
+      resources:
+        - name: get-billing-summary
+          path: '/me/billing/summary'
+          operations:
+            - name: get-billing-summary
+              method: GET
+              inputParameters:
+                - { name: since, in: query, type: string, required: false }
+                - { name: until, in: query, type: string, required: false }
+        - name: get-credits-balance
+          path: '/me/billing/credits'
+          operations:
+            - name: get-credits-balance
+              method: GET
+        - name: get-metrics-agent-runs
+          path: '/me/metrics/agent-runs'
+          operations:
+            - name: get-metrics-agent-runs
+              method: GET
+              inputParameters:
+                - { name: since, in: query, type: string, required: false }
+                - { name: agent_id, in: query, type: string, required: false }
+                - { name: groupby, in: query, type: string, required: false }
+
+  exposes:
+    - type: rest
+      address: 0.0.0.0
+      port: 8080
+      namespace: toolhouse-finops-bridge-rest
+      description: REST surface for unified Toolhouse + Naftiko FinOps reporting.
+      resources:
+        - name: get-billing-summary
+          path: '/billing/summary'
+          operations:
+            - name: get-billing-summary
+              method: GET
+              inputParameters:
+                - { name: since, in: query, type: string, required: false }
+                - { name: until, in: query, type: string, required: false }
+              call: toolhouse.get-billing-summary
+        - name: get-credits-balance
+          path: '/billing/credits'
+          operations:
+            - name: get-credits-balance
+              method: GET
+              call: toolhouse.get-credits-balance
+        - name: get-metrics-agent-runs
+          path: '/metrics/agent-runs'
+          operations:
+            - name: get-metrics-agent-runs
+              method: GET
+              inputParameters:
+                - { name: since, in: query, type: string, required: false }
+                - { name: agent_id, in: query, type: string, required: false }
+                - { name: groupby, in: query, type: string, required: false }
+              call: toolhouse.get-metrics-agent-runs
+
+    - type: mcp
+      address: 0.0.0.0
+      port: 3010
+      namespace: toolhouse-finops-bridge-mcp
+      description: MCP server for FinOps / platform agents to query unified Toolhouse + Naftiko cost.
+      tools:
+        - name: get-billing-summary
+          description: Get a Toolhouse billing summary (credit consumption + dollars across the period).
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: since, type: string, required: false, description: ISO 8601 timestamp lower bound. }
+            - { name: until, type: string, required: false, description: ISO 8601 timestamp upper bound. }
+          call: toolhouse.get-billing-summary
+        - name: get-credits-balance
+          description: Get the current Toolhouse credits balance + monthly allowance + reset date.
+          hints: { readOnly: true }
+          call: toolhouse.get-credits-balance
+        - name: get-metrics-agent-runs
+          description: Get Toolhouse agent-run volume broken down by agent + time (the per-call cost dimension).
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: since, type: string, required: false, description: ISO 8601 timestamp lower bound. }
+            - { name: agent_id, type: string, required: false, description: Filter to a specific agent. }
+            - { name: groupby, type: string, required: false, description: Group dimension (agent / day / hour). }
+          call: toolhouse.get-metrics-agent-runs

@@ -1,0 +1,131 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  title: Toolhouse Tools Discovery
+  description: >-
+    Pulls Toolhouse's 40+ pre-built agent tool catalog (web search, code
+    execution, RAG, browser automation, scrapers, database connectors,
+    integrations) into Naftiko Fleet discovery so the catalog is
+    consumable from any Naftiko capability and surfaced in Backstage
+    alongside Naftiko-built capabilities.
+  tags:
+    - Naftiko
+    - Toolhouse
+    - Partnership
+    - Discovery
+    - Tools
+    - Catalog
+  created: '2026-05-15'
+  modified: '2026-05-15'
+
+binds:
+  - namespace: toolhouse-env
+    description: Toolhouse Platform API key.
+    keys:
+      TOOLHOUSE_API_KEY: TOOLHOUSE_API_KEY
+
+capability:
+  consumes:
+    - namespace: toolhouse
+      type: http
+      baseUri: https://api.toolhouse.ai
+      authentication:
+        type: bearer
+        token: '{{TOOLHOUSE_API_KEY}}'
+      resources:
+        - name: list-tools
+          path: '/me/tools'
+          operations:
+            - name: list-tools
+              method: GET
+              inputParameters:
+                - { name: search, in: query, type: string, required: false }
+                - { name: bundle, in: query, type: string, required: false }
+        - name: tool
+          path: '/me/tools/{{tool_id}}'
+          operations:
+            - name: get-tool
+              method: GET
+              inputParameters:
+                - { name: tool_id, in: path, required: true }
+        - name: agent-tools
+          path: '/me/agents/{{agent_id}}/tools'
+          operations:
+            - name: list-agent-tools
+              method: GET
+              inputParameters:
+                - { name: agent_id, in: path, required: true }
+            - name: install-agent-tool
+              method: POST
+              inputParameters:
+                - { name: agent_id, in: path, required: true }
+
+  exposes:
+    - type: rest
+      address: 0.0.0.0
+      port: 8080
+      namespace: toolhouse-tools-discovery-rest
+      description: REST surface for Naftiko Fleet to discover Toolhouse tools.
+      resources:
+        - name: tools
+          path: '/tools'
+          operations:
+            - name: list-tools
+              method: GET
+              inputParameters:
+                - { name: search, in: query, type: string, required: false }
+                - { name: bundle, in: query, type: string, required: false }
+              call: toolhouse.list-tools
+        - name: tool
+          path: '/tools/{tool_id}'
+          operations:
+            - name: get-tool
+              method: GET
+              inputParameters:
+                - { name: tool_id, in: path, type: string, required: true }
+              call: toolhouse.get-tool
+        - name: agent-tools
+          path: '/agents/{agent_id}/tools'
+          operations:
+            - name: list-agent-tools
+              method: GET
+              inputParameters:
+                - { name: agent_id, in: path, type: string, required: true }
+              call: toolhouse.list-agent-tools
+            - name: install-agent-tool
+              method: POST
+              inputParameters:
+                - { name: agent_id, in: path, type: string, required: true }
+              call: toolhouse.install-agent-tool
+
+    - type: mcp
+      address: 0.0.0.0
+      port: 3010
+      namespace: toolhouse-tools-discovery-mcp
+      description: MCP server exposing Toolhouse tool catalog discovery to agents.
+      tools:
+        - name: list-tools
+          description: List or search Toolhouse's 40+ pre-built agent tools.
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: search, type: string, required: false, description: Free-text search. }
+            - { name: bundle, type: string, required: false, description: Filter by bundle name. }
+          call: toolhouse.list-tools
+        - name: get-tool
+          description: Get a Toolhouse tool by ID with its parameters and metadata.
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: tool_id, type: string, required: true, description: Toolhouse tool ID. }
+          call: toolhouse.get-tool
+        - name: list-agent-tools
+          description: List tools installed on a specific Toolhouse agent.
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: agent_id, type: string, required: true, description: Toolhouse agent UUID. }
+          call: toolhouse.list-agent-tools
+        - name: install-agent-tool
+          description: Install a tool on a Toolhouse agent.
+          hints: { destructiveHint: false }
+          inputParameters:
+            - { name: agent_id, type: string, required: true, description: Toolhouse agent UUID. }
+          call: toolhouse.install-agent-tool

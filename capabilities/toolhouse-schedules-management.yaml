@@ -1,0 +1,116 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  title: Toolhouse Schedules Management
+  description: >-
+    Manages Toolhouse cron schedules from Naftiko spec — declares when a
+    Toolhouse agent should fire autonomously and provisions the schedule
+    via the Platform API. Lets Naftiko orchestrate scheduled Toolhouse
+    agent runs as part of the same capability deploy that ships the
+    upstream consume + downstream expose.
+  tags:
+    - Naftiko
+    - Toolhouse
+    - Partnership
+    - Schedules
+    - Cron
+    - Autonomous
+  created: '2026-05-15'
+  modified: '2026-05-15'
+
+binds:
+  - namespace: toolhouse-env
+    description: Toolhouse Platform API key.
+    keys:
+      TOOLHOUSE_API_KEY: TOOLHOUSE_API_KEY
+
+capability:
+  consumes:
+    - namespace: toolhouse
+      type: http
+      baseUri: https://api.toolhouse.ai
+      authentication:
+        type: bearer
+        token: '{{TOOLHOUSE_API_KEY}}'
+      resources:
+        - name: agent-schedule
+          path: '/me/agents/{{agent_id}}/schedule'
+          operations:
+            - name: get-agent-schedule
+              method: GET
+              inputParameters:
+                - { name: agent_id, in: path, required: true }
+            - name: set-agent-schedule
+              method: PUT
+              inputParameters:
+                - { name: agent_id, in: path, required: true }
+            - name: delete-agent-schedule
+              method: DELETE
+              inputParameters:
+                - { name: agent_id, in: path, required: true }
+        - name: list-scheduled-agents
+          path: '/me/agents/scheduled'
+          operations:
+            - name: list-scheduled-agents
+              method: GET
+
+  exposes:
+    - type: rest
+      address: 0.0.0.0
+      port: 8080
+      namespace: toolhouse-schedules-management-rest
+      description: REST surface for managing Toolhouse agent schedules.
+      resources:
+        - name: agent-schedule
+          path: '/agents/{agent_id}/schedule'
+          operations:
+            - name: get-agent-schedule
+              method: GET
+              inputParameters:
+                - { name: agent_id, in: path, type: string, required: true }
+              call: toolhouse.get-agent-schedule
+            - name: set-agent-schedule
+              method: PUT
+              inputParameters:
+                - { name: agent_id, in: path, type: string, required: true }
+              call: toolhouse.set-agent-schedule
+            - name: delete-agent-schedule
+              method: DELETE
+              inputParameters:
+                - { name: agent_id, in: path, type: string, required: true }
+              call: toolhouse.delete-agent-schedule
+        - name: list-scheduled-agents
+          path: '/agents/scheduled'
+          operations:
+            - name: list-scheduled-agents
+              method: GET
+              call: toolhouse.list-scheduled-agents
+
+    - type: mcp
+      address: 0.0.0.0
+      port: 3010
+      namespace: toolhouse-schedules-management-mcp
+      description: MCP server for managing Toolhouse agent schedules from Naftiko spec.
+      tools:
+        - name: get-agent-schedule
+          description: Get the cron schedule (if any) for a Toolhouse agent.
+          hints: { readOnly: true }
+          inputParameters:
+            - { name: agent_id, type: string, required: true, description: Toolhouse agent UUID. }
+          call: toolhouse.get-agent-schedule
+        - name: set-agent-schedule
+          description: Set or update the cron schedule for a Toolhouse agent.
+          hints: { destructiveHint: true }
+          inputParameters:
+            - { name: agent_id, type: string, required: true, description: Toolhouse agent UUID. }
+          call: toolhouse.set-agent-schedule
+        - name: delete-agent-schedule
+          description: Remove the cron schedule from a Toolhouse agent.
+          hints: { destructiveHint: true }
+          inputParameters:
+            - { name: agent_id, type: string, required: true, description: Toolhouse agent UUID. }
+          call: toolhouse.delete-agent-schedule
+        - name: list-scheduled-agents
+          description: List all Toolhouse agents that currently have a cron schedule.
+          hints: { readOnly: true }
+          call: toolhouse.list-scheduled-agents

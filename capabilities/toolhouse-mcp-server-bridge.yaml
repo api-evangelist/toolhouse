@@ -1,0 +1,111 @@
+naftiko: "1.0.0-alpha2"
+
+info:
+  title: Toolhouse MCP Server Bridge
+  description: >-
+    Wraps Toolhouse's hosted MCP server (which exposes Toolhouse's 40+
+    pre-built agent tools to any MCP client) as a Naftiko consume so any
+    Naftiko capability can reach the Toolhouse tool surface and re-expose
+    it as a governed Naftiko-built MCP. The entire Toolhouse tool catalog
+    becomes a Naftiko-consumable surface.
+  tags:
+    - Naftiko
+    - Toolhouse
+    - Partnership
+    - MCP
+    - Tool-Bridge
+    - Re-expose
+  created: '2026-05-15'
+  modified: '2026-05-15'
+
+binds:
+  - namespace: toolhouse-env
+    description: Toolhouse Platform API key + MCP server endpoint.
+    keys:
+      TOOLHOUSE_API_KEY: TOOLHOUSE_API_KEY
+      TOOLHOUSE_MCP_BASE: TOOLHOUSE_MCP_BASE
+
+capability:
+  consumes:
+    - namespace: toolhouse-mcp
+      type: http
+      baseUri: '{{TOOLHOUSE_MCP_BASE}}'
+      authentication:
+        type: bearer
+        token: '{{TOOLHOUSE_API_KEY}}'
+      resources:
+        - name: list-mcp-tools
+          path: '/mcp/tools'
+          operations:
+            - name: list-mcp-tools
+              method: GET
+        - name: invoke-mcp-tool
+          path: '/mcp/tools/{{tool_name}}/invoke'
+          operations:
+            - name: invoke-mcp-tool
+              method: POST
+              inputParameters:
+                - { name: tool_name, in: path, required: true }
+        - name: list-mcp-server-config
+          path: '/me/mcp-servers'
+          operations:
+            - name: list-mcp-server-config
+              method: GET
+            - name: register-mcp-server
+              method: POST
+
+  exposes:
+    - type: rest
+      address: 0.0.0.0
+      port: 8080
+      namespace: toolhouse-mcp-server-bridge-rest
+      description: REST surface for the Toolhouse MCP server, wrapped for Naftiko consumption.
+      resources:
+        - name: list-mcp-tools
+          path: '/mcp/tools'
+          operations:
+            - name: list-mcp-tools
+              method: GET
+              call: toolhouse-mcp.list-mcp-tools
+        - name: invoke-mcp-tool
+          path: '/mcp/tools/{tool_name}/invoke'
+          operations:
+            - name: invoke-mcp-tool
+              method: POST
+              inputParameters:
+                - { name: tool_name, in: path, type: string, required: true }
+              call: toolhouse-mcp.invoke-mcp-tool
+        - name: mcp-server-config
+          path: '/mcp-servers'
+          operations:
+            - name: list-mcp-server-config
+              method: GET
+              call: toolhouse-mcp.list-mcp-server-config
+            - name: register-mcp-server
+              method: POST
+              call: toolhouse-mcp.register-mcp-server
+
+    - type: mcp
+      address: 0.0.0.0
+      port: 3010
+      namespace: toolhouse-mcp-server-bridge-mcp
+      description: MCP server re-exposing Toolhouse MCP tools as Naftiko-governed MCP tools.
+      tools:
+        - name: list-mcp-tools
+          description: List the MCP tools exposed by the Toolhouse hosted MCP server.
+          hints: { readOnly: true }
+          call: toolhouse-mcp.list-mcp-tools
+        - name: invoke-mcp-tool
+          description: Invoke a Toolhouse MCP tool by name (governed pass-through).
+          hints: { destructiveHint: true }
+          inputParameters:
+            - { name: tool_name, type: string, required: true, description: Toolhouse MCP tool name. }
+          call: toolhouse-mcp.invoke-mcp-tool
+        - name: list-mcp-server-config
+          description: List Toolhouse MCP server configurations registered with the platform.
+          hints: { readOnly: true }
+          call: toolhouse-mcp.list-mcp-server-config
+        - name: register-mcp-server
+          description: Register a new MCP server configuration with Toolhouse.
+          hints: { destructiveHint: false }
+          call: toolhouse-mcp.register-mcp-server
