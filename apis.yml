@@ -133,7 +133,7 @@ common:
     description: 'null'
   - url: https://toolhouse.betteruptime.com/
     name: Toolhouse Status
-    type: Status
+    type: StatusPage
     description: 'null'
   - url: https://github.com/toolhouseai/toolhouse-sdk-python
     name: Toolhouse Python SDK
@@ -161,7 +161,7 @@ common:
     description: 'Official Toolhouse command-line interface for creating, testing, and deploying agents from YAML "th" files.'
   - url: https://toolhouse.ai/blog/toolhouse-changelog-august-2025
     name: Toolhouse Changelog (August 2025)
-    type: Changelog
+    type: ChangeLog
     description: 'Most recent published changelog summarizing August 2025 platform updates including MCP Discovery, Creator Rewards, and Together AI model support.'
   - url: https://toolhouse.ai/blog/cli
     name: Toolhouse CLI Launch Announcement
@@ -177,7 +177,7 @@ common:
     description: 'Announcement of Toolhouse RAG, the managed retrieval-augmented generation tool included with agent runs.'
   - url: json-ld/toolhouse-context.jsonld
     name: Toolhouse JSON-LD Context
-    type: JSON-LD
+    type: JSONLD
     description: 'JSON-LD context defining Toolhouse domain vocabulary and linked data mappings.'
   - url: json-schema/toolhouse-agent-schema.json
     name: Toolhouse Agent Schema
