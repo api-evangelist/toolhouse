@@ -247,8 +247,11 @@ common:
       - name: Supabase
       - name: Lovable
       - name: MCP Clients
+  - name: MCP Server
+    url: https://github.com/toolhouseai/toolhouse-mcp
+    type: MCPServer
 created: '2026-03-26'
-modified: '2026-05-15'
+modified: '2026-05-19'
 position: Consumer
 segments:
   - AI Agents
