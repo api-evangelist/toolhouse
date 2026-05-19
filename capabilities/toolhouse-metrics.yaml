@@ -1,0 +1,218 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Toolhouse API — Metrics
+  description: 'Toolhouse API — Metrics. 4 operations. Lead operation: Get Agent Run Metrics. Self-contained Naftiko capability
+    covering one Toolhouse business surface.'
+  tags:
+  - Toolhouse
+  - Metrics
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TOOLHOUSE_API_KEY: TOOLHOUSE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: toolhouse-metrics
+    baseUri: ''
+    description: Toolhouse API — Metrics business capability. Self-contained, no shared references.
+    resources:
+    - name: me-metrics-agent-runs
+      path: /me/metrics/agent-runs
+      operations:
+      - name: getagentrunmetricsmemetricsagentrunsget
+        method: GET
+        description: Get Agent Run Metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: days
+          in: query
+          type: integer
+        - name: bucket_hours
+          in: query
+          type: string
+    - name: me-metrics-agent-runs-agents
+      path: /me/metrics/agent-runs/agents
+      operations:
+      - name: getagentrunmetricsagentsmemetricsagentrunsagentsget
+        method: GET
+        description: Get Agent Run Metrics Agents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: days
+          in: query
+          type: integer
+        - name: bucket_hours
+          in: query
+          type: string
+    - name: me-metrics-agent-runs-summary
+      path: /me/metrics/agent-runs/summary
+      operations:
+      - name: getagentrunmetricssummarymemetricsagentrunssummaryget
+        method: GET
+        description: Get Agent Run Metrics Summary
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: days
+          in: query
+          type: integer
+        - name: bucket_hours
+          in: query
+          type: string
+    - name: me-metrics-agent-runs-volume
+      path: /me/metrics/agent-runs/volume
+      operations:
+      - name: getagentrunmetricsvolumememetricsagentrunsvolumeget
+        method: GET
+        description: Get Agent Run Metrics Volume
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: days
+          in: query
+          type: integer
+        - name: bucket_hours
+          in: query
+          type: string
+    authentication:
+      type: bearer
+      token: '{{env.TOOLHOUSE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: toolhouse-metrics-rest
+    port: 8080
+    description: REST adapter for Toolhouse API — Metrics. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/me/metrics/agent-runs
+      name: me-metrics-agent-runs
+      description: REST surface for me-metrics-agent-runs.
+      operations:
+      - method: GET
+        name: getagentrunmetricsmemetricsagentrunsget
+        description: Get Agent Run Metrics
+        call: toolhouse-metrics.getagentrunmetricsmemetricsagentrunsget
+        with:
+          days: rest.days
+          bucket_hours: rest.bucket_hours
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/metrics/agent-runs/agents
+      name: me-metrics-agent-runs-agents
+      description: REST surface for me-metrics-agent-runs-agents.
+      operations:
+      - method: GET
+        name: getagentrunmetricsagentsmemetricsagentrunsagentsget
+        description: Get Agent Run Metrics Agents
+        call: toolhouse-metrics.getagentrunmetricsagentsmemetricsagentrunsagentsget
+        with:
+          days: rest.days
+          bucket_hours: rest.bucket_hours
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/metrics/agent-runs/summary
+      name: me-metrics-agent-runs-summary
+      description: REST surface for me-metrics-agent-runs-summary.
+      operations:
+      - method: GET
+        name: getagentrunmetricssummarymemetricsagentrunssummaryget
+        description: Get Agent Run Metrics Summary
+        call: toolhouse-metrics.getagentrunmetricssummarymemetricsagentrunssummaryget
+        with:
+          days: rest.days
+          bucket_hours: rest.bucket_hours
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/metrics/agent-runs/volume
+      name: me-metrics-agent-runs-volume
+      description: REST surface for me-metrics-agent-runs-volume.
+      operations:
+      - method: GET
+        name: getagentrunmetricsvolumememetricsagentrunsvolumeget
+        description: Get Agent Run Metrics Volume
+        call: toolhouse-metrics.getagentrunmetricsvolumememetricsagentrunsvolumeget
+        with:
+          days: rest.days
+          bucket_hours: rest.bucket_hours
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: toolhouse-metrics-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Toolhouse API — Metrics. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-agent-run-metrics
+      description: Get Agent Run Metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-metrics.getagentrunmetricsmemetricsagentrunsget
+      with:
+        days: tools.days
+        bucket_hours: tools.bucket_hours
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-run-metrics-agents
+      description: Get Agent Run Metrics Agents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-metrics.getagentrunmetricsagentsmemetricsagentrunsagentsget
+      with:
+        days: tools.days
+        bucket_hours: tools.bucket_hours
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-run-metrics-summary
+      description: Get Agent Run Metrics Summary
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-metrics.getagentrunmetricssummarymemetricsagentrunssummaryget
+      with:
+        days: tools.days
+        bucket_hours: tools.bucket_hours
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-run-metrics-volume
+      description: Get Agent Run Metrics Volume
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-metrics.getagentrunmetricsvolumememetricsagentrunsvolumeget
+      with:
+        days: tools.days
+        bucket_hours: tools.bucket_hours
+      outputParameters:
+      - type: object
+        mapping: $.

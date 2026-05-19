@@ -1,0 +1,3104 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Toolhouse API — User API
+  description: 'Toolhouse API — User API. 78 operations. Lead operation: Get User. Self-contained Naftiko capability covering
+    one Toolhouse business surface.'
+  tags:
+  - Toolhouse
+  - User API
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TOOLHOUSE_API_KEY: TOOLHOUSE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: toolhouse-user-api
+    baseUri: ''
+    description: Toolhouse API — User API business capability. Self-contained, no shared references.
+    resources:
+    - name: me
+      path: /me/
+      operations:
+      - name: getusermeget
+        method: GET
+        description: Get User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: me-agent-runs
+      path: /me/agent-runs
+      operations:
+      - name: getuseragentrunsmeagentrunsget
+        method: GET
+        description: Get User Agent Runs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: next_cursor
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+    - name: me-agent-runs-run_id
+      path: /me/agent-runs/{run_id}
+      operations:
+      - name: getuseragentrunmeagentrunsrunidget
+        method: GET
+        description: Get User Agent Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+    - name: me-agent-runs-run_id-logs
+      path: /me/agent-runs/{run_id}/logs
+      operations:
+      - name: getuseragentrunlogsmeagentrunsrunidlogsget
+        method: GET
+        description: Get User Agent Run Logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+    - name: me-agent-runs-run_id-mcp-server-logs
+      path: /me/agent-runs/{run_id}/mcp-server-logs
+      operations:
+      - name: getuseragentrunmcpserverlogsmeagentrunsrunidmcpserverlogsget
+        method: GET
+        description: Get User Agent Run Mcp Server Logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+    - name: me-agent-studio-chats
+      path: /me/agent-studio-chats
+      operations:
+      - name: getagentstudiochatsmeagentstudiochatsget
+        method: GET
+        description: Get Agent Studio Chats
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createagentstudiochatmeagentstudiochatspost
+        method: POST
+        description: Create Agent Studio Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: me-agent-studio-chats-run_id
+      path: /me/agent-studio-chats/{run_id}
+      operations:
+      - name: getagentstudiochatmeagentstudiochatsrunidget
+        method: GET
+        description: Get Agent Studio Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+      - name: updateagentstudiochatmeagentstudiochatsrunidput
+        method: PUT
+        description: Update Agent Studio Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: patchagentstudiochatmeagentstudiochatsrunidpatch
+        method: PATCH
+        description: Patch Agent Studio Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteagentstudiochatmeagentstudiochatsruniddelete
+        method: DELETE
+        description: Delete Agent Studio Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+    - name: me-agent-studio-chats-run_id-clone
+      path: /me/agent-studio-chats/{run_id}/clone
+      operations:
+      - name: cloneagentstudiochatmeagentstudiochatsrunidclonepost
+        method: POST
+        description: Clone Agent Studio Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+    - name: me-agents
+      path: /me/agents
+      operations:
+      - name: getallagentsmeagentsget
+        method: GET
+        description: Get All Agents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: upsertagentmeagentspost
+        method: POST
+        description: Upsert Agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: me-agents-list
+      path: /me/agents/list
+      operations:
+      - name: getagentslistmeagentslistget
+        method: GET
+        description: Get Agents List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: limit
+          in: query
+          type: integer
+        - name: next_cursor
+          in: query
+          type: string
+        - name: search
+          in: query
+          type: string
+    - name: me-agents-vanity-slug
+      path: /me/agents/vanity/slug
+      operations:
+      - name: generateslugmeagentsvanityslugpost
+        method: POST
+        description: Generate Slug
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: checkslugavailabilitymeagentsvanityslugget
+        method: GET
+        description: Check Slug Availability
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: slug
+          in: query
+          type: string
+          required: true
+    - name: me-agents-agent_id
+      path: /me/agents/{agent_id}
+      operations:
+      - name: getagentmeagentsagentidget
+        method: GET
+        description: Get Agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+    - name: me-agents-agent_id-customizations-theme
+      path: /me/agents/{agent_id}/customizations/theme
+      operations:
+      - name: getagentthemepreferencemeagentsagentidcustomizationsthemeget
+        method: GET
+        description: Get Agent Theme Preference
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+      - name: upsertagentthemepreferencemeagentsagentidcustomizationsthemeput
+        method: PUT
+        description: Upsert Agent Theme Preference
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: me-agents-agent_id-files
+      path: /me/agents/{agent_id}/files
+      operations:
+      - name: listagentfilesmeagentsagentidfilesget
+        method: GET
+        description: List Agent Files
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+      - name: createagentfilemeagentsagentidfilespost
+        method: POST
+        description: Create Agent File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: me-agents-agent_id-files-positions
+      path: /me/agents/{agent_id}/files/positions
+      operations:
+      - name: updatefilepositionsmeagentsagentidfilespositionsput
+        method: PUT
+        description: Update File Positions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: me-agents-agent_id-files-file_id
+      path: /me/agents/{agent_id}/files/{file_id}
+      operations:
+      - name: getagentfilemeagentsagentidfilesfileidget
+        method: GET
+        description: Get Agent File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+        - name: file_id
+          in: path
+          type: string
+          required: true
+      - name: updateagentfilemeagentsagentidfilesfileidpatch
+        method: PATCH
+        description: Update Agent File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+        - name: file_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteagentfilemeagentsagentidfilesfileiddelete
+        method: DELETE
+        description: Delete Agent File
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+        - name: file_id
+          in: path
+          type: string
+          required: true
+    - name: me-agents-agent_id-subscribe
+      path: /me/agents/{agent_id}/subscribe
+      operations:
+      - name: subscribetoagentmeagentsagentidsubscribepost
+        method: POST
+        description: Subscribe To Agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: me-agents-agent_id-transfer
+      path: /me/agents/{agent_id}/transfer
+      operations:
+      - name: transferagentmeagentsagentidtransferpost
+        method: POST
+        description: Transfer Agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: me-agents-agent_id-unsubscribe
+      path: /me/agents/{agent_id}/unsubscribe
+      operations:
+      - name: unsubscribefromagentmeagentsagentidunsubscribepost
+        method: POST
+        description: Unsubscribe From Agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+    - name: me-agents-agent_id-upsell-description
+      path: /me/agents/{agent_id}/upsell-description
+      operations:
+      - name: generateagentupselldescriptionmeagentsagentidupselldescriptionpost
+        method: POST
+        description: Generate Agent Upsell Description
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+    - name: me-agents-agent_id-vibe
+      path: /me/agents/{agent_id}/vibe
+      operations:
+      - name: getvibeagentpromptmeagentsagentidvibeget
+        method: GET
+        description: Get Vibe Agent Prompt
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+        - name: service_name
+          in: query
+          type: string
+          required: true
+    - name: me-api-keys
+      path: /me/api-keys
+      operations:
+      - name: getapikeysmeapikeysget
+        method: GET
+        description: Get Api Keys
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: postcreateapikeymeapikeyspost
+        method: POST
+        description: Post Create Api Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: me-api-keys-default
+      path: /me/api-keys/default
+      operations:
+      - name: getdefaultapikeymeapikeysdefaultget
+        method: GET
+        description: Get Default Api Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: me-api-keys-api_key_id
+      path: /me/api-keys/{api_key_id}
+      operations:
+      - name: getapikeymeapikeysapikeyidget
+        method: GET
+        description: Get Api Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: api_key_id
+          in: path
+          type: integer
+          required: true
+      - name: deleteapikeymeapikeysapikeyiddelete
+        method: DELETE
+        description: Delete Api Key
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: api_key_id
+          in: path
+          type: integer
+          required: true
+    - name: me-billing
+      path: /me/billing
+      operations:
+      - name: billinginformationmebillingget
+        method: GET
+        description: Billing Information
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: me-chats
+      path: /me/chats
+      operations:
+      - name: getallchatsmechatsget
+        method: GET
+        description: Get All Chats
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createchatmechatspost
+        method: POST
+        description: Create Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: me-chats-chat_id
+      path: /me/chats/{chat_id}
+      operations:
+      - name: getchatmechatschatidget
+        method: GET
+        description: Get Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: chat_id
+          in: path
+          type: string
+          required: true
+      - name: editchatmechatschatidput
+        method: PUT
+        description: Edit Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: chat_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: patchchatmechatschatidpatch
+        method: PATCH
+        description: Patch Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: chat_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: delchatmechatschatiddelete
+        method: DELETE
+        description: Del Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: chat_id
+          in: path
+          type: string
+          required: true
+    - name: me-chats-chat_id-clone
+      path: /me/chats/{chat_id}/clone
+      operations:
+      - name: clonechatmechatschatidclonepost
+        method: POST
+        description: Clone Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: chat_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: false
+    - name: me-chats-chat_id-feedback
+      path: /me/chats/{chat_id}/feedback
+      operations:
+      - name: postchatfeedbackmechatschatidfeedbackpost
+        method: POST
+        description: Post Chat Feedback
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: chat_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: me-chats-chat_id-og
+      path: /me/chats/{chat_id}/og
+      operations:
+      - name: getchatogmetadatamechatschatidogget
+        method: GET
+        description: Get Chat Og Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: chat_id
+          in: path
+          type: string
+          required: true
+    - name: me-chats-chat_id-runs
+      path: /me/chats/{chat_id}/runs
+      operations:
+      - name: postagentrunlogmechatschatidrunspost
+        method: POST
+        description: Post Agent Run Log
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: chat_id
+          in: path
+          type: string
+          required: true
+    - name: me-cli-auth
+      path: /me/cli-auth
+      operations:
+      - name: createcliauthmecliauthpost
+        method: POST
+        description: Create Cli Auth
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: me-cli-auth-auth_id
+      path: /me/cli-auth/{auth_id}
+      operations:
+      - name: getcliauthmecliauthauthidget
+        method: GET
+        description: Get Cli Auth
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: auth_id
+          in: path
+          type: string
+          required: true
+    - name: me-cli-auth-cli_auth_id
+      path: /me/cli-auth/{cli_auth_id}
+      operations:
+      - name: updatecliauthmecliauthcliauthidput
+        method: PUT
+        description: Update Cli Auth
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cli_auth_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: me-credits
+      path: /me/credits
+      operations:
+      - name: getusercreditsmecreditsget
+        method: GET
+        description: Get User Credits
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: me-credits-use
+      path: /me/credits/use
+      operations:
+      - name: useusercreditsmecreditsusepost
+        method: POST
+        description: Use User Credits
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: me-executions
+      path: /me/executions
+      operations:
+      - name: getuserlogsmeexecutionsget
+        method: GET
+        description: Get User Logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: next_cursor
+          in: query
+          type: string
+        - name: limit
+          in: query
+          type: integer
+    - name: me-executions-log_id
+      path: /me/executions/{log_id}
+      operations:
+      - name: getuserlogbyidmeexecutionslogidget
+        method: GET
+        description: Get User Log By Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: log_id
+          in: path
+          type: integer
+          required: true
+    - name: me-mcp-registry-servers
+      path: /me/mcp-registry/servers
+      operations:
+      - name: searchmcpserversmemcpregistryserversget
+        method: GET
+        description: Search Mcp Servers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: queries
+          in: query
+          type: array
+          description: optional search query
+          required: true
+    - name: me-mcp-servers
+      path: /me/mcp-servers
+      operations:
+      - name: getmcpserversmemcpserversget
+        method: GET
+        description: Get Mcp Servers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: me-mcp-servers-details
+      path: /me/mcp-servers/details
+      operations:
+      - name: getsmitherymcpserverdetailsmemcpserversdetailsget
+        method: GET
+        description: Get Smithery Mcp Server Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          required: true
+    - name: me-metrics-agent-runs
+      path: /me/metrics/agent-runs
+      operations:
+      - name: getagentrunmetricsmemetricsagentrunsget
+        method: GET
+        description: Get Agent Run Metrics
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: days
+          in: query
+          type: integer
+        - name: bucket_hours
+          in: query
+          type: string
+    - name: me-metrics-agent-runs-agents
+      path: /me/metrics/agent-runs/agents
+      operations:
+      - name: getagentrunmetricsagentsmemetricsagentrunsagentsget
+        method: GET
+        description: Get Agent Run Metrics Agents
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: days
+          in: query
+          type: integer
+        - name: bucket_hours
+          in: query
+          type: string
+    - name: me-metrics-agent-runs-summary
+      path: /me/metrics/agent-runs/summary
+      operations:
+      - name: getagentrunmetricssummarymemetricsagentrunssummaryget
+        method: GET
+        description: Get Agent Run Metrics Summary
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: days
+          in: query
+          type: integer
+        - name: bucket_hours
+          in: query
+          type: string
+    - name: me-metrics-agent-runs-volume
+      path: /me/metrics/agent-runs/volume
+      operations:
+      - name: getagentrunmetricsvolumememetricsagentrunsvolumeget
+        method: GET
+        description: Get Agent Run Metrics Volume
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: days
+          in: query
+          type: integer
+        - name: bucket_hours
+          in: query
+          type: string
+    - name: me-monetization-earnings
+      path: /me/monetization/earnings
+      operations:
+      - name: getmonetizationearningsmemonetizationearningsget
+        method: GET
+        description: Get Monetization Earnings
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: period
+          in: query
+          type: integer
+    - name: me-monetization-subscribers
+      path: /me/monetization/subscribers
+      operations:
+      - name: getmonetizationsubscribersmemonetizationsubscribersget
+        method: GET
+        description: Get Monetization Subscribers
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: period
+          in: query
+          type: integer
+    - name: me-monetization-summary
+      path: /me/monetization/summary
+      operations:
+      - name: getmonetizationsummarymemonetizationsummaryget
+        method: GET
+        description: Get Monetization Summary
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: period
+          in: query
+          type: integer
+    - name: me-schedules
+      path: /me/schedules
+      operations:
+      - name: getschedulelistmeschedulesget
+        method: GET
+        description: Get Schedule List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createschedulemeschedulespost
+        method: POST
+        description: Create Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: me-schedules-onboarding
+      path: /me/schedules/onboarding
+      operations:
+      - name: getonboardingschedulemeschedulesonboardingget
+        method: GET
+        description: Get Onboarding Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: me-schedules-text-to-cron
+      path: /me/schedules/text-to-cron
+      operations:
+      - name: texttocronmeschedulestexttocronget
+        method: GET
+        description: Text To Cron
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cron
+          in: query
+          type: string
+          required: true
+    - name: me-schedules-schedule_id
+      path: /me/schedules/{schedule_id}
+      operations:
+      - name: getschedulebyidmeschedulesscheduleidget
+        method: GET
+        description: Get Schedule By Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: schedule_id
+          in: path
+          type: string
+          required: true
+      - name: editschedulemeschedulesscheduleidput
+        method: PUT
+        description: Edit Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: schedule_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: delschedulemeschedulesscheduleiddelete
+        method: DELETE
+        description: Del Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: schedule_id
+          in: path
+          type: string
+          required: true
+    - name: me-stripe-sessions
+      path: /me/stripe/sessions
+      operations:
+      - name: getstripesessionsmestripesessionspost
+        method: POST
+        description: Get Stripe Sessions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: me-stripe-webhook
+      path: /me/stripe/webhook
+      operations:
+      - name: stripewebhookmestripewebhookpost
+        method: POST
+        description: Stripe Webhook
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: me-subscriptions
+      path: /me/subscriptions
+      operations:
+      - name: listagentsubscriptionsmesubscriptionsget
+        method: GET
+        description: List Agent Subscriptions
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: me-subscriptions-agent_id
+      path: /me/subscriptions/{agent_id}
+      operations:
+      - name: getagentsubscriptionmesubscriptionsagentidget
+        method: GET
+        description: Get Agent Subscription
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+    - name: me-vibe-services
+      path: /me/vibe/services
+      operations:
+      - name: getvibeservicesmevibeservicesget
+        method: GET
+        description: Get Vibe Services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: me-vip
+      path: /me/vip
+      operations:
+      - name: fetchredemptioncountmevipget
+        method: GET
+        description: Fetch Redemption Count
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: redeemcodemevippost
+        method: POST
+        description: Redeem Code
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.TOOLHOUSE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: toolhouse-user-api-rest
+    port: 8080
+    description: REST adapter for Toolhouse API — User API. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/me
+      name: me
+      description: REST surface for me.
+      operations:
+      - method: GET
+        name: getusermeget
+        description: Get User
+        call: toolhouse-user-api.getusermeget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agent-runs
+      name: me-agent-runs
+      description: REST surface for me-agent-runs.
+      operations:
+      - method: GET
+        name: getuseragentrunsmeagentrunsget
+        description: Get User Agent Runs
+        call: toolhouse-user-api.getuseragentrunsmeagentrunsget
+        with:
+          next_cursor: rest.next_cursor
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agent-runs/{run-id}
+      name: me-agent-runs-run-id
+      description: REST surface for me-agent-runs-run_id.
+      operations:
+      - method: GET
+        name: getuseragentrunmeagentrunsrunidget
+        description: Get User Agent Run
+        call: toolhouse-user-api.getuseragentrunmeagentrunsrunidget
+        with:
+          run_id: rest.run_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agent-runs/{run-id}/logs
+      name: me-agent-runs-run-id-logs
+      description: REST surface for me-agent-runs-run_id-logs.
+      operations:
+      - method: GET
+        name: getuseragentrunlogsmeagentrunsrunidlogsget
+        description: Get User Agent Run Logs
+        call: toolhouse-user-api.getuseragentrunlogsmeagentrunsrunidlogsget
+        with:
+          run_id: rest.run_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agent-runs/{run-id}/mcp-server-logs
+      name: me-agent-runs-run-id-mcp-server-logs
+      description: REST surface for me-agent-runs-run_id-mcp-server-logs.
+      operations:
+      - method: GET
+        name: getuseragentrunmcpserverlogsmeagentrunsrunidmcpserverlogsget
+        description: Get User Agent Run Mcp Server Logs
+        call: toolhouse-user-api.getuseragentrunmcpserverlogsmeagentrunsrunidmcpserverlogsget
+        with:
+          run_id: rest.run_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agent-studio-chats
+      name: me-agent-studio-chats
+      description: REST surface for me-agent-studio-chats.
+      operations:
+      - method: GET
+        name: getagentstudiochatsmeagentstudiochatsget
+        description: Get Agent Studio Chats
+        call: toolhouse-user-api.getagentstudiochatsmeagentstudiochatsget
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createagentstudiochatmeagentstudiochatspost
+        description: Create Agent Studio Chat
+        call: toolhouse-user-api.createagentstudiochatmeagentstudiochatspost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agent-studio-chats/{run-id}
+      name: me-agent-studio-chats-run-id
+      description: REST surface for me-agent-studio-chats-run_id.
+      operations:
+      - method: GET
+        name: getagentstudiochatmeagentstudiochatsrunidget
+        description: Get Agent Studio Chat
+        call: toolhouse-user-api.getagentstudiochatmeagentstudiochatsrunidget
+        with:
+          run_id: rest.run_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateagentstudiochatmeagentstudiochatsrunidput
+        description: Update Agent Studio Chat
+        call: toolhouse-user-api.updateagentstudiochatmeagentstudiochatsrunidput
+        with:
+          run_id: rest.run_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchagentstudiochatmeagentstudiochatsrunidpatch
+        description: Patch Agent Studio Chat
+        call: toolhouse-user-api.patchagentstudiochatmeagentstudiochatsrunidpatch
+        with:
+          run_id: rest.run_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteagentstudiochatmeagentstudiochatsruniddelete
+        description: Delete Agent Studio Chat
+        call: toolhouse-user-api.deleteagentstudiochatmeagentstudiochatsruniddelete
+        with:
+          run_id: rest.run_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agent-studio-chats/{run-id}/clone
+      name: me-agent-studio-chats-run-id-clone
+      description: REST surface for me-agent-studio-chats-run_id-clone.
+      operations:
+      - method: POST
+        name: cloneagentstudiochatmeagentstudiochatsrunidclonepost
+        description: Clone Agent Studio Chat
+        call: toolhouse-user-api.cloneagentstudiochatmeagentstudiochatsrunidclonepost
+        with:
+          run_id: rest.run_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agents
+      name: me-agents
+      description: REST surface for me-agents.
+      operations:
+      - method: GET
+        name: getallagentsmeagentsget
+        description: Get All Agents
+        call: toolhouse-user-api.getallagentsmeagentsget
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: upsertagentmeagentspost
+        description: Upsert Agent
+        call: toolhouse-user-api.upsertagentmeagentspost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agents/list
+      name: me-agents-list
+      description: REST surface for me-agents-list.
+      operations:
+      - method: GET
+        name: getagentslistmeagentslistget
+        description: Get Agents List
+        call: toolhouse-user-api.getagentslistmeagentslistget
+        with:
+          limit: rest.limit
+          next_cursor: rest.next_cursor
+          search: rest.search
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agents/vanity/slug
+      name: me-agents-vanity-slug
+      description: REST surface for me-agents-vanity-slug.
+      operations:
+      - method: POST
+        name: generateslugmeagentsvanityslugpost
+        description: Generate Slug
+        call: toolhouse-user-api.generateslugmeagentsvanityslugpost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: GET
+        name: checkslugavailabilitymeagentsvanityslugget
+        description: Check Slug Availability
+        call: toolhouse-user-api.checkslugavailabilitymeagentsvanityslugget
+        with:
+          slug: rest.slug
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agents/{agent-id}
+      name: me-agents-agent-id
+      description: REST surface for me-agents-agent_id.
+      operations:
+      - method: GET
+        name: getagentmeagentsagentidget
+        description: Get Agent
+        call: toolhouse-user-api.getagentmeagentsagentidget
+        with:
+          agent_id: rest.agent_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agents/{agent-id}/customizations/theme
+      name: me-agents-agent-id-customizations-theme
+      description: REST surface for me-agents-agent_id-customizations-theme.
+      operations:
+      - method: GET
+        name: getagentthemepreferencemeagentsagentidcustomizationsthemeget
+        description: Get Agent Theme Preference
+        call: toolhouse-user-api.getagentthemepreferencemeagentsagentidcustomizationsthemeget
+        with:
+          agent_id: rest.agent_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: upsertagentthemepreferencemeagentsagentidcustomizationsthemeput
+        description: Upsert Agent Theme Preference
+        call: toolhouse-user-api.upsertagentthemepreferencemeagentsagentidcustomizationsthemeput
+        with:
+          agent_id: rest.agent_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agents/{agent-id}/files
+      name: me-agents-agent-id-files
+      description: REST surface for me-agents-agent_id-files.
+      operations:
+      - method: GET
+        name: listagentfilesmeagentsagentidfilesget
+        description: List Agent Files
+        call: toolhouse-user-api.listagentfilesmeagentsagentidfilesget
+        with:
+          agent_id: rest.agent_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createagentfilemeagentsagentidfilespost
+        description: Create Agent File
+        call: toolhouse-user-api.createagentfilemeagentsagentidfilespost
+        with:
+          agent_id: rest.agent_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agents/{agent-id}/files/positions
+      name: me-agents-agent-id-files-positions
+      description: REST surface for me-agents-agent_id-files-positions.
+      operations:
+      - method: PUT
+        name: updatefilepositionsmeagentsagentidfilespositionsput
+        description: Update File Positions
+        call: toolhouse-user-api.updatefilepositionsmeagentsagentidfilespositionsput
+        with:
+          agent_id: rest.agent_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agents/{agent-id}/files/{file-id}
+      name: me-agents-agent-id-files-file-id
+      description: REST surface for me-agents-agent_id-files-file_id.
+      operations:
+      - method: GET
+        name: getagentfilemeagentsagentidfilesfileidget
+        description: Get Agent File
+        call: toolhouse-user-api.getagentfilemeagentsagentidfilesfileidget
+        with:
+          agent_id: rest.agent_id
+          file_id: rest.file_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: updateagentfilemeagentsagentidfilesfileidpatch
+        description: Update Agent File
+        call: toolhouse-user-api.updateagentfilemeagentsagentidfilesfileidpatch
+        with:
+          agent_id: rest.agent_id
+          file_id: rest.file_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteagentfilemeagentsagentidfilesfileiddelete
+        description: Delete Agent File
+        call: toolhouse-user-api.deleteagentfilemeagentsagentidfilesfileiddelete
+        with:
+          agent_id: rest.agent_id
+          file_id: rest.file_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agents/{agent-id}/subscribe
+      name: me-agents-agent-id-subscribe
+      description: REST surface for me-agents-agent_id-subscribe.
+      operations:
+      - method: POST
+        name: subscribetoagentmeagentsagentidsubscribepost
+        description: Subscribe To Agent
+        call: toolhouse-user-api.subscribetoagentmeagentsagentidsubscribepost
+        with:
+          agent_id: rest.agent_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agents/{agent-id}/transfer
+      name: me-agents-agent-id-transfer
+      description: REST surface for me-agents-agent_id-transfer.
+      operations:
+      - method: POST
+        name: transferagentmeagentsagentidtransferpost
+        description: Transfer Agent
+        call: toolhouse-user-api.transferagentmeagentsagentidtransferpost
+        with:
+          agent_id: rest.agent_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agents/{agent-id}/unsubscribe
+      name: me-agents-agent-id-unsubscribe
+      description: REST surface for me-agents-agent_id-unsubscribe.
+      operations:
+      - method: POST
+        name: unsubscribefromagentmeagentsagentidunsubscribepost
+        description: Unsubscribe From Agent
+        call: toolhouse-user-api.unsubscribefromagentmeagentsagentidunsubscribepost
+        with:
+          agent_id: rest.agent_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agents/{agent-id}/upsell-description
+      name: me-agents-agent-id-upsell-description
+      description: REST surface for me-agents-agent_id-upsell-description.
+      operations:
+      - method: POST
+        name: generateagentupselldescriptionmeagentsagentidupselldescriptionpost
+        description: Generate Agent Upsell Description
+        call: toolhouse-user-api.generateagentupselldescriptionmeagentsagentidupselldescriptionpost
+        with:
+          agent_id: rest.agent_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/agents/{agent-id}/vibe
+      name: me-agents-agent-id-vibe
+      description: REST surface for me-agents-agent_id-vibe.
+      operations:
+      - method: GET
+        name: getvibeagentpromptmeagentsagentidvibeget
+        description: Get Vibe Agent Prompt
+        call: toolhouse-user-api.getvibeagentpromptmeagentsagentidvibeget
+        with:
+          agent_id: rest.agent_id
+          service_name: rest.service_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/api-keys
+      name: me-api-keys
+      description: REST surface for me-api-keys.
+      operations:
+      - method: GET
+        name: getapikeysmeapikeysget
+        description: Get Api Keys
+        call: toolhouse-user-api.getapikeysmeapikeysget
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: postcreateapikeymeapikeyspost
+        description: Post Create Api Key
+        call: toolhouse-user-api.postcreateapikeymeapikeyspost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/api-keys/default
+      name: me-api-keys-default
+      description: REST surface for me-api-keys-default.
+      operations:
+      - method: GET
+        name: getdefaultapikeymeapikeysdefaultget
+        description: Get Default Api Key
+        call: toolhouse-user-api.getdefaultapikeymeapikeysdefaultget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/api-keys/{api-key-id}
+      name: me-api-keys-api-key-id
+      description: REST surface for me-api-keys-api_key_id.
+      operations:
+      - method: GET
+        name: getapikeymeapikeysapikeyidget
+        description: Get Api Key
+        call: toolhouse-user-api.getapikeymeapikeysapikeyidget
+        with:
+          api_key_id: rest.api_key_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapikeymeapikeysapikeyiddelete
+        description: Delete Api Key
+        call: toolhouse-user-api.deleteapikeymeapikeysapikeyiddelete
+        with:
+          api_key_id: rest.api_key_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/billing
+      name: me-billing
+      description: REST surface for me-billing.
+      operations:
+      - method: GET
+        name: billinginformationmebillingget
+        description: Billing Information
+        call: toolhouse-user-api.billinginformationmebillingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/chats
+      name: me-chats
+      description: REST surface for me-chats.
+      operations:
+      - method: GET
+        name: getallchatsmechatsget
+        description: Get All Chats
+        call: toolhouse-user-api.getallchatsmechatsget
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createchatmechatspost
+        description: Create Chat
+        call: toolhouse-user-api.createchatmechatspost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/chats/{chat-id}
+      name: me-chats-chat-id
+      description: REST surface for me-chats-chat_id.
+      operations:
+      - method: GET
+        name: getchatmechatschatidget
+        description: Get Chat
+        call: toolhouse-user-api.getchatmechatschatidget
+        with:
+          chat_id: rest.chat_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editchatmechatschatidput
+        description: Edit Chat
+        call: toolhouse-user-api.editchatmechatschatidput
+        with:
+          chat_id: rest.chat_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchchatmechatschatidpatch
+        description: Patch Chat
+        call: toolhouse-user-api.patchchatmechatschatidpatch
+        with:
+          chat_id: rest.chat_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delchatmechatschatiddelete
+        description: Del Chat
+        call: toolhouse-user-api.delchatmechatschatiddelete
+        with:
+          chat_id: rest.chat_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/chats/{chat-id}/clone
+      name: me-chats-chat-id-clone
+      description: REST surface for me-chats-chat_id-clone.
+      operations:
+      - method: POST
+        name: clonechatmechatschatidclonepost
+        description: Clone Chat
+        call: toolhouse-user-api.clonechatmechatschatidclonepost
+        with:
+          chat_id: rest.chat_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/chats/{chat-id}/feedback
+      name: me-chats-chat-id-feedback
+      description: REST surface for me-chats-chat_id-feedback.
+      operations:
+      - method: POST
+        name: postchatfeedbackmechatschatidfeedbackpost
+        description: Post Chat Feedback
+        call: toolhouse-user-api.postchatfeedbackmechatschatidfeedbackpost
+        with:
+          chat_id: rest.chat_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/chats/{chat-id}/og
+      name: me-chats-chat-id-og
+      description: REST surface for me-chats-chat_id-og.
+      operations:
+      - method: GET
+        name: getchatogmetadatamechatschatidogget
+        description: Get Chat Og Metadata
+        call: toolhouse-user-api.getchatogmetadatamechatschatidogget
+        with:
+          chat_id: rest.chat_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/chats/{chat-id}/runs
+      name: me-chats-chat-id-runs
+      description: REST surface for me-chats-chat_id-runs.
+      operations:
+      - method: POST
+        name: postagentrunlogmechatschatidrunspost
+        description: Post Agent Run Log
+        call: toolhouse-user-api.postagentrunlogmechatschatidrunspost
+        with:
+          chat_id: rest.chat_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/cli-auth
+      name: me-cli-auth
+      description: REST surface for me-cli-auth.
+      operations:
+      - method: POST
+        name: createcliauthmecliauthpost
+        description: Create Cli Auth
+        call: toolhouse-user-api.createcliauthmecliauthpost
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/cli-auth/{auth-id}
+      name: me-cli-auth-auth-id
+      description: REST surface for me-cli-auth-auth_id.
+      operations:
+      - method: GET
+        name: getcliauthmecliauthauthidget
+        description: Get Cli Auth
+        call: toolhouse-user-api.getcliauthmecliauthauthidget
+        with:
+          auth_id: rest.auth_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/cli-auth/{cli-auth-id}
+      name: me-cli-auth-cli-auth-id
+      description: REST surface for me-cli-auth-cli_auth_id.
+      operations:
+      - method: PUT
+        name: updatecliauthmecliauthcliauthidput
+        description: Update Cli Auth
+        call: toolhouse-user-api.updatecliauthmecliauthcliauthidput
+        with:
+          cli_auth_id: rest.cli_auth_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/credits
+      name: me-credits
+      description: REST surface for me-credits.
+      operations:
+      - method: GET
+        name: getusercreditsmecreditsget
+        description: Get User Credits
+        call: toolhouse-user-api.getusercreditsmecreditsget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/credits/use
+      name: me-credits-use
+      description: REST surface for me-credits-use.
+      operations:
+      - method: POST
+        name: useusercreditsmecreditsusepost
+        description: Use User Credits
+        call: toolhouse-user-api.useusercreditsmecreditsusepost
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/executions
+      name: me-executions
+      description: REST surface for me-executions.
+      operations:
+      - method: GET
+        name: getuserlogsmeexecutionsget
+        description: Get User Logs
+        call: toolhouse-user-api.getuserlogsmeexecutionsget
+        with:
+          next_cursor: rest.next_cursor
+          limit: rest.limit
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/executions/{log-id}
+      name: me-executions-log-id
+      description: REST surface for me-executions-log_id.
+      operations:
+      - method: GET
+        name: getuserlogbyidmeexecutionslogidget
+        description: Get User Log By Id
+        call: toolhouse-user-api.getuserlogbyidmeexecutionslogidget
+        with:
+          log_id: rest.log_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/mcp-registry/servers
+      name: me-mcp-registry-servers
+      description: REST surface for me-mcp-registry-servers.
+      operations:
+      - method: GET
+        name: searchmcpserversmemcpregistryserversget
+        description: Search Mcp Servers
+        call: toolhouse-user-api.searchmcpserversmemcpregistryserversget
+        with:
+          queries: rest.queries
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/mcp-servers
+      name: me-mcp-servers
+      description: REST surface for me-mcp-servers.
+      operations:
+      - method: GET
+        name: getmcpserversmemcpserversget
+        description: Get Mcp Servers
+        call: toolhouse-user-api.getmcpserversmemcpserversget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/mcp-servers/details
+      name: me-mcp-servers-details
+      description: REST surface for me-mcp-servers-details.
+      operations:
+      - method: GET
+        name: getsmitherymcpserverdetailsmemcpserversdetailsget
+        description: Get Smithery Mcp Server Details
+        call: toolhouse-user-api.getsmitherymcpserverdetailsmemcpserversdetailsget
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/metrics/agent-runs
+      name: me-metrics-agent-runs
+      description: REST surface for me-metrics-agent-runs.
+      operations:
+      - method: GET
+        name: getagentrunmetricsmemetricsagentrunsget
+        description: Get Agent Run Metrics
+        call: toolhouse-user-api.getagentrunmetricsmemetricsagentrunsget
+        with:
+          days: rest.days
+          bucket_hours: rest.bucket_hours
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/metrics/agent-runs/agents
+      name: me-metrics-agent-runs-agents
+      description: REST surface for me-metrics-agent-runs-agents.
+      operations:
+      - method: GET
+        name: getagentrunmetricsagentsmemetricsagentrunsagentsget
+        description: Get Agent Run Metrics Agents
+        call: toolhouse-user-api.getagentrunmetricsagentsmemetricsagentrunsagentsget
+        with:
+          days: rest.days
+          bucket_hours: rest.bucket_hours
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/metrics/agent-runs/summary
+      name: me-metrics-agent-runs-summary
+      description: REST surface for me-metrics-agent-runs-summary.
+      operations:
+      - method: GET
+        name: getagentrunmetricssummarymemetricsagentrunssummaryget
+        description: Get Agent Run Metrics Summary
+        call: toolhouse-user-api.getagentrunmetricssummarymemetricsagentrunssummaryget
+        with:
+          days: rest.days
+          bucket_hours: rest.bucket_hours
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/metrics/agent-runs/volume
+      name: me-metrics-agent-runs-volume
+      description: REST surface for me-metrics-agent-runs-volume.
+      operations:
+      - method: GET
+        name: getagentrunmetricsvolumememetricsagentrunsvolumeget
+        description: Get Agent Run Metrics Volume
+        call: toolhouse-user-api.getagentrunmetricsvolumememetricsagentrunsvolumeget
+        with:
+          days: rest.days
+          bucket_hours: rest.bucket_hours
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/monetization/earnings
+      name: me-monetization-earnings
+      description: REST surface for me-monetization-earnings.
+      operations:
+      - method: GET
+        name: getmonetizationearningsmemonetizationearningsget
+        description: Get Monetization Earnings
+        call: toolhouse-user-api.getmonetizationearningsmemonetizationearningsget
+        with:
+          period: rest.period
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/monetization/subscribers
+      name: me-monetization-subscribers
+      description: REST surface for me-monetization-subscribers.
+      operations:
+      - method: GET
+        name: getmonetizationsubscribersmemonetizationsubscribersget
+        description: Get Monetization Subscribers
+        call: toolhouse-user-api.getmonetizationsubscribersmemonetizationsubscribersget
+        with:
+          period: rest.period
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/monetization/summary
+      name: me-monetization-summary
+      description: REST surface for me-monetization-summary.
+      operations:
+      - method: GET
+        name: getmonetizationsummarymemonetizationsummaryget
+        description: Get Monetization Summary
+        call: toolhouse-user-api.getmonetizationsummarymemonetizationsummaryget
+        with:
+          period: rest.period
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/schedules
+      name: me-schedules
+      description: REST surface for me-schedules.
+      operations:
+      - method: GET
+        name: getschedulelistmeschedulesget
+        description: Get Schedule List
+        call: toolhouse-user-api.getschedulelistmeschedulesget
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createschedulemeschedulespost
+        description: Create Schedule
+        call: toolhouse-user-api.createschedulemeschedulespost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/schedules/onboarding
+      name: me-schedules-onboarding
+      description: REST surface for me-schedules-onboarding.
+      operations:
+      - method: GET
+        name: getonboardingschedulemeschedulesonboardingget
+        description: Get Onboarding Schedule
+        call: toolhouse-user-api.getonboardingschedulemeschedulesonboardingget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/schedules/text-to-cron
+      name: me-schedules-text-to-cron
+      description: REST surface for me-schedules-text-to-cron.
+      operations:
+      - method: GET
+        name: texttocronmeschedulestexttocronget
+        description: Text To Cron
+        call: toolhouse-user-api.texttocronmeschedulestexttocronget
+        with:
+          cron: rest.cron
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/schedules/{schedule-id}
+      name: me-schedules-schedule-id
+      description: REST surface for me-schedules-schedule_id.
+      operations:
+      - method: GET
+        name: getschedulebyidmeschedulesscheduleidget
+        description: Get Schedule By Id
+        call: toolhouse-user-api.getschedulebyidmeschedulesscheduleidget
+        with:
+          schedule_id: rest.schedule_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editschedulemeschedulesscheduleidput
+        description: Edit Schedule
+        call: toolhouse-user-api.editschedulemeschedulesscheduleidput
+        with:
+          schedule_id: rest.schedule_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delschedulemeschedulesscheduleiddelete
+        description: Del Schedule
+        call: toolhouse-user-api.delschedulemeschedulesscheduleiddelete
+        with:
+          schedule_id: rest.schedule_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/stripe/sessions
+      name: me-stripe-sessions
+      description: REST surface for me-stripe-sessions.
+      operations:
+      - method: POST
+        name: getstripesessionsmestripesessionspost
+        description: Get Stripe Sessions
+        call: toolhouse-user-api.getstripesessionsmestripesessionspost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/stripe/webhook
+      name: me-stripe-webhook
+      description: REST surface for me-stripe-webhook.
+      operations:
+      - method: POST
+        name: stripewebhookmestripewebhookpost
+        description: Stripe Webhook
+        call: toolhouse-user-api.stripewebhookmestripewebhookpost
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/subscriptions
+      name: me-subscriptions
+      description: REST surface for me-subscriptions.
+      operations:
+      - method: GET
+        name: listagentsubscriptionsmesubscriptionsget
+        description: List Agent Subscriptions
+        call: toolhouse-user-api.listagentsubscriptionsmesubscriptionsget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/subscriptions/{agent-id}
+      name: me-subscriptions-agent-id
+      description: REST surface for me-subscriptions-agent_id.
+      operations:
+      - method: GET
+        name: getagentsubscriptionmesubscriptionsagentidget
+        description: Get Agent Subscription
+        call: toolhouse-user-api.getagentsubscriptionmesubscriptionsagentidget
+        with:
+          agent_id: rest.agent_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/vibe/services
+      name: me-vibe-services
+      description: REST surface for me-vibe-services.
+      operations:
+      - method: GET
+        name: getvibeservicesmevibeservicesget
+        description: Get Vibe Services
+        call: toolhouse-user-api.getvibeservicesmevibeservicesget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/me/vip
+      name: me-vip
+      description: REST surface for me-vip.
+      operations:
+      - method: GET
+        name: fetchredemptioncountmevipget
+        description: Fetch Redemption Count
+        call: toolhouse-user-api.fetchredemptioncountmevipget
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: redeemcodemevippost
+        description: Redeem Code
+        call: toolhouse-user-api.redeemcodemevippost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: toolhouse-user-api-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Toolhouse API — User API. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-user
+      description: Get User
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getusermeget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-agent-runs
+      description: Get User Agent Runs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getuseragentrunsmeagentrunsget
+      with:
+        next_cursor: tools.next_cursor
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-agent-run
+      description: Get User Agent Run
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getuseragentrunmeagentrunsrunidget
+      with:
+        run_id: tools.run_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-agent-run-logs
+      description: Get User Agent Run Logs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getuseragentrunlogsmeagentrunsrunidlogsget
+      with:
+        run_id: tools.run_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-agent-run-mcp
+      description: Get User Agent Run Mcp Server Logs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getuseragentrunmcpserverlogsmeagentrunsrunidmcpserverlogsget
+      with:
+        run_id: tools.run_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-studio-chats
+      description: Get Agent Studio Chats
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getagentstudiochatsmeagentstudiochatsget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-agent-studio-chat
+      description: Create Agent Studio Chat
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.createagentstudiochatmeagentstudiochatspost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-studio-chat
+      description: Get Agent Studio Chat
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getagentstudiochatmeagentstudiochatsrunidget
+      with:
+        run_id: tools.run_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-agent-studio-chat
+      description: Update Agent Studio Chat
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.updateagentstudiochatmeagentstudiochatsrunidput
+      with:
+        run_id: tools.run_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: patch-agent-studio-chat
+      description: Patch Agent Studio Chat
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.patchagentstudiochatmeagentstudiochatsrunidpatch
+      with:
+        run_id: tools.run_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-agent-studio-chat
+      description: Delete Agent Studio Chat
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: toolhouse-user-api.deleteagentstudiochatmeagentstudiochatsruniddelete
+      with:
+        run_id: tools.run_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clone-agent-studio-chat
+      description: Clone Agent Studio Chat
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.cloneagentstudiochatmeagentstudiochatsrunidclonepost
+      with:
+        run_id: tools.run_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-agents
+      description: Get All Agents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getallagentsmeagentsget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upsert-agent
+      description: Upsert Agent
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.upsertagentmeagentspost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agents-list
+      description: Get Agents List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getagentslistmeagentslistget
+      with:
+        limit: tools.limit
+        next_cursor: tools.next_cursor
+        search: tools.search
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: generate-slug
+      description: Generate Slug
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.generateslugmeagentsvanityslugpost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: check-slug-availability
+      description: Check Slug Availability
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.checkslugavailabilitymeagentsvanityslugget
+      with:
+        slug: tools.slug
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent
+      description: Get Agent
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getagentmeagentsagentidget
+      with:
+        agent_id: tools.agent_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-theme-preference
+      description: Get Agent Theme Preference
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getagentthemepreferencemeagentsagentidcustomizationsthemeget
+      with:
+        agent_id: tools.agent_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upsert-agent-theme-preference
+      description: Upsert Agent Theme Preference
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.upsertagentthemepreferencemeagentsagentidcustomizationsthemeput
+      with:
+        agent_id: tools.agent_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-agent-files
+      description: List Agent Files
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.listagentfilesmeagentsagentidfilesget
+      with:
+        agent_id: tools.agent_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-agent-file
+      description: Create Agent File
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.createagentfilemeagentsagentidfilespost
+      with:
+        agent_id: tools.agent_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-file-positions
+      description: Update File Positions
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.updatefilepositionsmeagentsagentidfilespositionsput
+      with:
+        agent_id: tools.agent_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-file
+      description: Get Agent File
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getagentfilemeagentsagentidfilesfileidget
+      with:
+        agent_id: tools.agent_id
+        file_id: tools.file_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-agent-file
+      description: Update Agent File
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.updateagentfilemeagentsagentidfilesfileidpatch
+      with:
+        agent_id: tools.agent_id
+        file_id: tools.file_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-agent-file
+      description: Delete Agent File
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: toolhouse-user-api.deleteagentfilemeagentsagentidfilesfileiddelete
+      with:
+        agent_id: tools.agent_id
+        file_id: tools.file_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: subscribe-agent
+      description: Subscribe To Agent
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.subscribetoagentmeagentsagentidsubscribepost
+      with:
+        agent_id: tools.agent_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: transfer-agent
+      description: Transfer Agent
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.transferagentmeagentsagentidtransferpost
+      with:
+        agent_id: tools.agent_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: unsubscribe-agent
+      description: Unsubscribe From Agent
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.unsubscribefromagentmeagentsagentidunsubscribepost
+      with:
+        agent_id: tools.agent_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: generate-agent-upsell-description
+      description: Generate Agent Upsell Description
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.generateagentupselldescriptionmeagentsagentidupselldescriptionpost
+      with:
+        agent_id: tools.agent_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-vibe-agent-prompt
+      description: Get Vibe Agent Prompt
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getvibeagentpromptmeagentsagentidvibeget
+      with:
+        agent_id: tools.agent_id
+        service_name: tools.service_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-keys
+      description: Get Api Keys
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getapikeysmeapikeysget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-create-api-key
+      description: Post Create Api Key
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.postcreateapikeymeapikeyspost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-default-api-key
+      description: Get Default Api Key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getdefaultapikeymeapikeysdefaultget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-key
+      description: Get Api Key
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getapikeymeapikeysapikeyidget
+      with:
+        api_key_id: tools.api_key_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-key
+      description: Delete Api Key
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: toolhouse-user-api.deleteapikeymeapikeysapikeyiddelete
+      with:
+        api_key_id: tools.api_key_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: billing-information
+      description: Billing Information
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.billinginformationmebillingget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-chats
+      description: Get All Chats
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getallchatsmechatsget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-chat
+      description: Create Chat
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.createchatmechatspost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-chat
+      description: Get Chat
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getchatmechatschatidget
+      with:
+        chat_id: tools.chat_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-chat
+      description: Edit Chat
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.editchatmechatschatidput
+      with:
+        chat_id: tools.chat_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: patch-chat
+      description: Patch Chat
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.patchchatmechatschatidpatch
+      with:
+        chat_id: tools.chat_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: del-chat
+      description: Del Chat
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: toolhouse-user-api.delchatmechatschatiddelete
+      with:
+        chat_id: tools.chat_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clone-chat
+      description: Clone Chat
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.clonechatmechatschatidclonepost
+      with:
+        chat_id: tools.chat_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-chat-feedback
+      description: Post Chat Feedback
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.postchatfeedbackmechatschatidfeedbackpost
+      with:
+        chat_id: tools.chat_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-chat-og-metadata
+      description: Get Chat Og Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getchatogmetadatamechatschatidogget
+      with:
+        chat_id: tools.chat_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-agent-run-log
+      description: Post Agent Run Log
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.postagentrunlogmechatschatidrunspost
+      with:
+        chat_id: tools.chat_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-cli-auth
+      description: Create Cli Auth
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.createcliauthmecliauthpost
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cli-auth
+      description: Get Cli Auth
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getcliauthmecliauthauthidget
+      with:
+        auth_id: tools.auth_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-cli-auth
+      description: Update Cli Auth
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.updatecliauthmecliauthcliauthidput
+      with:
+        cli_auth_id: tools.cli_auth_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-credits
+      description: Get User Credits
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getusercreditsmecreditsget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: use-user-credits
+      description: Use User Credits
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.useusercreditsmecreditsusepost
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-logs
+      description: Get User Logs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getuserlogsmeexecutionsget
+      with:
+        next_cursor: tools.next_cursor
+        limit: tools.limit
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user-log-id
+      description: Get User Log By Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getuserlogbyidmeexecutionslogidget
+      with:
+        log_id: tools.log_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: search-mcp-servers
+      description: Search Mcp Servers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.searchmcpserversmemcpregistryserversget
+      with:
+        queries: tools.queries
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-mcp-servers
+      description: Get Mcp Servers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getmcpserversmemcpserversget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-smithery-mcp-server-details
+      description: Get Smithery Mcp Server Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getsmitherymcpserverdetailsmemcpserversdetailsget
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-run-metrics
+      description: Get Agent Run Metrics
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getagentrunmetricsmemetricsagentrunsget
+      with:
+        days: tools.days
+        bucket_hours: tools.bucket_hours
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-run-metrics-agents
+      description: Get Agent Run Metrics Agents
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getagentrunmetricsagentsmemetricsagentrunsagentsget
+      with:
+        days: tools.days
+        bucket_hours: tools.bucket_hours
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-run-metrics-summary
+      description: Get Agent Run Metrics Summary
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getagentrunmetricssummarymemetricsagentrunssummaryget
+      with:
+        days: tools.days
+        bucket_hours: tools.bucket_hours
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-run-metrics-volume
+      description: Get Agent Run Metrics Volume
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getagentrunmetricsvolumememetricsagentrunsvolumeget
+      with:
+        days: tools.days
+        bucket_hours: tools.bucket_hours
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-monetization-earnings
+      description: Get Monetization Earnings
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getmonetizationearningsmemonetizationearningsget
+      with:
+        period: tools.period
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-monetization-subscribers
+      description: Get Monetization Subscribers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getmonetizationsubscribersmemonetizationsubscribersget
+      with:
+        period: tools.period
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-monetization-summary
+      description: Get Monetization Summary
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getmonetizationsummarymemonetizationsummaryget
+      with:
+        period: tools.period
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-schedule-list
+      description: Get Schedule List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getschedulelistmeschedulesget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-schedule
+      description: Create Schedule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.createschedulemeschedulespost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-onboarding-schedule
+      description: Get Onboarding Schedule
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getonboardingschedulemeschedulesonboardingget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: text-cron
+      description: Text To Cron
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.texttocronmeschedulestexttocronget
+      with:
+        cron: tools.cron
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-schedule-id
+      description: Get Schedule By Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getschedulebyidmeschedulesscheduleidget
+      with:
+        schedule_id: tools.schedule_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-schedule
+      description: Edit Schedule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.editschedulemeschedulesscheduleidput
+      with:
+        schedule_id: tools.schedule_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: del-schedule
+      description: Del Schedule
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: toolhouse-user-api.delschedulemeschedulesscheduleiddelete
+      with:
+        schedule_id: tools.schedule_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-stripe-sessions
+      description: Get Stripe Sessions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.getstripesessionsmestripesessionspost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: stripe-webhook
+      description: Stripe Webhook
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.stripewebhookmestripewebhookpost
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-agent-subscriptions
+      description: List Agent Subscriptions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.listagentsubscriptionsmesubscriptionsget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-subscription
+      description: Get Agent Subscription
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getagentsubscriptionmesubscriptionsagentidget
+      with:
+        agent_id: tools.agent_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-vibe-services
+      description: Get Vibe Services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.getvibeservicesmevibeservicesget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: fetch-redemption-count
+      description: Fetch Redemption Count
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-user-api.fetchredemptioncountmevipget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: redeem-code
+      description: Redeem Code
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-user-api.redeemcodemevippost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

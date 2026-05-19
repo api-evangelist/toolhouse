@@ -1,0 +1,1172 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Toolhouse API — SDK API
+  description: 'Toolhouse API — SDK API. 30 operations. Lead operation: Get All Agent Runs. Self-contained Naftiko capability
+    covering one Toolhouse business surface.'
+  tags:
+  - Toolhouse
+  - SDK API
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    TOOLHOUSE_API_KEY: TOOLHOUSE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: toolhouse-sdk-api
+    baseUri: ''
+    description: Toolhouse API — SDK API business capability. Self-contained, no shared references.
+    resources:
+    - name: v1-agent-runs
+      path: /v1/agent-runs
+      operations:
+      - name: getallagentrunsv1agentrunsget
+        method: GET
+        description: Get All Agent Runs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createagentrunv1agentrunspost
+        method: POST
+        description: Create Agent Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-agent-runs-run_id
+      path: /v1/agent-runs/{run_id}
+      operations:
+      - name: getagentrunv1agentrunsrunidget
+        method: GET
+        description: Get Agent Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+      - name: putagentrunv1agentrunsrunidput
+        method: PUT
+        description: Put Agent Run
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: run_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-agents
+      path: /v1/agents
+      operations:
+      - name: getallchatsv1agentsget
+        method: GET
+        description: Get All Chats
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: upsertagentv1agentspost
+        method: POST
+        description: Upsert Agent
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-agents-agent_id-files
+      path: /v1/agents/{agent_id}/files
+      operations:
+      - name: getagentfilesforservicev1agentsagentidfilesget
+        method: GET
+        description: Get Agent Files For Service
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+    - name: v1-agents-agent_id-vibe
+      path: /v1/agents/{agent_id}/vibe
+      operations:
+      - name: getvibeagentpromptv1agentsagentidvibeget
+        method: GET
+        description: Get Vibe Agent Prompt
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: agent_id
+          in: path
+          type: string
+          required: true
+        - name: service_name
+          in: query
+          type: string
+          required: true
+    - name: v1-agents-chat_id
+      path: /v1/agents/{chat_id}
+      operations:
+      - name: getchatv1agentschatidget
+        method: GET
+        description: Get Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: chat_id
+          in: path
+          type: string
+          required: true
+      - name: editchatv1agentschatidput
+        method: PUT
+        description: Edit Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: chat_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: patchchatv1agentschatidpatch
+        method: PATCH
+        description: Patch Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: chat_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: delchatv1agentschatiddelete
+        method: DELETE
+        description: Del Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: chat_id
+          in: path
+          type: string
+          required: true
+    - name: v1-agents-chat_id-clone
+      path: /v1/agents/{chat_id}/clone
+      operations:
+      - name: clonechatv1agentschatidclonepost
+        method: POST
+        description: Clone Chat
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: chat_id
+          in: path
+          type: string
+          required: true
+    - name: v1-agents-chat_id-feedback
+      path: /v1/agents/{chat_id}/feedback
+      operations:
+      - name: postchatfeedbackv1agentschatidfeedbackpost
+        method: POST
+        description: Post Chat Feedback
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: chat_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-agents-chat_id-og
+      path: /v1/agents/{chat_id}/og
+      operations:
+      - name: getchatogmetadatav1agentschatidogget
+        method: GET
+        description: Get Chat Og Metadata
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: chat_id
+          in: path
+          type: string
+          required: true
+    - name: v1-cli-telemetry
+      path: /v1/cli-telemetry
+      operations:
+      - name: postclitelemetryv1clitelemetrypost
+        method: POST
+        description: Post Cli Telemetry
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-cli-version
+      path: /v1/cli/version
+      operations:
+      - name: cliv1cliversionget
+        method: GET
+        description: Cli
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: installed_version
+          in: query
+          type: string
+          required: true
+    - name: v1-kv
+      path: /v1/kv
+      operations:
+      - name: getallkvv1kvget
+        method: GET
+        description: Get All Kv
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: upsertkvv1kvpost
+        method: POST
+        description: Upsert Kv
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-kv-key
+      path: /v1/kv/{key}
+      operations:
+      - name: deletekvv1kvkeydelete
+        method: DELETE
+        description: Delete Kv
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: key
+          in: path
+          type: string
+          required: true
+    - name: v1-me
+      path: /v1/me
+      operations:
+      - name: getuserv1meget
+        method: GET
+        description: Get User
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-schedules
+      path: /v1/schedules
+      operations:
+      - name: getschedulelistv1schedulesget
+        method: GET
+        description: Get Schedule List
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+      - name: createschedulev1schedulespost
+        method: POST
+        description: Create Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: v1-schedules-text-to-cron
+      path: /v1/schedules/text-to-cron
+      operations:
+      - name: texttocronv1schedulestexttocronget
+        method: GET
+        description: Text To Cron
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: cron
+          in: query
+          type: string
+          required: true
+    - name: v1-schedules-schedule_id
+      path: /v1/schedules/{schedule_id}
+      operations:
+      - name: getschedulebyidv1schedulesscheduleidget
+        method: GET
+        description: Get Schedule By Id
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: schedule_id
+          in: path
+          type: string
+          required: true
+      - name: editschedulev1schedulesscheduleidput
+        method: PUT
+        description: Edit Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: schedule_id
+          in: path
+          type: string
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: delschedulev1schedulesscheduleiddelete
+        method: DELETE
+        description: Del Schedule
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: schedule_id
+          in: path
+          type: string
+          required: true
+    - name: v1-th-file-schema
+      path: /v1/th-file-schema
+      operations:
+      - name: getthfileschemav1thfileschemaget
+        method: GET
+        description: Get Th File Schema
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-users
+      path: /v1/users
+      operations:
+      - name: getusersendpointv1usersget
+        method: GET
+        description: Get Users Endpoint
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: v1-vibe-services
+      path: /v1/vibe/services
+      operations:
+      - name: getvibeservicesv1vibeservicesget
+        method: GET
+        description: Get Vibe Services
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: bearer
+      token: '{{env.TOOLHOUSE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: toolhouse-sdk-api-rest
+    port: 8080
+    description: REST adapter for Toolhouse API — SDK API. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/v1/agent-runs
+      name: v1-agent-runs
+      description: REST surface for v1-agent-runs.
+      operations:
+      - method: GET
+        name: getallagentrunsv1agentrunsget
+        description: Get All Agent Runs
+        call: toolhouse-sdk-api.getallagentrunsv1agentrunsget
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createagentrunv1agentrunspost
+        description: Create Agent Run
+        call: toolhouse-sdk-api.createagentrunv1agentrunspost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/agent-runs/{run-id}
+      name: v1-agent-runs-run-id
+      description: REST surface for v1-agent-runs-run_id.
+      operations:
+      - method: GET
+        name: getagentrunv1agentrunsrunidget
+        description: Get Agent Run
+        call: toolhouse-sdk-api.getagentrunv1agentrunsrunidget
+        with:
+          run_id: rest.run_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: putagentrunv1agentrunsrunidput
+        description: Put Agent Run
+        call: toolhouse-sdk-api.putagentrunv1agentrunsrunidput
+        with:
+          run_id: rest.run_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/agents
+      name: v1-agents
+      description: REST surface for v1-agents.
+      operations:
+      - method: GET
+        name: getallchatsv1agentsget
+        description: Get All Chats
+        call: toolhouse-sdk-api.getallchatsv1agentsget
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: upsertagentv1agentspost
+        description: Upsert Agent
+        call: toolhouse-sdk-api.upsertagentv1agentspost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/agents/{agent-id}/files
+      name: v1-agents-agent-id-files
+      description: REST surface for v1-agents-agent_id-files.
+      operations:
+      - method: GET
+        name: getagentfilesforservicev1agentsagentidfilesget
+        description: Get Agent Files For Service
+        call: toolhouse-sdk-api.getagentfilesforservicev1agentsagentidfilesget
+        with:
+          agent_id: rest.agent_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/agents/{agent-id}/vibe
+      name: v1-agents-agent-id-vibe
+      description: REST surface for v1-agents-agent_id-vibe.
+      operations:
+      - method: GET
+        name: getvibeagentpromptv1agentsagentidvibeget
+        description: Get Vibe Agent Prompt
+        call: toolhouse-sdk-api.getvibeagentpromptv1agentsagentidvibeget
+        with:
+          agent_id: rest.agent_id
+          service_name: rest.service_name
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/agents/{chat-id}
+      name: v1-agents-chat-id
+      description: REST surface for v1-agents-chat_id.
+      operations:
+      - method: GET
+        name: getchatv1agentschatidget
+        description: Get Chat
+        call: toolhouse-sdk-api.getchatv1agentschatidget
+        with:
+          chat_id: rest.chat_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editchatv1agentschatidput
+        description: Edit Chat
+        call: toolhouse-sdk-api.editchatv1agentschatidput
+        with:
+          chat_id: rest.chat_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PATCH
+        name: patchchatv1agentschatidpatch
+        description: Patch Chat
+        call: toolhouse-sdk-api.patchchatv1agentschatidpatch
+        with:
+          chat_id: rest.chat_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delchatv1agentschatiddelete
+        description: Del Chat
+        call: toolhouse-sdk-api.delchatv1agentschatiddelete
+        with:
+          chat_id: rest.chat_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/agents/{chat-id}/clone
+      name: v1-agents-chat-id-clone
+      description: REST surface for v1-agents-chat_id-clone.
+      operations:
+      - method: POST
+        name: clonechatv1agentschatidclonepost
+        description: Clone Chat
+        call: toolhouse-sdk-api.clonechatv1agentschatidclonepost
+        with:
+          chat_id: rest.chat_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/agents/{chat-id}/feedback
+      name: v1-agents-chat-id-feedback
+      description: REST surface for v1-agents-chat_id-feedback.
+      operations:
+      - method: POST
+        name: postchatfeedbackv1agentschatidfeedbackpost
+        description: Post Chat Feedback
+        call: toolhouse-sdk-api.postchatfeedbackv1agentschatidfeedbackpost
+        with:
+          chat_id: rest.chat_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/agents/{chat-id}/og
+      name: v1-agents-chat-id-og
+      description: REST surface for v1-agents-chat_id-og.
+      operations:
+      - method: GET
+        name: getchatogmetadatav1agentschatidogget
+        description: Get Chat Og Metadata
+        call: toolhouse-sdk-api.getchatogmetadatav1agentschatidogget
+        with:
+          chat_id: rest.chat_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/cli-telemetry
+      name: v1-cli-telemetry
+      description: REST surface for v1-cli-telemetry.
+      operations:
+      - method: POST
+        name: postclitelemetryv1clitelemetrypost
+        description: Post Cli Telemetry
+        call: toolhouse-sdk-api.postclitelemetryv1clitelemetrypost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/cli/version
+      name: v1-cli-version
+      description: REST surface for v1-cli-version.
+      operations:
+      - method: GET
+        name: cliv1cliversionget
+        description: Cli
+        call: toolhouse-sdk-api.cliv1cliversionget
+        with:
+          installed_version: rest.installed_version
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/kv
+      name: v1-kv
+      description: REST surface for v1-kv.
+      operations:
+      - method: GET
+        name: getallkvv1kvget
+        description: Get All Kv
+        call: toolhouse-sdk-api.getallkvv1kvget
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: upsertkvv1kvpost
+        description: Upsert Kv
+        call: toolhouse-sdk-api.upsertkvv1kvpost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/kv/{key}
+      name: v1-kv-key
+      description: REST surface for v1-kv-key.
+      operations:
+      - method: DELETE
+        name: deletekvv1kvkeydelete
+        description: Delete Kv
+        call: toolhouse-sdk-api.deletekvv1kvkeydelete
+        with:
+          key: rest.key
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/me
+      name: v1-me
+      description: REST surface for v1-me.
+      operations:
+      - method: GET
+        name: getuserv1meget
+        description: Get User
+        call: toolhouse-sdk-api.getuserv1meget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/schedules
+      name: v1-schedules
+      description: REST surface for v1-schedules.
+      operations:
+      - method: GET
+        name: getschedulelistv1schedulesget
+        description: Get Schedule List
+        call: toolhouse-sdk-api.getschedulelistv1schedulesget
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createschedulev1schedulespost
+        description: Create Schedule
+        call: toolhouse-sdk-api.createschedulev1schedulespost
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/schedules/text-to-cron
+      name: v1-schedules-text-to-cron
+      description: REST surface for v1-schedules-text-to-cron.
+      operations:
+      - method: GET
+        name: texttocronv1schedulestexttocronget
+        description: Text To Cron
+        call: toolhouse-sdk-api.texttocronv1schedulestexttocronget
+        with:
+          cron: rest.cron
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/schedules/{schedule-id}
+      name: v1-schedules-schedule-id
+      description: REST surface for v1-schedules-schedule_id.
+      operations:
+      - method: GET
+        name: getschedulebyidv1schedulesscheduleidget
+        description: Get Schedule By Id
+        call: toolhouse-sdk-api.getschedulebyidv1schedulesscheduleidget
+        with:
+          schedule_id: rest.schedule_id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: editschedulev1schedulesscheduleidput
+        description: Edit Schedule
+        call: toolhouse-sdk-api.editschedulev1schedulesscheduleidput
+        with:
+          schedule_id: rest.schedule_id
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delschedulev1schedulesscheduleiddelete
+        description: Del Schedule
+        call: toolhouse-sdk-api.delschedulev1schedulesscheduleiddelete
+        with:
+          schedule_id: rest.schedule_id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/th-file-schema
+      name: v1-th-file-schema
+      description: REST surface for v1-th-file-schema.
+      operations:
+      - method: GET
+        name: getthfileschemav1thfileschemaget
+        description: Get Th File Schema
+        call: toolhouse-sdk-api.getthfileschemav1thfileschemaget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/users
+      name: v1-users
+      description: REST surface for v1-users.
+      operations:
+      - method: GET
+        name: getusersendpointv1usersget
+        description: Get Users Endpoint
+        call: toolhouse-sdk-api.getusersendpointv1usersget
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/v1/vibe/services
+      name: v1-vibe-services
+      description: REST surface for v1-vibe-services.
+      operations:
+      - method: GET
+        name: getvibeservicesv1vibeservicesget
+        description: Get Vibe Services
+        call: toolhouse-sdk-api.getvibeservicesv1vibeservicesget
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: toolhouse-sdk-api-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Toolhouse API — SDK API. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: get-all-agent-runs
+      description: Get All Agent Runs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.getallagentrunsv1agentrunsget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-agent-run
+      description: Create Agent Run
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-sdk-api.createagentrunv1agentrunspost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-run
+      description: Get Agent Run
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.getagentrunv1agentrunsrunidget
+      with:
+        run_id: tools.run_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: put-agent-run
+      description: Put Agent Run
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.putagentrunv1agentrunsrunidput
+      with:
+        run_id: tools.run_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-chats
+      description: Get All Chats
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.getallchatsv1agentsget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upsert-agent
+      description: Upsert Agent
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-sdk-api.upsertagentv1agentspost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-agent-files-service
+      description: Get Agent Files For Service
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.getagentfilesforservicev1agentsagentidfilesget
+      with:
+        agent_id: tools.agent_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-vibe-agent-prompt
+      description: Get Vibe Agent Prompt
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.getvibeagentpromptv1agentsagentidvibeget
+      with:
+        agent_id: tools.agent_id
+        service_name: tools.service_name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-chat
+      description: Get Chat
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.getchatv1agentschatidget
+      with:
+        chat_id: tools.chat_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-chat
+      description: Edit Chat
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.editchatv1agentschatidput
+      with:
+        chat_id: tools.chat_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: patch-chat
+      description: Patch Chat
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.patchchatv1agentschatidpatch
+      with:
+        chat_id: tools.chat_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: del-chat
+      description: Del Chat
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: toolhouse-sdk-api.delchatv1agentschatiddelete
+      with:
+        chat_id: tools.chat_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clone-chat
+      description: Clone Chat
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-sdk-api.clonechatv1agentschatidclonepost
+      with:
+        chat_id: tools.chat_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-chat-feedback
+      description: Post Chat Feedback
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-sdk-api.postchatfeedbackv1agentschatidfeedbackpost
+      with:
+        chat_id: tools.chat_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-chat-og-metadata
+      description: Get Chat Og Metadata
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.getchatogmetadatav1agentschatidogget
+      with:
+        chat_id: tools.chat_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: post-cli-telemetry
+      description: Post Cli Telemetry
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-sdk-api.postclitelemetryv1clitelemetrypost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cli
+      description: Cli
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.cliv1cliversionget
+      with:
+        installed_version: tools.installed_version
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-kv
+      description: Get All Kv
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.getallkvv1kvget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: upsert-kv
+      description: Upsert Kv
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-sdk-api.upsertkvv1kvpost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-kv
+      description: Delete Kv
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: toolhouse-sdk-api.deletekvv1kvkeydelete
+      with:
+        key: tools.key
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-user
+      description: Get User
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.getuserv1meget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-schedule-list
+      description: Get Schedule List
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.getschedulelistv1schedulesget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-schedule
+      description: Create Schedule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: toolhouse-sdk-api.createschedulev1schedulespost
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: text-cron
+      description: Text To Cron
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.texttocronv1schedulestexttocronget
+      with:
+        cron: tools.cron
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-schedule-id
+      description: Get Schedule By Id
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.getschedulebyidv1schedulesscheduleidget
+      with:
+        schedule_id: tools.schedule_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: edit-schedule
+      description: Edit Schedule
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.editschedulev1schedulesscheduleidput
+      with:
+        schedule_id: tools.schedule_id
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: del-schedule
+      description: Del Schedule
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: toolhouse-sdk-api.delschedulev1schedulesscheduleiddelete
+      with:
+        schedule_id: tools.schedule_id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-th-file-schema
+      description: Get Th File Schema
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.getthfileschemav1thfileschemaget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-users-endpoint
+      description: Get Users Endpoint
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.getusersendpointv1usersget
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-vibe-services
+      description: Get Vibe Services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: toolhouse-sdk-api.getvibeservicesv1vibeservicesget
+      outputParameters:
+      - type: object
+        mapping: $.
