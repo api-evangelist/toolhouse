@@ -5,11 +5,12 @@
       "source": "https://toolhouse.ai/blog",
       "feed_url": "https://framerusercontent.com/sites/2JNeUWU2Yz7LMTTTNnRPw6/searchIndex-YHDV2ZS5Zbua.json",
       "title": "Toolhouse Blog",
-      "saved": 34,
-      "error": null
+      "saved": 0,
+      "error": null,
+      "last_error": "parse_error"
     }
   ],
-  "fetched": "2026-05-15T00:00:00Z",
+  "fetched": "2026-05-17T20:20:35Z",
   "post_count": 34,
   "posts": [
     {
