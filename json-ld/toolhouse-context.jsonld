@@ -6,6 +6,41 @@
     "xsd": "http://www.w3.org/2001/XMLSchema#",
     "dcterms": "http://purl.org/dc/terms/",
 
+    "AIWorker": {
+      "@id": "toolhouse:AIWorker",
+      "@context": {
+        "workerId": "toolhouse:workerId",
+        "name": "schema:name",
+        "description": "schema:description",
+        "trigger": "toolhouse:trigger",
+        "skills": {
+          "@id": "toolhouse:skills",
+          "@container": "@set"
+        },
+        "integrations": {
+          "@id": "toolhouse:integrations",
+          "@container": "@set"
+        },
+        "tools": {
+          "@id": "toolhouse:tools",
+          "@container": "@set"
+        },
+        "schedules": {
+          "@id": "toolhouse:schedules",
+          "@container": "@set"
+        },
+        "isPublic": "toolhouse:isPublic",
+        "createdAt": {
+          "@id": "dcterms:created",
+          "@type": "xsd:dateTime"
+        },
+        "updatedAt": {
+          "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
     "Agent": {
       "@id": "toolhouse:Agent",
       "@context": {
@@ -38,6 +73,24 @@
         },
         "updatedAt": {
           "@id": "dcterms:modified",
+          "@type": "xsd:dateTime"
+        }
+      }
+    },
+
+    "WorkerRun": {
+      "@id": "toolhouse:WorkerRun",
+      "@context": {
+        "runId": "toolhouse:runId",
+        "workerId": "toolhouse:workerId",
+        "status": "toolhouse:executionStatus",
+        "creditsConsumed": "toolhouse:creditsConsumed",
+        "history": {
+          "@id": "toolhouse:history",
+          "@container": "@list"
+        },
+        "createdAt": {
+          "@id": "dcterms:created",
           "@type": "xsd:dateTime"
         }
       }

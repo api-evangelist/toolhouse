@@ -11,9 +11,9 @@ providerId: toolhouse
 publisherName: Toolhouse
 serviceCategory: API
 created: '2026-05-04'
-modified: '2026-05-15'
+modified: '2026-05-22'
 reconciled: true
-reconciledOn: '2026-05-15'
+reconciledOn: '2026-05-22'
 reconciledAgainst: https://toolhouse.ai/pricing
 tags:
   - Agent Infrastructure
@@ -27,20 +27,22 @@ tags:
   - FOCUS
 description: FinOps framework definition for the Toolhouse API surface. Provides a FOCUS-aligned mapping
   for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs. Toolhouse
-  meters consumption in "credits" (one credit per agent run) rather than per-request, so the primary
-  billable meter below is agent_run_credits.
+  meters consumption in monthly "credits" (one credit per worker run) rather than per-request, so the
+  primary billable meter below is worker_run_credits. Model token usage is NOT separately metered to the
+  customer — every published tier advertises "free unlimited tokens."
 principles:
   - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
+    description: Make worker run consumption visible to engineering, product, and finance teams in near
+      real-time via the Toolhouse Platform API metrics surface.
   - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
+    description: Tag every chargeable worker run with the consuming team, environment, application, and
+      worker so cost can be allocated.
   - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
+    description: Continuously evaluate worker invocation patterns, schedule cadence, and tier selection
+      to reduce credits per useful unit of work.
   - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
+    description: Establish budget owners and chargeback or showback flows for each consuming team and
+      organization.
 domains:
   - name: Understand Usage and Cost
     capabilities:
@@ -70,7 +72,7 @@ domains:
       - Onboarding Workloads
       - Intersecting Disciplines
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Subscription with Included Quota
   billingFrequency: Monthly
   billingCurrency: USD
   chargeCategories:
@@ -91,17 +93,26 @@ focusColumns:
   BillingCurrency: USD
   ChargeCategory: Usage
 meters:
-  - name: agent_run_credits
-    description: Primary Toolhouse billable meter. One credit corresponds to one agent run on the Toolhouse
-      runtime. Monthly credit allowance is set by the subscribed plan (Basic 15, Pro 100, Business 15000).
+  - name: worker_run_credits
+    description: Primary Toolhouse billable meter. One credit corresponds to one worker run on the
+      Toolhouse runtime. Monthly credit allowance is set by the subscribed plan (Business 25000, Business
+      Max 80000, Enterprise negotiated).
     unit: credit
     aggregation: sum
     dimensions:
       - api
-      - agent
+      - worker
       - tier
       - region
       - consumer
+  - name: workers_active
+    description: Count of workers deployed on the account. Subject to per-tier worker count caps (50
+      Business, 500 Business Max, unlimited Enterprise).
+    unit: worker
+    aggregation: max
+    dimensions:
+      - tier
+      - organization
   - name: api_requests
     description: Count of HTTP API requests (operational telemetry; not directly billed per request).
     unit: request
@@ -121,7 +132,7 @@ meters:
       - region
       - consumer
   - name: compute_seconds
-    description: Server-side compute consumed by an agent run on the Virtual Computer sandbox or other
+    description: Server-side compute consumed by a worker run on the Virtual Computer sandbox or other
       Toolhouse runtime (operational telemetry).
     unit: second
     aggregation: sum
@@ -129,41 +140,50 @@ meters:
       - api
       - endpoint
       - tier
+  - name: log_retention_days
+    description: Effective log retention window for worker run logs by plan (30 days Business, 365 days
+      Business Max, custom Enterprise).
+    unit: day
+    aggregation: max
+    dimensions:
+      - tier
+      - organization
 apis:
   - name: Toolhouse Platform API
     baseURL: ''
     tags:
       - Agent Runs
       - AI Agents
+      - AI Workers
       - API Keys
       - Billing
-      - Bundles
       - Management
       - Schedules
       - Tools
     serviceName: Toolhouse Platform API
     serviceCategory: API
-  - name: Toolhouse Agents API
-    baseURL: ''
+  - name: Toolhouse Workers API
+    baseURL: https://agents.toolhouse.ai
     tags:
       - AI Agents
+      - AI Workers
       - Conversations
       - Execution
       - Streaming
-    serviceName: Toolhouse Agents API
+    serviceName: Toolhouse Workers API
     serviceCategory: API
 unitEconomics:
-  - name: Cost per Agent Run (Credit)
-    metric: billed_cost / agent_run_credits
-    target: '0.10 (Pro), 0.0333 (Business)'
+  - name: Cost per Worker Run (Credit)
+    metric: billed_cost / worker_run_credits
+    target: '0.02 (Business), 0.015 (Business Max)'
+  - name: Cost per Active Worker
+    metric: billed_cost / workers_active
+    target: TBD
   - name: Cost per 1K Requests
     metric: billed_cost / (api_requests / 1000)
     target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
   - name: Credit Utilization
-    metric: agent_run_credits_consumed / agent_run_credits_allocated
+    metric: worker_run_credits_consumed / worker_run_credits_allocated
     target: '> 0.50'
 maintainers:
   - FN: Kin Lane

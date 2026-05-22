@@ -6,12 +6,15 @@ apis:
   tags:
   - Agent Runs
   - AI Agents
+  - AI Workers
   - Agent Studio
   - API Keys
   - Billing
+  - Credits
   - Integrations
   - Management
   - Metrics
+  - Monetization
   - Schedules
   - SDK
   humanURL: https://docs.toolhouse.ai/toolhouse
@@ -36,31 +39,45 @@ apis:
     url: capabilities/toolhouse-sdk-api.yaml
   - type: NaftikoCapability
     url: capabilities/toolhouse-user-api.yaml
-  description: The Toolhouse Platform API provides management and orchestration capabilities for AI agents and connected tools.
-    It exposes endpoints for user profile and billing administration, API key lifecycle, agent definition and deployment,
-    agent run management with paginated listing and per-run logs (including MCP server logs), Agent Studio chat sessions,
-    agent file management, agent subscriptions, agent transfer, scheduled agent execution via cron expressions, MCP server
-    configuration, integrations and authentication connections, OAuth callback handling, and an agent-runs metrics surface
-    for usage, volume, and per-agent summary reporting. The SDK API exposes the same agent and schedule primitives under /v1/
-    for direct programmatic use by Toolhouse CLI and SDK clients. Authentication uses HTTPBearer JWT tokens and per-user API
-    keys.
-- aid: toolhouse:agents-api
-  name: Toolhouse Agents API
+  description: The Toolhouse Platform API provides management and orchestration capabilities for AI workers
+    (also referred to as AI agents) and their connected tools. It exposes endpoints for user profile and
+    billing administration, API key lifecycle, worker/agent definition and deployment, agent-run management
+    with paginated listing and per-run logs (including MCP server logs), Agent Studio chat sessions, agent
+    file management, agent subscriptions and monetization, agent transfer, scheduled execution via cron
+    expressions (10-minute minimum interval), MCP server and MCP registry configuration, integrations and
+    auth-connection management, OAuth callback handling, Stripe webhook and session handling, and an
+    agent-runs metrics surface for usage, volume, and per-agent summary reporting. The SDK API exposes the
+    same agent and schedule primitives under /v1/ for direct programmatic use by Toolhouse SDK clients.
+    Authentication uses HTTPBearer JWT tokens and per-user API keys.
+- aid: toolhouse:workers-api
+  name: Toolhouse Workers API
   tags:
   - AI Agents
+  - AI Workers
+  - Attachments
   - Conversations
   - Execution
+  - Statefulness
   - Streaming
-  - Workers
-  humanURL: https://docs.toolhouse.ai/toolhouse/for-developers/workers-api
+  humanURL: https://docs.toolhouse.ai/toolhouse/developers/workers-api
+  baseURL: https://agents.toolhouse.ai
   properties:
-  - url: https://docs.toolhouse.ai/toolhouse/for-developers/workers-api
+  - url: https://docs.toolhouse.ai/toolhouse/developers/workers-api
     type: Documentation
-  description: The Toolhouse Agents API (Workers API) enables execution of deployed AI agents via simple HTTP endpoints. Agents
-    defined in code or via the Toolhouse CLI as YAML "th" files can be deployed and accessed through REST calls that support
-    streaming responses (text and NDJSON), conversation continuation via persistent run IDs, stateful conversational memory,
-    and full conversation history retrieval. Public agents require no authentication while private agents use Bearer token
-    authorization with Toolhouse-issued API keys.
+  - url: https://docs.toolhouse.ai/toolhouse/developers/authentication
+    type: Authentication
+  - url: https://docs.toolhouse.ai/toolhouse/developers/worker-statefulness
+    type: Documentation
+  - url: https://docs.toolhouse.ai/toolhouse/developers/attachments
+    type: Documentation
+  description: The Toolhouse Workers API (historically the "Agents API") enables HTTP execution of any
+    deployed Toolhouse worker. Workers defined via the Agent Editor or as code are reachable at
+    https://agents.toolhouse.ai/{agent_id} with POST to start a new task, PUT /{agent_id}/{run_id} to
+    continue an existing conversation, and GET /{agent_id}/{run_id} to retrieve full history. NDJSON
+    variants under /ndjson/ stream the worker's output plus out-of-band tool-call and debug signals.
+    Conversation continuity is keyed by the X-Toolhouse-Run-ID response header. Attachments are supported
+    via URL (30-second download timeout) or base64-encoded direct upload (10 MB max per attachment).
+    Public workers require no authentication; private workers use HTTPBearer with a Toolhouse API key.
 name: Toolhouse
 tags:
 - Agent Infrastructure
@@ -136,60 +153,124 @@ common:
   name: Toolhouse Status
   type: StatusPage
   description: 'null'
+- url: https://docs.toolhouse.ai/toolhouse/sitemap.md
+  name: Toolhouse Documentation Sitemap
+  type: Sitemap
+  description: Markdown sitemap covering the entire docs.toolhouse.ai corpus including developer
+    references, integrations, and capabilities pages.
+- url: https://docs.toolhouse.ai/toolhouse/llms-full.txt
+  name: Toolhouse LLMs.txt
+  type: LLMsTxt
+  description: Full Toolhouse documentation corpus packaged as a single LLM-friendly text file for AI
+    agent ingestion.
 - url: https://github.com/toolhouseai/toolhouse-sdk-python
   name: Toolhouse Python SDK
   type: SDK
-  description: Official Python SDK for integrating Toolhouse into Python applications.
+  description: Official Python SDK for integrating Toolhouse tools and agent invocations into Python
+    applications (latest release v1.3.1).
 - url: https://github.com/toolhouseai/toolhouse-sdk-typescript
   name: Toolhouse TypeScript SDK
   type: SDK
   description: Official TypeScript/JavaScript SDK for Toolhouse integration.
+- url: https://github.com/toolhouseai/client
+  name: Toolhouse Client (JavaScript)
+  type: SDK
+  description: Lightweight JavaScript library for Toolhouse AI agents / workers.
 - url: https://github.com/toolhouseai/toolhouse-mcp
   name: Toolhouse MCP Server
   type: Integration
   description: Connect Toolhouse tools to any MCP-compatible client or agent.
+- url: https://github.com/toolhouseai/mcp-distributed
+  name: MCP Distributed
+  type: OpenSource
+  description: Open source project for managing remote MCP servers at scale.
 - url: https://github.com/toolhouseai/n8n-nodes-toolhouse
   name: Toolhouse n8n Integration
   type: Integration
-  description: n8n workflow automation nodes for Toolhouse.
-- url: https://docs.toolhouse.ai/toolhouse/for-developers/workers-api
+  description: n8n workflow automation nodes for Toolhouse worker invocation.
+- url: https://github.com/toolhouseai/toolhouse-examples
+  name: Toolhouse Examples
+  type: SampleApplications
+  description: Example implementations and demos for the Toolhouse platform (TypeScript).
+- url: https://github.com/toolhouseai/fastlane-demo
+  name: Fastlane Demo
+  type: SampleApplication
+  description: Demonstration project showing how Fastlane helps publishers monetize content with AI
+    workers.
+- url: https://github.com/toolhouseai/toolhouse-assessment
+  name: Toolhouse Assessment
+  type: Tool
+  description: Web tool that helps companies assess their organizational readiness to deploy AI workers.
+- url: https://github.com/toolhouseai/toolhouse-teleprompter
+  name: Toolhouse Teleprompter
+  type: SampleApplication
+  description: Smart teleprompter application built on Toolhouse.
+- url: https://github.com/toolhouseai/toolhouse-agenticlabs
+  name: Toolhouse Agentic Labs
+  type: SampleApplication
+  description: Experimental agent / worker development lab from Toolhouse.
+- url: https://docs.toolhouse.ai/toolhouse/developers/workers-api
   name: Toolhouse Workers API Documentation
   type: Documentation
-  description: Developer documentation for the Toolhouse Workers API used to invoke deployed agents over HTTP with streaming
-    and stateful conversations.
-- url: https://github.com/toolhouseai/toolhouse-cli
-  name: Toolhouse CLI
-  type: SDK
-  description: Official Toolhouse command-line interface for creating, testing, and deploying agents from YAML "th" files.
+  description: Developer documentation for the Toolhouse Workers API used to invoke deployed workers
+    over HTTP with text and NDJSON streaming, stateful run IDs, and conversation continuation.
+- url: https://docs.toolhouse.ai/toolhouse/developers/authentication
+  name: Toolhouse Authentication Documentation
+  type: Authentication
+  description: Documentation covering API key creation, the HTTPBearer scheme, and the API key management
+    surface inside the Toolhouse account settings.
 - url: https://toolhouse.ai/blog/toolhouse-changelog-august-2025
   name: Toolhouse Changelog (August 2025)
   type: ChangeLog
-  description: Most recent published changelog summarizing August 2025 platform updates including MCP Discovery, Creator Rewards,
-    and Together AI model support.
-- url: https://toolhouse.ai/blog/cli
-  name: Toolhouse CLI Launch Announcement
-  type: Article
-  description: May 2025 launch announcement covering the Toolhouse CLI, agent files, and the new streaming API.
+  description: Most recent published changelog summarizing August 2025 platform updates including MCP
+    Discovery, Creator Rewards, and Together AI model support.
 - url: https://toolhouse.ai/blog/introducing-mcp-discovery-effortless-agent-superpowers-in-toolhouse
   name: Introducing MCP Discovery
   type: Article
-  description: Announcement of MCP Discovery for effortless agent capability expansion through MCP servers.
+  description: Announcement of MCP Discovery for effortless agent capability expansion through MCP
+    servers.
 - url: https://toolhouse.ai/blog/introducing-toolhouse-rag-free-yourself-from-rag-complexity
   name: Toolhouse RAG Announcement
   type: Article
-  description: Announcement of Toolhouse RAG, the managed retrieval-augmented generation tool included with agent runs.
+  description: Announcement of Toolhouse RAG, the managed retrieval-augmented generation tool included
+    with worker runs.
+- url: https://toolhouse.ai/blog/connect-toolhouse-agents-to-zapier-in-minutes
+  name: Toolhouse Zapier Integration Announcement
+  type: Article
+  description: August 2025 announcement of native Zapier integration for connecting Toolhouse workers
+    to thousands of Zapier-enabled apps.
+- url: https://toolhouse.ai/blog/now-running-on-together-ai-models
+  name: Now Running On Together AI Models
+  type: Article
+  description: August 2025 announcement of Together AI model support across Toolhouse workers.
+- url: plans/toolhouse-plans-pricing.yml
+  name: Toolhouse Plans And Pricing
+  type: Plans
+  description: API Commons Plans 0.1 description of Toolhouse's published pricing tiers (Business,
+    Business Max, Enterprise) reconciled against toolhouse.ai/pricing on 2026-05-22.
+- url: rate-limits/toolhouse-rate-limits.yml
+  name: Toolhouse Rate Limits
+  type: RateLimits
+  description: API Commons Rate Limits 0.1 description of Toolhouse's credit-based quotas, per-tier
+    request defaults, schedule minimum interval, and attachment constraints.
+- url: finops/toolhouse-finops.yml
+  name: Toolhouse FinOps
+  type: FinOps
+  description: FOCUS-aligned FinOps framework definition mapping Toolhouse credit consumption and
+    operational meters for cost allocation and unit economics.
 - url: json-ld/toolhouse-context.jsonld
   name: Toolhouse JSON-LD Context
   type: JSONLD
-  description: JSON-LD context defining Toolhouse domain vocabulary and linked data mappings.
+  description: JSON-LD context defining Toolhouse domain vocabulary (AIWorker, Agent, WorkerRun, Tool,
+    Schedule, ApiKey, McpServer) and linked-data mappings.
 - url: json-schema/toolhouse-agent-schema.json
   name: Toolhouse Agent Schema
   type: JSON-Schema
-  description: JSON Schema describing the Toolhouse agent entity model and related types.
+  description: JSON Schema describing the Toolhouse agent / worker entity model and related types.
 - url: json-structure/toolhouse-agent-structure.json
   name: Toolhouse Agent Structure
   type: JSONStructure
-  description: Structured documentation of the Toolhouse Agent object model.
+  description: Structured documentation of the Toolhouse Agent / Worker object model.
 - url: rules/toolhouse-rules.yml
   name: Toolhouse Spectral Rules
   type: SpectralRules
@@ -197,40 +278,49 @@ common:
 - url: vocabulary/toolhouse-vocabulary.yml
   name: Toolhouse Vocabulary
   type: Vocabulary
-  description: Vocabulary and taxonomy for the Toolhouse AI agent platform domain.
+  description: Vocabulary and taxonomy for the Toolhouse AI worker / agent platform domain.
 - name: Features
   type: Features
   data:
-  - name: AI Agent Deployment from a Prompt
-  - name: Toolhouse CLI (th files, deploy from terminal)
+  - name: AI Worker Deployment from a Prompt (Agent Editor)
   - name: Agent Studio (v2)
-  - name: Workers API (REST + Streaming, NDJSON)
-  - name: Stateful Conversational Memory
+  - name: Workers API (REST + Streaming + NDJSON)
+  - name: Stateful Conversational Memory (X-Toolhouse-Run-ID)
+  - name: Attachments via URL or Base64 (10 MB max)
   - name: MCP Discovery
   - name: MCP Server Integration
   - name: Toolhouse RAG
-  - name: Code Execution (Virtual Computer sandbox)
+  - name: Skills and Knowledge (Templates, Guidelines, Reference)
+  - name: Virtual Computer (Python Sandbox)
   - name: Browser Automation
-  - name: Web Scraping & Social Search
+  - name: Web and Social Media Search
   - name: Image Generation, Editing, and Vision
-  - name: Document Parser & File Download
-  - name: Scheduled Agent Runs (cron)
-  - name: Agent Run Logs & MCP Server Logs
-  - name: Agent Run Metrics & Volume Reporting
+  - name: Document Parser
+  - name: File Download
+  - name: Memory
+  - name: Scheduled Worker Runs (cron, 10-minute floor)
+  - name: Worker Email Inbox
+  - name: Worker Run Logs (incl. MCP Server Logs)
+  - name: Worker Run Metrics And Volume Reporting
   - name: API Key Management
-  - name: Agent Subscriptions & Transfer
-  - name: Agent Files (knowledge attachments)
-  - name: Streaming Responses
-  - name: Creator Rewards Program
+  - name: Organizations
+  - name: Agent Subscriptions, Monetization, and Transfer
+  - name: Streaming Responses (Text + NDJSON)
+  - name: Free Unlimited Tokens On All Plans
 - name: Use Cases
   type: UseCases
   data:
-  - name: AI Agent Backend-as-a-Service
-  - name: Automated Agent Scheduling
+  - name: AI Worker Backend-as-a-Service
+  - name: Deal Analysis and Market Research Automation
+  - name: Document Processing (Policy Abstraction, Summarization, Query)
+  - name: Knowledge Assistants For Policy and Business Data
+  - name: Lead Generation and Outbound Automation (SMS, Cold Calling, Inbound)
+  - name: Marketing and Content Creation (Listings, Copy, Image Generation)
+  - name: Automated Worker Scheduling
   - name: Tool-Augmented LLM Pipelines
   - name: Agent Studio Chat
   - name: MCP Client Integration
-  - name: Production Agent Deployment
+  - name: Production Worker Deployment
 - name: Integrations
   type: Integrations
   data:
@@ -239,32 +329,57 @@ common:
   - name: Together AI
   - name: Groq
   - name: NVIDIA (Llama 3.1 Nemotron 70B)
+  - name: Tavily (Official Partner)
   - name: Vercel AI SDK
   - name: LlamaIndex
   - name: n8n (Toolhouse n8n Nodes)
   - name: Zapier
   - name: Supabase
   - name: Lovable
-  - name: MCP Clients
+  - name: GitHub
+  - name: GitLab
+  - name: Bitbucket
+  - name: Stripe
+  - name: Square
+  - name: QuickBooks
+  - name: Salesforce
+  - name: HubSpot
+  - name: Microsoft Dynamics 365
+  - name: Google Workspace (Sheets, Docs, Drive)
+  - name: Microsoft Teams
+  - name: Slack
+  - name: Discord
+  - name: Notion
+  - name: MCP Clients (via MCP Server and MCP Discovery)
 - name: MCP Server
   url: https://github.com/toolhouseai/toolhouse-mcp
   type: MCPServer
 created: '2026-03-26'
-modified: '2026-05-19'
+modified: '2026-05-22'
 position: Consumer
 segments:
 - AI Agents
 - AI Workers
 - Agent Infrastructure
-description: Toolhouse is a Backend-as-a-Service platform for building, deploying, and managing AI agents — what the product
-  now frames as "AI workers." Builders describe a task in plain language and ship an agent to production in a single click;
-  developers can do the same from the terminal using the Toolhouse CLI and YAML "th" files. Every agent is automatically wired
-  into Toolhouse's pre-integrated capabilities, including web scraping and social search, Toolhouse RAG, persistent memory,
-  an isolated Virtual Computer code-execution sandbox, image generation, vision, document parsing, file download, and MCP
-  Discovery for connecting to thousands of MCP servers. The platform exposes a Workers API for invoking deployed agents over
-  REST with streaming (text and NDJSON) and stateful conversation continuity, a Platform API for full agent and run lifecycle
-  management, scheduling, metrics, and integrations, and supports no-code workflow integration through Zapier and Toolhouse
-  n8n Nodes. Toolhouse runs on a broad model substrate including OpenAI, Anthropic, Together AI, Groq, and NVIDIA model offerings.
+description: Toolhouse is a Backend-as-a-Service platform for building, deploying, and managing "AI workers"
+  (Toolhouse's current product noun, used interchangeably with "AI agents"). The homepage frames the value
+  proposition as "Turn your AI chats into affordable and reliable AI workers that do work while you're
+  busy," and the docs define a worker as "a system that carries out a task with three components: a trigger,
+  a process that may include specialized skills, and tools or systems it can connect to." Builders describe
+  a task in plain language in the Agent Editor and ship a worker to production; developers can do the same
+  programmatically via SDKs. Every worker is automatically wired into Toolhouse's pre-integrated
+  capabilities, including web and social media search, scraping, Toolhouse RAG, persistent memory, the
+  Virtual Computer code-execution sandbox, image generation/editing and vision, document parsing, file
+  download, and MCP Discovery for connecting to thousands of MCP servers at runtime. The platform exposes
+  a Workers API (agents.toolhouse.ai) for invoking deployed workers over REST with text and NDJSON
+  streaming and stateful conversation continuity (X-Toolhouse-Run-ID), a Platform API for full worker and
+  run lifecycle management, scheduling (10-minute minimum cadence), metrics, monetization, and integrations,
+  plus no-code workflow integration through Zapier and Toolhouse n8n Nodes. Toolhouse runs on a broad model
+  substrate including OpenAI, Anthropic, Together AI, Groq, and NVIDIA model offerings. The current public
+  pricing surface is Business ($500/mo, 25,000 credits, 50 workers), Business Max ($1,200/mo, 80,000
+  credits, 500 workers), and custom Enterprise — all plans include "free unlimited tokens" and a 14-day
+  free trial. Toolhouse reports 7,000+ teams on the platform and 40+ integrations and is backed by
+  NextGenerationEU funding.
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

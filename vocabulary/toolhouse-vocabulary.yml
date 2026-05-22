@@ -6,24 +6,73 @@ vocabulary:
     and platform concepts used across the Toolhouse Platform API.
   provider: Toolhouse
   url: https://toolhouse.ai
-  version: "1.0"
+  version: "1.1"
   created: "2026-05-03"
-  modified: "2026-05-03"
+  modified: "2026-05-22"
 
 terms:
   # Core Platform Concepts
+  - term: AI Worker
+    definition: >-
+      Toolhouse's primary product noun (as of 2026): "a system that carries
+      out a task with three components: a trigger, a process that may include
+      specialized skills, and tools or systems it can connect to." AI Workers
+      are designed for repeatable workflows and are used interchangeably with
+      "AI Agents" in Toolhouse documentation. Every Worker can be invoked as
+      an API via the Workers API surface at agents.toolhouse.ai.
+    tags:
+      - Core
+      - AI Workers
+      - AI Agents
+    relatedTerms:
+      - Agent
+      - Workers API
+      - Trigger
+      - Integration
+
+  - term: Workers API
+    definition: >-
+      The execution surface that lets any deployed Toolhouse worker (agent)
+      be invoked over HTTP. Hosted at agents.toolhouse.ai. Supports text and
+      NDJSON streaming responses, conversation continuation via the
+      X-Toolhouse-Run-ID header, and stateful history retrieval via GET on
+      the agent + run ID path. Authentication uses HTTPBearer with a
+      Toolhouse-issued API key.
+    tags:
+      - Core
+      - Execution
+      - Streaming
+    relatedTerms:
+      - AI Worker
+      - Run ID
+      - Streaming
+
+  - term: Run ID
+    definition: >-
+      The session identifier for a worker invocation, returned in the
+      X-Toolhouse-Run-ID response header on the initial POST and used in
+      subsequent PUT (continue) and GET (history) requests against
+      /{agent_id}/{run_id}.
+    tags:
+      - Execution
+      - Identity
+    relatedTerms:
+      - Workers API
+      - Agent Run
+
   - term: Agent
     definition: >-
-      An AI-powered application defined as code and deployed to Toolhouse.
-      Agents combine a system prompt, LLM model selection, and a set of
-      tools or bundles. Deployed agents are accessible via REST endpoints.
+      An AI-powered application defined in plain language (Agent Editor) or
+      as code, deployed to Toolhouse, and addressable via the Workers API.
+      In current Toolhouse documentation the terms "Agent" and "AI Worker"
+      are used interchangeably; "Worker" is the preferred product noun.
     tags:
       - Core
       - AI Agents
     relatedTerms:
+      - AI Worker
       - Agent Run
       - Agent Studio
-      - Bundle
 
   - term: Agent Run
     definition: >-
@@ -182,15 +231,79 @@ terms:
     relatedTerms:
       - Agent
 
-  - term: Sandbox Tier
+  - term: Credit
     definition: >-
-      The free tier of Toolhouse access with restrictions such as limited
-      private agent creation and restricted Agent Studio functionality.
+      Toolhouse's primary metered unit of consumption. One credit corresponds
+      to one worker run on the Toolhouse runtime. Monthly credit allowances
+      are set per plan (Business 25,000, Business Max 80,000, Enterprise
+      volume-priced). Model token usage is not separately metered — every
+      plan includes "free unlimited tokens."
     tags:
       - Billing
-      - Tiers
+      - Metering
     relatedTerms:
-      - Agent
+      - Agent Run
+      - Worker Email
+
+  - term: Worker Email
+    definition: >-
+      A per-worker email inbox provided on every Toolhouse plan that lets
+      external systems trigger workers by sending email to a dedicated
+      address.
+    tags:
+      - Triggers
+      - Integration
+    relatedTerms:
+      - AI Worker
+      - Trigger
+
+  - term: Trigger
+    definition: >-
+      The mechanism that initiates a worker — manual invocation, a Workers
+      API call, a Schedule, a worker email inbox message, or a webhook from
+      an integration such as Zapier or n8n.
+    tags:
+      - Triggers
+      - Automation
+    relatedTerms:
+      - AI Worker
+      - Schedule
+
+  - term: MCP Discovery
+    definition: >-
+      A Toolhouse feature (introduced August 2025) that lets agents discover
+      and attach to thousands of Model Context Protocol servers at runtime
+      without per-server configuration.
+    tags:
+      - MCP
+      - Discovery
+    relatedTerms:
+      - MCP Server
+      - AI Worker
+
+  - term: Virtual Computer
+    definition: >-
+      Toolhouse's isolated, internet-connected sandbox capability for
+      running Python code as part of a worker. Provides per-run compute
+      isolation for code execution and data processing.
+    tags:
+      - Tools
+      - Sandbox
+    relatedTerms:
+      - Tool
+      - Code Execution
+
+  - term: Toolhouse RAG
+    definition: >-
+      Toolhouse's managed retrieval-augmented generation tool that ingests
+      attached files and skills/knowledge into worker context without
+      requiring the developer to operate a separate vector store.
+    tags:
+      - Tools
+      - RAG
+    relatedTerms:
+      - RAG Memory
+      - Agent File
 
   - term: Theme Preference
     definition: >-
@@ -204,11 +317,13 @@ terms:
 tags:
   - Core
   - AI Agents
+  - AI Workers
   - Authentication
   - Automation
   - Billing
   - Customization
   - Development Tools
+  - Discovery
   - Execution
   - Files
   - Identity
@@ -216,10 +331,14 @@ tags:
   - Marketplace
   - Memory
   - MCP
+  - Metering
   - Observability
   - Protocol
   - RAG
+  - Sandbox
   - Scheduling
   - Security
+  - Streaming
   - Tiers
   - Tools
+  - Triggers

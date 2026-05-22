@@ -4,9 +4,9 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Toolhouse
 providerId: toolhouse
 created: '2026-05-04'
-modified: '2026-05-15'
+modified: '2026-05-22'
 reconciled: true
-reconciledOn: '2026-05-15'
+reconciledOn: '2026-05-22'
 reconciledAgainst: https://toolhouse.ai/pricing
 tags:
   - Agent Infrastructure
@@ -18,69 +18,41 @@ tags:
   - Rate Limiting
   - Quotas
   - Credits
-description: Machine-readable rate limit definitions for the Toolhouse API surface. Toolhouse's published
-  pricing page meters consumption as monthly "credits" (one credit per agent run) rather than per-second
-  HTTP rate caps. Per-tier monthly credit budgets are confirmed from the live pricing page; the per-minute
+description: Machine-readable rate limit definitions for the Toolhouse API surface. Toolhouse meters
+  consumption as monthly "credits" (one credit per worker run) rather than per-second HTTP rate caps.
+  Per-tier monthly credit budgets are confirmed from the live pricing page on 2026-05-22; the per-minute
   rate values below are scaffold defaults for HTTP throttling and have not been independently published
-  by the provider.
+  by the provider. A documented platform-level cadence rule is that scheduled workers may execute at most
+  once every 10 minutes per schedule. Attachment uploads are capped at 10 MB per attachment.
 headers:
   limit: X-RateLimit-Limit
   remaining: X-RateLimit-Remaining
   reset: X-RateLimit-Reset
   retryAfter: Retry-After
   policy: RateLimit-Policy
+  runId: X-Toolhouse-Run-ID
 responseCodes:
   throttled: 429
   quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: basic
-    name: Basic Tier Monthly Credit Quota
-    scope: api-key
-    metric: credits_per_month
-    limit: 15
-    timeFrame: month
-    applies:
-      - Toolhouse Platform API
-      - Toolhouse Agents API
-  - tier: basic
-    name: Basic Tier Per-Minute Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - Toolhouse Platform API
-      - Toolhouse Agents API
-  - tier: pro
-    name: Pro Tier Monthly Credit Quota
-    scope: api-key
-    metric: credits_per_month
-    limit: 100
-    timeFrame: month
-    applies:
-      - Toolhouse Platform API
-      - Toolhouse Agents API
-  - tier: pro
-    name: Pro Tier Per-Minute Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 60
-    burst: 120
-    timeFrame: minute
-    applies:
-      - Toolhouse Platform API
-      - Toolhouse Agents API
   - tier: business
     name: Business Tier Monthly Credit Quota
     scope: api-key
     metric: credits_per_month
-    limit: 15000
+    limit: 25000
     timeFrame: month
     applies:
       - Toolhouse Platform API
-      - Toolhouse Agents API
+      - Toolhouse Workers API
+  - tier: business
+    name: Business Tier Worker Count
+    scope: account
+    metric: workers
+    limit: 50
+    timeFrame: lifetime
+    applies:
+      - Toolhouse Platform API
   - tier: business
     name: Business Tier Per-Minute Default
     scope: api-key
@@ -90,7 +62,34 @@ limits:
     timeFrame: minute
     applies:
       - Toolhouse Platform API
-      - Toolhouse Agents API
+      - Toolhouse Workers API
+  - tier: business-max
+    name: Business Max Monthly Credit Quota
+    scope: api-key
+    metric: credits_per_month
+    limit: 80000
+    timeFrame: month
+    applies:
+      - Toolhouse Platform API
+      - Toolhouse Workers API
+  - tier: business-max
+    name: Business Max Worker Count
+    scope: account
+    metric: workers
+    limit: 500
+    timeFrame: lifetime
+    applies:
+      - Toolhouse Platform API
+  - tier: business-max
+    name: Business Max Per-Minute Default
+    scope: api-key
+    metric: requests_per_minute
+    limit: 600
+    burst: 1200
+    timeFrame: minute
+    applies:
+      - Toolhouse Platform API
+      - Toolhouse Workers API
   - tier: enterprise
     name: Enterprise Negotiated Limit
     scope: contract
@@ -100,12 +99,39 @@ limits:
     timeFrame: minute
     applies:
       - Toolhouse Platform API
-      - Toolhouse Agents API
+      - Toolhouse Workers API
+  - tier: platform
+    name: Schedule Minimum Interval
+    scope: schedule
+    metric: minutes_between_runs
+    limit: 10
+    timeFrame: schedule
+    applies:
+      - Toolhouse Platform API
+  - tier: platform
+    name: Attachment Size Limit
+    scope: request
+    metric: megabytes_per_attachment
+    limit: 10
+    timeFrame: request
+    applies:
+      - Toolhouse Workers API
+  - tier: platform
+    name: URL Attachment Download Timeout
+    scope: request
+    metric: seconds
+    limit: 30
+    timeFrame: request
+    applies:
+      - Toolhouse Workers API
 policies:
   - name: Credit Metering
     description: Consumption is primarily metered in credits, not raw HTTP request counts. One credit
-      represents one agent run on the Toolhouse runtime; Toolhouse-provided tool invocations within an
-      agent run are not separately credited on paid tiers.
+      represents one worker run on the Toolhouse runtime; Toolhouse-provided tool invocations within a
+      worker run are not separately credited.
+  - name: Token Inclusion
+    description: All plans include "free unlimited tokens" — model token usage is not separately metered
+      to the customer.
   - name: Backoff Strategy
     description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
       when present.
@@ -113,9 +139,15 @@ policies:
     description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
       before throttling engages.
   - name: Quota Reset
-    description: Monthly credit quotas reset at the start of each calendar month in UTC.
+    description: Monthly credit quotas reset at the start of each billing cycle.
+  - name: Schedule Cadence Floor
+    description: Scheduled workers cannot execute more frequently than once every 10 minutes per schedule;
+      faster cadences automatically default to this 10-minute minimum.
+  - name: Attachment Constraints
+    description: Worker invocation attachments are limited to 10 MB each, with URL attachments subject to
+      a 30-second download timeout. Unsupported or corrupted files are silently discarded.
   - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
+    description: Even on Enterprise tiers, sustained usage that materially impacts shared infrastructure
       may be subject to fair-use throttling.
 maintainers:
   - FN: Kin Lane

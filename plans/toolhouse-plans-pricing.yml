@@ -4,9 +4,9 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: Toolhouse
 providerId: toolhouse
 created: '2026-05-04'
-modified: '2026-05-15'
+modified: '2026-05-22'
 reconciled: true
-reconciledOn: '2026-05-15'
+reconciledOn: '2026-05-22'
 reconciledAgainst: https://toolhouse.ai/pricing
 tags:
   - Agent Infrastructure
@@ -16,36 +16,52 @@ tags:
   - MCP
   - Tools
 description: Machine-readable plans and pricing for the Toolhouse API surface, reconciled against the
-  published pricing page at toolhouse.ai/pricing. Toolhouse meters consumption in "credits" rather than
-  raw API requests; a credit represents one agent run / one unit of agent work on the Toolhouse runtime.
+  published pricing page at toolhouse.ai/pricing on 2026-05-22. Toolhouse now markets the platform around
+  "AI workers" rather than "AI agents" and meters consumption in monthly "credits" — one credit corresponds
+  to one worker run on the Toolhouse runtime. All plans advertise "free unlimited tokens" and a 14-day free
+  trial with no credit card required. The previous Basic (free) and Pro ($10) tiers are no longer offered
+  on the public pricing page; the entry tier is now Business at $500/month.
 plans:
-  - id: toolhouse-basic
-    name: Basic
-    type: freemium
-    price: '0.00'
+  - id: toolhouse-business
+    name: Business
+    type: paid
+    price: '500.00'
     priceUnit: USD/month
-    description: Free entry tier for evaluating Toolhouse. Designed for getting started with public projects
-      and unlimited agent definitions on a small monthly credit budget.
+    description: Entry tier for companies running production AI workers. Includes 25,000 credits per month,
+      up to 50 workers, 30-day log retention, worker email inbox, onboarding, organizations, and email
+      support. Free unlimited tokens are included on every plan.
     entries:
       - label: Credits
-        description: Monthly credit allowance. One credit corresponds to one agent run on the Toolhouse
-          runtime.
+        description: Monthly credit allowance for worker runs. One credit corresponds to one worker run on
+          the Toolhouse runtime.
         name: credits
         type: quota
         metric: credits
-        limit: 15
+        limit: 25000
         timeFrame: month
+        geo: global
+        domains: []
+        unit: 1
+        price: '0.02'
+        userMultiplied: false
+      - label: Workers
+        description: Maximum number of workers (deployed AI agents) on the Business tier.
+        name: workers
+        type: quota
+        metric: workers
+        limit: 50
+        timeFrame: lifetime
         geo: global
         domains: []
         unit: 1
         price: '0.00'
         userMultiplied: false
-      - label: Agents
-        description: Number of agents a user may define on the Basic tier.
-        name: agents
+      - label: Log Retention
+        description: Worker run log retention window.
+        name: log_retention
         type: quota
-        metric: agents
-        limit: -1
+        metric: days
+        limit: 30
         timeFrame: lifetime
         geo: global
         domains: []
@@ -53,108 +69,80 @@ plans:
         price: '0.00'
         userMultiplied: false
     elements:
-      - name: Public Projects
-      - name: Unlimited Agents
+      - name: 25,000 Credits / Month
+      - name: Up to 50 Workers
+      - name: 30-Day Log Retention
+      - name: Worker Email Inbox
+      - name: Onboarding
+      - name: Organizations
+      - name: Email Support
+      - name: Free Unlimited Tokens
       - name: Toolhouse Platform API
-      - name: Toolhouse Agents API (Workers API)
-      - name: Community Support
-  - id: toolhouse-pro
-    name: Pro
+      - name: Toolhouse Workers API
+  - id: toolhouse-business-max
+    name: Business Max
     type: paid
-    price: '10.00'
+    price: '1200.00'
     priceUnit: USD/month
-    description: Production tier for individuals and startups. Includes 100 credits per month, the full
-      pre-integrated tool stack (scraping, web search, file upload), and workflow integrations with Zapier
-      and n8n.
+    description: Most popular tier for scaling production AI worker deployments. Includes 80,000 credits per
+      month, up to 500 workers, 1-year log retention, on-demand account engineer, and priority support across
+      Slack, email, and phone.
     entries:
       - label: Credits
-        description: Monthly credit allowance for agent runs.
+        description: Monthly credit allowance for worker runs.
         name: credits
         type: quota
         metric: credits
-        limit: 100
+        limit: 80000
         timeFrame: month
         geo: global
         domains: []
         unit: 1
-        price: '0.10'
+        price: '0.015'
         userMultiplied: false
-      - label: Tool Usage
-        description: Toolhouse pre-integrated tool calls (scraping, web search, etc.) are unlimited within
-          the agent run.
-        name: tool_usage
+      - label: Workers
+        description: Maximum number of workers on the Business Max tier.
+        name: workers
         type: quota
-        metric: tool_calls
-        limit: -1
-        timeFrame: month
+        metric: workers
+        limit: 500
+        timeFrame: lifetime
+        geo: global
+        domains: []
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Log Retention
+        description: Worker run log retention window.
+        name: log_retention
+        type: quota
+        metric: days
+        limit: 365
+        timeFrame: lifetime
         geo: global
         domains: []
         unit: 1
         price: '0.00'
         userMultiplied: false
     elements:
-      - name: Powerful Scraping and Web Search
-      - name: Unlimited Tool Usage
-      - name: Upload Files to AI Workers
-      - name: Zapier Integration
-      - name: n8n Integration (Toolhouse n8n Nodes)
-      - name: Toolhouse Platform API
-      - name: Toolhouse Agents API (Workers API)
-      - name: Streaming Responses
-  - id: toolhouse-business
-    name: Business
-    type: paid
-    price: '500.00'
-    priceUnit: USD/month
-    description: Tier for established companies running production AI workers at scale. Includes 15,000
-      credits per month, Agent Studio access, choice of more powerful models, advanced customization,
-      human-in-the-loop, and white-glove onboarding with priority support over phone and Slack.
-    entries:
-      - label: Credits
-        description: Monthly credit allowance for agent runs.
-        name: credits
-        type: quota
-        metric: credits
-        limit: 15000
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.0333'
-        userMultiplied: false
-      - label: Tool Usage
-        description: Pre-integrated tool calls are unlimited within agent runs.
-        name: tool_usage
-        type: quota
-        metric: tool_calls
-        limit: -1
-        timeFrame: month
-        geo: global
-        domains: []
-        unit: 1
-        price: '0.00'
-        userMultiplied: false
-    elements:
-      - name: Everything in Pro
-      - name: White-Glove Onboarding
-      - name: Priority Support via Phone and Slack
-      - name: Agent Studio Access
-      - name: More Powerful Models
-      - name: Advanced Customization Options
-      - name: Human-in-the-Loop
-      - name: Toolhouse Platform API
-      - name: Toolhouse Agents API (Workers API)
+      - name: Everything In Business
+      - name: 80,000 Credits / Month
+      - name: Up to 500 Workers
+      - name: 1-Year Log Retention
+      - name: On-Demand Account Engineer
+      - name: Priority Support (Slack, Email, Phone)
+      - name: Free Unlimited Tokens
   - id: toolhouse-enterprise
     name: Enterprise
     type: enterprise
     price: custom
     priceUnit: custom
-    description: Custom-negotiated tier for Toolhouse covering dedicated capacity, contractual SLAs, security
-      review, data residency options, and named technical account management. Inferred from the published
-      tier ladder; contact Toolhouse sales for current terms.
+    description: Custom-negotiated tier for the largest production workloads. Includes volume-priced credits,
+      unlimited workers, custom log retention, named account engineer, and custom support.
     entries:
       - label: Credits
-        description: Negotiated credit volume; -1 indicates uncapped subject to fair use.
+        description: Negotiated credit volume on volume pricing; -1 indicates uncapped subject to contract
+          and fair use.
         name: credits
         type: quota
         metric: credits
@@ -165,31 +153,47 @@ plans:
         unit: 1
         price: custom
         userMultiplied: false
-      - label: Rate Limit
-        description: Negotiated burst and steady-state rate.
-        name: rate_limit
-        type: rate
-        metric: requests_per_minute
-        limit: 1000
-        timeFrame: minute
+      - label: Workers
+        description: Unlimited workers under the Enterprise tier.
+        name: workers
+        type: quota
+        metric: workers
+        limit: -1
+        timeFrame: lifetime
+        geo: global
+        domains: []
+        unit: 1
+        price: '0.00'
+        userMultiplied: false
+      - label: Log Retention
+        description: Custom log retention configurable per contract.
+        name: log_retention
+        type: quota
+        metric: days
+        limit: -1
+        timeFrame: lifetime
         geo: configurable
         domains: []
         unit: 1
         price: custom
         userMultiplied: false
     elements:
-      - name: Unlimited / Negotiated Volume
-      - name: 24/7 Dedicated Support
-      - name: Contractual SLA
-      - name: Security & Compliance Review
-      - name: Dedicated Account Manager
-      - name: Custom Data Residency
-      - name: Toolhouse Platform API
-      - name: Toolhouse Agents API (Workers API)
+      - name: Volume Pricing Credits
+      - name: Unlimited Workers
+      - name: Custom Log Retention
+      - name: Named Account Engineer
+      - name: Custom Support
+      - name: Worker Email Inbox
+      - name: Onboarding
+      - name: Organizations
+      - name: Free Unlimited Tokens
 notes:
-  - Toolhouse meters usage in "credits"; the pricing page does not publish per-request rate limits or
-    overage pricing for paid tiers.
-  - Pricing reconciled against https://toolhouse.ai/pricing on 2026-05-15.
+  - All plans include "free unlimited tokens" — model token costs are not separately metered to the customer
+    on the published tiers.
+  - "14-day free trial on all plans, cancel anytime" — no credit card required to start.
+  - The previously published Basic (free) and Pro ($10/month) tiers are no longer advertised on
+    toolhouse.ai/pricing as of 2026-05-22. The current entry tier is Business at $500/month.
+  - Pricing reconciled against https://toolhouse.ai/pricing on 2026-05-22.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
