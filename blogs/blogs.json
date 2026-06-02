@@ -2,15 +2,18 @@
   "repo": "toolhouse",
   "feeds": [
     {
-      "source": "https://toolhouse.ai/blog",
+      "source": "https://framerusercontent.com/sites/2JNeUWU2Yz7LMTTTNnRPw6/searchIndex-YHDV2ZS5Zbua.json",
       "feed_url": "https://framerusercontent.com/sites/2JNeUWU2Yz7LMTTTNnRPw6/searchIndex-YHDV2ZS5Zbua.json",
-      "title": "Toolhouse Blog",
+      "title": "",
       "saved": 0,
-      "error": null,
-      "last_error": "parse_error"
+      "method": "none"
+    },
+    {
+      "source": "https://toolhouse.ai/blog",
+      "error": "HTTPError"
     }
   ],
-  "fetched": "2026-05-17T20:20:35Z",
+  "fetched": "2026-06-01T23:35:02Z",
   "post_count": 34,
   "posts": [
     {
