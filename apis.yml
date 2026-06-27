@@ -25,19 +25,19 @@ apis:
     type: OpenAPI
   - url: rules/toolhouse-rules.yml
     type: SpectralRules
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/toolhouse-api-keys.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/toolhouse-agent-runs.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/toolhouse-backoffice.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/toolhouse-logs.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/toolhouse-metrics.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/toolhouse-sdk-api.yaml
-  - type: NaftikoCapability
+  - type: X-NaftikoCapability
     url: capabilities/toolhouse-user-api.yaml
   description: The Toolhouse Platform API provides management and orchestration capabilities for AI workers
     (also referred to as AI agents) and their connected tools. It exposes endpoints for user profile and
@@ -160,25 +160,25 @@ common:
     references, integrations, and capabilities pages.
 - url: https://docs.toolhouse.ai/toolhouse/llms-full.txt
   name: Toolhouse LLMs.txt
-  type: LLMsTxt
+  type: LlmsText
   description: Full Toolhouse documentation corpus packaged as a single LLM-friendly text file for AI
     agent ingestion.
 - url: https://github.com/toolhouseai/toolhouse-sdk-python
   name: Toolhouse Python SDK
-  type: SDK
+  type: SDKs
   description: Official Python SDK for integrating Toolhouse tools and agent invocations into Python
     applications (latest release v1.3.1).
 - url: https://github.com/toolhouseai/toolhouse-sdk-typescript
   name: Toolhouse TypeScript SDK
-  type: SDK
+  type: SDKs
   description: Official TypeScript/JavaScript SDK for Toolhouse integration.
 - url: https://github.com/toolhouseai/client
   name: Toolhouse Client (JavaScript)
-  type: SDK
+  type: SDKs
   description: Lightweight JavaScript library for Toolhouse AI agents / workers.
 - url: https://github.com/toolhouseai/toolhouse-mcp
   name: Toolhouse MCP Server
-  type: Integration
+  type: Integrations
   description: Connect Toolhouse tools to any MCP-compatible client or agent.
 - url: https://github.com/toolhouseai/mcp-distributed
   name: MCP Distributed
@@ -186,7 +186,7 @@ common:
   description: Open source project for managing remote MCP servers at scale.
 - url: https://github.com/toolhouseai/n8n-nodes-toolhouse
   name: Toolhouse n8n Integration
-  type: Integration
+  type: Integrations
   description: n8n workflow automation nodes for Toolhouse worker invocation.
 - url: https://github.com/toolhouseai/toolhouse-examples
   name: Toolhouse Examples
@@ -199,7 +199,7 @@ common:
     workers.
 - url: https://github.com/toolhouseai/toolhouse-assessment
   name: Toolhouse Assessment
-  type: Tool
+  type: Tools
   description: Web tool that helps companies assess their organizational readiness to deploy AI workers.
 - url: https://github.com/toolhouseai/toolhouse-teleprompter
   name: Toolhouse Teleprompter
@@ -265,7 +265,7 @@ common:
     Schedule, ApiKey, McpServer) and linked-data mappings.
 - url: json-schema/toolhouse-agent-schema.json
   name: Toolhouse Agent Schema
-  type: JSON-Schema
+  type: JSONSchema
   description: JSON Schema describing the Toolhouse agent / worker entity model and related types.
 - url: json-structure/toolhouse-agent-structure.json
   name: Toolhouse Agent Structure
@@ -361,7 +361,8 @@ segments:
 - AI Agents
 - AI Workers
 - Agent Infrastructure
-description: Toolhouse is a Backend-as-a-Service platform for building, deploying, and managing "AI workers"
+description: |-
+  Toolhouse is a Backend-as-a-Service platform for building, deploying, and managing "AI workers"
   (Toolhouse's current product noun, used interchangeably with "AI agents"). The homepage frames the value
   proposition as "Turn your AI chats into affordable and reliable AI workers that do work while you're
   busy," and the docs define a worker as "a system that carries out a task with three components: a trigger,

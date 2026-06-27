@@ -3,9 +3,10 @@
   "feeds": [
     {
       "source": "https://toolhouse.ai/blog",
-      "error": "URLError"
+      "saved": 0,
+      "error": "HTTP 404 Not Found on listing page"
     }
   ],
-  "fetched": "2026-06-14T20:42:17Z",
+  "fetched": "2026-06-27T13:16:03Z",
   "post_count": 34
 }
