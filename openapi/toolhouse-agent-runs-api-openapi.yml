@@ -1,0 +1,394 @@
+openapi: 3.1.0
+info:
+  title: Toolhouse Agent Runs API
+  description: All the API! \o/
+  version: 0.1.0
+tags:
+- name: Agent Runs
+paths:
+  /me/agent-runs:
+    get:
+      tags:
+      - Agent Runs
+      summary: Get User Agent Runs
+      description: User Installed Tools
+      operationId: get_user_agent_runs_me_agent_runs_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: next_cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Next Cursor
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 30
+          title: Limit
+      responses:
+        '200':
+          description: Successfully retrieved agent runs list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRunViewListResponse'
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /me/agent-runs/{run_id}:
+    get:
+      tags:
+      - Agent Runs
+      summary: Get User Agent Run
+      description: User Installed Tools
+      operationId: get_user_agent_run_me_agent_runs__run_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Run Id
+      responses:
+        '200':
+          description: Successfully retrieved agent run
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRunView'
+        '404':
+          description: Agent run not found
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /me/agent-runs/{run_id}/mcp-server-logs:
+    get:
+      tags:
+      - Agent Runs
+      summary: Get User Agent Run Mcp Server Logs
+      description: User Installed Tools
+      operationId: get_user_agent_run_mcp_server_logs_me_agent_runs__run_id__mcp_server_logs_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Run Id
+      responses:
+        '200':
+          description: Successfully retrieved MCP server logs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/McpServerLog'
+                title: Response Get User Agent Run Mcp Server Logs Me Agent Runs  Run Id  Mcp Server Logs Get
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /me/agent-runs/{run_id}/logs:
+    get:
+      tags:
+      - Agent Runs
+      summary: Get User Agent Run Logs
+      description: User Installed Tools
+      operationId: get_user_agent_run_logs_me_agent_runs__run_id__logs_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Run Id
+      responses:
+        '200':
+          description: Successfully retrieved agent run logs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AgentRunLog'
+                title: Response Get User Agent Run Logs Me Agent Runs  Run Id  Logs Get
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    AgentRunView:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        user_id:
+          type: string
+          title: User Id
+        schedule_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Schedule Id
+        status:
+          type: string
+          enum:
+          - queued
+          - in_progress
+          - completed
+          - failed
+          title: Status
+        results:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: Results
+          default: []
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        toolhouse_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+        title:
+          type: string
+          title: Title
+        chat_archived:
+          type: boolean
+          title: Chat Archived
+      type: object
+      required:
+      - chat_id
+      - user_id
+      - status
+      - title
+      - chat_archived
+      title: AgentRunView
+    McpServerLog:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        agent_id:
+          type: string
+          format: uuid
+          title: Agent Id
+        run_id:
+          type: string
+          format: uuid
+          title: Run Id
+        tool_name:
+          type: string
+          title: Tool Name
+        tool_call_id:
+          type: string
+          title: Tool Call Id
+        start_time:
+          type: string
+          format: date-time
+          title: Start Time
+        end_time:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End Time
+      type: object
+      required:
+      - id
+      - user_id
+      - agent_id
+      - run_id
+      - tool_name
+      - tool_call_id
+      - start_time
+      - end_time
+      title: McpServerLog
+    AgentRunLog:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        agent_id:
+          type: string
+          format: uuid
+          title: Agent Id
+        run_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Run Id
+        type:
+          type: string
+          enum:
+          - local
+          - agent_stream
+          - agent_run
+          - agent_studio
+          - agent_studio_v3
+          title: Type
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        start_time:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start Time
+        end_time:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End Time
+      type: object
+      required:
+      - user_id
+      - agent_id
+      - type
+      title: AgentRunLog
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    AgentRunViewListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AgentRunView'
+          type: array
+          title: Data
+        next_cursor:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: AgentRunViewListResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

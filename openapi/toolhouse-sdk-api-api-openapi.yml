@@ -1,0 +1,1875 @@
+openapi: 3.1.0
+info:
+  title: Toolhouse Agent Runs SDK API API
+  description: All the API! \o/
+  version: 0.1.0
+tags:
+- name: SDK API
+paths:
+  /v1/agent-runs:
+    get:
+      tags:
+      - SDK API
+      summary: Get All Agent Runs
+      operationId: get_all_agent_runs_v1_agent_runs_get
+      responses:
+        '200':
+          description: Agent runs successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRunListResponse'
+        '500':
+          description: Internal server error
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - SDK API
+      summary: Create Agent Run
+      operationId: create_agent_run_v1_agent_runs_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentRunRequest'
+        required: true
+      responses:
+        '200':
+          description: Agent run successfully created
+          content:
+            application/json:
+              schema: {}
+        '403':
+          description: Chat ID is invalid or does not belong to you
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /v1/agent-runs/{run_id}:
+    get:
+      tags:
+      - SDK API
+      summary: Get Agent Run
+      operationId: get_agent_run_v1_agent_runs__run_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Run Id
+      responses:
+        '200':
+          description: Agent run successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRunAPIResponse'
+        '403':
+          description: Chat ID associated to this Agent Run is invalid
+        '404':
+          description: Agent run not found
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - SDK API
+      summary: Put Agent Run
+      operationId: put_agent_run_v1_agent_runs__run_id__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Run Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentRunUpdateRequest'
+      responses:
+        '200':
+          description: Agent run successfully updated
+          content:
+            application/json:
+              schema: {}
+        '403':
+          description: Chat ID is invalid or does not belong to you
+        '406':
+          description: You can only add messages to completed runs
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/agents/{agent_id}/files:
+    get:
+      tags:
+      - SDK API
+      summary: Get Agent Files For Service
+      description: 'Get enabled files for an agent (for genservice).
+
+
+        Returns only enabled files, ordered by position for deterministic injection.
+
+        Access is allowed for the agent owner OR if the agent is public.'
+      operationId: get_agent_files_for_service_v1_agents__agent_id__files_get
+      parameters:
+      - name: agent_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Agent Id
+      responses:
+        '200':
+          description: Successfully retrieved enabled agent files
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentFileListResponse'
+        '403':
+          description: Not authorized to access this agent
+        '404':
+          description: Agent not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/agents:
+    get:
+      tags:
+      - SDK API
+      summary: Get All Chats
+      description: Gets all chats for this user
+      operationId: get_all_chats_v1_agents_get
+      responses:
+        '200':
+          description: Agents successfully retrieved
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/AgentModel'
+                type: array
+                title: Response Get All Chats V1 Agents Get
+        '500':
+          description: Internal server error
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - SDK API
+      summary: Upsert Agent
+      description: Saves a chat
+      operationId: upsert_agent_v1_agents_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentRequest'
+        required: true
+      responses:
+        '200':
+          description: Agent successfully created or updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentModel'
+        '400':
+          description: Invalid request or missing prompt
+        '403':
+          description: You don't have permission to access this chat
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /v1/agents/{chat_id}:
+    get:
+      tags:
+      - SDK API
+      summary: Get Chat
+      description: Gets a chat
+      operationId: get_chat_v1_agents__chat_id__get
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Chat Id
+      responses:
+        '200':
+          description: Agent successfully retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentModel'
+        '403':
+          description: You don't have permission to access this chat
+        '404':
+          description: Agent not found
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - SDK API
+      summary: Edit Chat
+      description: 'Updates a chat
+
+
+        This endpoint allows users to update Chats fields of a chat identified by its `chat_id`.
+
+
+        - **chat_id**: The unique identifier of the chat to be patched. This field cannot be updated.
+
+        - **request**: A ChatRequest object containing the fields to be updated. All fields will be updated,
+
+        if a field is not provided default values will be used. The ID of the user who owns the chat
+
+        and the chat''s ID cannot be updated.
+
+
+        **Responses:**
+
+        - 200: Returns the updated ChatModel.
+
+        - 404: If the chat is not found.
+
+        - 500: If there is an internal server error.'
+      operationId: edit_chat_v1_agents__chat_id__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Chat Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentRequest'
+      responses:
+        '200':
+          description: Agent successfully updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentModel'
+        '400':
+          description: Invalid request
+        '403':
+          description: You don't have permission to access this chat
+        '404':
+          description: Agent not found
+        '409':
+          description: Conflict updating agent
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    patch:
+      tags:
+      - SDK API
+      summary: Patch Chat
+      description: "Patches a chat.\n\nThis endpoint allows users to update specific fields of a chat identified by its `chat_id`.\n\n- **chat_id**: The unique identifier of the chat to be patched. This field cannot be updated.\n- **request**: A ChatModel object containing the fields to be updated. Only fields that are provided\n  will be updated. The ID of the user who owns the chat and the chat's ID cannot be updated.\n\n**Responses:**\n- 200: Returns the updated ChatModel.\n- 404: If the chat is not found.\n- 500: If there is an internal server error."
+      operationId: patch_chat_v1_agents__chat_id__patch
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Chat Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgentRequestPartial'
+      responses:
+        '200':
+          description: Agent successfully patched
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentModel'
+        '400':
+          description: Invalid request
+        '403':
+          description: You don't have permission to access this chat
+        '404':
+          description: Agent not found
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - SDK API
+      summary: Del Chat
+      description: Deletes a chat
+      operationId: del_chat_v1_agents__chat_id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Chat Id
+      responses:
+        '200':
+          description: Agent successfully deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentModel'
+        '403':
+          description: You don't have permission to access this chat
+        '404':
+          description: Agent not found
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/agents/{chat_id}/og:
+    get:
+      tags:
+      - SDK API
+      summary: Get Chat Og Metadata
+      description: Returns the OG metadata for a chat
+      operationId: get_chat_og_metadata_v1_agents__chat_id__og_get
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Chat Id
+      responses:
+        '200':
+          description: OG metadata successfully retrieved
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/agents/{chat_id}/clone:
+    post:
+      tags:
+      - SDK API
+      summary: Clone Chat
+      operationId: clone_chat_v1_agents__chat_id__clone_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Chat Id
+      responses:
+        '200':
+          description: Agent successfully cloned
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentModel'
+        '403':
+          description: This chat is not public
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/agents/{chat_id}/feedback:
+    post:
+      tags:
+      - SDK API
+      summary: Post Chat Feedback
+      description: Updates the feedback for a chat
+      operationId: post_chat_feedback_v1_agents__chat_id__feedback_post
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: chat_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Chat Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserFeedbackRequest'
+      responses:
+        '200':
+          description: Feedback successfully submitted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentModel'
+        '404':
+          description: Agent not found
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/cli/version:
+    get:
+      tags:
+      - SDK API
+      summary: Cli
+      description: Check if a new version of the CLI is available.
+      operationId: cli_v1_cli_version_get
+      parameters:
+      - name: installed_version
+        in: query
+        required: true
+        schema:
+          type: string
+          pattern: ^\d+\.\d+\.\d+([a-zA-Z0-9.\-+]+)?$
+          title: Installed Version
+          description: The version of the CLI that is currently installed.
+          examples:
+          - 1.0.0
+          - 2.3.4
+      responses:
+        '200':
+          description: CLI version information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CliVersionResponse'
+        '422':
+          description: Invalid version format
+        '503':
+          description: Version not available
+  /v1/cli-telemetry:
+    post:
+      tags:
+      - SDK API
+      summary: Post Cli Telemetry
+      description: Stores a new CLI telemetry entry.
+      operationId: post_cli_telemetry_v1_cli_telemetry_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CliTelemetryEvents'
+        required: true
+      responses:
+        '200':
+          description: CLI telemetry stored successfully
+          content:
+            application/json:
+              schema:
+                type: boolean
+                title: Response Post Cli Telemetry V1 Cli Telemetry Post
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/users:
+    get:
+      tags:
+      - SDK API
+      summary: Get Users Endpoint
+      operationId: get_users_endpoint_v1_users_get
+      responses:
+        '200':
+          description: Users retrieved successfully
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal server error
+      security:
+      - HTTPBearer: []
+  /v1/kv:
+    get:
+      tags:
+      - SDK API
+      summary: Get All Kv
+      description: Gets all key-value pairs for a user
+      operationId: get_all_kv_v1_kv_get
+      responses:
+        '200':
+          description: All key-value pairs retrieved successfully
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal server error
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - SDK API
+      summary: Upsert Kv
+      description: Upserts a key-value pair for a user
+      operationId: upsert_kv_v1_kv_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BaseKV'
+        required: true
+      responses:
+        '200':
+          description: Key-value pair upserted successfully
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /v1/kv/{key}:
+    delete:
+      tags:
+      - SDK API
+      summary: Delete Kv
+      description: Deletes a key-value pair for a user
+      operationId: delete_kv_v1_kv__key__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: key
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Key
+      responses:
+        '200':
+          description: Key-value pair deleted successfully
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/schedules:
+    get:
+      tags:
+      - SDK API
+      summary: Get Schedule List
+      operationId: get_schedule_list_v1_schedules_get
+      responses:
+        '200':
+          description: Schedules retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleListResponse'
+        '500':
+          description: Internal server error
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - SDK API
+      summary: Create Schedule
+      operationId: create_schedule_v1_schedules_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleRequest'
+        required: true
+      responses:
+        '200':
+          description: Schedule created successfully
+          content:
+            application/json:
+              schema: {}
+        '403':
+          description: Invalid chat ID or chat does not belong to user
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /v1/schedules/text-to-cron:
+    get:
+      tags:
+      - SDK API
+      summary: Text To Cron
+      operationId: text_to_cron_v1_schedules_text_to_cron_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: cron
+        in: query
+        required: true
+        schema:
+          type: string
+          title: Cron
+      responses:
+        '200':
+          description: Cron expression generated successfully
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid cron text input
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/schedules/{schedule_id}:
+    get:
+      tags:
+      - SDK API
+      summary: Get Schedule By Id
+      operationId: get_schedule_by_id_v1_schedules__schedule_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: schedule_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Schedule Id
+      responses:
+        '200':
+          description: Schedule retrieved successfully
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Schedule not found
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    put:
+      tags:
+      - SDK API
+      summary: Edit Schedule
+      operationId: edit_schedule_v1_schedules__schedule_id__put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: schedule_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Schedule Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleUpdateRequest'
+      responses:
+        '200':
+          description: Schedule updated successfully
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+    delete:
+      tags:
+      - SDK API
+      summary: Del Schedule
+      operationId: del_schedule_v1_schedules__schedule_id__delete
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: schedule_id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          title: Schedule Id
+      responses:
+        '200':
+          description: Schedule deleted successfully
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Schedule not found
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /v1/th-file-schema:
+    get:
+      tags:
+      - SDK API
+      summary: Get Th File Schema
+      description: Returns the schema for the Toolhouse file.
+      operationId: get_th_file_schema_v1_th_file_schema_get
+      responses:
+        '200':
+          description: Toolhouse file schema retrieved successfully
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Get Th File Schema V1 Th File Schema Get
+  /v1/me:
+    get:
+      tags:
+      - SDK API
+      summary: Get User
+      description: Gets the current user
+      operationId: get_user_v1_me_get
+      responses:
+        '200':
+          description: Current user retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAuthenticated'
+      security:
+      - HTTPBearer: []
+  /v1/vibe/services:
+    get:
+      tags:
+      - SDK API
+      summary: Get Vibe Services
+      operationId: get_vibe_services_v1_vibe_services_get
+      responses:
+        '200':
+          description: Vibe services retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VibeCoderListResponse'
+  /v1/agents/{agent_id}/vibe:
+    get:
+      tags:
+      - SDK API
+      summary: Get Vibe Agent Prompt
+      operationId: get_vibe_agent_prompt_v1_agents__agent_id__vibe_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: agent_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Agent Id
+      - name: service_name
+        in: query
+        required: true
+        schema:
+          enum:
+          - lovable
+          - bolt
+          - v0
+          type: string
+          title: Service Name
+      responses:
+        '200':
+          description: Vibe agent prompt retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VibeCoderPromptResponse'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    VibeCoderListResponse:
+      properties:
+        services:
+          items:
+            $ref: '#/components/schemas/Service'
+          type: array
+          title: Services
+      type: object
+      required:
+      - services
+      title: VibeCoderListResponse
+    AgentRunUpdateRequest:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: AgentRunUpdateRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    AgentModel:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prompt
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        original_chat_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Original Chat Id
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        history:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: History
+          default: []
+        public:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Public
+          default: true
+        rag:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Rag
+        system_prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: System Prompt
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+        mcp_servers:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Mcp Servers
+        tools:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Tools
+          description: List of tool slugs available to the agent
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        price_in_cents:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Price In Cents
+        trial_period_in_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Trial Period In Days
+        upsell_description:
+          anyOf:
+          - $ref: '#/components/schemas/UpsellDescription'
+          - type: 'null'
+        count_runs:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Count Runs
+        user_id:
+          type: string
+          title: User Id
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        last_ran_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Ran At
+        user_feedback:
+          type: string
+          enum:
+          - approved
+          - rejected
+          - pending
+          title: User Feedback
+          default: pending
+      type: object
+      required:
+      - id
+      - user_id
+      title: AgentModel
+    Schedule:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        last_ran_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Ran At
+        active:
+          type: boolean
+          title: Active
+          default: true
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+        cadence:
+          type: string
+          title: Cadence
+        toolhouse_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        chat_archived:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Chat Archived
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+      type: object
+      required:
+      - user_id
+      - chat_id
+      - cadence
+      title: Schedule
+    AgentRun:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        user_id:
+          type: string
+          title: User Id
+        schedule_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Schedule Id
+        status:
+          type: string
+          enum:
+          - queued
+          - in_progress
+          - completed
+          - failed
+          title: Status
+        results:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: Results
+          default: []
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        toolhouse_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+      type: object
+      required:
+      - chat_id
+      - user_id
+      - status
+      title: AgentRun
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    AgentFileModel:
+      properties:
+        filename:
+          type: string
+          maxLength: 255
+          minLength: 1
+          title: Filename
+          description: Original filename
+        mime_type:
+          type: string
+          title: Mime Type
+          description: MIME type of the file
+        storage_url:
+          type: string
+          minLength: 1
+          format: uri
+          title: Storage Url
+          description: External URL where the file is hosted
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Whether the file is active
+          default: true
+        position:
+          type: integer
+          minimum: 0.0
+          title: Position
+          description: Order position for deterministic injection
+          default: 0
+        auth:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Auth
+          description: Authentication configuration for accessing the file
+        id:
+          type: string
+          format: uuid
+          title: Id
+        agent_id:
+          type: string
+          format: uuid
+          title: Agent Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+      type: object
+      required:
+      - filename
+      - mime_type
+      - storage_url
+      - id
+      - agent_id
+      - created_at
+      title: AgentFileModel
+      description: Full model with database fields (ORM model)
+    UpsellDescription:
+      properties:
+        description:
+          type: string
+          title: Description
+        use_cases:
+          items:
+            type: string
+          type: array
+          title: Use Cases
+      type: object
+      required:
+      - description
+      - use_cases
+      title: UpsellDescription
+    ScheduleUpdateRequest:
+      properties:
+        active:
+          type: boolean
+          title: Active
+          default: true
+        cadence:
+          type: string
+          title: Cadence
+        toolhouse_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        chat_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Chat Id
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+      type: object
+      required:
+      - cadence
+      title: ScheduleUpdateRequest
+    CliVersionResponse:
+      properties:
+        installed_version:
+          type: string
+          title: Installed Version
+        latest_version:
+          type: string
+          title: Latest Version
+        is_update_available:
+          type: boolean
+          title: Is Update Available
+      type: object
+      required:
+      - installed_version
+      - latest_version
+      - is_update_available
+      title: CliVersionResponse
+    UserFeedbackRequest:
+      properties:
+        user_feedback:
+          type: string
+          enum:
+          - approved
+          - rejected
+          - pending
+          title: User Feedback
+      type: object
+      required:
+      - user_feedback
+      title: UserFeedbackRequest
+    ScheduleRequest:
+      properties:
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        cadence:
+          type: string
+          title: Cadence
+        toolhouse_id:
+          type: string
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+      type: object
+      required:
+      - chat_id
+      - cadence
+      title: ScheduleRequest
+    UserAuthenticated:
+      properties:
+        user_id:
+          type: string
+          title: User Id
+        api_key:
+          type: string
+          title: Api Key
+        authorization_header:
+          type: string
+          title: Authorization Header
+        tier:
+          type: string
+          title: Tier
+      type: object
+      required:
+      - user_id
+      - api_key
+      - authorization_header
+      - tier
+      title: UserAuthenticated
+      description: User Authenticated
+    Service:
+      properties:
+        name:
+          type: string
+          title: Name
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+      type: object
+      required:
+      - name
+      - url
+      title: Service
+    AgentRunRequest:
+      properties:
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        schedule_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Schedule Id
+        toolhouse_id:
+          type: string
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+      type: object
+      required:
+      - chat_id
+      title: AgentRunRequest
+    AgentRequest:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prompt
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        original_chat_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Original Chat Id
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        history:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: History
+          default: []
+        public:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Public
+          default: true
+        rag:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Rag
+        system_prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: System Prompt
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+        mcp_servers:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Mcp Servers
+        tools:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Tools
+          description: List of tool slugs available to the agent
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        price_in_cents:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Price In Cents
+        trial_period_in_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Trial Period In Days
+        upsell_description:
+          anyOf:
+          - $ref: '#/components/schemas/UpsellDescription'
+          - type: 'null'
+        count_runs:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Count Runs
+      type: object
+      required:
+      - id
+      title: AgentRequest
+    AgentRequestPartial:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        user_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+        original_chat_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Original Chat Id
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        history:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: History
+          default: []
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prompt
+        public:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Public
+          default: true
+        rag:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Rag
+        system_prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: System Prompt
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+          description: Model name must start with one of ['@openai/', '@anthropic/', '@groq/', '@google/', '@togetherai/', '@openrouter/'].
+        mcp_servers:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Mcp Servers
+        tools:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Tools
+          description: List of tool slugs available to the agent
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        price_in_cents:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Price In Cents
+        trial_period_in_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Trial Period In Days
+        upsell_description:
+          anyOf:
+          - $ref: '#/components/schemas/UpsellDescription'
+          - type: 'null'
+      type: object
+      title: AgentRequestPartial
+    ScheduleListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Schedule'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: ScheduleListResponse
+    AgentRunResponse:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        schedule_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Schedule Id
+        results:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: Results
+          default: []
+        status:
+          type: string
+          enum:
+          - queued
+          - in_progress
+          - completed
+          - failed
+          title: Status
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        toolhouse_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+        last_agent_message:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Agent Message
+      type: object
+      required:
+      - chat_id
+      - status
+      title: AgentRunResponse
+    AgentFileListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AgentFileModel'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AgentFileListResponse
+      description: API response wrapper for multiple files
+    AgentRunListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AgentRun'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AgentRunListResponse
+    BaseKV:
+      properties:
+        key:
+          type: string
+          title: Key
+        value:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Value
+      type: object
+      required:
+      - key
+      title: BaseKV
+    CliTelemetryEvents:
+      properties:
+        session_id:
+          type: string
+          title: Session Id
+        events:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Events
+      type: object
+      required:
+      - session_id
+      - events
+      title: CliTelemetryEvents
+    AgentRunAPIResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/AgentRunResponse'
+      type: object
+      required:
+      - data
+      title: AgentRunAPIResponse
+    VibeCoderPromptResponse:
+      properties:
+        prompt:
+          type: string
+          title: Prompt
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+      type: object
+      required:
+      - prompt
+      - url
+      title: VibeCoderPromptResponse
+      description: Vibe Coder Response
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

@@ -1,0 +1,841 @@
+openapi: 3.1.0
+info:
+  title: Toolhouse Agent Runs Backoffice API
+  description: All the API! \o/
+  version: 0.1.0
+tags:
+- name: Backoffice
+paths:
+  /backoffice/agent-runs-from-schedule:
+    post:
+      tags:
+      - Backoffice
+      summary: Bo Create Agent Run From Schedule
+      description: Creates an Agent Run on behalf of a user with the Schedule ID you specify.
+      operationId: bo_create_agent_run_from_schedule_backoffice_agent_runs_from_schedule_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScheduleBackofficeRequest'
+        required: true
+      responses:
+        '200':
+          description: Agent run successfully created from schedule
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRun'
+        '400':
+          description: Schedule not found or invalid request
+        '403':
+          description: Chat ID does not belong to the user who created the schedule
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /backoffice/api-keys:
+    post:
+      tags:
+      - Backoffice
+      summary: Post Create Api Key
+      description: Create API Key
+      operationId: post_create_api_key_backoffice_api_keys_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ApiKey'
+        required: true
+      responses:
+        '200':
+          description: API key created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BaseApiKey'
+        '409':
+          description: API key creation failed - entry already exists
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /backoffice/users/{user_id}/credits:
+    get:
+      tags:
+      - Backoffice
+      summary: Get User Credits Request
+      description: Get User Credits
+      operationId: get_user_credits_request_backoffice_users__user_id__credits_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      responses:
+        '200':
+          description: User credits retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentExecutionCredits'
+        '404':
+          description: User not found or credits entry is missing
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /backoffice/users/{user_id}/monthly_credit_allowance:
+    put:
+      tags:
+      - Backoffice
+      summary: Update User Credits Request
+      description: 'Update User Credits Allowance
+
+        This endpoint is used to increase or decrease the monthly credit allowance for a user.
+
+        It is used to give users free credits every month.
+
+        Note: if the user upgrades or downgrades, the credit allowance will be reset to the default value.'
+      operationId: update_user_credits_request_backoffice_users__user_id__monthly_credit_allowance_put
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateMonthlyCreditAllowance'
+      responses:
+        '200':
+          description: User credit allowance updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentExecutionCredits'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /backoffice/users/reset_credit_allowance:
+    post:
+      tags:
+      - Backoffice
+      summary: Post Reset Credit Allowance
+      description: Resets credit allowance to all users (used to give users free credits every month)
+      operationId: post_reset_credit_allowance_backoffice_users_reset_credit_allowance_post
+      responses:
+        '200':
+          description: Credit allowance reset successfully for all users
+          content:
+            application/json:
+              schema: {}
+        '500':
+          description: Failed to reset credit allowance
+      security:
+      - HTTPBearer: []
+  /backoffice/events:
+    post:
+      tags:
+      - Backoffice
+      summary: Proxy To Customerio
+      description: Proxy request to Customer.io
+      operationId: proxy_to_customerio_backoffice_events_post
+      responses:
+        '200':
+          description: Event proxied to broker successfully
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid request - missing required fields or payload
+        '500':
+          description: Failed to proxy event to broker
+      security:
+      - HTTPBearer: []
+  /backoffice/onboarding-runs:
+    post:
+      tags:
+      - Backoffice
+      summary: Create Run
+      operationId: create_run_backoffice_onboarding_runs_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              additionalProperties: true
+              type: object
+              title: Request
+        required: true
+      responses:
+        '200':
+          description: Onboarding run created successfully
+          content:
+            application/json:
+              schema: {}
+        '404':
+          description: Onboarding chat or user not found
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /backoffice/schedules:
+    get:
+      tags:
+      - Backoffice
+      summary: Get Active Schedules
+      description: Returns all the active schedules in the app
+      operationId: get_active_schedules_backoffice_schedules_get
+      responses:
+        '200':
+          description: Active schedules retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScheduleListResponse'
+        '500':
+          description: Internal server error
+      security:
+      - HTTPBearer: []
+  /backoffice/users/{user_id}:
+    get:
+      tags:
+      - Backoffice
+      summary: Get User Route
+      description: Get User
+      operationId: get_user_route_backoffice_users__user_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      responses:
+        '200':
+          description: User retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /backoffice/users/{user_id}/default-api-key:
+    get:
+      tags:
+      - Backoffice
+      summary: Get Default Api Key For User
+      description: Get the user's default API Key
+      operationId: get_default_api_key_for_user_backoffice_users__user_id__default_api_key_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: user_id
+        in: path
+        required: true
+        schema:
+          type: string
+          title: User Id
+      responses:
+        '200':
+          description: Default API key retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiKey'
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /backoffice/users/by/email/{email}:
+    get:
+      tags:
+      - Backoffice
+      summary: Get User By Email Route
+      description: Get User
+      operationId: get_user_by_email_route_backoffice_users_by_email__email__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: email
+        in: path
+        required: true
+        schema:
+          type: string
+          title: Email
+      responses:
+        '200':
+          description: User retrieved successfully
+          content:
+            application/json:
+              schema:
+                anyOf:
+                - $ref: '#/components/schemas/User'
+                - type: 'null'
+                title: Response Get User By Email Route Backoffice Users By Email  Email  Get
+        '404':
+          description: User not found
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /backoffice/users:
+    post:
+      tags:
+      - Backoffice
+      summary: Create User Route
+      description: Create User
+      operationId: create_user_route_backoffice_users_post
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserCreate'
+        required: true
+      responses:
+        '200':
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '409':
+          description: User creation failed - user already exists
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+      security:
+      - HTTPBearer: []
+  /backoffice/mcp-servers:
+    get:
+      tags:
+      - Backoffice
+      summary: Get Mcp Servers
+      description: Get all MCP servers from the local database
+      operationId: get_mcp_servers_backoffice_mcp_servers_get
+      responses:
+        '200':
+          description: MCP servers retrieved successfully
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/MCPServer'
+                type: array
+                title: Response Get Mcp Servers Backoffice Mcp Servers Get
+        '500':
+          description: Internal server error
+      security:
+      - HTTPBearer: []
+    post:
+      tags:
+      - Backoffice
+      summary: Sync Mcp Servers
+      description: 'Sync MCP servers from remote registry to local database.
+
+
+        This endpoint fetches all pages of MCP servers from the remote registry API
+
+        and stores them in the local mcp_servers table.'
+      operationId: sync_mcp_servers_backoffice_mcp_servers_post
+      responses:
+        '200':
+          description: MCP servers synced successfully
+          content:
+            application/json:
+              schema:
+                additionalProperties: true
+                type: object
+                title: Response Sync Mcp Servers Backoffice Mcp Servers Post
+        '500':
+          description: Internal server error
+        '502':
+          description: Failed to fetch servers from remote registry or parse response
+      security:
+      - HTTPBearer: []
+  /backoffice/cleanup:
+    post:
+      tags:
+      - Backoffice
+      summary: Perform Cleanup Tasks
+      description: Perform Cleanup Tasks
+      operationId: perform_cleanup_tasks_backoffice_cleanup_post
+      responses:
+        '200':
+          description: Cleanup tasks completed successfully
+          content:
+            application/json:
+              schema: {}
+      security:
+      - HTTPBearer: []
+  /backoffice/worker-status:
+    get:
+      tags:
+      - Backoffice
+      summary: Get Worker Status
+      description: Returns the number of in-flight agent runs.
+      operationId: get_worker_status_backoffice_worker_status_get
+      responses:
+        '200':
+          description: Worker status
+          content:
+            application/json:
+              schema: {}
+      security:
+      - HTTPBearer: []
+components:
+  schemas:
+    User:
+      properties:
+        id:
+          type: string
+          title: Id
+        auth_id:
+          type: string
+          title: Auth Id
+        email:
+          type: string
+          title: Email
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+      type: object
+      required:
+      - id
+      - auth_id
+      - email
+      title: User
+      description: User
+    UpdateMonthlyCreditAllowance:
+      properties:
+        amount:
+          type: integer
+          title: Amount
+      type: object
+      required:
+      - amount
+      title: UpdateMonthlyCreditAllowance
+      description: Update Monthly Credit Allowance
+    ScheduleListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Schedule'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: ScheduleListResponse
+    BaseApiKey:
+      properties:
+        id:
+          type: integer
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        name:
+          type: string
+          title: Name
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+      type: object
+      required:
+      - id
+      - user_id
+      - name
+      title: BaseApiKey
+    AgentExecutionCredits:
+      properties:
+        user_id:
+          type: string
+          title: User Id
+        total_executions:
+          type: integer
+          title: Total Executions
+        allowed_monthly_executions:
+          type: integer
+          title: Allowed Monthly Executions
+        reset_datetime:
+          type: string
+          format: date-time
+          title: Reset Datetime
+        last_reset_datetime:
+          type: string
+          format: date-time
+          title: Last Reset Datetime
+          default: '2026-05-15T16:42:26.132612Z'
+      type: object
+      required:
+      - user_id
+      - total_executions
+      - allowed_monthly_executions
+      - reset_datetime
+      title: AgentExecutionCredits
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ScheduleBackofficeRequest:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+      type: object
+      required:
+      - id
+      title: ScheduleBackofficeRequest
+    MCPServer:
+      properties:
+        qualified_name:
+          type: string
+          title: Qualified Name
+          description: Fully qualified server name
+        display_name:
+          type: string
+          title: Display Name
+          description: Display name for the server
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Server description
+        use_count:
+          type: integer
+          minimum: 0.0
+          title: Use Count
+          description: Number of times the server has been used
+        is_remote:
+          type: boolean
+          title: Is Remote
+          description: True if server is designed to run remotely
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Creation timestamp
+        homepage:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Homepage
+          description: Link to Smithery server page
+      type: object
+      required:
+      - qualified_name
+      - display_name
+      - use_count
+      - is_remote
+      - created_at
+      title: MCPServer
+      description: MCP Server model for database storage
+    AgentRun:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        user_id:
+          type: string
+          title: User Id
+        schedule_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Schedule Id
+        status:
+          type: string
+          enum:
+          - queued
+          - in_progress
+          - completed
+          - failed
+          title: Status
+        results:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: Results
+          default: []
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        toolhouse_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+      type: object
+      required:
+      - chat_id
+      - user_id
+      - status
+      title: AgentRun
+    UserCreate:
+      properties:
+        first_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        verified:
+          type: boolean
+          title: Verified
+          default: false
+      type: object
+      required:
+      - email
+      title: UserCreate
+      description: User model for the backend API.
+    Schedule:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        last_ran_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Ran At
+        active:
+          type: boolean
+          title: Active
+          default: true
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+        cadence:
+          type: string
+          title: Cadence
+        toolhouse_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        chat_archived:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Chat Archived
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+      type: object
+      required:
+      - user_id
+      - chat_id
+      - cadence
+      title: Schedule
+    ApiKey:
+      properties:
+        id:
+          type: integer
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        name:
+          type: string
+          title: Name
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+        api_key:
+          type: string
+          title: Api Key
+      type: object
+      required:
+      - id
+      - user_id
+      - name
+      - api_key
+      title: ApiKey
+      description: API Key
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

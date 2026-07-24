@@ -1,0 +1,186 @@
+openapi: 3.1.0
+info:
+  title: Toolhouse Agent Runs Logs API
+  description: All the API! \o/
+  version: 0.1.0
+tags:
+- name: Logs
+paths:
+  /me/executions:
+    get:
+      tags:
+      - Logs
+      summary: Get User Logs
+      description: User Installed Tools
+      operationId: get_user_logs_me_executions_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: next_cursor
+        in: query
+        required: false
+        schema:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Next Cursor
+      - name: limit
+        in: query
+        required: false
+        schema:
+          type: integer
+          default: 30
+          title: Limit
+      responses:
+        '200':
+          description: Successfully retrieved tool execution logs
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToolExecutionLogsResponse'
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /me/executions/{log_id}:
+    get:
+      tags:
+      - Logs
+      summary: Get User Log By Id
+      description: User Installed Tools
+      operationId: get_user_log_by_id_me_executions__log_id__get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: log_id
+        in: path
+        required: true
+        schema:
+          type: integer
+          title: Log Id
+      responses:
+        '200':
+          description: Successfully retrieved tool execution log
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ToolExecutionLog'
+        '404':
+          description: Tool execution log not found
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ToolExecutionLog:
+      properties:
+        user_id:
+          type: string
+          title: User Id
+        tool_id:
+          type: string
+          title: Tool Id
+        start_date:
+          type: string
+          format: date-time
+          title: Start Date
+        end_date:
+          type: string
+          format: date-time
+          title: End Date
+        duration_ms:
+          type: number
+          title: Duration Ms
+        execution_cost:
+          type: integer
+          title: Execution Cost
+        input:
+          additionalProperties: true
+          type: object
+          title: Input
+        output:
+          type: string
+          title: Output
+        provider:
+          type: string
+          title: Provider
+        id:
+          type: integer
+          title: Id
+      type: object
+      required:
+      - user_id
+      - tool_id
+      - start_date
+      - end_date
+      - duration_ms
+      - execution_cost
+      - input
+      - output
+      - provider
+      - id
+      title: ToolExecutionLog
+      description: Tool Execution Log
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ToolExecutionLogsResponse:
+      properties:
+        logs:
+          items:
+            $ref: '#/components/schemas/ToolExecutionLog'
+          type: array
+          title: Logs
+        next_cursor:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - logs
+      - next_cursor
+      title: ToolExecutionLogsResponse
+      description: Tool Execution Log Response
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer

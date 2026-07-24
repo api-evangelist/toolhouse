@@ -1,14 +1,15 @@
 openapi: 3.1.0
 info:
-  title: Toolhouse API
+  title: Toolhouse Agent Runs User API API
   description: All the API! \o/
   version: 0.1.0
+tags:
+- name: User API
 paths:
   /me/agent-runs:
     get:
       tags:
       - User API
-      - Agent Runs
       summary: Get User Agent Runs
       description: User Installed Tools
       operationId: get_user_agent_runs_me_agent_runs_get
@@ -50,7 +51,6 @@ paths:
     get:
       tags:
       - User API
-      - Agent Runs
       summary: Get User Agent Run
       description: User Installed Tools
       operationId: get_user_agent_run_me_agent_runs__run_id__get
@@ -85,7 +85,6 @@ paths:
     get:
       tags:
       - User API
-      - Agent Runs
       summary: Get User Agent Run Mcp Server Logs
       description: User Installed Tools
       operationId: get_user_agent_run_mcp_server_logs_me_agent_runs__run_id__mcp_server_logs_get
@@ -121,7 +120,6 @@ paths:
     get:
       tags:
       - User API
-      - Agent Runs
       summary: Get User Agent Run Logs
       description: User Installed Tools
       operationId: get_user_agent_run_logs_me_agent_runs__run_id__logs_get
@@ -1072,7 +1070,6 @@ paths:
     get:
       tags:
       - User API
-      - API Keys
       summary: Get Api Keys
       description: Get all API Keys
       operationId: get_api_keys_me_api_keys_get
@@ -1093,7 +1090,6 @@ paths:
     post:
       tags:
       - User API
-      - API Keys
       summary: Post Create Api Key
       description: Create API Key
       operationId: post_create_api_key_me_api_keys_post
@@ -1124,7 +1120,6 @@ paths:
     get:
       tags:
       - User API
-      - API Keys
       summary: Get Default Api Key
       description: Get default API Key
       operationId: get_default_api_key_me_api_keys_default_get
@@ -1143,7 +1138,6 @@ paths:
     get:
       tags:
       - User API
-      - API Keys
       summary: Get Api Key
       description: Get API Key by ID
       operationId: get_api_key_me_api_keys__api_key_id__get
@@ -1176,7 +1170,6 @@ paths:
     delete:
       tags:
       - User API
-      - API Keys
       summary: Delete Api Key
       description: Delete API Key
       operationId: delete_api_key_me_api_keys__api_key_id__delete
@@ -1687,7 +1680,6 @@ paths:
     get:
       tags:
       - User API
-      - Logs
       summary: Get User Logs
       description: User Installed Tools
       operationId: get_user_logs_me_executions_get
@@ -1729,7 +1721,6 @@ paths:
     get:
       tags:
       - User API
-      - Logs
       summary: Get User Log By Id
       description: User Installed Tools
       operationId: get_user_log_by_id_me_executions__log_id__get
@@ -1763,7 +1754,6 @@ paths:
     get:
       tags:
       - User API
-      - Metrics
       summary: Get Agent Run Metrics
       operationId: get_agent_run_metrics_me_metrics_agent_runs_get
       security:
@@ -1803,7 +1793,6 @@ paths:
     get:
       tags:
       - User API
-      - Metrics
       summary: Get Agent Run Metrics Summary
       operationId: get_agent_run_metrics_summary_me_metrics_agent_runs_summary_get
       security:
@@ -1843,7 +1832,6 @@ paths:
     get:
       tags:
       - User API
-      - Metrics
       summary: Get Agent Run Metrics Volume
       operationId: get_agent_run_metrics_volume_me_metrics_agent_runs_volume_get
       security:
@@ -1883,7 +1871,6 @@ paths:
     get:
       tags:
       - User API
-      - Metrics
       summary: Get Agent Run Metrics Agents
       operationId: get_agent_run_metrics_agents_me_metrics_agent_runs_agents_get
       security:
@@ -2448,1634 +2435,181 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/HTTPValidationError'
-  /backoffice/agent-runs-from-schedule:
-    post:
-      tags:
-      - Backoffice
-      summary: Bo Create Agent Run From Schedule
-      description: Creates an Agent Run on behalf of a user with the Schedule ID you specify.
-      operationId: bo_create_agent_run_from_schedule_backoffice_agent_runs_from_schedule_post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ScheduleBackofficeRequest'
-        required: true
-      responses:
-        '200':
-          description: Agent run successfully created from schedule
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentRun'
-        '400':
-          description: Schedule not found or invalid request
-        '403':
-          description: Chat ID does not belong to the user who created the schedule
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-      security:
-      - HTTPBearer: []
-  /backoffice/api-keys:
-    post:
-      tags:
-      - Backoffice
-      summary: Post Create Api Key
-      description: Create API Key
-      operationId: post_create_api_key_backoffice_api_keys_post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ApiKey'
-        required: true
-      responses:
-        '200':
-          description: API key created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/BaseApiKey'
-        '409':
-          description: API key creation failed - entry already exists
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-      security:
-      - HTTPBearer: []
-  /backoffice/users/{user_id}/credits:
-    get:
-      tags:
-      - Backoffice
-      summary: Get User Credits Request
-      description: Get User Credits
-      operationId: get_user_credits_request_backoffice_users__user_id__credits_get
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: user_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: User Id
-      responses:
-        '200':
-          description: User credits retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentExecutionCredits'
-        '404':
-          description: User not found or credits entry is missing
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /backoffice/users/{user_id}/monthly_credit_allowance:
-    put:
-      tags:
-      - Backoffice
-      summary: Update User Credits Request
-      description: 'Update User Credits Allowance
-
-        This endpoint is used to increase or decrease the monthly credit allowance for a user.
-
-        It is used to give users free credits every month.
-
-        Note: if the user upgrades or downgrades, the credit allowance will be reset to the default value.'
-      operationId: update_user_credits_request_backoffice_users__user_id__monthly_credit_allowance_put
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: user_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: User Id
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UpdateMonthlyCreditAllowance'
-      responses:
-        '200':
-          description: User credit allowance updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentExecutionCredits'
-        '404':
-          description: User not found
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /backoffice/users/reset_credit_allowance:
-    post:
-      tags:
-      - Backoffice
-      summary: Post Reset Credit Allowance
-      description: Resets credit allowance to all users (used to give users free credits every month)
-      operationId: post_reset_credit_allowance_backoffice_users_reset_credit_allowance_post
-      responses:
-        '200':
-          description: Credit allowance reset successfully for all users
-          content:
-            application/json:
-              schema: {}
-        '500':
-          description: Failed to reset credit allowance
-      security:
-      - HTTPBearer: []
-  /backoffice/events:
-    post:
-      tags:
-      - Backoffice
-      summary: Proxy To Customerio
-      description: Proxy request to Customer.io
-      operationId: proxy_to_customerio_backoffice_events_post
-      responses:
-        '200':
-          description: Event proxied to broker successfully
-          content:
-            application/json:
-              schema: {}
-        '400':
-          description: Invalid request - missing required fields or payload
-        '500':
-          description: Failed to proxy event to broker
-      security:
-      - HTTPBearer: []
-  /backoffice/onboarding-runs:
-    post:
-      tags:
-      - Backoffice
-      summary: Create Run
-      operationId: create_run_backoffice_onboarding_runs_post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              additionalProperties: true
-              type: object
-              title: Request
-        required: true
-      responses:
-        '200':
-          description: Onboarding run created successfully
-          content:
-            application/json:
-              schema: {}
-        '404':
-          description: Onboarding chat or user not found
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-      security:
-      - HTTPBearer: []
-  /backoffice/schedules:
-    get:
-      tags:
-      - Backoffice
-      summary: Get Active Schedules
-      description: Returns all the active schedules in the app
-      operationId: get_active_schedules_backoffice_schedules_get
-      responses:
-        '200':
-          description: Active schedules retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ScheduleListResponse'
-        '500':
-          description: Internal server error
-      security:
-      - HTTPBearer: []
-  /backoffice/users/{user_id}:
-    get:
-      tags:
-      - Backoffice
-      summary: Get User Route
-      description: Get User
-      operationId: get_user_route_backoffice_users__user_id__get
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: user_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: User Id
-      responses:
-        '200':
-          description: User retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        '404':
-          description: User not found
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /backoffice/users/{user_id}/default-api-key:
-    get:
-      tags:
-      - Backoffice
-      summary: Get Default Api Key For User
-      description: Get the user's default API Key
-      operationId: get_default_api_key_for_user_backoffice_users__user_id__default_api_key_get
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: user_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: User Id
-      responses:
-        '200':
-          description: Default API key retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ApiKey'
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /backoffice/users/by/email/{email}:
-    get:
-      tags:
-      - Backoffice
-      summary: Get User By Email Route
-      description: Get User
-      operationId: get_user_by_email_route_backoffice_users_by_email__email__get
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: email
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Email
-      responses:
-        '200':
-          description: User retrieved successfully
-          content:
-            application/json:
-              schema:
-                anyOf:
-                - $ref: '#/components/schemas/User'
-                - type: 'null'
-                title: Response Get User By Email Route Backoffice Users By Email  Email  Get
-        '404':
-          description: User not found
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /backoffice/users:
-    post:
-      tags:
-      - Backoffice
-      summary: Create User Route
-      description: Create User
-      operationId: create_user_route_backoffice_users_post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserCreate'
-        required: true
-      responses:
-        '200':
-          description: User created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User'
-        '409':
-          description: User creation failed - user already exists
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-      security:
-      - HTTPBearer: []
-  /backoffice/mcp-servers:
-    get:
-      tags:
-      - Backoffice
-      summary: Get Mcp Servers
-      description: Get all MCP servers from the local database
-      operationId: get_mcp_servers_backoffice_mcp_servers_get
-      responses:
-        '200':
-          description: MCP servers retrieved successfully
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/MCPServer'
-                type: array
-                title: Response Get Mcp Servers Backoffice Mcp Servers Get
-        '500':
-          description: Internal server error
-      security:
-      - HTTPBearer: []
-    post:
-      tags:
-      - Backoffice
-      summary: Sync Mcp Servers
-      description: 'Sync MCP servers from remote registry to local database.
-
-
-        This endpoint fetches all pages of MCP servers from the remote registry API
-
-        and stores them in the local mcp_servers table.'
-      operationId: sync_mcp_servers_backoffice_mcp_servers_post
-      responses:
-        '200':
-          description: MCP servers synced successfully
-          content:
-            application/json:
-              schema:
-                additionalProperties: true
-                type: object
-                title: Response Sync Mcp Servers Backoffice Mcp Servers Post
-        '500':
-          description: Internal server error
-        '502':
-          description: Failed to fetch servers from remote registry or parse response
-      security:
-      - HTTPBearer: []
-  /backoffice/cleanup:
-    post:
-      tags:
-      - Backoffice
-      summary: Perform Cleanup Tasks
-      description: Perform Cleanup Tasks
-      operationId: perform_cleanup_tasks_backoffice_cleanup_post
-      responses:
-        '200':
-          description: Cleanup tasks completed successfully
-          content:
-            application/json:
-              schema: {}
-      security:
-      - HTTPBearer: []
-  /backoffice/worker-status:
-    get:
-      tags:
-      - Backoffice
-      summary: Get Worker Status
-      description: Returns the number of in-flight agent runs.
-      operationId: get_worker_status_backoffice_worker_status_get
-      responses:
-        '200':
-          description: Worker status
-          content:
-            application/json:
-              schema: {}
-      security:
-      - HTTPBearer: []
-  /v1/agent-runs:
-    get:
-      tags:
-      - SDK API
-      summary: Get All Agent Runs
-      operationId: get_all_agent_runs_v1_agent_runs_get
-      responses:
-        '200':
-          description: Agent runs successfully retrieved
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentRunListResponse'
-        '500':
-          description: Internal server error
-      security:
-      - HTTPBearer: []
-    post:
-      tags:
-      - SDK API
-      summary: Create Agent Run
-      operationId: create_agent_run_v1_agent_runs_post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgentRunRequest'
-        required: true
-      responses:
-        '200':
-          description: Agent run successfully created
-          content:
-            application/json:
-              schema: {}
-        '403':
-          description: Chat ID is invalid or does not belong to you
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-      security:
-      - HTTPBearer: []
-  /v1/agent-runs/{run_id}:
-    get:
-      tags:
-      - SDK API
-      summary: Get Agent Run
-      operationId: get_agent_run_v1_agent_runs__run_id__get
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: run_id
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-          title: Run Id
-      responses:
-        '200':
-          description: Agent run successfully retrieved
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentRunAPIResponse'
-        '403':
-          description: Chat ID associated to this Agent Run is invalid
-        '404':
-          description: Agent run not found
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-    put:
-      tags:
-      - SDK API
-      summary: Put Agent Run
-      operationId: put_agent_run_v1_agent_runs__run_id__put
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: run_id
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-          title: Run Id
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgentRunUpdateRequest'
-      responses:
-        '200':
-          description: Agent run successfully updated
-          content:
-            application/json:
-              schema: {}
-        '403':
-          description: Chat ID is invalid or does not belong to you
-        '406':
-          description: You can only add messages to completed runs
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /v1/agents/{agent_id}/files:
-    get:
-      tags:
-      - SDK API
-      summary: Get Agent Files For Service
-      description: 'Get enabled files for an agent (for genservice).
-
-
-        Returns only enabled files, ordered by position for deterministic injection.
-
-        Access is allowed for the agent owner OR if the agent is public.'
-      operationId: get_agent_files_for_service_v1_agents__agent_id__files_get
-      parameters:
-      - name: agent_id
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-          title: Agent Id
-      responses:
-        '200':
-          description: Successfully retrieved enabled agent files
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentFileListResponse'
-        '403':
-          description: Not authorized to access this agent
-        '404':
-          description: Agent not found
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /v1/agents:
-    get:
-      tags:
-      - SDK API
-      summary: Get All Chats
-      description: Gets all chats for this user
-      operationId: get_all_chats_v1_agents_get
-      responses:
-        '200':
-          description: Agents successfully retrieved
-          content:
-            application/json:
-              schema:
-                items:
-                  $ref: '#/components/schemas/AgentModel'
-                type: array
-                title: Response Get All Chats V1 Agents Get
-        '500':
-          description: Internal server error
-      security:
-      - HTTPBearer: []
-    post:
-      tags:
-      - SDK API
-      summary: Upsert Agent
-      description: Saves a chat
-      operationId: upsert_agent_v1_agents_post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgentRequest'
-        required: true
-      responses:
-        '200':
-          description: Agent successfully created or updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentModel'
-        '400':
-          description: Invalid request or missing prompt
-        '403':
-          description: You don't have permission to access this chat
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-      security:
-      - HTTPBearer: []
-  /v1/agents/{chat_id}:
-    get:
-      tags:
-      - SDK API
-      summary: Get Chat
-      description: Gets a chat
-      operationId: get_chat_v1_agents__chat_id__get
-      parameters:
-      - name: chat_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Chat Id
-      responses:
-        '200':
-          description: Agent successfully retrieved
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentModel'
-        '403':
-          description: You don't have permission to access this chat
-        '404':
-          description: Agent not found
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-    put:
-      tags:
-      - SDK API
-      summary: Edit Chat
-      description: 'Updates a chat
-
-
-        This endpoint allows users to update Chats fields of a chat identified by its `chat_id`.
-
-
-        - **chat_id**: The unique identifier of the chat to be patched. This field cannot be updated.
-
-        - **request**: A ChatRequest object containing the fields to be updated. All fields will be updated,
-
-        if a field is not provided default values will be used. The ID of the user who owns the chat
-
-        and the chat''s ID cannot be updated.
-
-
-        **Responses:**
-
-        - 200: Returns the updated ChatModel.
-
-        - 404: If the chat is not found.
-
-        - 500: If there is an internal server error.'
-      operationId: edit_chat_v1_agents__chat_id__put
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: chat_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Chat Id
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgentRequest'
-      responses:
-        '200':
-          description: Agent successfully updated
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentModel'
-        '400':
-          description: Invalid request
-        '403':
-          description: You don't have permission to access this chat
-        '404':
-          description: Agent not found
-        '409':
-          description: Conflict updating agent
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-    patch:
-      tags:
-      - SDK API
-      summary: Patch Chat
-      description: "Patches a chat.\n\nThis endpoint allows users to update specific fields of a chat identified by its `chat_id`.\n\n- **chat_id**: The unique identifier of the chat to be patched. This field cannot be updated.\n- **request**: A ChatModel object containing the fields to be updated. Only fields that are provided\n  will be updated. The ID of the user who owns the chat and the chat's ID cannot be updated.\n\n**Responses:**\n- 200: Returns the updated ChatModel.\n- 404: If the chat is not found.\n- 500: If there is an internal server error."
-      operationId: patch_chat_v1_agents__chat_id__patch
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: chat_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Chat Id
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AgentRequestPartial'
-      responses:
-        '200':
-          description: Agent successfully patched
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentModel'
-        '400':
-          description: Invalid request
-        '403':
-          description: You don't have permission to access this chat
-        '404':
-          description: Agent not found
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-    delete:
-      tags:
-      - SDK API
-      summary: Del Chat
-      description: Deletes a chat
-      operationId: del_chat_v1_agents__chat_id__delete
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: chat_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Chat Id
-      responses:
-        '200':
-          description: Agent successfully deleted
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentModel'
-        '403':
-          description: You don't have permission to access this chat
-        '404':
-          description: Agent not found
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /v1/agents/{chat_id}/og:
-    get:
-      tags:
-      - SDK API
-      summary: Get Chat Og Metadata
-      description: Returns the OG metadata for a chat
-      operationId: get_chat_og_metadata_v1_agents__chat_id__og_get
-      parameters:
-      - name: chat_id
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-          title: Chat Id
-      responses:
-        '200':
-          description: OG metadata successfully retrieved
-          content:
-            application/json:
-              schema: {}
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /v1/agents/{chat_id}/clone:
-    post:
-      tags:
-      - SDK API
-      summary: Clone Chat
-      operationId: clone_chat_v1_agents__chat_id__clone_post
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: chat_id
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-          title: Chat Id
-      responses:
-        '200':
-          description: Agent successfully cloned
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentModel'
-        '403':
-          description: This chat is not public
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /v1/agents/{chat_id}/feedback:
-    post:
-      tags:
-      - SDK API
-      summary: Post Chat Feedback
-      description: Updates the feedback for a chat
-      operationId: post_chat_feedback_v1_agents__chat_id__feedback_post
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: chat_id
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-          title: Chat Id
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/UserFeedbackRequest'
-      responses:
-        '200':
-          description: Feedback successfully submitted
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AgentModel'
-        '404':
-          description: Agent not found
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /v1/cli/version:
-    get:
-      tags:
-      - SDK API
-      summary: Cli
-      description: Check if a new version of the CLI is available.
-      operationId: cli_v1_cli_version_get
-      parameters:
-      - name: installed_version
-        in: query
-        required: true
-        schema:
-          type: string
-          pattern: ^\d+\.\d+\.\d+([a-zA-Z0-9.\-+]+)?$
-          title: Installed Version
-          description: The version of the CLI that is currently installed.
-          examples:
-          - 1.0.0
-          - 2.3.4
-      responses:
-        '200':
-          description: CLI version information retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/CliVersionResponse'
-        '422':
-          description: Invalid version format
-        '503':
-          description: Version not available
-  /v1/cli-telemetry:
-    post:
-      tags:
-      - SDK API
-      summary: Post Cli Telemetry
-      description: Stores a new CLI telemetry entry.
-      operationId: post_cli_telemetry_v1_cli_telemetry_post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/CliTelemetryEvents'
-        required: true
-      responses:
-        '200':
-          description: CLI telemetry stored successfully
-          content:
-            application/json:
-              schema:
-                type: boolean
-                title: Response Post Cli Telemetry V1 Cli Telemetry Post
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /v1/users:
-    get:
-      tags:
-      - SDK API
-      summary: Get Users Endpoint
-      operationId: get_users_endpoint_v1_users_get
-      responses:
-        '200':
-          description: Users retrieved successfully
-          content:
-            application/json:
-              schema: {}
-        '500':
-          description: Internal server error
-      security:
-      - HTTPBearer: []
-  /v1/kv:
-    get:
-      tags:
-      - SDK API
-      summary: Get All Kv
-      description: Gets all key-value pairs for a user
-      operationId: get_all_kv_v1_kv_get
-      responses:
-        '200':
-          description: All key-value pairs retrieved successfully
-          content:
-            application/json:
-              schema: {}
-        '500':
-          description: Internal server error
-      security:
-      - HTTPBearer: []
-    post:
-      tags:
-      - SDK API
-      summary: Upsert Kv
-      description: Upserts a key-value pair for a user
-      operationId: upsert_kv_v1_kv_post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/BaseKV'
-        required: true
-      responses:
-        '200':
-          description: Key-value pair upserted successfully
-          content:
-            application/json:
-              schema: {}
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-      security:
-      - HTTPBearer: []
-  /v1/kv/{key}:
-    delete:
-      tags:
-      - SDK API
-      summary: Delete Kv
-      description: Deletes a key-value pair for a user
-      operationId: delete_kv_v1_kv__key__delete
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: key
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Key
-      responses:
-        '200':
-          description: Key-value pair deleted successfully
-          content:
-            application/json:
-              schema: {}
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /v1/schedules:
-    get:
-      tags:
-      - SDK API
-      summary: Get Schedule List
-      operationId: get_schedule_list_v1_schedules_get
-      responses:
-        '200':
-          description: Schedules retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ScheduleListResponse'
-        '500':
-          description: Internal server error
-      security:
-      - HTTPBearer: []
-    post:
-      tags:
-      - SDK API
-      summary: Create Schedule
-      operationId: create_schedule_v1_schedules_post
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ScheduleRequest'
-        required: true
-      responses:
-        '200':
-          description: Schedule created successfully
-          content:
-            application/json:
-              schema: {}
-        '403':
-          description: Invalid chat ID or chat does not belong to user
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-      security:
-      - HTTPBearer: []
-  /v1/schedules/text-to-cron:
-    get:
-      tags:
-      - SDK API
-      summary: Text To Cron
-      operationId: text_to_cron_v1_schedules_text_to_cron_get
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: cron
-        in: query
-        required: true
-        schema:
-          type: string
-          title: Cron
-      responses:
-        '200':
-          description: Cron expression generated successfully
-          content:
-            application/json:
-              schema: {}
-        '400':
-          description: Invalid cron text input
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /v1/schedules/{schedule_id}:
-    get:
-      tags:
-      - SDK API
-      summary: Get Schedule By Id
-      operationId: get_schedule_by_id_v1_schedules__schedule_id__get
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: schedule_id
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-          title: Schedule Id
-      responses:
-        '200':
-          description: Schedule retrieved successfully
-          content:
-            application/json:
-              schema: {}
-        '404':
-          description: Schedule not found
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-    put:
-      tags:
-      - SDK API
-      summary: Edit Schedule
-      operationId: edit_schedule_v1_schedules__schedule_id__put
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: schedule_id
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-          title: Schedule Id
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ScheduleUpdateRequest'
-      responses:
-        '200':
-          description: Schedule updated successfully
-          content:
-            application/json:
-              schema: {}
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-    delete:
-      tags:
-      - SDK API
-      summary: Del Schedule
-      operationId: del_schedule_v1_schedules__schedule_id__delete
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: schedule_id
-        in: path
-        required: true
-        schema:
-          type: string
-          format: uuid
-          title: Schedule Id
-      responses:
-        '200':
-          description: Schedule deleted successfully
-          content:
-            application/json:
-              schema: {}
-        '400':
-          description: Schedule not found
-        '500':
-          description: Internal server error
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
-  /v1/th-file-schema:
-    get:
-      tags:
-      - SDK API
-      summary: Get Th File Schema
-      description: Returns the schema for the Toolhouse file.
-      operationId: get_th_file_schema_v1_th_file_schema_get
-      responses:
-        '200':
-          description: Toolhouse file schema retrieved successfully
-          content:
-            application/json:
-              schema:
-                additionalProperties: true
-                type: object
-                title: Response Get Th File Schema V1 Th File Schema Get
-  /v1/me:
-    get:
-      tags:
-      - SDK API
-      summary: Get User
-      description: Gets the current user
-      operationId: get_user_v1_me_get
-      responses:
-        '200':
-          description: Current user retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/UserAuthenticated'
-      security:
-      - HTTPBearer: []
-  /v1/vibe/services:
-    get:
-      tags:
-      - SDK API
-      summary: Get Vibe Services
-      operationId: get_vibe_services_v1_vibe_services_get
-      responses:
-        '200':
-          description: Vibe services retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VibeCoderListResponse'
-  /v1/agents/{agent_id}/vibe:
-    get:
-      tags:
-      - SDK API
-      summary: Get Vibe Agent Prompt
-      operationId: get_vibe_agent_prompt_v1_agents__agent_id__vibe_get
-      security:
-      - HTTPBearer: []
-      parameters:
-      - name: agent_id
-        in: path
-        required: true
-        schema:
-          type: string
-          title: Agent Id
-      - name: service_name
-        in: query
-        required: true
-        schema:
-          enum:
-          - lovable
-          - bolt
-          - v0
-          type: string
-          title: Service Name
-      responses:
-        '200':
-          description: Vibe agent prompt retrieved successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/VibeCoderPromptResponse'
-        '422':
-          description: Validation Error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    AgentExecutionCredits:
+    VibeCoderListResponse:
+      properties:
+        services:
+          items:
+            $ref: '#/components/schemas/Service'
+          type: array
+          title: Services
+      type: object
+      required:
+      - services
+      title: VibeCoderListResponse
+    SlugRequest:
+      properties:
+        agent:
+          type: string
+          title: Agent
+      type: object
+      required:
+      - agent
+      title: SlugRequest
+    BillingInformationSubscription:
       properties:
         user_id:
           type: string
           title: User Id
-        total_executions:
-          type: integer
-          title: Total Executions
-        allowed_monthly_executions:
-          type: integer
-          title: Allowed Monthly Executions
-        reset_datetime:
+        stripe_customer_id:
           type: string
-          format: date-time
-          title: Reset Datetime
-        last_reset_datetime:
+          title: Stripe Customer Id
+        plan_type:
           type: string
-          format: date-time
-          title: Last Reset Datetime
-          default: '2026-05-15T16:42:26.132612Z'
+          enum:
+          - trial
+          - pay_as_you_go
+          - subscription
+          title: Plan Type
+        tier:
+          type: string
+          enum:
+          - sandbox
+          - pro
+          - business
+          - enterprise
+          title: Tier
+          default: sandbox
+        subscription_period_start:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Subscription Period Start
+        subscription_period_end:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Subscription Period End
+        subscription_status:
+          anyOf:
+          - type: string
+            enum:
+            - incomplete
+            - incomplete_expired
+            - trialing
+            - active
+            - past_due
+            - canceled
+            - unpaid
+            - paused
+          - type: 'null'
+          title: Subscription Status
+        interval:
+          anyOf:
+          - type: string
+            enum:
+            - day
+            - week
+            - month
+            - year
+          - type: 'null'
+          title: Interval
+        cancel_at_period_end:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Cancel At Period End
+        price_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Price Id
       type: object
       required:
       - user_id
-      - total_executions
-      - allowed_monthly_executions
-      - reset_datetime
-      title: AgentExecutionCredits
-    AgentFileBatchPositionRequest:
+      - stripe_customer_id
+      - plan_type
+      title: BillingInformationSubscription
+      description: Billing Information Response
+    AgentThemePreferenceResponse:
       properties:
-        positions:
-          items:
-            $ref: '#/components/schemas/AgentFilePositionUpdate'
-          type: array
-          title: Positions
-      type: object
-      required:
-      - positions
-      title: AgentFileBatchPositionRequest
-      description: Request model for updating positions of multiple files
-    AgentFileCreateRequest:
-      properties:
-        filename:
-          type: string
-          maxLength: 255
-          minLength: 1
-          title: Filename
-          description: Original filename
-        mime_type:
-          type: string
-          title: Mime Type
-          description: MIME type of the file
-        storage_url:
-          type: string
-          minLength: 1
-          format: uri
-          title: Storage Url
-          description: External URL where the file is hosted
-        enabled:
-          type: boolean
-          title: Enabled
-          description: Whether the file is active
-          default: true
-        position:
-          type: integer
-          minimum: 0.0
-          title: Position
-          description: Order position for deterministic injection
-          default: 0
-        auth:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Auth
-          description: Authentication configuration for accessing the file
-      type: object
-      required:
-      - filename
-      - mime_type
-      - storage_url
-      title: AgentFileCreateRequest
-      description: Request model for creating a new agent file
-    AgentFileListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AgentFileModel'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: AgentFileListResponse
-      description: API response wrapper for multiple files
-    AgentFileModel:
-      properties:
-        filename:
-          type: string
-          maxLength: 255
-          minLength: 1
-          title: Filename
-          description: Original filename
-        mime_type:
-          type: string
-          title: Mime Type
-          description: MIME type of the file
-        storage_url:
-          type: string
-          minLength: 1
-          format: uri
-          title: Storage Url
-          description: External URL where the file is hosted
-        enabled:
-          type: boolean
-          title: Enabled
-          description: Whether the file is active
-          default: true
-        position:
-          type: integer
-          minimum: 0.0
-          title: Position
-          description: Order position for deterministic injection
-          default: 0
-        auth:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Auth
-          description: Authentication configuration for accessing the file
-        id:
-          type: string
-          format: uuid
-          title: Id
         agent_id:
           type: string
           format: uuid
           title: Agent Id
-        created_at:
+        theme_color:
+          type: string
+          pattern: ^#[0-9A-F]{6}$
+          title: Theme Color
+        updated_at:
           type: string
           format: date-time
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
           title: Updated At
       type: object
       required:
-      - filename
-      - mime_type
-      - storage_url
-      - id
       - agent_id
-      - created_at
-      title: AgentFileModel
-      description: Full model with database fields (ORM model)
-    AgentFilePositionUpdate:
+      - theme_color
+      - updated_at
+      title: AgentThemePreferenceResponse
+    ServerWithConnections:
       properties:
-        file_id:
+        connections:
+          items:
+            $ref: '#/components/schemas/MCPServerConnection'
+          type: array
+          title: Connections
+        qualifiedName:
           type: string
-          format: uuid
-          title: File Id
-        position:
-          type: integer
-          minimum: 0.0
-          title: Position
-      type: object
-      required:
-      - file_id
-      - position
-      title: AgentFilePositionUpdate
-      description: Request model for batch position updates
-    AgentFileResponse:
-      properties:
-        data:
-          $ref: '#/components/schemas/AgentFileModel'
-      type: object
-      required:
-      - data
-      title: AgentFileResponse
-      description: API response wrapper for a single file
-    AgentFileUpdateRequest:
-      properties:
-        filename:
+          title: Qualifiedname
+          description: Fully qualified server name
+        displayName:
+          type: string
+          title: Displayname
+          description: Display name for the server
+        description:
+          type: string
+          title: Description
+          description: Server description
+        iconUrl:
           anyOf:
           - type: string
-            maxLength: 255
-            minLength: 1
-          - type: 'null'
-          title: Filename
-        mime_type:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Mime Type
-        storage_url:
-          anyOf:
-          - type: string
+            maxLength: 2083
             minLength: 1
             format: uri
           - type: 'null'
-          title: Storage Url
-        enabled:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Enabled
-        position:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
-          title: Position
-        auth:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Auth
-      type: object
-      title: AgentFileUpdateRequest
-      description: Request model for updating an agent file (all fields optional)
-    AgentListItem:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        title:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Title
-        slug:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Slug
-        public:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Public
-        user_id:
-          type: string
-          title: User Id
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-        last_ran_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Last Ran At
-        count_runs:
-          type: integer
-          title: Count Runs
-          default: 0
+          title: Iconurl
+          description: URL to the server icon
       type: object
       required:
-      - id
-      - user_id
-      title: AgentListItem
-    AgentListResponse:
+      - connections
+      - qualifiedName
+      - displayName
+      - description
+      title: ServerWithConnections
+    ValidationError:
       properties:
-        data:
+        loc:
           items:
-            $ref: '#/components/schemas/AgentListItem'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Data
-        next_cursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Next Cursor
-        total_count:
-          type: integer
-          title: Total Count
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - data
-      - next_cursor
-      - total_count
-      title: AgentListResponse
+      - loc
+      - msg
+      - type
+      title: ValidationError
     AgentModel:
       properties:
         id:
@@ -4208,6 +2742,1213 @@ components:
       - id
       - user_id
       title: AgentModel
+    Schedule:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        last_ran_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Ran At
+        active:
+          type: boolean
+          title: Active
+          default: true
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+        cadence:
+          type: string
+          title: Cadence
+        toolhouse_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        chat_archived:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Chat Archived
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+      type: object
+      required:
+      - user_id
+      - chat_id
+      - cadence
+      title: Schedule
+    MonetizationSummary:
+      properties:
+        total_subscribers:
+          type: integer
+          title: Total Subscribers
+          description: Current active/trialing subscriber count (not period-filtered)
+        total_earnings_cents:
+          type: integer
+          title: Total Earnings Cents
+          description: Total earnings in cents within the requested period
+      type: object
+      required:
+      - total_subscribers
+      - total_earnings_cents
+      title: MonetizationSummary
+    AgentSubscriptionListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AgentSubscriptionResponse'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AgentSubscriptionListResponse
+    ApiKey:
+      properties:
+        id:
+          type: integer
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        name:
+          type: string
+          title: Name
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+        api_key:
+          type: string
+          title: Api Key
+      type: object
+      required:
+      - id
+      - user_id
+      - name
+      - api_key
+      title: ApiKey
+      description: API Key
+    AgentRunTrendPoint:
+      properties:
+        bucket_start:
+          type: string
+          format: date-time
+          title: Bucket Start
+        bucket_end:
+          type: string
+          format: date-time
+          title: Bucket End
+        label:
+          type: string
+          title: Label
+        total:
+          type: integer
+          title: Total
+      type: object
+      required:
+      - bucket_start
+      - bucket_end
+      - label
+      - total
+      title: AgentRunTrendPoint
+    MCPServerConnection:
+      properties:
+        type:
+          type: string
+          title: Type
+        url:
+          anyOf:
+          - type: string
+            maxLength: 2083
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Url
+        configSchema:
+          additionalProperties: true
+          type: object
+          title: Configschema
+          default: {}
+      type: object
+      required:
+      - type
+      title: MCPServerConnection
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ApiKeyHidden:
+      properties:
+        id:
+          type: integer
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        name:
+          type: string
+          title: Name
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+      type: object
+      required:
+      - id
+      - user_id
+      - name
+      title: ApiKeyHidden
+      description: API Key Hidden
+    AgentRunBreakdownRow:
+      properties:
+        agent_id:
+          type: string
+          format: uuid
+          title: Agent Id
+        title:
+          type: string
+          title: Title
+        total:
+          type: integer
+          title: Total
+        completed:
+          type: integer
+          title: Completed
+        failed:
+          type: integer
+          title: Failed
+        active:
+          type: integer
+          title: Active
+        success_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Success Rate
+        latest_run_at:
+          type: string
+          format: date-time
+          title: Latest Run At
+        trend:
+          items:
+            $ref: '#/components/schemas/AgentRunTrendPoint'
+          type: array
+          title: Trend
+      type: object
+      required:
+      - agent_id
+      - title
+      - total
+      - completed
+      - failed
+      - active
+      - success_rate
+      - latest_run_at
+      - trend
+      title: AgentRunBreakdownRow
+    MonetizationEarningsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DailyEarnings'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: MonetizationEarningsResponse
+    ToolExecutionLogsResponse:
+      properties:
+        logs:
+          items:
+            $ref: '#/components/schemas/ToolExecutionLog'
+          type: array
+          title: Logs
+        next_cursor:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - logs
+      - next_cursor
+      title: ToolExecutionLogsResponse
+      description: Tool Execution Log Response
+    CliAuthInsertModel:
+      properties:
+        jwt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Jwt
+      type: object
+      title: CliAuthInsertModel
+    AgentFilePositionUpdate:
+      properties:
+        file_id:
+          type: string
+          format: uuid
+          title: File Id
+        position:
+          type: integer
+          minimum: 0.0
+          title: Position
+      type: object
+      required:
+      - file_id
+      - position
+      title: AgentFilePositionUpdate
+      description: Request model for batch position updates
+    AgentFileModel:
+      properties:
+        filename:
+          type: string
+          maxLength: 255
+          minLength: 1
+          title: Filename
+          description: Original filename
+        mime_type:
+          type: string
+          title: Mime Type
+          description: MIME type of the file
+        storage_url:
+          type: string
+          minLength: 1
+          format: uri
+          title: Storage Url
+          description: External URL where the file is hosted
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Whether the file is active
+          default: true
+        position:
+          type: integer
+          minimum: 0.0
+          title: Position
+          description: Order position for deterministic injection
+          default: 0
+        auth:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Auth
+          description: Authentication configuration for accessing the file
+        id:
+          type: string
+          format: uuid
+          title: Id
+        agent_id:
+          type: string
+          format: uuid
+          title: Agent Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+      type: object
+      required:
+      - filename
+      - mime_type
+      - storage_url
+      - id
+      - agent_id
+      - created_at
+      title: AgentFileModel
+      description: Full model with database fields (ORM model)
+    UpsellDescription:
+      properties:
+        description:
+          type: string
+          title: Description
+        use_cases:
+          items:
+            type: string
+          type: array
+          title: Use Cases
+      type: object
+      required:
+      - description
+      - use_cases
+      title: UpsellDescription
+    AgentExecutionCredits:
+      properties:
+        user_id:
+          type: string
+          title: User Id
+        total_executions:
+          type: integer
+          title: Total Executions
+        allowed_monthly_executions:
+          type: integer
+          title: Allowed Monthly Executions
+        reset_datetime:
+          type: string
+          format: date-time
+          title: Reset Datetime
+        last_reset_datetime:
+          type: string
+          format: date-time
+          title: Last Reset Datetime
+          default: '2026-05-15T16:42:26.132612Z'
+      type: object
+      required:
+      - user_id
+      - total_executions
+      - allowed_monthly_executions
+      - reset_datetime
+      title: AgentExecutionCredits
+    AgentRunLog:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        agent_id:
+          type: string
+          format: uuid
+          title: Agent Id
+        run_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Run Id
+        type:
+          type: string
+          enum:
+          - local
+          - agent_stream
+          - agent_run
+          - agent_studio
+          - agent_studio_v3
+          title: Type
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        start_time:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start Time
+        end_time:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End Time
+      type: object
+      required:
+      - user_id
+      - agent_id
+      - type
+      title: AgentRunLog
+    AgentSubscriptionResponse:
+      properties:
+        agent_id:
+          type: string
+          title: Agent Id
+        agent_title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Agent Title
+        agent_slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Agent Slug
+        subscription_status:
+          type: string
+          enum:
+          - incomplete
+          - incomplete_expired
+          - trialing
+          - active
+          - past_due
+          - canceled
+          - unpaid
+          - paused
+          title: Subscription Status
+        trial_end:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Trial End
+        cancel_at_period_end:
+          type: boolean
+          title: Cancel At Period End
+          default: false
+        subscription_period_end:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Subscription Period End
+      type: object
+      required:
+      - agent_id
+      - subscription_status
+      title: AgentSubscriptionResponse
+    ScheduleUpdateRequest:
+      properties:
+        active:
+          type: boolean
+          title: Active
+          default: true
+        cadence:
+          type: string
+          title: Cadence
+        toolhouse_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        chat_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Chat Id
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+      type: object
+      required:
+      - cadence
+      title: ScheduleUpdateRequest
+    BucketHours:
+      type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 6
+      - 8
+      - 12
+      - 24
+      title: BucketHours
+    AgentStudioChatCreate:
+      properties:
+        run_id:
+          type: string
+          format: uuid
+          title: Run Id
+        visibility:
+          $ref: '#/components/schemas/ChatVisibility'
+        title:
+          type: string
+          title: Title
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+        deployed:
+          type: boolean
+          title: Deployed
+          default: false
+      type: object
+      required:
+      - run_id
+      - visibility
+      - title
+      title: AgentStudioChatCreate
+    UserFeedbackRequest:
+      properties:
+        user_feedback:
+          type: string
+          enum:
+          - approved
+          - rejected
+          - pending
+          title: User Feedback
+      type: object
+      required:
+      - user_feedback
+      title: UserFeedbackRequest
+    RunVolumeResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/RunVolumeRow'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: RunVolumeResponse
+    AgentStudioChatUpdate:
+      properties:
+        run_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Run Id
+        visibility:
+          anyOf:
+          - $ref: '#/components/schemas/ChatVisibility'
+          - type: 'null'
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        archived:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Archived
+      type: object
+      title: AgentStudioChatUpdate
+    AgentRunMetricsSummary:
+      properties:
+        total_runs:
+          type: integer
+          title: Total Runs
+        completed_runs:
+          type: integer
+          title: Completed Runs
+        failed_runs:
+          type: integer
+          title: Failed Runs
+        active_runs:
+          type: integer
+          title: Active Runs
+        success_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Success Rate
+        failure_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Failure Rate
+      type: object
+      required:
+      - total_runs
+      - completed_runs
+      - failed_runs
+      - active_runs
+      - success_rate
+      - failure_rate
+      title: AgentRunMetricsSummary
+    AgentRunMetricsResponse:
+      properties:
+        total_runs:
+          type: integer
+          title: Total Runs
+        completed_runs:
+          type: integer
+          title: Completed Runs
+        failed_runs:
+          type: integer
+          title: Failed Runs
+        active_runs:
+          type: integer
+          title: Active Runs
+        success_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Success Rate
+        failure_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Failure Rate
+        days:
+          type: integer
+          title: Days
+        bucket_hours:
+          type: integer
+          title: Bucket Hours
+        chart_rows:
+          items:
+            $ref: '#/components/schemas/RunVolumeRow'
+          type: array
+          title: Chart Rows
+        agent_rows:
+          items:
+            $ref: '#/components/schemas/AgentRunBreakdownRow'
+          type: array
+          title: Agent Rows
+      type: object
+      required:
+      - total_runs
+      - completed_runs
+      - failed_runs
+      - active_runs
+      - success_rate
+      - failure_rate
+      - days
+      - bucket_hours
+      - chart_rows
+      - agent_rows
+      title: AgentRunMetricsResponse
+    ChatVisibility:
+      type: string
+      enum:
+      - public
+      - private
+      title: ChatVisibility
+    StripeSessionResponse:
+      properties:
+        sessions_urls:
+          items:
+            $ref: '#/components/schemas/StripeSession'
+          type: array
+          title: Sessions Urls
+        billing_portal_url:
+          type: string
+          title: Billing Portal Url
+      type: object
+      required:
+      - sessions_urls
+      - billing_portal_url
+      title: StripeSessionResponse
+      description: Stripe Session Response
+    AgentListItem:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        public:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Public
+        user_id:
+          type: string
+          title: User Id
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        last_ran_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Ran At
+        count_runs:
+          type: integer
+          title: Count Runs
+          default: 0
+      type: object
+      required:
+      - id
+      - user_id
+      title: AgentListItem
+    ScheduleRequest:
+      properties:
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        cadence:
+          type: string
+          title: Cadence
+        toolhouse_id:
+          type: string
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+      type: object
+      required:
+      - chat_id
+      - cadence
+      title: ScheduleRequest
+    TransferAgentRequest:
+      properties:
+        recipient_email:
+          type: string
+          title: Recipient Email
+          description: Email of the recipient user
+      type: object
+      required:
+      - recipient_email
+      title: TransferAgentRequest
+    ApiKeyCreate:
+      properties:
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+      - name
+      title: ApiKeyCreate
+      description: API Key Create
+    MCPServerTool:
+      properties:
+        id:
+          type: string
+          title: Id
+        publisher:
+          type: string
+          title: Publisher
+        tool_type:
+          type: string
+          title: Tool Type
+        logo:
+          type: string
+          title: Logo
+        title:
+          type: string
+          title: Title
+        category:
+          type: string
+          title: Category
+        short_description:
+          type: string
+          title: Short Description
+        long_description:
+          type: string
+          title: Long Description
+        price_per_execution:
+          type: number
+          title: Price Per Execution
+        star_rating:
+          type: number
+          title: Star Rating
+        executions:
+          type: integer
+          title: Executions
+        description_for_model:
+          type: string
+          title: Description For Model
+        arguments:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Arguments
+        hidden:
+          type: boolean
+          title: Hidden
+        version:
+          type: string
+          title: Version
+        featured:
+          type: boolean
+          title: Featured
+        requires_config:
+          type: boolean
+          title: Requires Config
+        background_image:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Background Image
+        timeout:
+          type: integer
+          title: Timeout
+        connections:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: Connections
+        installed:
+          type: boolean
+          title: Installed
+          readOnly: true
+      type: object
+      required:
+      - id
+      - publisher
+      - tool_type
+      - logo
+      - title
+      - category
+      - short_description
+      - long_description
+      - price_per_execution
+      - star_rating
+      - executions
+      - description_for_model
+      - arguments
+      - hidden
+      - version
+      - featured
+      - requires_config
+      - background_image
+      - timeout
+      - installed
+      title: MCPServerTool
+    DailyEarnings:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+        earnings_cents:
+          type: integer
+          title: Earnings Cents
+      type: object
+      required:
+      - date
+      - earnings_cents
+      title: DailyEarnings
+    CliAuthModel:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        user_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+        jwt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Jwt
+      type: object
+      required:
+      - id
+      title: CliAuthModel
+    StripeResponseSuccess:
+      properties:
+        success:
+          type: boolean
+          title: Success
+      type: object
+      required:
+      - success
+      title: StripeResponseSuccess
+      description: Stripe Response Success
+    StripeSession:
+      properties:
+        price_id:
+          type: string
+          title: Price Id
+        session_url:
+          type: string
+          title: Session Url
+      type: object
+      required:
+      - price_id
+      - session_url
+      title: StripeSession
+      description: Stripe Session
+    Service:
+      properties:
+        name:
+          type: string
+          title: Name
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+      type: object
+      required:
+      - name
+      - url
+      title: Service
+    DailyTotalSubscribers:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+        total_subscribers:
+          type: integer
+          title: Total Subscribers
+      type: object
+      required:
+      - date
+      - total_subscribers
+      title: DailyTotalSubscribers
+    StripeSessionRequest:
+      properties:
+        price_ids:
+          items:
+            type: string
+          type: array
+          title: Price Ids
+        success_payment_url:
+          type: string
+          title: Success Payment Url
+        cancel_payment_url:
+          type: string
+          title: Cancel Payment Url
+        billing_url:
+          type: string
+          title: Billing Url
+        mode:
+          type: string
+          enum:
+          - subscription
+          - payment
+          title: Mode
+          default: subscription
+      type: object
+      required:
+      - price_ids
+      - success_payment_url
+      - cancel_payment_url
+      - billing_url
+      title: StripeSessionRequest
+      description: Stripe Session
+    AgentListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AgentListItem'
+          type: array
+          title: Data
+        next_cursor:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Next Cursor
+        total_count:
+          type: integer
+          title: Total Count
+      type: object
+      required:
+      - data
+      - next_cursor
+      - total_count
+      title: AgentListResponse
+    RunVolumeRow:
+      properties:
+        bucket_start:
+          type: string
+          format: date-time
+          title: Bucket Start
+        bucket_end:
+          type: string
+          format: date-time
+          title: Bucket End
+        label:
+          type: string
+          title: Label
+        total:
+          type: integer
+          title: Total
+        completed:
+          type: integer
+          title: Completed
+        failed:
+          type: integer
+          title: Failed
+        active:
+          type: integer
+          title: Active
+      type: object
+      required:
+      - bucket_start
+      - bucket_end
+      - label
+      - total
+      - completed
+      - failed
+      - active
+      title: RunVolumeRow
+    VipCodeRedeemed:
+      properties:
+        redeemed:
+          type: boolean
+          title: Redeemed
+      type: object
+      required:
+      - redeemed
+      title: VipCodeRedeemed
+    AgentFileUpdateRequest:
+      properties:
+        filename:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 1
+          - type: 'null'
+          title: Filename
+        mime_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Mime Type
+        storage_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Storage Url
+        enabled:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Enabled
+        position:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Position
+        auth:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Auth
+      type: object
+      title: AgentFileUpdateRequest
+      description: Request model for updating an agent file (all fields optional)
+    AgentRunViewListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AgentRunView'
+          type: array
+          title: Data
+        next_cursor:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: AgentRunViewListResponse
     AgentRequest:
       properties:
         id:
@@ -4413,447 +4154,19 @@ components:
           - type: 'null'
       type: object
       title: AgentRequestPartial
-    AgentRun:
+    AgentSubscribeRequest:
       properties:
-        id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Id
-        chat_id:
+        success_url:
           type: string
-          format: uuid
-          title: Chat Id
-        user_id:
+          title: Success Url
+        cancel_url:
           type: string
-          title: User Id
-        schedule_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Schedule Id
-        status:
-          type: string
-          enum:
-          - queued
-          - in_progress
-          - completed
-          - failed
-          title: Status
-        results:
-          anyOf:
-          - items:
-              additionalProperties: true
-              type: object
-            type: array
-          - type: 'null'
-          title: Results
-          default: []
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-        toolhouse_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Toolhouse Id
-          default: default
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        callback_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Callback Url
-        error:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Error
+          title: Cancel Url
       type: object
       required:
-      - chat_id
-      - user_id
-      - status
-      title: AgentRun
-    AgentRunAPIResponse:
-      properties:
-        data:
-          $ref: '#/components/schemas/AgentRunResponse'
-      type: object
-      required:
-      - data
-      title: AgentRunAPIResponse
-    AgentRunBreakdownResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AgentRunBreakdownRow'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: AgentRunBreakdownResponse
-    AgentRunBreakdownRow:
-      properties:
-        agent_id:
-          type: string
-          format: uuid
-          title: Agent Id
-        title:
-          type: string
-          title: Title
-        total:
-          type: integer
-          title: Total
-        completed:
-          type: integer
-          title: Completed
-        failed:
-          type: integer
-          title: Failed
-        active:
-          type: integer
-          title: Active
-        success_rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Success Rate
-        latest_run_at:
-          type: string
-          format: date-time
-          title: Latest Run At
-        trend:
-          items:
-            $ref: '#/components/schemas/AgentRunTrendPoint'
-          type: array
-          title: Trend
-      type: object
-      required:
-      - agent_id
-      - title
-      - total
-      - completed
-      - failed
-      - active
-      - success_rate
-      - latest_run_at
-      - trend
-      title: AgentRunBreakdownRow
-    AgentRunListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AgentRun'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: AgentRunListResponse
-    AgentRunLog:
-      properties:
-        id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        agent_id:
-          type: string
-          format: uuid
-          title: Agent Id
-        run_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Run Id
-        type:
-          type: string
-          enum:
-          - local
-          - agent_stream
-          - agent_run
-          - agent_studio
-          - agent_studio_v3
-          title: Type
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-        start_time:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Start Time
-        end_time:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: End Time
-      type: object
-      required:
-      - user_id
-      - agent_id
-      - type
-      title: AgentRunLog
-    AgentRunMetricsResponse:
-      properties:
-        total_runs:
-          type: integer
-          title: Total Runs
-        completed_runs:
-          type: integer
-          title: Completed Runs
-        failed_runs:
-          type: integer
-          title: Failed Runs
-        active_runs:
-          type: integer
-          title: Active Runs
-        success_rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Success Rate
-        failure_rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Failure Rate
-        days:
-          type: integer
-          title: Days
-        bucket_hours:
-          type: integer
-          title: Bucket Hours
-        chart_rows:
-          items:
-            $ref: '#/components/schemas/RunVolumeRow'
-          type: array
-          title: Chart Rows
-        agent_rows:
-          items:
-            $ref: '#/components/schemas/AgentRunBreakdownRow'
-          type: array
-          title: Agent Rows
-      type: object
-      required:
-      - total_runs
-      - completed_runs
-      - failed_runs
-      - active_runs
-      - success_rate
-      - failure_rate
-      - days
-      - bucket_hours
-      - chart_rows
-      - agent_rows
-      title: AgentRunMetricsResponse
-    AgentRunMetricsSummary:
-      properties:
-        total_runs:
-          type: integer
-          title: Total Runs
-        completed_runs:
-          type: integer
-          title: Completed Runs
-        failed_runs:
-          type: integer
-          title: Failed Runs
-        active_runs:
-          type: integer
-          title: Active Runs
-        success_rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Success Rate
-        failure_rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Failure Rate
-      type: object
-      required:
-      - total_runs
-      - completed_runs
-      - failed_runs
-      - active_runs
-      - success_rate
-      - failure_rate
-      title: AgentRunMetricsSummary
-    AgentRunRequest:
-      properties:
-        chat_id:
-          type: string
-          format: uuid
-          title: Chat Id
-        schedule_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Schedule Id
-        toolhouse_id:
-          type: string
-          title: Toolhouse Id
-          default: default
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        callback_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Callback Url
-      type: object
-      required:
-      - chat_id
-      title: AgentRunRequest
-    AgentRunResponse:
-      properties:
-        id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Id
-        chat_id:
-          type: string
-          format: uuid
-          title: Chat Id
-        schedule_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Schedule Id
-        results:
-          anyOf:
-          - items:
-              additionalProperties: true
-              type: object
-            type: array
-          - type: 'null'
-          title: Results
-          default: []
-        status:
-          type: string
-          enum:
-          - queued
-          - in_progress
-          - completed
-          - failed
-          title: Status
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-        toolhouse_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Toolhouse Id
-          default: default
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        callback_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Callback Url
-        last_agent_message:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Last Agent Message
-      type: object
-      required:
-      - chat_id
-      - status
-      title: AgentRunResponse
-    AgentRunTrendPoint:
-      properties:
-        bucket_start:
-          type: string
-          format: date-time
-          title: Bucket Start
-        bucket_end:
-          type: string
-          format: date-time
-          title: Bucket End
-        label:
-          type: string
-          title: Label
-        total:
-          type: integer
-          title: Total
-      type: object
-      required:
-      - bucket_start
-      - bucket_end
-      - label
-      - total
-      title: AgentRunTrendPoint
-    AgentRunUpdateRequest:
-      properties:
-        message:
-          type: string
-          title: Message
-      type: object
-      required:
-      - message
-      title: AgentRunUpdateRequest
+      - success_url
+      - cancel_url
+      title: AgentSubscribeRequest
     AgentRunView:
       properties:
         id:
@@ -4943,24 +4256,91 @@ components:
       - title
       - chat_archived
       title: AgentRunView
-    AgentRunViewListResponse:
+    AgentSubscribeResponse:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AgentRunView'
-          type: array
-          title: Data
-        next_cursor:
+        checkout_url:
+          type: string
+          title: Checkout Url
+      type: object
+      required:
+      - checkout_url
+      title: AgentSubscribeResponse
+    McpServerLog:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        agent_id:
+          type: string
+          format: uuid
+          title: Agent Id
+        run_id:
+          type: string
+          format: uuid
+          title: Run Id
+        tool_name:
+          type: string
+          title: Tool Name
+        tool_call_id:
+          type: string
+          title: Tool Call Id
+        start_time:
+          type: string
+          format: date-time
+          title: Start Time
+        end_time:
           anyOf:
           - type: string
             format: date-time
           - type: 'null'
-          title: Next Cursor
+          title: End Time
+      type: object
+      required:
+      - id
+      - user_id
+      - agent_id
+      - run_id
+      - tool_name
+      - tool_call_id
+      - start_time
+      - end_time
+      title: McpServerLog
+    VipCodeRequest:
+      properties:
+        vip_code:
+          type: string
+          title: Vip Code
+      type: object
+      required:
+      - vip_code
+      title: VipCodeRequest
+    ScheduleListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Schedule'
+          type: array
+          title: Data
       type: object
       required:
       - data
-      - next_cursor
-      title: AgentRunViewListResponse
+      title: ScheduleListResponse
+    AgentFileBatchPositionRequest:
+      properties:
+        positions:
+          items:
+            $ref: '#/components/schemas/AgentFilePositionUpdate'
+          type: array
+          title: Positions
+      type: object
+      required:
+      - positions
+      title: AgentFileBatchPositionRequest
+      description: Request model for updating positions of multiple files
     AgentStudioChat:
       properties:
         run_id:
@@ -5011,1062 +4391,6 @@ components:
       - updated_at
       - sandbox_agent_id
       title: AgentStudioChat
-    AgentStudioChatCreate:
-      properties:
-        run_id:
-          type: string
-          format: uuid
-          title: Run Id
-        visibility:
-          $ref: '#/components/schemas/ChatVisibility'
-        title:
-          type: string
-          title: Title
-        archived:
-          type: boolean
-          title: Archived
-          default: false
-        deployed:
-          type: boolean
-          title: Deployed
-          default: false
-      type: object
-      required:
-      - run_id
-      - visibility
-      - title
-      title: AgentStudioChatCreate
-    AgentStudioChatUpdate:
-      properties:
-        run_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Run Id
-        visibility:
-          anyOf:
-          - $ref: '#/components/schemas/ChatVisibility'
-          - type: 'null'
-        title:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Title
-        archived:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Archived
-      type: object
-      title: AgentStudioChatUpdate
-    AgentSubscribeRequest:
-      properties:
-        success_url:
-          type: string
-          title: Success Url
-        cancel_url:
-          type: string
-          title: Cancel Url
-      type: object
-      required:
-      - success_url
-      - cancel_url
-      title: AgentSubscribeRequest
-    AgentSubscribeResponse:
-      properties:
-        checkout_url:
-          type: string
-          title: Checkout Url
-      type: object
-      required:
-      - checkout_url
-      title: AgentSubscribeResponse
-    AgentSubscriptionListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AgentSubscriptionResponse'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: AgentSubscriptionListResponse
-    AgentSubscriptionResponse:
-      properties:
-        agent_id:
-          type: string
-          title: Agent Id
-        agent_title:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Agent Title
-        agent_slug:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Agent Slug
-        subscription_status:
-          type: string
-          enum:
-          - incomplete
-          - incomplete_expired
-          - trialing
-          - active
-          - past_due
-          - canceled
-          - unpaid
-          - paused
-          title: Subscription Status
-        trial_end:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Trial End
-        cancel_at_period_end:
-          type: boolean
-          title: Cancel At Period End
-          default: false
-        subscription_period_end:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Subscription Period End
-      type: object
-      required:
-      - agent_id
-      - subscription_status
-      title: AgentSubscriptionResponse
-    AgentThemePreferenceResponse:
-      properties:
-        agent_id:
-          type: string
-          format: uuid
-          title: Agent Id
-        theme_color:
-          type: string
-          pattern: ^#[0-9A-F]{6}$
-          title: Theme Color
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-      type: object
-      required:
-      - agent_id
-      - theme_color
-      - updated_at
-      title: AgentThemePreferenceResponse
-    AgentThemePreferenceUpsertRequest:
-      properties:
-        theme_color:
-          type: string
-          title: Theme Color
-      type: object
-      required:
-      - theme_color
-      title: AgentThemePreferenceUpsertRequest
-    ApiKey:
-      properties:
-        id:
-          type: integer
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        name:
-          type: string
-          title: Name
-        archived:
-          type: boolean
-          title: Archived
-          default: false
-        api_key:
-          type: string
-          title: Api Key
-      type: object
-      required:
-      - id
-      - user_id
-      - name
-      - api_key
-      title: ApiKey
-      description: API Key
-    ApiKeyCreate:
-      properties:
-        name:
-          type: string
-          title: Name
-      type: object
-      required:
-      - name
-      title: ApiKeyCreate
-      description: API Key Create
-    ApiKeyHidden:
-      properties:
-        id:
-          type: integer
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        name:
-          type: string
-          title: Name
-        archived:
-          type: boolean
-          title: Archived
-          default: false
-      type: object
-      required:
-      - id
-      - user_id
-      - name
-      title: ApiKeyHidden
-      description: API Key Hidden
-    BaseApiKey:
-      properties:
-        id:
-          type: integer
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        name:
-          type: string
-          title: Name
-        archived:
-          type: boolean
-          title: Archived
-          default: false
-      type: object
-      required:
-      - id
-      - user_id
-      - name
-      title: BaseApiKey
-    BaseKV:
-      properties:
-        key:
-          type: string
-          title: Key
-        value:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Value
-      type: object
-      required:
-      - key
-      title: BaseKV
-    BillingInformationSubscription:
-      properties:
-        user_id:
-          type: string
-          title: User Id
-        stripe_customer_id:
-          type: string
-          title: Stripe Customer Id
-        plan_type:
-          type: string
-          enum:
-          - trial
-          - pay_as_you_go
-          - subscription
-          title: Plan Type
-        tier:
-          type: string
-          enum:
-          - sandbox
-          - pro
-          - business
-          - enterprise
-          title: Tier
-          default: sandbox
-        subscription_period_start:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Subscription Period Start
-        subscription_period_end:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Subscription Period End
-        subscription_status:
-          anyOf:
-          - type: string
-            enum:
-            - incomplete
-            - incomplete_expired
-            - trialing
-            - active
-            - past_due
-            - canceled
-            - unpaid
-            - paused
-          - type: 'null'
-          title: Subscription Status
-        interval:
-          anyOf:
-          - type: string
-            enum:
-            - day
-            - week
-            - month
-            - year
-          - type: 'null'
-          title: Interval
-        cancel_at_period_end:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Cancel At Period End
-        price_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Price Id
-      type: object
-      required:
-      - user_id
-      - stripe_customer_id
-      - plan_type
-      title: BillingInformationSubscription
-      description: Billing Information Response
-    BucketHours:
-      type: integer
-      enum:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 6
-      - 8
-      - 12
-      - 24
-      title: BucketHours
-    ChatVisibility:
-      type: string
-      enum:
-      - public
-      - private
-      title: ChatVisibility
-    CliAuthInsertModel:
-      properties:
-        jwt:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Jwt
-      type: object
-      title: CliAuthInsertModel
-    CliAuthModel:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-        user_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: User Id
-        jwt:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Jwt
-      type: object
-      required:
-      - id
-      title: CliAuthModel
-    CliTelemetryEvents:
-      properties:
-        session_id:
-          type: string
-          title: Session Id
-        events:
-          items:
-            additionalProperties: true
-            type: object
-          type: array
-          title: Events
-      type: object
-      required:
-      - session_id
-      - events
-      title: CliTelemetryEvents
-    CliVersionResponse:
-      properties:
-        installed_version:
-          type: string
-          title: Installed Version
-        latest_version:
-          type: string
-          title: Latest Version
-        is_update_available:
-          type: boolean
-          title: Is Update Available
-      type: object
-      required:
-      - installed_version
-      - latest_version
-      - is_update_available
-      title: CliVersionResponse
-    DailyEarnings:
-      properties:
-        date:
-          type: string
-          format: date
-          title: Date
-        earnings_cents:
-          type: integer
-          title: Earnings Cents
-      type: object
-      required:
-      - date
-      - earnings_cents
-      title: DailyEarnings
-    DailyTotalSubscribers:
-      properties:
-        date:
-          type: string
-          format: date
-          title: Date
-        total_subscribers:
-          type: integer
-          title: Total Subscribers
-      type: object
-      required:
-      - date
-      - total_subscribers
-      title: DailyTotalSubscribers
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    MCPServer:
-      properties:
-        qualified_name:
-          type: string
-          title: Qualified Name
-          description: Fully qualified server name
-        display_name:
-          type: string
-          title: Display Name
-          description: Display name for the server
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Server description
-        use_count:
-          type: integer
-          minimum: 0.0
-          title: Use Count
-          description: Number of times the server has been used
-        is_remote:
-          type: boolean
-          title: Is Remote
-          description: True if server is designed to run remotely
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-          description: Creation timestamp
-        homepage:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Homepage
-          description: Link to Smithery server page
-      type: object
-      required:
-      - qualified_name
-      - display_name
-      - use_count
-      - is_remote
-      - created_at
-      title: MCPServer
-      description: MCP Server model for database storage
-    MCPServerConnection:
-      properties:
-        type:
-          type: string
-          title: Type
-        url:
-          anyOf:
-          - type: string
-            maxLength: 2083
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Url
-        configSchema:
-          additionalProperties: true
-          type: object
-          title: Configschema
-          default: {}
-      type: object
-      required:
-      - type
-      title: MCPServerConnection
-    MCPServerTool:
-      properties:
-        id:
-          type: string
-          title: Id
-        publisher:
-          type: string
-          title: Publisher
-        tool_type:
-          type: string
-          title: Tool Type
-        logo:
-          type: string
-          title: Logo
-        title:
-          type: string
-          title: Title
-        category:
-          type: string
-          title: Category
-        short_description:
-          type: string
-          title: Short Description
-        long_description:
-          type: string
-          title: Long Description
-        price_per_execution:
-          type: number
-          title: Price Per Execution
-        star_rating:
-          type: number
-          title: Star Rating
-        executions:
-          type: integer
-          title: Executions
-        description_for_model:
-          type: string
-          title: Description For Model
-        arguments:
-          items:
-            additionalProperties: true
-            type: object
-          type: array
-          title: Arguments
-        hidden:
-          type: boolean
-          title: Hidden
-        version:
-          type: string
-          title: Version
-        featured:
-          type: boolean
-          title: Featured
-        requires_config:
-          type: boolean
-          title: Requires Config
-        background_image:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Background Image
-        timeout:
-          type: integer
-          title: Timeout
-        connections:
-          anyOf:
-          - items:
-              additionalProperties: true
-              type: object
-            type: array
-          - type: 'null'
-          title: Connections
-        installed:
-          type: boolean
-          title: Installed
-          readOnly: true
-      type: object
-      required:
-      - id
-      - publisher
-      - tool_type
-      - logo
-      - title
-      - category
-      - short_description
-      - long_description
-      - price_per_execution
-      - star_rating
-      - executions
-      - description_for_model
-      - arguments
-      - hidden
-      - version
-      - featured
-      - requires_config
-      - background_image
-      - timeout
-      - installed
-      title: MCPServerTool
-    McpServerLog:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        agent_id:
-          type: string
-          format: uuid
-          title: Agent Id
-        run_id:
-          type: string
-          format: uuid
-          title: Run Id
-        tool_name:
-          type: string
-          title: Tool Name
-        tool_call_id:
-          type: string
-          title: Tool Call Id
-        start_time:
-          type: string
-          format: date-time
-          title: Start Time
-        end_time:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: End Time
-      type: object
-      required:
-      - id
-      - user_id
-      - agent_id
-      - run_id
-      - tool_name
-      - tool_call_id
-      - start_time
-      - end_time
-      title: McpServerLog
-    MonetizationEarningsResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/DailyEarnings'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: MonetizationEarningsResponse
-    MonetizationSubscribersResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/DailyTotalSubscribers'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: MonetizationSubscribersResponse
-    MonetizationSummary:
-      properties:
-        total_subscribers:
-          type: integer
-          title: Total Subscribers
-          description: Current active/trialing subscriber count (not period-filtered)
-        total_earnings_cents:
-          type: integer
-          title: Total Earnings Cents
-          description: Total earnings in cents within the requested period
-      type: object
-      required:
-      - total_subscribers
-      - total_earnings_cents
-      title: MonetizationSummary
-    RunVolumeResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/RunVolumeRow'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: RunVolumeResponse
-    RunVolumeRow:
-      properties:
-        bucket_start:
-          type: string
-          format: date-time
-          title: Bucket Start
-        bucket_end:
-          type: string
-          format: date-time
-          title: Bucket End
-        label:
-          type: string
-          title: Label
-        total:
-          type: integer
-          title: Total
-        completed:
-          type: integer
-          title: Completed
-        failed:
-          type: integer
-          title: Failed
-        active:
-          type: integer
-          title: Active
-      type: object
-      required:
-      - bucket_start
-      - bucket_end
-      - label
-      - total
-      - completed
-      - failed
-      - active
-      title: RunVolumeRow
-    Schedule:
-      properties:
-        id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        chat_id:
-          type: string
-          format: uuid
-          title: Chat Id
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-        last_ran_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Last Ran At
-        active:
-          type: boolean
-          title: Active
-          default: true
-        archived:
-          type: boolean
-          title: Archived
-          default: false
-        cadence:
-          type: string
-          title: Cadence
-        toolhouse_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Toolhouse Id
-          default: default
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        title:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Title
-        chat_archived:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Chat Archived
-        callback_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Callback Url
-      type: object
-      required:
-      - user_id
-      - chat_id
-      - cadence
-      title: Schedule
-    ScheduleBackofficeRequest:
-      properties:
-        id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Id
-      type: object
-      required:
-      - id
-      title: ScheduleBackofficeRequest
-    ScheduleListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Schedule'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: ScheduleListResponse
-    ScheduleRequest:
-      properties:
-        chat_id:
-          type: string
-          format: uuid
-          title: Chat Id
-        cadence:
-          type: string
-          title: Cadence
-        toolhouse_id:
-          type: string
-          title: Toolhouse Id
-          default: default
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        callback_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Callback Url
-      type: object
-      required:
-      - chat_id
-      - cadence
-      title: ScheduleRequest
-    ScheduleUpdateRequest:
-      properties:
-        active:
-          type: boolean
-          title: Active
-          default: true
-        cadence:
-          type: string
-          title: Cadence
-        toolhouse_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Toolhouse Id
-          default: default
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        chat_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Chat Id
-        callback_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Callback Url
-      type: object
-      required:
-      - cadence
-      title: ScheduleUpdateRequest
-    ServerWithConnections:
-      properties:
-        connections:
-          items:
-            $ref: '#/components/schemas/MCPServerConnection'
-          type: array
-          title: Connections
-        qualifiedName:
-          type: string
-          title: Qualifiedname
-          description: Fully qualified server name
-        displayName:
-          type: string
-          title: Displayname
-          description: Display name for the server
-        description:
-          type: string
-          title: Description
-          description: Server description
-        iconUrl:
-          anyOf:
-          - type: string
-            maxLength: 2083
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Iconurl
-          description: URL to the server icon
-      type: object
-      required:
-      - connections
-      - qualifiedName
-      - displayName
-      - description
-      title: ServerWithConnections
-    Service:
-      properties:
-        name:
-          type: string
-          title: Name
-        url:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Url
-      type: object
-      required:
-      - name
-      - url
-      title: Service
-    SlugRequest:
-      properties:
-        agent:
-          type: string
-          title: Agent
-      type: object
-      required:
-      - agent
-      title: SlugRequest
-    StripeResponseSuccess:
-      properties:
-        success:
-          type: boolean
-          title: Success
-      type: object
-      required:
-      - success
-      title: StripeResponseSuccess
-      description: Stripe Response Success
-    StripeSession:
-      properties:
-        price_id:
-          type: string
-          title: Price Id
-        session_url:
-          type: string
-          title: Session Url
-      type: object
-      required:
-      - price_id
-      - session_url
-      title: StripeSession
-      description: Stripe Session
-    StripeSessionRequest:
-      properties:
-        price_ids:
-          items:
-            type: string
-          type: array
-          title: Price Ids
-        success_payment_url:
-          type: string
-          title: Success Payment Url
-        cancel_payment_url:
-          type: string
-          title: Cancel Payment Url
-        billing_url:
-          type: string
-          title: Billing Url
-        mode:
-          type: string
-          enum:
-          - subscription
-          - payment
-          title: Mode
-          default: subscription
-      type: object
-      required:
-      - price_ids
-      - success_payment_url
-      - cancel_payment_url
-      - billing_url
-      title: StripeSessionRequest
-      description: Stripe Session
-    StripeSessionResponse:
-      properties:
-        sessions_urls:
-          items:
-            $ref: '#/components/schemas/StripeSession'
-          type: array
-          title: Sessions Urls
-        billing_portal_url:
-          type: string
-          title: Billing Portal Url
-      type: object
-      required:
-      - sessions_urls
-      - billing_portal_url
-      title: StripeSessionResponse
-      description: Stripe Session Response
     ToolExecutionLog:
       properties:
         user_id:
@@ -6116,144 +4440,131 @@ components:
       - id
       title: ToolExecutionLog
       description: Tool Execution Log
-    ToolExecutionLogsResponse:
+    VipCodeRedemptionCount:
       properties:
-        logs:
-          items:
-            $ref: '#/components/schemas/ToolExecutionLog'
-          type: array
-          title: Logs
-        next_cursor:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - logs
-      - next_cursor
-      title: ToolExecutionLogsResponse
-      description: Tool Execution Log Response
-    TransferAgentRequest:
-      properties:
-        recipient_email:
-          type: string
-          title: Recipient Email
-          description: Email of the recipient user
-      type: object
-      required:
-      - recipient_email
-      title: TransferAgentRequest
-    UpdateMonthlyCreditAllowance:
-      properties:
-        amount:
+        redemption_count:
           type: integer
-          title: Amount
+          title: Redemption Count
+        vip_code:
+          type: string
+          title: Vip Code
       type: object
       required:
-      - amount
-      title: UpdateMonthlyCreditAllowance
-      description: Update Monthly Credit Allowance
-    UpsellDescription:
+      - redemption_count
+      - vip_code
+      title: VipCodeRedemptionCount
+    AgentFileListResponse:
       properties:
-        description:
-          type: string
-          title: Description
-        use_cases:
+        data:
           items:
-            type: string
+            $ref: '#/components/schemas/AgentFileModel'
           type: array
-          title: Use Cases
+          title: Data
       type: object
       required:
-      - description
-      - use_cases
-      title: UpsellDescription
-    User:
+      - data
+      title: AgentFileListResponse
+      description: API response wrapper for multiple files
+    AgentRunBreakdownResponse:
       properties:
-        id:
-          type: string
-          title: Id
-        auth_id:
-          type: string
-          title: Auth Id
-        email:
-          type: string
-          title: Email
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
+        data:
+          items:
+            $ref: '#/components/schemas/AgentRunBreakdownRow'
+          type: array
+          title: Data
       type: object
       required:
-      - id
-      - auth_id
-      - email
-      title: User
-      description: User
-    UserAuthenticated:
+      - data
+      title: AgentRunBreakdownResponse
+    MonetizationSubscribersResponse:
       properties:
-        user_id:
-          type: string
-          title: User Id
-        api_key:
-          type: string
-          title: Api Key
-        authorization_header:
-          type: string
-          title: Authorization Header
-        tier:
-          type: string
-          title: Tier
+        data:
+          items:
+            $ref: '#/components/schemas/DailyTotalSubscribers'
+          type: array
+          title: Data
       type: object
       required:
-      - user_id
-      - api_key
-      - authorization_header
-      - tier
-      title: UserAuthenticated
-      description: User Authenticated
-    UserCreate:
+      - data
+      title: MonetizationSubscribersResponse
+    VibeCoderPromptResponse:
       properties:
-        first_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: First Name
-        last_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Last Name
-        email:
+        prompt:
           type: string
-          format: email
-          title: Email
-        verified:
+          title: Prompt
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+      type: object
+      required:
+      - prompt
+      - url
+      title: VibeCoderPromptResponse
+      description: Vibe Coder Response
+    AgentThemePreferenceUpsertRequest:
+      properties:
+        theme_color:
+          type: string
+          title: Theme Color
+      type: object
+      required:
+      - theme_color
+      title: AgentThemePreferenceUpsertRequest
+    AgentFileResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/AgentFileModel'
+      type: object
+      required:
+      - data
+      title: AgentFileResponse
+      description: API response wrapper for a single file
+    AgentFileCreateRequest:
+      properties:
+        filename:
+          type: string
+          maxLength: 255
+          minLength: 1
+          title: Filename
+          description: Original filename
+        mime_type:
+          type: string
+          title: Mime Type
+          description: MIME type of the file
+        storage_url:
+          type: string
+          minLength: 1
+          format: uri
+          title: Storage Url
+          description: External URL where the file is hosted
+        enabled:
           type: boolean
-          title: Verified
-          default: false
+          title: Enabled
+          description: Whether the file is active
+          default: true
+        position:
+          type: integer
+          minimum: 0.0
+          title: Position
+          description: Order position for deterministic injection
+          default: 0
+        auth:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Auth
+          description: Authentication configuration for accessing the file
       type: object
       required:
-      - email
-      title: UserCreate
-      description: User model for the backend API.
-    UserFeedbackRequest:
-      properties:
-        user_feedback:
-          type: string
-          enum:
-          - approved
-          - rejected
-          - pending
-          title: User Feedback
-      type: object
-      required:
-      - user_feedback
-      title: UserFeedbackRequest
+      - filename
+      - mime_type
+      - storage_url
+      title: AgentFileCreateRequest
+      description: Request model for creating a new agent file
     UserWithTier:
       properties:
         id:
@@ -6287,86 +4598,6 @@ components:
       - email
       title: UserWithTier
       description: User with tier
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    VibeCoderListResponse:
-      properties:
-        services:
-          items:
-            $ref: '#/components/schemas/Service'
-          type: array
-          title: Services
-      type: object
-      required:
-      - services
-      title: VibeCoderListResponse
-    VibeCoderPromptResponse:
-      properties:
-        prompt:
-          type: string
-          title: Prompt
-        url:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Url
-      type: object
-      required:
-      - prompt
-      - url
-      title: VibeCoderPromptResponse
-      description: Vibe Coder Response
-    VipCodeRedeemed:
-      properties:
-        redeemed:
-          type: boolean
-          title: Redeemed
-      type: object
-      required:
-      - redeemed
-      title: VipCodeRedeemed
-    VipCodeRedemptionCount:
-      properties:
-        redemption_count:
-          type: integer
-          title: Redemption Count
-        vip_code:
-          type: string
-          title: Vip Code
-      type: object
-      required:
-      - redemption_count
-      - vip_code
-      title: VipCodeRedemptionCount
-    VipCodeRequest:
-      properties:
-        vip_code:
-          type: string
-          title: Vip Code
-      type: object
-      required:
-      - vip_code
-      title: VipCodeRequest
   securitySchemes:
     HTTPBearer:
       type: http

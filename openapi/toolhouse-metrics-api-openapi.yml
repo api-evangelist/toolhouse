@@ -1,0 +1,425 @@
+openapi: 3.1.0
+info:
+  title: Toolhouse Agent Runs Metrics API
+  description: All the API! \o/
+  version: 0.1.0
+tags:
+- name: Metrics
+paths:
+  /me/metrics/agent-runs:
+    get:
+      tags:
+      - Metrics
+      summary: Get Agent Run Metrics
+      operationId: get_agent_run_metrics_me_metrics_agent_runs_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: days
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 90
+          minimum: 1
+          default: 7
+          title: Days
+      - name: bucket_hours
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/BucketHours'
+          default: 12
+      responses:
+        '200':
+          description: Successfully retrieved agent run metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRunMetricsResponse'
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /me/metrics/agent-runs/summary:
+    get:
+      tags:
+      - Metrics
+      summary: Get Agent Run Metrics Summary
+      operationId: get_agent_run_metrics_summary_me_metrics_agent_runs_summary_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: days
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 90
+          minimum: 1
+          default: 7
+          title: Days
+      - name: bucket_hours
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/BucketHours'
+          default: 12
+      responses:
+        '200':
+          description: Successfully retrieved agent run metrics summary
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRunMetricsSummary'
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /me/metrics/agent-runs/volume:
+    get:
+      tags:
+      - Metrics
+      summary: Get Agent Run Metrics Volume
+      operationId: get_agent_run_metrics_volume_me_metrics_agent_runs_volume_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: days
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 90
+          minimum: 1
+          default: 7
+          title: Days
+      - name: bucket_hours
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/BucketHours'
+          default: 12
+      responses:
+        '200':
+          description: Successfully retrieved agent run volume metrics
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RunVolumeResponse'
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+  /me/metrics/agent-runs/agents:
+    get:
+      tags:
+      - Metrics
+      summary: Get Agent Run Metrics Agents
+      operationId: get_agent_run_metrics_agents_me_metrics_agent_runs_agents_get
+      security:
+      - HTTPBearer: []
+      parameters:
+      - name: days
+        in: query
+        required: false
+        schema:
+          type: integer
+          maximum: 90
+          minimum: 1
+          default: 7
+          title: Days
+      - name: bucket_hours
+        in: query
+        required: false
+        schema:
+          $ref: '#/components/schemas/BucketHours'
+          default: 12
+      responses:
+        '200':
+          description: Successfully retrieved agent run metrics by agent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AgentRunBreakdownResponse'
+        '500':
+          description: Internal server error
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HTTPValidationError'
+components:
+  schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    BucketHours:
+      type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 6
+      - 8
+      - 12
+      - 24
+      title: BucketHours
+    RunVolumeRow:
+      properties:
+        bucket_start:
+          type: string
+          format: date-time
+          title: Bucket Start
+        bucket_end:
+          type: string
+          format: date-time
+          title: Bucket End
+        label:
+          type: string
+          title: Label
+        total:
+          type: integer
+          title: Total
+        completed:
+          type: integer
+          title: Completed
+        failed:
+          type: integer
+          title: Failed
+        active:
+          type: integer
+          title: Active
+      type: object
+      required:
+      - bucket_start
+      - bucket_end
+      - label
+      - total
+      - completed
+      - failed
+      - active
+      title: RunVolumeRow
+    AgentRunBreakdownResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AgentRunBreakdownRow'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AgentRunBreakdownResponse
+    AgentRunTrendPoint:
+      properties:
+        bucket_start:
+          type: string
+          format: date-time
+          title: Bucket Start
+        bucket_end:
+          type: string
+          format: date-time
+          title: Bucket End
+        label:
+          type: string
+          title: Label
+        total:
+          type: integer
+          title: Total
+      type: object
+      required:
+      - bucket_start
+      - bucket_end
+      - label
+      - total
+      title: AgentRunTrendPoint
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    RunVolumeResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/RunVolumeRow'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: RunVolumeResponse
+    AgentRunBreakdownRow:
+      properties:
+        agent_id:
+          type: string
+          format: uuid
+          title: Agent Id
+        title:
+          type: string
+          title: Title
+        total:
+          type: integer
+          title: Total
+        completed:
+          type: integer
+          title: Completed
+        failed:
+          type: integer
+          title: Failed
+        active:
+          type: integer
+          title: Active
+        success_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Success Rate
+        latest_run_at:
+          type: string
+          format: date-time
+          title: Latest Run At
+        trend:
+          items:
+            $ref: '#/components/schemas/AgentRunTrendPoint'
+          type: array
+          title: Trend
+      type: object
+      required:
+      - agent_id
+      - title
+      - total
+      - completed
+      - failed
+      - active
+      - success_rate
+      - latest_run_at
+      - trend
+      title: AgentRunBreakdownRow
+    AgentRunMetricsSummary:
+      properties:
+        total_runs:
+          type: integer
+          title: Total Runs
+        completed_runs:
+          type: integer
+          title: Completed Runs
+        failed_runs:
+          type: integer
+          title: Failed Runs
+        active_runs:
+          type: integer
+          title: Active Runs
+        success_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Success Rate
+        failure_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Failure Rate
+      type: object
+      required:
+      - total_runs
+      - completed_runs
+      - failed_runs
+      - active_runs
+      - success_rate
+      - failure_rate
+      title: AgentRunMetricsSummary
+    AgentRunMetricsResponse:
+      properties:
+        total_runs:
+          type: integer
+          title: Total Runs
+        completed_runs:
+          type: integer
+          title: Completed Runs
+        failed_runs:
+          type: integer
+          title: Failed Runs
+        active_runs:
+          type: integer
+          title: Active Runs
+        success_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Success Rate
+        failure_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Failure Rate
+        days:
+          type: integer
+          title: Days
+        bucket_hours:
+          type: integer
+          title: Bucket Hours
+        chart_rows:
+          items:
+            $ref: '#/components/schemas/RunVolumeRow'
+          type: array
+          title: Chart Rows
+        agent_rows:
+          items:
+            $ref: '#/components/schemas/AgentRunBreakdownRow'
+          type: array
+          title: Agent Rows
+      type: object
+      required:
+      - total_runs
+      - completed_runs
+      - failed_runs
+      - active_runs
+      - success_rate
+      - failure_rate
+      - days
+      - bucket_hours
+      - chart_rows
+      - agent_rows
+      title: AgentRunMetricsResponse
+  securitySchemes:
+    HTTPBearer:
+      type: http
+      scheme: bearer
