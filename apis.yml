@@ -1,54 +1,6 @@
 aid: toolhouse
 url: https://raw.githubusercontent.com/api-evangelist/toolhouse/refs/heads/main/apis.yml
 apis:
-- aid: toolhouse:platform-api
-  name: Toolhouse Platform API
-  tags:
-  - Agent Runs
-  - AI Agents
-  - AI Workers
-  - Agent Studio
-  - API Keys
-  - Billing
-  - Credits
-  - Integrations
-  - Management
-  - Metrics
-  - Monetization
-  - Schedules
-  - SDK
-  humanURL: https://docs.toolhouse.ai/toolhouse
-  properties:
-  - url: https://docs.toolhouse.ai/toolhouse
-    type: Documentation
-  - url: openapi/toolhouse-openapi-original.yml
-    type: OpenAPI
-  - url: rules/toolhouse-rules.yml
-    type: SpectralRules
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-api-keys.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-agent-runs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-backoffice.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-logs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-metrics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-sdk-api.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-user-api.yaml
-  description: The Toolhouse Platform API provides management and orchestration capabilities for AI workers
-    (also referred to as AI agents) and their connected tools. It exposes endpoints for user profile and
-    billing administration, API key lifecycle, worker/agent definition and deployment, agent-run management
-    with paginated listing and per-run logs (including MCP server logs), Agent Studio chat sessions, agent
-    file management, agent subscriptions and monetization, agent transfer, scheduled execution via cron
-    expressions (10-minute minimum interval), MCP server and MCP registry configuration, integrations and
-    auth-connection management, OAuth callback handling, Stripe webhook and session handling, and an
-    agent-runs metrics surface for usage, volume, and per-agent summary reporting. The SDK API exposes the
-    same agent and schedule primitives under /v1/ for direct programmatic use by Toolhouse SDK clients.
-    Authentication uses HTTPBearer JWT tokens and per-user API keys.
 - aid: toolhouse:workers-api
   name: Toolhouse Workers API
   tags:
@@ -70,14 +22,211 @@ apis:
     type: Documentation
   - url: https://docs.toolhouse.ai/toolhouse/developers/attachments
     type: Documentation
-  description: The Toolhouse Workers API (historically the "Agents API") enables HTTP execution of any
-    deployed Toolhouse worker. Workers defined via the Agent Editor or as code are reachable at
-    https://agents.toolhouse.ai/{agent_id} with POST to start a new task, PUT /{agent_id}/{run_id} to
-    continue an existing conversation, and GET /{agent_id}/{run_id} to retrieve full history. NDJSON
-    variants under /ndjson/ stream the worker's output plus out-of-band tool-call and debug signals.
-    Conversation continuity is keyed by the X-Toolhouse-Run-ID response header. Attachments are supported
-    via URL (30-second download timeout) or base64-encoded direct upload (10 MB max per attachment).
-    Public workers require no authentication; private workers use HTTPBearer with a Toolhouse API key.
+  description: >-
+    The Toolhouse Workers API (historically the "Agents API") enables HTTP execution of any deployed Toolhouse
+    worker. Workers defined via the Agent Editor or as code are reachable at https://agents.toolhouse.ai/{agent_id}
+    with POST to start a new task, PUT /{agent_id}/{run_id} to continue an existing conversation, and
+    GET /{agent_id}/{run_id} to retrieve full history. NDJSON variants under /ndjson/ stream the worker's
+    output plus out-of-band tool-call and debug signals. Conversation continuity is keyed by the X-Toolhouse-Run-ID
+    response header. Attachments are supported via URL (30-second download timeout) or base64-encoded
+    direct upload (10 MB max per attachment). Public workers require no authentication; private workers
+    use HTTPBearer with a Toolhouse API key.
+- aid: toolhouse:toolhouse-agent-runs-api
+  name: Toolhouse Agent Runs API
+  description: The Agent Runs API from Toolhouse — 4 operation(s) for agent runs.
+  humanURL: https://docs.toolhouse.ai/toolhouse
+  baseURL: https://agents.toolhouse.ai
+  tags:
+  - Agent Runs
+  properties:
+  - type: OpenAPI
+    url: openapi/toolhouse-agent-runs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.toolhouse.ai/toolhouse
+  - type: SpectralRules
+    url: rules/toolhouse-rules.yml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-api-keys.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-agent-runs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-backoffice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-logs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-metrics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-sdk-api.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-user-api.yaml
+- aid: toolhouse:toolhouse-api-keys-api
+  name: Toolhouse API Keys API
+  description: The API Keys API from Toolhouse — 3 operation(s) for api keys.
+  humanURL: https://docs.toolhouse.ai/toolhouse
+  baseURL: https://agents.toolhouse.ai
+  tags:
+  - API Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/toolhouse-api-keys-api-openapi.yml
+  - type: Documentation
+    url: https://docs.toolhouse.ai/toolhouse
+  - type: SpectralRules
+    url: rules/toolhouse-rules.yml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-api-keys.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-agent-runs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-backoffice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-logs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-metrics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-sdk-api.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-user-api.yaml
+- aid: toolhouse:toolhouse-backoffice-api
+  name: Toolhouse Backoffice API
+  description: The Backoffice API from Toolhouse — 15 operation(s) for backoffice.
+  humanURL: https://docs.toolhouse.ai/toolhouse
+  baseURL: https://agents.toolhouse.ai
+  tags:
+  - Backoffice
+  properties:
+  - type: OpenAPI
+    url: openapi/toolhouse-backoffice-api-openapi.yml
+  - type: Documentation
+    url: https://docs.toolhouse.ai/toolhouse
+  - type: SpectralRules
+    url: rules/toolhouse-rules.yml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-api-keys.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-agent-runs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-backoffice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-logs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-metrics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-sdk-api.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-user-api.yaml
+- aid: toolhouse:toolhouse-logs-api
+  name: Toolhouse Logs API
+  description: The Logs API from Toolhouse — 2 operation(s) for logs.
+  humanURL: https://docs.toolhouse.ai/toolhouse
+  baseURL: https://agents.toolhouse.ai
+  tags:
+  - Logs
+  properties:
+  - type: OpenAPI
+    url: openapi/toolhouse-logs-api-openapi.yml
+  - type: Documentation
+    url: https://docs.toolhouse.ai/toolhouse
+  - type: SpectralRules
+    url: rules/toolhouse-rules.yml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-api-keys.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-agent-runs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-backoffice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-logs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-metrics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-sdk-api.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-user-api.yaml
+- aid: toolhouse:toolhouse-metrics-api
+  name: Toolhouse Metrics API
+  description: The Metrics API from Toolhouse — 4 operation(s) for metrics.
+  humanURL: https://docs.toolhouse.ai/toolhouse
+  baseURL: https://agents.toolhouse.ai
+  tags:
+  - Metrics
+  properties:
+  - type: OpenAPI
+    url: openapi/toolhouse-metrics-api-openapi.yml
+  - type: Documentation
+    url: https://docs.toolhouse.ai/toolhouse
+  - type: SpectralRules
+    url: rules/toolhouse-rules.yml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-api-keys.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-agent-runs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-backoffice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-logs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-metrics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-sdk-api.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-user-api.yaml
+- aid: toolhouse:toolhouse-sdk-api-api
+  name: Toolhouse SDK API API
+  description: The SDK API API from Toolhouse — 20 operation(s) for sdk api.
+  humanURL: https://docs.toolhouse.ai/toolhouse
+  baseURL: https://agents.toolhouse.ai
+  tags:
+  - SDK API
+  properties:
+  - type: OpenAPI
+    url: openapi/toolhouse-sdk-api-api-openapi.yml
+  - type: Documentation
+    url: https://docs.toolhouse.ai/toolhouse
+  - type: SpectralRules
+    url: rules/toolhouse-rules.yml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-api-keys.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-agent-runs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-backoffice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-logs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-metrics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-sdk-api.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-user-api.yaml
+- aid: toolhouse:toolhouse-user-api-api
+  name: Toolhouse User API API
+  description: The User API API from Toolhouse — 58 operation(s) for user api.
+  humanURL: https://docs.toolhouse.ai/toolhouse
+  baseURL: https://agents.toolhouse.ai
+  tags:
+  - User API
+  properties:
+  - type: OpenAPI
+    url: openapi/toolhouse-user-api-api-openapi.yml
+  - type: Documentation
+    url: https://docs.toolhouse.ai/toolhouse
+  - type: SpectralRules
+    url: rules/toolhouse-rules.yml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-api-keys.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-agent-runs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-backoffice.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-logs.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-metrics.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-sdk-api.yaml
+  - type: X-NaftikoCapability
+    url: capabilities/toolhouse-user-api.yaml
 name: Toolhouse
 tags:
 - Agent Infrastructure
@@ -90,9 +239,24 @@ tags:
 - Tools
 - Workers API
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - finops
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/toolhouse.png
 access: 3rd-Party
 common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/toolhouse/overview
 - type: AgenticAccess
   url: agentic-access/toolhouse-agentic-access.yml
 - type: DomainSecurity
