@@ -1,0 +1,3238 @@
+{
+  "info": {
+    "_postman_id": "3664ecf7-a526-477e-9c0d-81bf3b0de37f",
+    "name": "Toolhouse Agent Runs Backoffice API",
+    "description": "All the API! \\o/",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:16:58.000Z",
+    "updatedAt": "2026-07-28T03:16:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3664ecf7-a526-477e-9c0d-81bf3b0de37f"
+  },
+  "item": [
+    {
+      "name": "backoffice",
+      "item": [
+        {
+          "name": "agent-runs-from-schedule",
+          "item": [
+            {
+              "name": "Bo Create Agent Run From Schedule",
+              "id": "e2d3f7e4-0963-45f4-b840-ed734276f2ed",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/backoffice/agent-runs-from-schedule",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "backoffice",
+                    "agent-runs-from-schedule"
+                  ]
+                },
+                "description": "Creates an Agent Run on behalf of a user with the Schedule ID you specify."
+              },
+              "response": [
+                {
+                  "id": "434cb516-e470-44a1-98bd-666fc392bcb1",
+                  "name": "Agent run successfully created from schedule",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/agent-runs-from-schedule",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "agent-runs-from-schedule"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"chat_id\": \"<uuid>\",\n  \"user_id\": \"<string>\",\n  \"status\": \"completed\",\n  \"id\": \"<uuid>\",\n  \"schedule_id\": \"<uuid>\",\n  \"results\": [\n    {\n      \"proident6\": true,\n      \"est_c1\": \"minim nulla in\",\n      \"Duis_471\": 21824035.256838888\n    },\n    {\n      \"culpa_a1c\": -35191912,\n      \"labore3_\": \"Excepteur magna nulla proident dolor\"\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"toolhouse_id\": \"<string>\",\n  \"vars\": {\n    \"minimd42\": \"<string>\",\n    \"ina2\": \"<string>\",\n    \"anim29\": \"<string>\"\n  },\n  \"callback_url\": \"<uri>\",\n  \"error\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-434cb516-e470-44a1-98bd-666fc392bcb1"
+                },
+                {
+                  "id": "c509d0fd-5049-49c5-ab31-8b217b1d2eee",
+                  "name": "Schedule not found or invalid request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/agent-runs-from-schedule",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "agent-runs-from-schedule"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-c509d0fd-5049-49c5-ab31-8b217b1d2eee"
+                },
+                {
+                  "id": "3e1258bc-7b1d-4d2a-b488-fdf7aaa19863",
+                  "name": "Chat ID does not belong to the user who created the schedule",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/agent-runs-from-schedule",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "agent-runs-from-schedule"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-3e1258bc-7b1d-4d2a-b488-fdf7aaa19863"
+                },
+                {
+                  "id": "8fc94597-32ea-483e-a657-4317981f03dc",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/agent-runs-from-schedule",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "agent-runs-from-schedule"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-8fc94597-32ea-483e-a657-4317981f03dc"
+                },
+                {
+                  "id": "f439ac43-caad-4a36-96c6-a70d7018b433",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<uuid>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/agent-runs-from-schedule",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "agent-runs-from-schedule"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-f439ac43-caad-4a36-96c6-a70d7018b433"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:59.000Z",
+              "updatedAt": "2026-07-28T03:16:59.000Z",
+              "uid": "35240-e2d3f7e4-0963-45f4-b840-ed734276f2ed"
+            }
+          ],
+          "id": "a7fe6bfb-6eed-47a8-af9d-cc09c9fb527c",
+          "createdAt": "2026-07-28T03:16:59.000Z",
+          "updatedAt": "2026-07-28T03:16:59.000Z",
+          "uid": "35240-a7fe6bfb-6eed-47a8-af9d-cc09c9fb527c"
+        },
+        {
+          "name": "api-keys",
+          "item": [
+            {
+              "name": "Post Create Api Key",
+              "id": "30f5adc9-85f2-4976-8d06-1582319840d2",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"archived\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/backoffice/api-keys",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "backoffice",
+                    "api-keys"
+                  ]
+                },
+                "description": "Create API Key"
+              },
+              "response": [
+                {
+                  "id": "c2971df1-a116-40be-9dd3-f9f00c411240",
+                  "name": "API key created successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"archived\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/api-keys",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "api-keys"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"archived\": false\n}",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-c2971df1-a116-40be-9dd3-f9f00c411240"
+                },
+                {
+                  "id": "2cf30f64-4eec-430d-95a4-5c64609ba848",
+                  "name": "API key creation failed - entry already exists",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"archived\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/api-keys",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "api-keys"
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-2cf30f64-4eec-430d-95a4-5c64609ba848"
+                },
+                {
+                  "id": "178edcb2-9dd7-4368-908a-ac97dd85856a",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"archived\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/api-keys",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "api-keys"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-178edcb2-9dd7-4368-908a-ac97dd85856a"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:59.000Z",
+              "updatedAt": "2026-07-28T03:16:59.000Z",
+              "uid": "35240-30f5adc9-85f2-4976-8d06-1582319840d2"
+            }
+          ],
+          "id": "9e67bd34-f0de-49e8-9314-c55e3653c8a1",
+          "createdAt": "2026-07-28T03:16:59.000Z",
+          "updatedAt": "2026-07-28T03:16:59.000Z",
+          "uid": "35240-9e67bd34-f0de-49e8-9314-c55e3653c8a1"
+        },
+        {
+          "name": "users",
+          "item": [
+            {
+              "name": "{user_id}",
+              "item": [
+                {
+                  "name": "credits",
+                  "item": [
+                    {
+                      "name": "Get User Credits Request",
+                      "id": "09f33fc6-e77f-457f-b000-2ec1d50fe159",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backoffice/users/:user_id/credits",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backoffice",
+                            "users",
+                            ":user_id",
+                            "credits"
+                          ],
+                          "variable": [
+                            {
+                              "id": "79c74b5e-aa2b-477b-813d-755dc2469c44",
+                              "key": "user_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Get User Credits"
+                      },
+                      "response": [
+                        {
+                          "id": "cdf61499-287d-4acc-9b7f-a60fcca49a09",
+                          "name": "User credits retrieved successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backoffice/users/:user_id/credits",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backoffice",
+                                "users",
+                                ":user_id",
+                                "credits"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"user_id\": \"<string>\",\n  \"total_executions\": \"<integer>\",\n  \"allowed_monthly_executions\": \"<integer>\",\n  \"reset_datetime\": \"<dateTime>\",\n  \"last_reset_datetime\": \"2026-05-15T16:42:26.132612Z\"\n}",
+                          "createdAt": "2026-07-28T03:16:59.000Z",
+                          "updatedAt": "2026-07-28T03:16:59.000Z",
+                          "uid": "35240-cdf61499-287d-4acc-9b7f-a60fcca49a09"
+                        },
+                        {
+                          "id": "3b09429e-4f9b-4697-9de6-b2801a583b4e",
+                          "name": "User not found or credits entry is missing",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backoffice/users/:user_id/credits",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backoffice",
+                                "users",
+                                ":user_id",
+                                "credits"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:16:59.000Z",
+                          "updatedAt": "2026-07-28T03:16:59.000Z",
+                          "uid": "35240-3b09429e-4f9b-4697-9de6-b2801a583b4e"
+                        },
+                        {
+                          "id": "7dc817aa-bb25-45fe-8f43-02c7fcb2a2d1",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backoffice/users/:user_id/credits",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backoffice",
+                                "users",
+                                ":user_id",
+                                "credits"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:16:59.000Z",
+                          "updatedAt": "2026-07-28T03:16:59.000Z",
+                          "uid": "35240-7dc817aa-bb25-45fe-8f43-02c7fcb2a2d1"
+                        },
+                        {
+                          "id": "1d358000-9e91-467d-89fc-9b869b702b53",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backoffice/users/:user_id/credits",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backoffice",
+                                "users",
+                                ":user_id",
+                                "credits"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:16:59.000Z",
+                          "updatedAt": "2026-07-28T03:16:59.000Z",
+                          "uid": "35240-1d358000-9e91-467d-89fc-9b869b702b53"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:16:59.000Z",
+                      "updatedAt": "2026-07-28T03:16:59.000Z",
+                      "uid": "35240-09f33fc6-e77f-457f-b000-2ec1d50fe159"
+                    }
+                  ],
+                  "id": "946e6efc-2033-472d-b47e-24f5eed048f0",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-946e6efc-2033-472d-b47e-24f5eed048f0"
+                },
+                {
+                  "name": "monthly_credit_allowance",
+                  "item": [
+                    {
+                      "name": "Update User Credits Request",
+                      "id": "6fe1a9c5-3d90-4565-aa92-abe084cb962e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"amount\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/backoffice/users/:user_id/monthly_credit_allowance",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backoffice",
+                            "users",
+                            ":user_id",
+                            "monthly_credit_allowance"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6ea4d122-f9f1-47e6-9868-2f6e6dfc3450",
+                              "key": "user_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Update User Credits Allowance\nThis endpoint is used to increase or decrease the monthly credit allowance for a user.\nIt is used to give users free credits every month.\nNote: if the user upgrades or downgrades, the credit allowance will be reset to the default value."
+                      },
+                      "response": [
+                        {
+                          "id": "ed5f8157-80df-4ec0-9c8f-1d56635c5c60",
+                          "name": "User credit allowance updated successfully",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"amount\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/backoffice/users/:user_id/monthly_credit_allowance",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backoffice",
+                                "users",
+                                ":user_id",
+                                "monthly_credit_allowance"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"user_id\": \"<string>\",\n  \"total_executions\": \"<integer>\",\n  \"allowed_monthly_executions\": \"<integer>\",\n  \"reset_datetime\": \"<dateTime>\",\n  \"last_reset_datetime\": \"2026-05-15T16:42:26.132612Z\"\n}",
+                          "createdAt": "2026-07-28T03:16:59.000Z",
+                          "updatedAt": "2026-07-28T03:16:59.000Z",
+                          "uid": "35240-ed5f8157-80df-4ec0-9c8f-1d56635c5c60"
+                        },
+                        {
+                          "id": "4a10e0b2-5b95-4507-81d2-4d8ed46326b7",
+                          "name": "User not found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"amount\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/backoffice/users/:user_id/monthly_credit_allowance",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backoffice",
+                                "users",
+                                ":user_id",
+                                "monthly_credit_allowance"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:16:59.000Z",
+                          "updatedAt": "2026-07-28T03:16:59.000Z",
+                          "uid": "35240-4a10e0b2-5b95-4507-81d2-4d8ed46326b7"
+                        },
+                        {
+                          "id": "4e403264-a97b-4447-bcd1-6d8bbdc77139",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"amount\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/backoffice/users/:user_id/monthly_credit_allowance",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backoffice",
+                                "users",
+                                ":user_id",
+                                "monthly_credit_allowance"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:16:59.000Z",
+                          "updatedAt": "2026-07-28T03:16:59.000Z",
+                          "uid": "35240-4e403264-a97b-4447-bcd1-6d8bbdc77139"
+                        },
+                        {
+                          "id": "74af96f4-97db-49f3-94db-fd280f4d03df",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"amount\": \"<integer>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/backoffice/users/:user_id/monthly_credit_allowance",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backoffice",
+                                "users",
+                                ":user_id",
+                                "monthly_credit_allowance"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:16:59.000Z",
+                          "updatedAt": "2026-07-28T03:16:59.000Z",
+                          "uid": "35240-74af96f4-97db-49f3-94db-fd280f4d03df"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:16:59.000Z",
+                      "updatedAt": "2026-07-28T03:16:59.000Z",
+                      "uid": "35240-6fe1a9c5-3d90-4565-aa92-abe084cb962e"
+                    }
+                  ],
+                  "id": "b42902cf-bfa8-40ff-ba2a-e3afbfde025a",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-b42902cf-bfa8-40ff-ba2a-e3afbfde025a"
+                },
+                {
+                  "name": "default-api-key",
+                  "item": [
+                    {
+                      "name": "Get Default Api Key For User",
+                      "id": "7aab0a6f-796e-4898-8003-2e5a17651915",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backoffice/users/:user_id/default-api-key",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backoffice",
+                            "users",
+                            ":user_id",
+                            "default-api-key"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8b461624-cd43-4d6d-aea2-23435833cc7d",
+                              "key": "user_id",
+                              "value": "<string>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "Get the user's default API Key"
+                      },
+                      "response": [
+                        {
+                          "id": "b9a33bb4-5bac-4e82-ab62-4b0d91dad5c0",
+                          "name": "Default API key retrieved successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backoffice/users/:user_id/default-api-key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backoffice",
+                                "users",
+                                ":user_id",
+                                "default-api-key"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"archived\": false\n}",
+                          "createdAt": "2026-07-28T03:16:59.000Z",
+                          "updatedAt": "2026-07-28T03:16:59.000Z",
+                          "uid": "35240-b9a33bb4-5bac-4e82-ab62-4b0d91dad5c0"
+                        },
+                        {
+                          "id": "b6c7c509-de48-45d7-aa63-001259e9e587",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backoffice/users/:user_id/default-api-key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backoffice",
+                                "users",
+                                ":user_id",
+                                "default-api-key"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:16:59.000Z",
+                          "updatedAt": "2026-07-28T03:16:59.000Z",
+                          "uid": "35240-b6c7c509-de48-45d7-aa63-001259e9e587"
+                        },
+                        {
+                          "id": "d40e0a48-2140-4d02-923d-8ebe50a0acba",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backoffice/users/:user_id/default-api-key",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backoffice",
+                                "users",
+                                ":user_id",
+                                "default-api-key"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "user_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:16:59.000Z",
+                          "updatedAt": "2026-07-28T03:16:59.000Z",
+                          "uid": "35240-d40e0a48-2140-4d02-923d-8ebe50a0acba"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:16:59.000Z",
+                      "updatedAt": "2026-07-28T03:16:59.000Z",
+                      "uid": "35240-7aab0a6f-796e-4898-8003-2e5a17651915"
+                    }
+                  ],
+                  "id": "b39f4dea-5947-4be6-b40b-46f6cca542dd",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-b39f4dea-5947-4be6-b40b-46f6cca542dd"
+                },
+                {
+                  "name": "Get User Route",
+                  "id": "5ab429d1-7111-4427-b66a-2b76b0366e08",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/users/:user_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "users",
+                        ":user_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "9fd5459b-74c3-4dd4-a9a1-40a01a6172af",
+                          "key": "user_id",
+                          "value": "<string>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Get User"
+                  },
+                  "response": [
+                    {
+                      "id": "2ce2b6d1-c52f-4e54-82f6-f554fcb7c971",
+                      "name": "User retrieved successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backoffice/users/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backoffice",
+                            "users",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"auth_id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T03:16:59.000Z",
+                      "updatedAt": "2026-07-28T03:16:59.000Z",
+                      "uid": "35240-2ce2b6d1-c52f-4e54-82f6-f554fcb7c971"
+                    },
+                    {
+                      "id": "d1722855-dd46-4f48-925f-ed505bfad175",
+                      "name": "User not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backoffice/users/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backoffice",
+                            "users",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:16:59.000Z",
+                      "updatedAt": "2026-07-28T03:16:59.000Z",
+                      "uid": "35240-d1722855-dd46-4f48-925f-ed505bfad175"
+                    },
+                    {
+                      "id": "dfd90c9f-c5d3-4bd8-b53e-b9a7e12a112c",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backoffice/users/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backoffice",
+                            "users",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:16:59.000Z",
+                      "updatedAt": "2026-07-28T03:16:59.000Z",
+                      "uid": "35240-dfd90c9f-c5d3-4bd8-b53e-b9a7e12a112c"
+                    },
+                    {
+                      "id": "8d782b26-ec7c-470a-aea0-79bed9949bf2",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backoffice/users/:user_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backoffice",
+                            "users",
+                            ":user_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "user_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:16:59.000Z",
+                      "updatedAt": "2026-07-28T03:16:59.000Z",
+                      "uid": "35240-8d782b26-ec7c-470a-aea0-79bed9949bf2"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-5ab429d1-7111-4427-b66a-2b76b0366e08"
+                }
+              ],
+              "id": "b00916b5-fc6d-4a71-a99f-f590d8cd01d2",
+              "createdAt": "2026-07-28T03:16:59.000Z",
+              "updatedAt": "2026-07-28T03:16:59.000Z",
+              "uid": "35240-b00916b5-fc6d-4a71-a99f-f590d8cd01d2"
+            },
+            {
+              "name": "reset_credit_allowance",
+              "item": [
+                {
+                  "name": "Post Reset Credit Allowance",
+                  "id": "2035403c-3f92-44bf-8643-f26654dce9ce",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/users/reset_credit_allowance",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "users",
+                        "reset_credit_allowance"
+                      ]
+                    },
+                    "description": "Resets credit allowance to all users (used to give users free credits every month)"
+                  },
+                  "response": [
+                    {
+                      "id": "a3410789-5377-444c-b2a1-035ca8334729",
+                      "name": "Credit allowance reset successfully for all users",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backoffice/users/reset_credit_allowance",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backoffice",
+                            "users",
+                            "reset_credit_allowance"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{}",
+                      "createdAt": "2026-07-28T03:16:59.000Z",
+                      "updatedAt": "2026-07-28T03:16:59.000Z",
+                      "uid": "35240-a3410789-5377-444c-b2a1-035ca8334729"
+                    },
+                    {
+                      "id": "5dfc4329-521c-4530-a0f9-e5d226dce02a",
+                      "name": "Failed to reset credit allowance",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/backoffice/users/reset_credit_allowance",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "backoffice",
+                            "users",
+                            "reset_credit_allowance"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:16:59.000Z",
+                      "updatedAt": "2026-07-28T03:16:59.000Z",
+                      "uid": "35240-5dfc4329-521c-4530-a0f9-e5d226dce02a"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-2035403c-3f92-44bf-8643-f26654dce9ce"
+                }
+              ],
+              "id": "961a572b-b687-4eb8-b851-396f364df6cf",
+              "createdAt": "2026-07-28T03:16:59.000Z",
+              "updatedAt": "2026-07-28T03:16:59.000Z",
+              "uid": "35240-961a572b-b687-4eb8-b851-396f364df6cf"
+            },
+            {
+              "name": "by",
+              "item": [
+                {
+                  "name": "email",
+                  "item": [
+                    {
+                      "name": "{email}",
+                      "item": [
+                        {
+                          "name": "Get User By Email Route",
+                          "id": "e070c9b1-fc09-4a2b-ae2d-06aa08af84a2",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/backoffice/users/by/email/:email",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "backoffice",
+                                "users",
+                                "by",
+                                "email",
+                                ":email"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "df0233c6-6f3c-4f20-ac3f-3250ba569598",
+                                  "key": "email",
+                                  "value": "<string>",
+                                  "description": "(Required) "
+                                }
+                              ]
+                            },
+                            "description": "Get User"
+                          },
+                          "response": [
+                            {
+                              "id": "a320892a-ea1f-4014-8d40-8adffa89b2e3",
+                              "name": "User retrieved successfully",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/backoffice/users/by/email/:email",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "backoffice",
+                                    "users",
+                                    "by",
+                                    "email",
+                                    ":email"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "email"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"auth_id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                              "createdAt": "2026-07-28T03:16:59.000Z",
+                              "updatedAt": "2026-07-28T03:16:59.000Z",
+                              "uid": "35240-a320892a-ea1f-4014-8d40-8adffa89b2e3"
+                            },
+                            {
+                              "id": "8111fbf3-8d36-468e-af4e-22e4876761e1",
+                              "name": "User not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/backoffice/users/by/email/:email",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "backoffice",
+                                    "users",
+                                    "by",
+                                    "email",
+                                    ":email"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "email"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-07-28T03:16:59.000Z",
+                              "updatedAt": "2026-07-28T03:16:59.000Z",
+                              "uid": "35240-8111fbf3-8d36-468e-af4e-22e4876761e1"
+                            },
+                            {
+                              "id": "41df251d-6225-4d4f-9947-817560b88229",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/backoffice/users/by/email/:email",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "backoffice",
+                                    "users",
+                                    "by",
+                                    "email",
+                                    ":email"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "email"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T03:16:59.000Z",
+                              "updatedAt": "2026-07-28T03:16:59.000Z",
+                              "uid": "35240-41df251d-6225-4d4f-9947-817560b88229"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T03:16:59.000Z",
+                          "updatedAt": "2026-07-28T03:16:59.000Z",
+                          "uid": "35240-e070c9b1-fc09-4a2b-ae2d-06aa08af84a2"
+                        }
+                      ],
+                      "id": "cabb8c61-61e5-4a82-b7f5-270cb9649c2c",
+                      "createdAt": "2026-07-28T03:16:59.000Z",
+                      "updatedAt": "2026-07-28T03:16:59.000Z",
+                      "uid": "35240-cabb8c61-61e5-4a82-b7f5-270cb9649c2c"
+                    }
+                  ],
+                  "id": "10582889-eeea-497d-8c9d-66a3b855cc13",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-10582889-eeea-497d-8c9d-66a3b855cc13"
+                }
+              ],
+              "id": "c23ca465-36eb-406b-b7af-1d27539c5c33",
+              "createdAt": "2026-07-28T03:16:59.000Z",
+              "updatedAt": "2026-07-28T03:16:59.000Z",
+              "uid": "35240-c23ca465-36eb-406b-b7af-1d27539c5c33"
+            },
+            {
+              "name": "Create User Route",
+              "id": "50bee3f7-d388-4fcd-a57d-c7f554565034",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"verified\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/backoffice/users",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "backoffice",
+                    "users"
+                  ]
+                },
+                "description": "Create User"
+              },
+              "response": [
+                {
+                  "id": "914dbe3d-8df9-4d70-a0f5-acc3b59d7a3e",
+                  "name": "User created successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"verified\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/users",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "users"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"auth_id\": \"<string>\",\n  \"email\": \"<string>\",\n  \"created_at\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-914dbe3d-8df9-4d70-a0f5-acc3b59d7a3e"
+                },
+                {
+                  "id": "64e2f0a8-1ad3-424c-a8f4-eae3fcf19011",
+                  "name": "User creation failed - user already exists",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"verified\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/users",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "users"
+                      ]
+                    }
+                  },
+                  "status": "Conflict",
+                  "code": 409,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-64e2f0a8-1ad3-424c-a8f4-eae3fcf19011"
+                },
+                {
+                  "id": "b3b7a951-a4a3-4ec1-a4a2-81ad6a2ee607",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"verified\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/users",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "users"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-b3b7a951-a4a3-4ec1-a4a2-81ad6a2ee607"
+                },
+                {
+                  "id": "93713c2e-6b94-4a1f-aa28-7c6e91752c2b",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"email\": \"<email>\",\n  \"first_name\": \"<string>\",\n  \"last_name\": \"<string>\",\n  \"verified\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/users",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "users"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-93713c2e-6b94-4a1f-aa28-7c6e91752c2b"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:59.000Z",
+              "updatedAt": "2026-07-28T03:16:59.000Z",
+              "uid": "35240-50bee3f7-d388-4fcd-a57d-c7f554565034"
+            }
+          ],
+          "id": "cfd5b4dd-393a-47e3-876f-f935c21f327f",
+          "createdAt": "2026-07-28T03:16:59.000Z",
+          "updatedAt": "2026-07-28T03:16:59.000Z",
+          "uid": "35240-cfd5b4dd-393a-47e3-876f-f935c21f327f"
+        },
+        {
+          "name": "events",
+          "item": [
+            {
+              "name": "Proxy To Customerio",
+              "id": "42d8dfa9-65d8-4939-87c2-39e2a12c2156",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/backoffice/events",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "backoffice",
+                    "events"
+                  ]
+                },
+                "description": "Proxy request to Customer.io"
+              },
+              "response": [
+                {
+                  "id": "82d1a365-de24-4698-aee9-14b57e71fa0f",
+                  "name": "Event proxied to broker successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/events",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "events"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-82d1a365-de24-4698-aee9-14b57e71fa0f"
+                },
+                {
+                  "id": "9b4eb0ea-eb46-4161-8da4-70b70a796cf2",
+                  "name": "Invalid request - missing required fields or payload",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/events",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "events"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-9b4eb0ea-eb46-4161-8da4-70b70a796cf2"
+                },
+                {
+                  "id": "54c3ab2a-f968-4649-9084-b339b3612dca",
+                  "name": "Failed to proxy event to broker",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/events",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "events"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-54c3ab2a-f968-4649-9084-b339b3612dca"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:59.000Z",
+              "updatedAt": "2026-07-28T03:16:59.000Z",
+              "uid": "35240-42d8dfa9-65d8-4939-87c2-39e2a12c2156"
+            }
+          ],
+          "id": "0d932915-d22a-4259-923a-c8c54ca1c367",
+          "createdAt": "2026-07-28T03:16:59.000Z",
+          "updatedAt": "2026-07-28T03:16:59.000Z",
+          "uid": "35240-0d932915-d22a-4259-923a-c8c54ca1c367"
+        },
+        {
+          "name": "onboarding-runs",
+          "item": [
+            {
+              "name": "Create Run",
+              "id": "ad148b4c-aebd-49d8-87d6-8b44f2098ea1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"pariatur2cb\": true,\n  \"non_a\": \"cupidatat qui dolor labore\",\n  \"id171\": \"minim sed fugiat sunt\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/backoffice/onboarding-runs",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "backoffice",
+                    "onboarding-runs"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "id": "c2a3d9ef-3b35-46cc-911f-ffb9a711905c",
+                  "name": "Onboarding run created successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"pariatur2cb\": true,\n  \"non_a\": \"cupidatat qui dolor labore\",\n  \"id171\": \"minim sed fugiat sunt\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/onboarding-runs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "onboarding-runs"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-c2a3d9ef-3b35-46cc-911f-ffb9a711905c"
+                },
+                {
+                  "id": "497778e7-c211-474f-a554-4b1d9258a540",
+                  "name": "Onboarding chat or user not found",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"pariatur2cb\": true,\n  \"non_a\": \"cupidatat qui dolor labore\",\n  \"id171\": \"minim sed fugiat sunt\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/onboarding-runs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "onboarding-runs"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-497778e7-c211-474f-a554-4b1d9258a540"
+                },
+                {
+                  "id": "2a30cbf5-3518-49d7-9d57-d80e9876d362",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"pariatur2cb\": true,\n  \"non_a\": \"cupidatat qui dolor labore\",\n  \"id171\": \"minim sed fugiat sunt\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/onboarding-runs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "onboarding-runs"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-2a30cbf5-3518-49d7-9d57-d80e9876d362"
+                },
+                {
+                  "id": "03f99612-2d52-4933-a274-d1c2e53e7b57",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"pariatur2cb\": true,\n  \"non_a\": \"cupidatat qui dolor labore\",\n  \"id171\": \"minim sed fugiat sunt\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/onboarding-runs",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "onboarding-runs"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-03f99612-2d52-4933-a274-d1c2e53e7b57"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:59.000Z",
+              "updatedAt": "2026-07-28T03:16:59.000Z",
+              "uid": "35240-ad148b4c-aebd-49d8-87d6-8b44f2098ea1"
+            }
+          ],
+          "id": "3d3fbb1d-d2b6-4266-bb61-bffd9148afe3",
+          "createdAt": "2026-07-28T03:16:59.000Z",
+          "updatedAt": "2026-07-28T03:16:59.000Z",
+          "uid": "35240-3d3fbb1d-d2b6-4266-bb61-bffd9148afe3"
+        },
+        {
+          "name": "schedules",
+          "item": [
+            {
+              "name": "Get Active Schedules",
+              "id": "a671289a-d5de-4ba4-ab8f-c1c1dbc0185d",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/backoffice/schedules",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "backoffice",
+                    "schedules"
+                  ]
+                },
+                "description": "Returns all the active schedules in the app"
+              },
+              "response": [
+                {
+                  "id": "a51dee4e-0b32-44b1-ac0d-d959ceb742aa",
+                  "name": "Active schedules retrieved successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/schedules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "schedules"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"user_id\": \"<string>\",\n      \"chat_id\": \"<uuid>\",\n      \"cadence\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"last_ran_at\": \"<dateTime>\",\n      \"active\": true,\n      \"archived\": false,\n      \"toolhouse_id\": \"<string>\",\n      \"vars\": {\n        \"est31\": \"<string>\",\n        \"Lorem857\": \"<string>\",\n        \"do_7\": \"<string>\",\n        \"exercitation_2c\": \"<string>\",\n        \"autea53\": \"<string>\"\n      },\n      \"title\": \"<string>\",\n      \"chat_archived\": \"<boolean>\",\n      \"callback_url\": \"<uri>\"\n    },\n    {\n      \"user_id\": \"<string>\",\n      \"chat_id\": \"<uuid>\",\n      \"cadence\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"last_ran_at\": \"<dateTime>\",\n      \"active\": true,\n      \"archived\": false,\n      \"toolhouse_id\": \"<string>\",\n      \"vars\": {\n        \"fugiat_713\": \"<string>\",\n        \"sunt_d\": \"<string>\",\n        \"laboris_60\": \"<string>\"\n      },\n      \"title\": \"<string>\",\n      \"chat_archived\": \"<boolean>\",\n      \"callback_url\": \"<uri>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-a51dee4e-0b32-44b1-ac0d-d959ceb742aa"
+                },
+                {
+                  "id": "e8381d55-280c-418e-9f59-1c255831e51c",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/schedules",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "schedules"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-e8381d55-280c-418e-9f59-1c255831e51c"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:59.000Z",
+              "updatedAt": "2026-07-28T03:16:59.000Z",
+              "uid": "35240-a671289a-d5de-4ba4-ab8f-c1c1dbc0185d"
+            }
+          ],
+          "id": "a00f1178-a711-4339-b0fa-c414acd972fb",
+          "createdAt": "2026-07-28T03:16:59.000Z",
+          "updatedAt": "2026-07-28T03:16:59.000Z",
+          "uid": "35240-a00f1178-a711-4339-b0fa-c414acd972fb"
+        },
+        {
+          "name": "mcp-servers",
+          "item": [
+            {
+              "name": "Get Mcp Servers",
+              "id": "b976a70e-9d60-4f4e-b191-43aa720ec225",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/backoffice/mcp-servers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "backoffice",
+                    "mcp-servers"
+                  ]
+                },
+                "description": "Get all MCP servers from the local database"
+              },
+              "response": [
+                {
+                  "id": "52f3f476-d3df-4b3f-95a8-8e23381cabd5",
+                  "name": "MCP servers retrieved successfully",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/mcp-servers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "mcp-servers"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"qualified_name\": \"<string>\",\n    \"display_name\": \"<string>\",\n    \"use_count\": \"<integer>\",\n    \"is_remote\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"description\": \"<string>\",\n    \"homepage\": \"<string>\"\n  },\n  {\n    \"qualified_name\": \"<string>\",\n    \"display_name\": \"<string>\",\n    \"use_count\": \"<integer>\",\n    \"is_remote\": \"<boolean>\",\n    \"created_at\": \"<dateTime>\",\n    \"description\": \"<string>\",\n    \"homepage\": \"<string>\"\n  }\n]",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-52f3f476-d3df-4b3f-95a8-8e23381cabd5"
+                },
+                {
+                  "id": "aad1550a-9aa0-4919-bb94-690bf9d22527",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/mcp-servers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "mcp-servers"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-aad1550a-9aa0-4919-bb94-690bf9d22527"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:59.000Z",
+              "updatedAt": "2026-07-28T03:16:59.000Z",
+              "uid": "35240-b976a70e-9d60-4f4e-b191-43aa720ec225"
+            },
+            {
+              "name": "Sync Mcp Servers",
+              "id": "3e5740fc-8fec-4e92-9c77-93d73dea6aad",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/backoffice/mcp-servers",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "backoffice",
+                    "mcp-servers"
+                  ]
+                },
+                "description": "Sync MCP servers from remote registry to local database.\n\nThis endpoint fetches all pages of MCP servers from the remote registry API\nand stores them in the local mcp_servers table."
+              },
+              "response": [
+                {
+                  "id": "d47000c4-d38f-4511-ab0c-b91bfeacd52f",
+                  "name": "MCP servers synced successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/mcp-servers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "mcp-servers"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"consequat_5\": 88077789,\n  \"adipisicing_84\": 41110050\n}",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-d47000c4-d38f-4511-ab0c-b91bfeacd52f"
+                },
+                {
+                  "id": "2fc71540-6f6c-4646-a0c4-ed081ab90b69",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/mcp-servers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "mcp-servers"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-2fc71540-6f6c-4646-a0c4-ed081ab90b69"
+                },
+                {
+                  "id": "4726a6f1-0869-4232-b63e-8dbda8d2205f",
+                  "name": "Failed to fetch servers from remote registry or parse response",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/mcp-servers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "mcp-servers"
+                      ]
+                    }
+                  },
+                  "status": "Bad Gateway",
+                  "code": 502,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-4726a6f1-0869-4232-b63e-8dbda8d2205f"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:59.000Z",
+              "updatedAt": "2026-07-28T03:16:59.000Z",
+              "uid": "35240-3e5740fc-8fec-4e92-9c77-93d73dea6aad"
+            }
+          ],
+          "id": "7553251d-f62e-447e-b2c7-1d025fcac810",
+          "createdAt": "2026-07-28T03:16:59.000Z",
+          "updatedAt": "2026-07-28T03:16:59.000Z",
+          "uid": "35240-7553251d-f62e-447e-b2c7-1d025fcac810"
+        },
+        {
+          "name": "cleanup",
+          "item": [
+            {
+              "name": "Perform Cleanup Tasks",
+              "id": "9b4958ca-4d57-465b-a9fc-7983cd68ba86",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/backoffice/cleanup",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "backoffice",
+                    "cleanup"
+                  ]
+                },
+                "description": "Perform Cleanup Tasks"
+              },
+              "response": [
+                {
+                  "id": "a359221e-392e-4c08-ba13-a13a59dce4b8",
+                  "name": "Cleanup tasks completed successfully",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/cleanup",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "cleanup"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-a359221e-392e-4c08-ba13-a13a59dce4b8"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:59.000Z",
+              "updatedAt": "2026-07-28T03:16:59.000Z",
+              "uid": "35240-9b4958ca-4d57-465b-a9fc-7983cd68ba86"
+            }
+          ],
+          "id": "6b16fbbd-853d-49df-a927-458fd53894e8",
+          "createdAt": "2026-07-28T03:16:59.000Z",
+          "updatedAt": "2026-07-28T03:16:59.000Z",
+          "uid": "35240-6b16fbbd-853d-49df-a927-458fd53894e8"
+        },
+        {
+          "name": "worker-status",
+          "item": [
+            {
+              "name": "Get Worker Status",
+              "id": "4306d7b3-2376-42cd-99a4-bff24a9802d3",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/backoffice/worker-status",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "backoffice",
+                    "worker-status"
+                  ]
+                },
+                "description": "Returns the number of in-flight agent runs."
+              },
+              "response": [
+                {
+                  "id": "a15a7f7f-10ee-42a2-8eb6-c9a6390e5ed6",
+                  "name": "Worker status",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/backoffice/worker-status",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "backoffice",
+                        "worker-status"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-07-28T03:16:59.000Z",
+                  "updatedAt": "2026-07-28T03:16:59.000Z",
+                  "uid": "35240-a15a7f7f-10ee-42a2-8eb6-c9a6390e5ed6"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:59.000Z",
+              "updatedAt": "2026-07-28T03:16:59.000Z",
+              "uid": "35240-4306d7b3-2376-42cd-99a4-bff24a9802d3"
+            }
+          ],
+          "id": "69ddcba0-76b0-4941-86c7-89b06a52d16b",
+          "createdAt": "2026-07-28T03:16:59.000Z",
+          "updatedAt": "2026-07-28T03:16:59.000Z",
+          "uid": "35240-69ddcba0-76b0-4941-86c7-89b06a52d16b"
+        }
+      ],
+      "id": "b57501dd-fcef-4aea-9cfa-4e7597d5c885",
+      "createdAt": "2026-07-28T03:16:59.000Z",
+      "updatedAt": "2026-07-28T03:16:59.000Z",
+      "uid": "35240-b57501dd-fcef-4aea-9cfa-4e7597d5c885"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/"
+    }
+  ]
+}

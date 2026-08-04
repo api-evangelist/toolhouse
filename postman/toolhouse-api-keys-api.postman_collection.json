@@ -1,0 +1,973 @@
+{
+  "info": {
+    "_postman_id": "d4a9ed28-e218-4055-9068-97c8628647a4",
+    "name": "Toolhouse Agent Runs API Keys API",
+    "description": "All the API! \\o/",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:16:57.000Z",
+    "updatedAt": "2026-07-28T03:16:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-d4a9ed28-e218-4055-9068-97c8628647a4"
+  },
+  "item": [
+    {
+      "name": "me",
+      "item": [
+        {
+          "name": "api-keys",
+          "item": [
+            {
+              "name": "default",
+              "item": [
+                {
+                  "name": "Get Default Api Key",
+                  "id": "00e07859-a033-4428-8749-94290e6f0db2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/me/api-keys/default",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "api-keys",
+                        "default"
+                      ]
+                    },
+                    "description": "Get default API Key"
+                  },
+                  "response": [
+                    {
+                      "id": "ace91e61-bfb9-4088-9411-97c67858853d",
+                      "name": "Successfully retrieved default API key",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/api-keys/default",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "api-keys",
+                            "default"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"archived\": false\n}",
+                      "createdAt": "2026-07-28T03:16:58.000Z",
+                      "updatedAt": "2026-07-28T03:16:58.000Z",
+                      "uid": "35240-ace91e61-bfb9-4088-9411-97c67858853d"
+                    },
+                    {
+                      "id": "4bab0d33-3221-4222-9b69-e45abff1a562",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/api-keys/default",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "api-keys",
+                            "default"
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:16:58.000Z",
+                      "updatedAt": "2026-07-28T03:16:58.000Z",
+                      "uid": "35240-4bab0d33-3221-4222-9b69-e45abff1a562"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:16:58.000Z",
+                  "updatedAt": "2026-07-28T03:16:58.000Z",
+                  "uid": "35240-00e07859-a033-4428-8749-94290e6f0db2"
+                }
+              ],
+              "id": "81331a8e-200e-418b-a457-ac4f934acfc4",
+              "createdAt": "2026-07-28T03:16:58.000Z",
+              "updatedAt": "2026-07-28T03:16:58.000Z",
+              "uid": "35240-81331a8e-200e-418b-a457-ac4f934acfc4"
+            },
+            {
+              "name": "{api_key_id}",
+              "item": [
+                {
+                  "name": "Get Api Key",
+                  "id": "de6aba8d-6270-4619-8f8b-241156c0ef46",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/me/api-keys/:api_key_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "api-keys",
+                        ":api_key_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "79a4efa6-d756-480d-ae43-b6956cea7c53",
+                          "key": "api_key_id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Get API Key by ID"
+                  },
+                  "response": [
+                    {
+                      "id": "dfe4fd9b-3f47-48a8-bc52-7ffdd69daa33",
+                      "name": "Successfully retrieved API key",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/api-keys/:api_key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "api-keys",
+                            ":api_key_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "api_key_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"archived\": false\n}",
+                      "createdAt": "2026-07-28T03:16:58.000Z",
+                      "updatedAt": "2026-07-28T03:16:58.000Z",
+                      "uid": "35240-dfe4fd9b-3f47-48a8-bc52-7ffdd69daa33"
+                    },
+                    {
+                      "id": "ec3ced7e-ba6a-4c69-8539-d0ef59309cb2",
+                      "name": "API key not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/api-keys/:api_key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "api-keys",
+                            ":api_key_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "api_key_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:16:58.000Z",
+                      "updatedAt": "2026-07-28T03:16:58.000Z",
+                      "uid": "35240-ec3ced7e-ba6a-4c69-8539-d0ef59309cb2"
+                    },
+                    {
+                      "id": "a24c37b2-7792-4708-a3c8-4fd311ad54a2",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/api-keys/:api_key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "api-keys",
+                            ":api_key_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "api_key_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:16:58.000Z",
+                      "updatedAt": "2026-07-28T03:16:58.000Z",
+                      "uid": "35240-a24c37b2-7792-4708-a3c8-4fd311ad54a2"
+                    },
+                    {
+                      "id": "78675795-a2eb-45eb-b7be-2469f32e82c1",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/api-keys/:api_key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "api-keys",
+                            ":api_key_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "api_key_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:16:58.000Z",
+                      "updatedAt": "2026-07-28T03:16:58.000Z",
+                      "uid": "35240-78675795-a2eb-45eb-b7be-2469f32e82c1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:16:58.000Z",
+                  "updatedAt": "2026-07-28T03:16:58.000Z",
+                  "uid": "35240-de6aba8d-6270-4619-8f8b-241156c0ef46"
+                },
+                {
+                  "name": "Delete Api Key",
+                  "id": "2e371c61-fe83-4a68-979e-fe9b91c15105",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/me/api-keys/:api_key_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "api-keys",
+                        ":api_key_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "86469467-aaf8-438d-bf97-c6e2ab6413af",
+                          "key": "api_key_id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "Delete API Key"
+                  },
+                  "response": [
+                    {
+                      "id": "30df4e51-6b85-43ac-bbc4-4a485b85366b",
+                      "name": "Successfully deleted API key",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/api-keys/:api_key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "api-keys",
+                            ":api_key_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "api_key_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"archived\": false\n}",
+                      "createdAt": "2026-07-28T03:16:58.000Z",
+                      "updatedAt": "2026-07-28T03:16:58.000Z",
+                      "uid": "35240-30df4e51-6b85-43ac-bbc4-4a485b85366b"
+                    },
+                    {
+                      "id": "24fbf8b8-a321-475a-869e-a64e9218c652",
+                      "name": "API key not found",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/api-keys/:api_key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "api-keys",
+                            ":api_key_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "api_key_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:16:58.000Z",
+                      "updatedAt": "2026-07-28T03:16:58.000Z",
+                      "uid": "35240-24fbf8b8-a321-475a-869e-a64e9218c652"
+                    },
+                    {
+                      "id": "cfaf3d4a-0f78-451a-8dd0-3291f2d7f318",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/api-keys/:api_key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "api-keys",
+                            ":api_key_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "api_key_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:16:58.000Z",
+                      "updatedAt": "2026-07-28T03:16:58.000Z",
+                      "uid": "35240-cfaf3d4a-0f78-451a-8dd0-3291f2d7f318"
+                    },
+                    {
+                      "id": "54224713-abd0-4ea0-ba65-685ec9779771",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/api-keys/:api_key_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "api-keys",
+                            ":api_key_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "api_key_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:16:58.000Z",
+                      "updatedAt": "2026-07-28T03:16:58.000Z",
+                      "uid": "35240-54224713-abd0-4ea0-ba65-685ec9779771"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:16:58.000Z",
+                  "updatedAt": "2026-07-28T03:16:58.000Z",
+                  "uid": "35240-2e371c61-fe83-4a68-979e-fe9b91c15105"
+                }
+              ],
+              "id": "c06ee257-0a36-429a-997e-87c3db0e9bab",
+              "createdAt": "2026-07-28T03:16:58.000Z",
+              "updatedAt": "2026-07-28T03:16:58.000Z",
+              "uid": "35240-c06ee257-0a36-429a-997e-87c3db0e9bab"
+            },
+            {
+              "name": "Get Api Keys",
+              "id": "49a2f79d-4659-4259-9915-4a085110667e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/me/api-keys",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "me",
+                    "api-keys"
+                  ]
+                },
+                "description": "Get all API Keys"
+              },
+              "response": [
+                {
+                  "id": "83b0dde3-e4ad-4e60-876a-623e3163c06a",
+                  "name": "Successfully retrieved all API keys",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/me/api-keys",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "api-keys"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "[\n  {\n    \"id\": \"<integer>\",\n    \"user_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"archived\": false\n  },\n  {\n    \"id\": \"<integer>\",\n    \"user_id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"archived\": false\n  }\n]",
+                  "createdAt": "2026-07-28T03:16:58.000Z",
+                  "updatedAt": "2026-07-28T03:16:58.000Z",
+                  "uid": "35240-83b0dde3-e4ad-4e60-876a-623e3163c06a"
+                },
+                {
+                  "id": "62a0dbc9-b1b3-4e69-8538-8b79ce6fe675",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/me/api-keys",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "api-keys"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:58.000Z",
+                  "updatedAt": "2026-07-28T03:16:58.000Z",
+                  "uid": "35240-62a0dbc9-b1b3-4e69-8538-8b79ce6fe675"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:58.000Z",
+              "updatedAt": "2026-07-28T03:16:58.000Z",
+              "uid": "35240-49a2f79d-4659-4259-9915-4a085110667e"
+            },
+            {
+              "name": "Post Create Api Key",
+              "id": "4414da6d-9821-458e-9802-d72b3c5fa02f",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/me/api-keys",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "me",
+                    "api-keys"
+                  ]
+                },
+                "description": "Create API Key"
+              },
+              "response": [
+                {
+                  "id": "845178be-20ba-4e87-9201-f6a9323876f7",
+                  "name": "Successfully created API key",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/me/api-keys",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "api-keys"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<integer>\",\n  \"user_id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"api_key\": \"<string>\",\n  \"archived\": false\n}",
+                  "createdAt": "2026-07-28T03:16:58.000Z",
+                  "updatedAt": "2026-07-28T03:16:58.000Z",
+                  "uid": "35240-845178be-20ba-4e87-9201-f6a9323876f7"
+                },
+                {
+                  "id": "7cc9410d-6dcb-43f1-a218-7a489dc51941",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/me/api-keys",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "api-keys"
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:16:58.000Z",
+                  "updatedAt": "2026-07-28T03:16:58.000Z",
+                  "uid": "35240-7cc9410d-6dcb-43f1-a218-7a489dc51941"
+                },
+                {
+                  "id": "a5c6d73c-2476-40f1-bbc8-8259339a7042",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/me/api-keys",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "api-keys"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:58.000Z",
+                  "updatedAt": "2026-07-28T03:16:58.000Z",
+                  "uid": "35240-a5c6d73c-2476-40f1-bbc8-8259339a7042"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:58.000Z",
+              "updatedAt": "2026-07-28T03:16:58.000Z",
+              "uid": "35240-4414da6d-9821-458e-9802-d72b3c5fa02f"
+            }
+          ],
+          "id": "ac104f2c-81f1-441c-afb1-d17744ab7b5f",
+          "createdAt": "2026-07-28T03:16:58.000Z",
+          "updatedAt": "2026-07-28T03:16:58.000Z",
+          "uid": "35240-ac104f2c-81f1-441c-afb1-d17744ab7b5f"
+        }
+      ],
+      "id": "5de0d22b-6bb7-441a-bd89-6b532773b03c",
+      "createdAt": "2026-07-28T03:16:58.000Z",
+      "updatedAt": "2026-07-28T03:16:58.000Z",
+      "uid": "35240-5de0d22b-6bb7-441a-bd89-6b532773b03c"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/"
+    }
+  ]
+}

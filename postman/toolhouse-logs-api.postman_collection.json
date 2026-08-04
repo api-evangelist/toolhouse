@@ -1,0 +1,478 @@
+{
+  "info": {
+    "_postman_id": "f2ad2d99-7fe0-487a-9c9c-4c127278368e",
+    "name": "Toolhouse Agent Runs Logs API",
+    "description": "All the API! \\o/",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:17:00.000Z",
+    "updatedAt": "2026-07-28T03:17:00.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f2ad2d99-7fe0-487a-9c9c-4c127278368e"
+  },
+  "item": [
+    {
+      "name": "me",
+      "item": [
+        {
+          "name": "executions",
+          "item": [
+            {
+              "name": "{log_id}",
+              "item": [
+                {
+                  "name": "Get User Log By Id",
+                  "id": "504d6a26-d26d-443e-ae6b-7c9dc6667911",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/me/executions/:log_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "executions",
+                        ":log_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "75536f61-34a8-485b-bffd-729dbca08c7c",
+                          "key": "log_id",
+                          "value": "<integer>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "User Installed Tools"
+                  },
+                  "response": [
+                    {
+                      "id": "2d870ca4-ed0b-4f3c-85b7-b71d8fd61cb5",
+                      "name": "Successfully retrieved tool execution log",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/executions/:log_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "executions",
+                            ":log_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "log_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"user_id\": \"<string>\",\n  \"tool_id\": \"<string>\",\n  \"start_date\": \"<dateTime>\",\n  \"end_date\": \"<dateTime>\",\n  \"duration_ms\": \"<number>\",\n  \"execution_cost\": \"<integer>\",\n  \"input\": {\n    \"Lorem_d\": -89065185\n  },\n  \"output\": \"<string>\",\n  \"provider\": \"<string>\",\n  \"id\": \"<integer>\"\n}",
+                      "createdAt": "2026-07-28T03:17:00.000Z",
+                      "updatedAt": "2026-07-28T03:17:00.000Z",
+                      "uid": "35240-2d870ca4-ed0b-4f3c-85b7-b71d8fd61cb5"
+                    },
+                    {
+                      "id": "37523a70-21d9-42a6-ab18-995f2ef18471",
+                      "name": "Tool execution log not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/executions/:log_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "executions",
+                            ":log_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "log_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:17:00.000Z",
+                      "updatedAt": "2026-07-28T03:17:00.000Z",
+                      "uid": "35240-37523a70-21d9-42a6-ab18-995f2ef18471"
+                    },
+                    {
+                      "id": "012edfb0-389f-4c30-bd63-a2558493d7a0",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/executions/:log_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "executions",
+                            ":log_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "log_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:17:00.000Z",
+                      "updatedAt": "2026-07-28T03:17:00.000Z",
+                      "uid": "35240-012edfb0-389f-4c30-bd63-a2558493d7a0"
+                    },
+                    {
+                      "id": "d768f922-4b7d-4145-bfbb-c0a93e107bc3",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/executions/:log_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "executions",
+                            ":log_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "log_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:17:00.000Z",
+                      "updatedAt": "2026-07-28T03:17:00.000Z",
+                      "uid": "35240-d768f922-4b7d-4145-bfbb-c0a93e107bc3"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:17:00.000Z",
+                  "updatedAt": "2026-07-28T03:17:00.000Z",
+                  "uid": "35240-504d6a26-d26d-443e-ae6b-7c9dc6667911"
+                }
+              ],
+              "id": "c5b50caa-6fe8-41a7-a66d-b55aa863918e",
+              "createdAt": "2026-07-28T03:17:00.000Z",
+              "updatedAt": "2026-07-28T03:17:00.000Z",
+              "uid": "35240-c5b50caa-6fe8-41a7-a66d-b55aa863918e"
+            },
+            {
+              "name": "Get User Logs",
+              "id": "00507e06-9ecf-47b3-bdb0-b95206407c56",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/me/executions?next_cursor=<dateTime>&limit=30",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "me",
+                    "executions"
+                  ],
+                  "query": [
+                    {
+                      "key": "next_cursor",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "30"
+                    }
+                  ]
+                },
+                "description": "User Installed Tools"
+              },
+              "response": [
+                {
+                  "id": "ee238a86-e4d9-44b1-b1bc-efff6574c17e",
+                  "name": "Successfully retrieved tool execution logs",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/me/executions?next_cursor=<dateTime>&limit=30",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "executions"
+                      ],
+                      "query": [
+                        {
+                          "key": "next_cursor",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "30"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"logs\": [\n    {\n      \"user_id\": \"<string>\",\n      \"tool_id\": \"<string>\",\n      \"start_date\": \"<dateTime>\",\n      \"end_date\": \"<dateTime>\",\n      \"duration_ms\": \"<number>\",\n      \"execution_cost\": \"<integer>\",\n      \"input\": {\n        \"nostrud_69\": -41059925.017526,\n        \"ipsum21\": \"sint adipisicing\"\n      },\n      \"output\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"id\": \"<integer>\"\n    },\n    {\n      \"user_id\": \"<string>\",\n      \"tool_id\": \"<string>\",\n      \"start_date\": \"<dateTime>\",\n      \"end_date\": \"<dateTime>\",\n      \"duration_ms\": \"<number>\",\n      \"execution_cost\": \"<integer>\",\n      \"input\": {\n        \"et_8\": \"Duis Lorem\",\n        \"voluptate_4e\": -91203093.91995382,\n        \"et_a\": 71955204.75476065\n      },\n      \"output\": \"<string>\",\n      \"provider\": \"<string>\",\n      \"id\": \"<integer>\"\n    }\n  ],\n  \"next_cursor\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T03:17:00.000Z",
+                  "updatedAt": "2026-07-28T03:17:00.000Z",
+                  "uid": "35240-ee238a86-e4d9-44b1-b1bc-efff6574c17e"
+                },
+                {
+                  "id": "6b4303f0-afc6-443e-b927-7826e10a076d",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/me/executions?next_cursor=<dateTime>&limit=30",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "executions"
+                      ],
+                      "query": [
+                        {
+                          "key": "next_cursor",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "30"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:17:00.000Z",
+                  "updatedAt": "2026-07-28T03:17:00.000Z",
+                  "uid": "35240-6b4303f0-afc6-443e-b927-7826e10a076d"
+                },
+                {
+                  "id": "20866eaa-1c2d-4ce2-b22b-ee9a8d2c7b49",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/me/executions?next_cursor=<dateTime>&limit=30",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "executions"
+                      ],
+                      "query": [
+                        {
+                          "key": "next_cursor",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "30"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:17:00.000Z",
+                  "updatedAt": "2026-07-28T03:17:00.000Z",
+                  "uid": "35240-20866eaa-1c2d-4ce2-b22b-ee9a8d2c7b49"
+                }
+              ],
+              "createdAt": "2026-07-28T03:17:00.000Z",
+              "updatedAt": "2026-07-28T03:17:00.000Z",
+              "uid": "35240-00507e06-9ecf-47b3-bdb0-b95206407c56"
+            }
+          ],
+          "id": "0cf2f64f-3e31-4d6e-9cf0-8d4625993e90",
+          "createdAt": "2026-07-28T03:17:00.000Z",
+          "updatedAt": "2026-07-28T03:17:00.000Z",
+          "uid": "35240-0cf2f64f-3e31-4d6e-9cf0-8d4625993e90"
+        }
+      ],
+      "id": "6b810c5b-e950-44cc-a912-9a86d0e4f8da",
+      "createdAt": "2026-07-28T03:17:00.000Z",
+      "updatedAt": "2026-07-28T03:17:00.000Z",
+      "uid": "35240-6b810c5b-e950-44cc-a912-9a86d0e4f8da"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/"
+    }
+  ]
+}

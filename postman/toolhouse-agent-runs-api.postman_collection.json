@@ -1,0 +1,882 @@
+{
+  "info": {
+    "_postman_id": "b12a7544-13e9-45bd-af84-717c1659b012",
+    "name": "Toolhouse Agent Runs API",
+    "description": "All the API! \\o/",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T03:16:56.000Z",
+    "updatedAt": "2026-07-28T03:16:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b12a7544-13e9-45bd-af84-717c1659b012"
+  },
+  "item": [
+    {
+      "name": "me",
+      "item": [
+        {
+          "name": "agent-runs",
+          "item": [
+            {
+              "name": "{run_id}",
+              "item": [
+                {
+                  "name": "mcp-server-logs",
+                  "item": [
+                    {
+                      "name": "Get User Agent Run Mcp Server Logs",
+                      "id": "7f9bcbcc-c0ca-4bbe-83e7-ecc303df7dc8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/agent-runs/:run_id/mcp-server-logs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "agent-runs",
+                            ":run_id",
+                            "mcp-server-logs"
+                          ],
+                          "variable": [
+                            {
+                              "id": "55e24ca8-ea34-44ee-a861-7b04c64542ba",
+                              "key": "run_id",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "User Installed Tools"
+                      },
+                      "response": [
+                        {
+                          "id": "d4e05fca-2e07-4062-9961-8032b076d79c",
+                          "name": "Successfully retrieved MCP server logs",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/me/agent-runs/:run_id/mcp-server-logs",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "me",
+                                "agent-runs",
+                                ":run_id",
+                                "mcp-server-logs"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "run_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"id\": \"<uuid>\",\n    \"user_id\": \"<string>\",\n    \"agent_id\": \"<uuid>\",\n    \"run_id\": \"<uuid>\",\n    \"tool_name\": \"<string>\",\n    \"tool_call_id\": \"<string>\",\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\"\n  },\n  {\n    \"id\": \"<uuid>\",\n    \"user_id\": \"<string>\",\n    \"agent_id\": \"<uuid>\",\n    \"run_id\": \"<uuid>\",\n    \"tool_name\": \"<string>\",\n    \"tool_call_id\": \"<string>\",\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\"\n  }\n]",
+                          "createdAt": "2026-07-28T03:16:57.000Z",
+                          "updatedAt": "2026-07-28T03:16:57.000Z",
+                          "uid": "35240-d4e05fca-2e07-4062-9961-8032b076d79c"
+                        },
+                        {
+                          "id": "43c0bd9f-1686-462e-88bb-844520ab25b7",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/me/agent-runs/:run_id/mcp-server-logs",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "me",
+                                "agent-runs",
+                                ":run_id",
+                                "mcp-server-logs"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "run_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:16:57.000Z",
+                          "updatedAt": "2026-07-28T03:16:57.000Z",
+                          "uid": "35240-43c0bd9f-1686-462e-88bb-844520ab25b7"
+                        },
+                        {
+                          "id": "1e493070-facf-4c78-9fbf-fe708da33ecd",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/me/agent-runs/:run_id/mcp-server-logs",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "me",
+                                "agent-runs",
+                                ":run_id",
+                                "mcp-server-logs"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "run_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:16:57.000Z",
+                          "updatedAt": "2026-07-28T03:16:57.000Z",
+                          "uid": "35240-1e493070-facf-4c78-9fbf-fe708da33ecd"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:16:57.000Z",
+                      "updatedAt": "2026-07-28T03:16:57.000Z",
+                      "uid": "35240-7f9bcbcc-c0ca-4bbe-83e7-ecc303df7dc8"
+                    }
+                  ],
+                  "id": "1c58f89b-bb34-4d5d-8b3e-17d1cfe56814",
+                  "createdAt": "2026-07-28T03:16:57.000Z",
+                  "updatedAt": "2026-07-28T03:16:57.000Z",
+                  "uid": "35240-1c58f89b-bb34-4d5d-8b3e-17d1cfe56814"
+                },
+                {
+                  "name": "logs",
+                  "item": [
+                    {
+                      "name": "Get User Agent Run Logs",
+                      "id": "6f74644f-ad24-4cb5-b424-3ebb94d17f9d",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/agent-runs/:run_id/logs",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "agent-runs",
+                            ":run_id",
+                            "logs"
+                          ],
+                          "variable": [
+                            {
+                              "id": "5b3f47a8-c529-4cf8-be20-cb784486db7c",
+                              "key": "run_id",
+                              "value": "<uuid>",
+                              "description": "(Required) "
+                            }
+                          ]
+                        },
+                        "description": "User Installed Tools"
+                      },
+                      "response": [
+                        {
+                          "id": "31d99726-22e9-41dd-9adc-967984860a11",
+                          "name": "Successfully retrieved agent run logs",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/me/agent-runs/:run_id/logs",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "me",
+                                "agent-runs",
+                                ":run_id",
+                                "logs"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "run_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"user_id\": \"<string>\",\n    \"agent_id\": \"<uuid>\",\n    \"type\": \"agent_run\",\n    \"id\": \"<uuid>\",\n    \"run_id\": \"<uuid>\",\n    \"created_at\": \"<dateTime>\",\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\"\n  },\n  {\n    \"user_id\": \"<string>\",\n    \"agent_id\": \"<uuid>\",\n    \"type\": \"agent_studio_v3\",\n    \"id\": \"<uuid>\",\n    \"run_id\": \"<uuid>\",\n    \"created_at\": \"<dateTime>\",\n    \"start_time\": \"<dateTime>\",\n    \"end_time\": \"<dateTime>\"\n  }\n]",
+                          "createdAt": "2026-07-28T03:16:57.000Z",
+                          "updatedAt": "2026-07-28T03:16:57.000Z",
+                          "uid": "35240-31d99726-22e9-41dd-9adc-967984860a11"
+                        },
+                        {
+                          "id": "5edc206a-ca7c-4ed1-8be3-ad5d81637cd8",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/me/agent-runs/:run_id/logs",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "me",
+                                "agent-runs",
+                                ":run_id",
+                                "logs"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "run_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T03:16:57.000Z",
+                          "updatedAt": "2026-07-28T03:16:57.000Z",
+                          "uid": "35240-5edc206a-ca7c-4ed1-8be3-ad5d81637cd8"
+                        },
+                        {
+                          "id": "67e8e63f-afae-415e-b838-ed4db8009888",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/me/agent-runs/:run_id/logs",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "me",
+                                "agent-runs",
+                                ":run_id",
+                                "logs"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "run_id"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T03:16:57.000Z",
+                          "updatedAt": "2026-07-28T03:16:57.000Z",
+                          "uid": "35240-67e8e63f-afae-415e-b838-ed4db8009888"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T03:16:57.000Z",
+                      "updatedAt": "2026-07-28T03:16:57.000Z",
+                      "uid": "35240-6f74644f-ad24-4cb5-b424-3ebb94d17f9d"
+                    }
+                  ],
+                  "id": "254b537b-11a3-4cd3-9f3a-496741a578e8",
+                  "createdAt": "2026-07-28T03:16:57.000Z",
+                  "updatedAt": "2026-07-28T03:16:57.000Z",
+                  "uid": "35240-254b537b-11a3-4cd3-9f3a-496741a578e8"
+                },
+                {
+                  "name": "Get User Agent Run",
+                  "id": "ca2161ac-b816-485e-a07c-a793d283789b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/me/agent-runs/:run_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "agent-runs",
+                        ":run_id"
+                      ],
+                      "variable": [
+                        {
+                          "id": "d1664f19-1d47-466b-b7bc-e56e5ce77671",
+                          "key": "run_id",
+                          "value": "<uuid>",
+                          "description": "(Required) "
+                        }
+                      ]
+                    },
+                    "description": "User Installed Tools"
+                  },
+                  "response": [
+                    {
+                      "id": "7fc63333-e31b-4512-824b-5b2a0df1beb7",
+                      "name": "Successfully retrieved agent run",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/agent-runs/:run_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "agent-runs",
+                            ":run_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "run_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"chat_id\": \"<uuid>\",\n  \"user_id\": \"<string>\",\n  \"status\": \"completed\",\n  \"title\": \"<string>\",\n  \"chat_archived\": \"<boolean>\",\n  \"id\": \"<uuid>\",\n  \"schedule_id\": \"<uuid>\",\n  \"results\": [\n    {\n      \"consequat_7b\": 50166867\n    },\n    {\n      \"exercitation_70\": -83341450,\n      \"incididunt_e42\": \"qui ea quis\",\n      \"ut_5c9\": -68843921.309174\n    }\n  ],\n  \"created_at\": \"<dateTime>\",\n  \"updated_at\": \"<dateTime>\",\n  \"toolhouse_id\": \"<string>\",\n  \"vars\": {\n    \"dolor5a\": \"<string>\"\n  },\n  \"callback_url\": \"<uri>\",\n  \"error\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T03:16:57.000Z",
+                      "updatedAt": "2026-07-28T03:16:57.000Z",
+                      "uid": "35240-7fc63333-e31b-4512-824b-5b2a0df1beb7"
+                    },
+                    {
+                      "id": "d917a7c5-aecd-4ada-958b-4908ffe6c752",
+                      "name": "Agent run not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/agent-runs/:run_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "agent-runs",
+                            ":run_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "run_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:16:57.000Z",
+                      "updatedAt": "2026-07-28T03:16:57.000Z",
+                      "uid": "35240-d917a7c5-aecd-4ada-958b-4908ffe6c752"
+                    },
+                    {
+                      "id": "c13ab2bd-1d20-4ee6-85e2-dc9c7eb890fb",
+                      "name": "Validation Error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/agent-runs/:run_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "agent-runs",
+                            ":run_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "run_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                      "code": 422,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T03:16:57.000Z",
+                      "updatedAt": "2026-07-28T03:16:57.000Z",
+                      "uid": "35240-c13ab2bd-1d20-4ee6-85e2-dc9c7eb890fb"
+                    },
+                    {
+                      "id": "3addf7fe-cbe2-4d47-85fa-619d37f756fd",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/me/agent-runs/:run_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "me",
+                            "agent-runs",
+                            ":run_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "run_id"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-07-28T03:16:57.000Z",
+                      "updatedAt": "2026-07-28T03:16:57.000Z",
+                      "uid": "35240-3addf7fe-cbe2-4d47-85fa-619d37f756fd"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T03:16:57.000Z",
+                  "updatedAt": "2026-07-28T03:16:57.000Z",
+                  "uid": "35240-ca2161ac-b816-485e-a07c-a793d283789b"
+                }
+              ],
+              "id": "1ef122ff-4054-4de4-a33f-46560afa9373",
+              "createdAt": "2026-07-28T03:16:57.000Z",
+              "updatedAt": "2026-07-28T03:16:57.000Z",
+              "uid": "35240-1ef122ff-4054-4de4-a33f-46560afa9373"
+            },
+            {
+              "name": "Get User Agent Runs",
+              "id": "06620815-4f5f-4b6b-959c-ff25ce2dccc7",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/me/agent-runs?next_cursor=<dateTime>&limit=30",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "me",
+                    "agent-runs"
+                  ],
+                  "query": [
+                    {
+                      "key": "next_cursor",
+                      "value": "<dateTime>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "30"
+                    }
+                  ]
+                },
+                "description": "User Installed Tools"
+              },
+              "response": [
+                {
+                  "id": "d0637f9a-8afd-4cea-bfa0-c9dad108e579",
+                  "name": "Successfully retrieved agent runs list",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/me/agent-runs?next_cursor=<dateTime>&limit=30",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "agent-runs"
+                      ],
+                      "query": [
+                        {
+                          "key": "next_cursor",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "30"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"data\": [\n    {\n      \"chat_id\": \"<uuid>\",\n      \"user_id\": \"<string>\",\n      \"status\": \"in_progress\",\n      \"title\": \"<string>\",\n      \"chat_archived\": \"<boolean>\",\n      \"id\": \"<uuid>\",\n      \"schedule_id\": \"<uuid>\",\n      \"results\": [\n        {\n          \"qui853\": false\n        },\n        {\n          \"ut320\": \"cupidatat ullamco nostrud deserunt\"\n        }\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"toolhouse_id\": \"<string>\",\n      \"vars\": {\n        \"fugiat10e\": \"<string>\",\n        \"do_d\": \"<string>\",\n        \"id4b\": \"<string>\"\n      },\n      \"callback_url\": \"<uri>\",\n      \"error\": \"<string>\"\n    },\n    {\n      \"chat_id\": \"<uuid>\",\n      \"user_id\": \"<string>\",\n      \"status\": \"completed\",\n      \"title\": \"<string>\",\n      \"chat_archived\": \"<boolean>\",\n      \"id\": \"<uuid>\",\n      \"schedule_id\": \"<uuid>\",\n      \"results\": [\n        {\n          \"Utf95\": false,\n          \"veniam4f\": false\n        },\n        {\n          \"officia9\": 9370055,\n          \"nostrud_83\": 1022067.6578619182,\n          \"ad_b\": \"ut veniam culpa elit in\"\n        }\n      ],\n      \"created_at\": \"<dateTime>\",\n      \"updated_at\": \"<dateTime>\",\n      \"toolhouse_id\": \"<string>\",\n      \"vars\": {\n        \"elit4ea\": \"<string>\"\n      },\n      \"callback_url\": \"<uri>\",\n      \"error\": \"<string>\"\n    }\n  ],\n  \"next_cursor\": \"<dateTime>\"\n}",
+                  "createdAt": "2026-07-28T03:16:57.000Z",
+                  "updatedAt": "2026-07-28T03:16:57.000Z",
+                  "uid": "35240-d0637f9a-8afd-4cea-bfa0-c9dad108e579"
+                },
+                {
+                  "id": "b60ea103-e8d0-4257-b2b3-db0289b36610",
+                  "name": "Validation Error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/me/agent-runs?next_cursor=<dateTime>&limit=30",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "agent-runs"
+                      ],
+                      "query": [
+                        {
+                          "key": "next_cursor",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "30"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                  "code": 422,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    },\n    {\n      \"loc\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"msg\": \"<string>\",\n      \"type\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T03:16:57.000Z",
+                  "updatedAt": "2026-07-28T03:16:57.000Z",
+                  "uid": "35240-b60ea103-e8d0-4257-b2b3-db0289b36610"
+                },
+                {
+                  "id": "a7cd7cae-1e7e-41f2-aa1a-db08939b9be3",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/me/agent-runs?next_cursor=<dateTime>&limit=30",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "me",
+                        "agent-runs"
+                      ],
+                      "query": [
+                        {
+                          "key": "next_cursor",
+                          "value": "<dateTime>"
+                        },
+                        {
+                          "key": "limit",
+                          "value": "30"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T03:16:57.000Z",
+                  "updatedAt": "2026-07-28T03:16:57.000Z",
+                  "uid": "35240-a7cd7cae-1e7e-41f2-aa1a-db08939b9be3"
+                }
+              ],
+              "createdAt": "2026-07-28T03:16:57.000Z",
+              "updatedAt": "2026-07-28T03:16:57.000Z",
+              "uid": "35240-06620815-4f5f-4b6b-959c-ff25ce2dccc7"
+            }
+          ],
+          "id": "0a55f268-fecc-4204-aa61-73ddbd6fa92c",
+          "createdAt": "2026-07-28T03:16:57.000Z",
+          "updatedAt": "2026-07-28T03:16:57.000Z",
+          "uid": "35240-0a55f268-fecc-4204-aa61-73ddbd6fa92c"
+        }
+      ],
+      "id": "f7404804-00c3-4696-a4ad-40f81be895a6",
+      "createdAt": "2026-07-28T03:16:57.000Z",
+      "updatedAt": "2026-07-28T03:16:57.000Z",
+      "uid": "35240-f7404804-00c3-4696-a4ad-40f81be895a6"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "/"
+    }
+  ]
+}

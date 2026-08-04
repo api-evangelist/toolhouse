@@ -1,0 +1,26 @@
+{
+  "provider": "toolhouse",
+  "sources": [
+    "toolhouse-agent-runs-api-openapi.yml",
+    "toolhouse-api-keys-api-openapi.yml",
+    "toolhouse-backoffice-api-openapi.yml",
+    "toolhouse-logs-api-openapi.yml",
+    "toolhouse-metrics-api-openapi.yml",
+    "toolhouse-sdk-api-api-openapi.yml",
+    "toolhouse-user-api-api-openapi.yml"
+  ],
+  "outputs": [
+    "toolhouse-agent-runs-api-openapi.yml",
+    "toolhouse-api-keys-api-openapi.yml",
+    "toolhouse-backoffice-api-openapi.yml",
+    "toolhouse-logs-api-openapi.yml",
+    "toolhouse-metrics-api-openapi.yml",
+    "toolhouse-sdk-api-api-openapi.yml",
+    "toolhouse-user-api-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
