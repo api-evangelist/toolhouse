@@ -45,20 +45,6 @@ apis:
     url: https://docs.toolhouse.ai/toolhouse
   - type: SpectralRules
     url: rules/toolhouse-rules.yml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-api-keys.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-agent-runs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-backoffice.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-logs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-metrics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-sdk-api.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-user-api.yaml
 - aid: toolhouse:toolhouse-api-keys-api
   name: Toolhouse API Keys API
   description: The API Keys API from Toolhouse — 3 operation(s) for api keys.
@@ -73,20 +59,6 @@ apis:
     url: https://docs.toolhouse.ai/toolhouse
   - type: SpectralRules
     url: rules/toolhouse-rules.yml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-api-keys.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-agent-runs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-backoffice.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-logs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-metrics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-sdk-api.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-user-api.yaml
 - aid: toolhouse:toolhouse-backoffice-api
   name: Toolhouse Backoffice API
   description: The Backoffice API from Toolhouse — 15 operation(s) for backoffice.
@@ -101,20 +73,6 @@ apis:
     url: https://docs.toolhouse.ai/toolhouse
   - type: SpectralRules
     url: rules/toolhouse-rules.yml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-api-keys.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-agent-runs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-backoffice.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-logs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-metrics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-sdk-api.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-user-api.yaml
 - aid: toolhouse:toolhouse-logs-api
   name: Toolhouse Logs API
   description: The Logs API from Toolhouse — 2 operation(s) for logs.
@@ -129,20 +87,6 @@ apis:
     url: https://docs.toolhouse.ai/toolhouse
   - type: SpectralRules
     url: rules/toolhouse-rules.yml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-api-keys.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-agent-runs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-backoffice.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-logs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-metrics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-sdk-api.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-user-api.yaml
 - aid: toolhouse:toolhouse-metrics-api
   name: Toolhouse Metrics API
   description: The Metrics API from Toolhouse — 4 operation(s) for metrics.
@@ -157,20 +101,6 @@ apis:
     url: https://docs.toolhouse.ai/toolhouse
   - type: SpectralRules
     url: rules/toolhouse-rules.yml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-api-keys.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-agent-runs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-backoffice.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-logs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-metrics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-sdk-api.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-user-api.yaml
 - aid: toolhouse:toolhouse-sdk-api-api
   name: Toolhouse SDK API API
   description: The SDK API API from Toolhouse — 20 operation(s) for sdk api.
@@ -185,20 +115,6 @@ apis:
     url: https://docs.toolhouse.ai/toolhouse
   - type: SpectralRules
     url: rules/toolhouse-rules.yml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-api-keys.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-agent-runs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-backoffice.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-logs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-metrics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-sdk-api.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-user-api.yaml
 - aid: toolhouse:toolhouse-user-api-api
   name: Toolhouse User API API
   description: The User API API from Toolhouse — 58 operation(s) for user api.
@@ -213,20 +129,6 @@ apis:
     url: https://docs.toolhouse.ai/toolhouse
   - type: SpectralRules
     url: rules/toolhouse-rules.yml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-api-keys.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-agent-runs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-backoffice.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-logs.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-metrics.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-sdk-api.yaml
-  - type: X-NaftikoCapability
-    url: capabilities/toolhouse-user-api.yaml
 name: Toolhouse
 tags:
 - Agent Infrastructure
