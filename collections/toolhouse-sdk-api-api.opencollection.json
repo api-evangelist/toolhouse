@@ -1,0 +1,604 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Toolhouse Agent Runs SDK API API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "SDK API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get All Agent Runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/agent-runs",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get All Agent Runs"
+        },
+        {
+          "info": {
+            "name": "Create Agent Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/agent-runs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Agent Run"
+        },
+        {
+          "info": {
+            "name": "Get Agent Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/agent-runs/:run_id",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Agent Run"
+        },
+        {
+          "info": {
+            "name": "Put Agent Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/agent-runs/:run_id",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Put Agent Run"
+        },
+        {
+          "info": {
+            "name": "Get Agent Files For Service",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/agents/:agent_id/files",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get enabled files for an agent (for genservice).\n\nReturns only enabled files, ordered by position for deterministic injection.\nAccess is allowed for the agent owner OR if the agent is public."
+        },
+        {
+          "info": {
+            "name": "Get All Chats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/agents",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets all chats for this user"
+        },
+        {
+          "info": {
+            "name": "Upsert Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/agents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Saves a chat"
+        },
+        {
+          "info": {
+            "name": "Get Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/agents/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Gets a chat"
+        },
+        {
+          "info": {
+            "name": "Edit Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/agents/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a chat\n\nThis endpoint allows users to update Chats fields of a chat identified by its `chat_id`.\n\n- **chat_id**: The unique identifier of the chat to be patched. This field cannot be updated.\n- **request**: A ChatRequest object containing the fields to be updated. All fields will be updated,\nif a field is not provided default values will be used. The ID of the user who owns the chat\nand the chat's ID cannot be updated.\n\n**Responses:**\n- 200: Returns the updated ChatModel.\n- 404: If the c"
+        },
+        {
+          "info": {
+            "name": "Patch Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/v1/agents/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patches a chat.\n\nThis endpoint allows users to update specific fields of a chat identified by its `chat_id`.\n\n- **chat_id**: The unique identifier of the chat to be patched. This field cannot be updated.\n- **request**: A ChatModel object containing the fields to be updated. Only fields that are provided\n  will be updated. The ID of the user who owns the chat and the chat's ID cannot be updated.\n\n**Responses:**\n- 200: Returns the updated ChatModel.\n- 404: If the chat is not found.\n- 500: If there"
+        },
+        {
+          "info": {
+            "name": "Del Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/agents/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a chat"
+        },
+        {
+          "info": {
+            "name": "Get Chat Og Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/agents/:chat_id/og",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the OG metadata for a chat"
+        },
+        {
+          "info": {
+            "name": "Clone Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/agents/:chat_id/clone",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Clone Chat"
+        },
+        {
+          "info": {
+            "name": "Post Chat Feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/agents/:chat_id/feedback",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates the feedback for a chat"
+        },
+        {
+          "info": {
+            "name": "Cli",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/cli/version",
+            "params": [
+              {
+                "name": "installed_version",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Check if a new version of the CLI is available."
+        },
+        {
+          "info": {
+            "name": "Post Cli Telemetry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/cli-telemetry",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Stores a new CLI telemetry entry."
+        },
+        {
+          "info": {
+            "name": "Get Users Endpoint",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/users",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Users Endpoint"
+        },
+        {
+          "info": {
+            "name": "Get All Kv",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/kv",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets all key-value pairs for a user"
+        },
+        {
+          "info": {
+            "name": "Upsert Kv",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/kv",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upserts a key-value pair for a user"
+        },
+        {
+          "info": {
+            "name": "Delete Kv",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/kv/:key",
+            "params": [
+              {
+                "name": "key",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a key-value pair for a user"
+        },
+        {
+          "info": {
+            "name": "Get Schedule List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/schedules",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Schedule List"
+        },
+        {
+          "info": {
+            "name": "Create Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/v1/schedules",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Schedule"
+        },
+        {
+          "info": {
+            "name": "Text To Cron",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/schedules/text-to-cron",
+            "params": [
+              {
+                "name": "cron",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Text To Cron"
+        },
+        {
+          "info": {
+            "name": "Get Schedule By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/schedules/:schedule_id",
+            "params": [
+              {
+                "name": "schedule_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Schedule By Id"
+        },
+        {
+          "info": {
+            "name": "Edit Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/v1/schedules/:schedule_id",
+            "params": [
+              {
+                "name": "schedule_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Edit Schedule"
+        },
+        {
+          "info": {
+            "name": "Del Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/v1/schedules/:schedule_id",
+            "params": [
+              {
+                "name": "schedule_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Del Schedule"
+        },
+        {
+          "info": {
+            "name": "Get Th File Schema",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/th-file-schema"
+          },
+          "docs": "Returns the schema for the Toolhouse file."
+        },
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/me",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets the current user"
+        },
+        {
+          "info": {
+            "name": "Get Vibe Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/vibe/services"
+          },
+          "docs": "Get Vibe Services"
+        },
+        {
+          "info": {
+            "name": "Get Vibe Agent Prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/v1/agents/:agent_id/vibe",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Vibe Agent Prompt"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,313 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Toolhouse Agent Runs Backoffice API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Backoffice",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Bo Create Agent Run From Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/backoffice/agent-runs-from-schedule",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates an Agent Run on behalf of a user with the Schedule ID you specify."
+        },
+        {
+          "info": {
+            "name": "Post Create Api Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/backoffice/api-keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create API Key"
+        },
+        {
+          "info": {
+            "name": "Get User Credits Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/backoffice/users/:user_id/credits",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get User Credits"
+        },
+        {
+          "info": {
+            "name": "Update User Credits Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/backoffice/users/:user_id/monthly_credit_allowance",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update User Credits Allowance\nThis endpoint is used to increase or decrease the monthly credit allowance for a user.\nIt is used to give users free credits every month.\nNote: if the user upgrades or downgrades, the credit allowance will be reset to the default value."
+        },
+        {
+          "info": {
+            "name": "Post Reset Credit Allowance",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/backoffice/users/reset_credit_allowance",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Resets credit allowance to all users (used to give users free credits every month)"
+        },
+        {
+          "info": {
+            "name": "Proxy To Customerio",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/backoffice/events",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Proxy request to Customer.io"
+        },
+        {
+          "info": {
+            "name": "Create Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/backoffice/onboarding-runs",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Run"
+        },
+        {
+          "info": {
+            "name": "Get Active Schedules",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/backoffice/schedules",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns all the active schedules in the app"
+        },
+        {
+          "info": {
+            "name": "Get User Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/backoffice/users/:user_id",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get User"
+        },
+        {
+          "info": {
+            "name": "Get Default Api Key For User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/backoffice/users/:user_id/default-api-key",
+            "params": [
+              {
+                "name": "user_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get the user's default API Key"
+        },
+        {
+          "info": {
+            "name": "Get User By Email Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/backoffice/users/by/email/:email",
+            "params": [
+              {
+                "name": "email",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get User"
+        },
+        {
+          "info": {
+            "name": "Create User Route",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/backoffice/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create User"
+        },
+        {
+          "info": {
+            "name": "Get Mcp Servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/backoffice/mcp-servers",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all MCP servers from the local database"
+        },
+        {
+          "info": {
+            "name": "Sync Mcp Servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/backoffice/mcp-servers",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Sync MCP servers from remote registry to local database.\n\nThis endpoint fetches all pages of MCP servers from the remote registry API\nand stores them in the local mcp_servers table."
+        },
+        {
+          "info": {
+            "name": "Perform Cleanup Tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/backoffice/cleanup",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Perform Cleanup Tasks"
+        },
+        {
+          "info": {
+            "name": "Get Worker Status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/backoffice/worker-status",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the number of in-flight agent runs."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

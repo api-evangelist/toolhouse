@@ -1,0 +1,888 @@
+{
+  "item": [
+    {
+      "id": "25276b31-3123-40d1-ae9d-bd7f46232f63",
+      "name": "Metrics",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "52397087-b3f5-4183-aedc-ccf201df3dcb",
+          "name": "Get Agent Run Metrics",
+          "request": {
+            "name": "Get Agent Run Metrics",
+            "description": {},
+            "url": {
+              "path": [
+                "me",
+                "metrics",
+                "agent-runs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "7"
+                },
+                {
+                  "disabled": false,
+                  "key": "bucket_hours",
+                  "value": "12"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2c27d821-0f3e-482f-9eaf-14cd4c553fb9",
+              "name": "Successfully retrieved agent run metrics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me",
+                    "metrics",
+                    "agent-runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "7"
+                    },
+                    {
+                      "key": "bucket_hours",
+                      "value": "12"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total_runs\": 8307,\n  \"completed_runs\": 8309,\n  \"failed_runs\": 6229,\n  \"active_runs\": 8750,\n  \"success_rate\": 9375.640789531124,\n  \"failure_rate\": 3416.019249448169,\n  \"days\": 460,\n  \"bucket_hours\": 6618,\n  \"chart_rows\": [\n    {\n      \"bucket_start\": \"1975-01-09T21:01:14.754Z\",\n      \"bucket_end\": \"1973-02-06T18:44:31.964Z\",\n      \"label\": \"string\",\n      \"total\": 424,\n      \"completed\": 72,\n      \"failed\": 2955,\n      \"active\": 2694\n    },\n    {\n      \"bucket_start\": \"2004-05-31T22:16:41.586Z\",\n      \"bucket_end\": \"1980-06-24T23:44:07.619Z\",\n      \"label\": \"string\",\n      \"total\": 7069,\n      \"completed\": 5847,\n      \"failed\": 8273,\n      \"active\": 7817\n    }\n  ],\n  \"agent_rows\": [\n    {\n      \"agent_id\": \"85967e64-6cb2-77cf-e8cd-a332f5462e6f\",\n      \"title\": \"string\",\n      \"total\": 3326,\n      \"completed\": 9099,\n      \"failed\": 4249,\n      \"active\": 4060,\n      \"success_rate\": 7291.351673626746,\n      \"latest_run_at\": \"1951-10-16T19:21:27.482Z\",\n      \"trend\": [\n        {\n          \"bucket_start\": \"1997-05-17T04:23:16.402Z\",\n          \"bucket_end\": \"1960-08-26T12:37:07.940Z\",\n          \"label\": \"string\",\n          \"total\": 8924\n        },\n        {\n          \"bucket_start\": \"2018-02-25T22:50:12.963Z\",\n          \"bucket_end\": \"2000-10-16T18:00:13.153Z\",\n          \"label\": \"string\",\n          \"total\": 4596\n        }\n      ]\n    },\n    {\n      \"agent_id\": \"8d7398f9-aee0-16a5-39b5-ddb59da1cff9\",\n      \"title\": \"string\",\n      \"total\": 3361,\n      \"completed\": 916,\n      \"failed\": 2436,\n      \"active\": 9033,\n      \"success_rate\": 637.8968504135263,\n      \"latest_run_at\": \"1947-12-05T00:52:27.198Z\",\n      \"trend\": [\n        {\n          \"bucket_start\": \"1959-01-21T06:38:13.947Z\",\n          \"bucket_end\": \"1972-10-06T02:12:37.626Z\",\n          \"label\": \"string\",\n          \"total\": 1794\n        },\n        {\n          \"bucket_start\": \"1974-08-11T05:35:32.169Z\",\n          \"bucket_end\": \"1950-08-31T09:51:03.283Z\",\n          \"label\": \"string\",\n          \"total\": 657\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3eec04d4-724a-4ad6-a46d-5fcf936da278",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me",
+                    "metrics",
+                    "agent-runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "7"
+                    },
+                    {
+                      "key": "bucket_hours",
+                      "value": "12"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e355ed9f-f0d2-477f-80aa-c2a5323ea84d",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me",
+                    "metrics",
+                    "agent-runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "7"
+                    },
+                    {
+                      "key": "bucket_hours",
+                      "value": "12"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9dc627b5-f8df-4bac-9365-92d7b41f6089",
+          "name": "Get Agent Run Metrics Summary",
+          "request": {
+            "name": "Get Agent Run Metrics Summary",
+            "description": {},
+            "url": {
+              "path": [
+                "me",
+                "metrics",
+                "agent-runs",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "7"
+                },
+                {
+                  "disabled": false,
+                  "key": "bucket_hours",
+                  "value": "12"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "574667de-5ef9-4626-ab4a-ae782d1608c6",
+              "name": "Successfully retrieved agent run metrics summary",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me",
+                    "metrics",
+                    "agent-runs",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "7"
+                    },
+                    {
+                      "key": "bucket_hours",
+                      "value": "12"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"total_runs\": 4724,\n  \"completed_runs\": 3965,\n  \"failed_runs\": 1789,\n  \"active_runs\": 7485,\n  \"success_rate\": 1036.6781078603826,\n  \"failure_rate\": 8842.505119967982\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e64eeade-f548-4427-a687-bdefc160450e",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me",
+                    "metrics",
+                    "agent-runs",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "7"
+                    },
+                    {
+                      "key": "bucket_hours",
+                      "value": "12"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30d6ba4b-4b18-43e3-8849-89241bc909e5",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me",
+                    "metrics",
+                    "agent-runs",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "7"
+                    },
+                    {
+                      "key": "bucket_hours",
+                      "value": "12"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c2bb34dd-16fc-451c-810d-979d256c3a8c",
+          "name": "Get Agent Run Metrics Volume",
+          "request": {
+            "name": "Get Agent Run Metrics Volume",
+            "description": {},
+            "url": {
+              "path": [
+                "me",
+                "metrics",
+                "agent-runs",
+                "volume"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "7"
+                },
+                {
+                  "disabled": false,
+                  "key": "bucket_hours",
+                  "value": "12"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0d6bbeb5-a476-4edf-9b3f-3736ea35c052",
+              "name": "Successfully retrieved agent run volume metrics",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me",
+                    "metrics",
+                    "agent-runs",
+                    "volume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "7"
+                    },
+                    {
+                      "key": "bucket_hours",
+                      "value": "12"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"bucket_start\": \"2008-08-02T17:24:38.448Z\",\n      \"bucket_end\": \"1957-04-03T20:17:08.336Z\",\n      \"label\": \"string\",\n      \"total\": 8684,\n      \"completed\": 2970,\n      \"failed\": 9119,\n      \"active\": 7430\n    },\n    {\n      \"bucket_start\": \"2023-10-03T22:53:25.625Z\",\n      \"bucket_end\": \"1989-03-19T03:40:05.541Z\",\n      \"label\": \"string\",\n      \"total\": 2718,\n      \"completed\": 8180,\n      \"failed\": 1302,\n      \"active\": 1722\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "370de65f-960c-4c2d-a8f5-4da5a67059a0",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me",
+                    "metrics",
+                    "agent-runs",
+                    "volume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "7"
+                    },
+                    {
+                      "key": "bucket_hours",
+                      "value": "12"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d538847d-5ac2-49f6-832e-71153148d4ee",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me",
+                    "metrics",
+                    "agent-runs",
+                    "volume"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "7"
+                    },
+                    {
+                      "key": "bucket_hours",
+                      "value": "12"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1af4ba86-f169-48fb-9331-5361983258ed",
+          "name": "Get Agent Run Metrics Agents",
+          "request": {
+            "name": "Get Agent Run Metrics Agents",
+            "description": {},
+            "url": {
+              "path": [
+                "me",
+                "metrics",
+                "agent-runs",
+                "agents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "days",
+                  "value": "7"
+                },
+                {
+                  "disabled": false,
+                  "key": "bucket_hours",
+                  "value": "12"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "c6c81a5e-2f07-4eb5-bd0b-b47b363ea97e",
+              "name": "Successfully retrieved agent run metrics by agent",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me",
+                    "metrics",
+                    "agent-runs",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "7"
+                    },
+                    {
+                      "key": "bucket_hours",
+                      "value": "12"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"agent_id\": \"77487aab-34ce-4bf4-72ff-729fe0c0c5d8\",\n      \"title\": \"string\",\n      \"total\": 663,\n      \"completed\": 7074,\n      \"failed\": 2705,\n      \"active\": 2186,\n      \"success_rate\": 7845.380026249201,\n      \"latest_run_at\": \"1957-02-16T21:01:08.847Z\",\n      \"trend\": [\n        {\n          \"bucket_start\": \"1988-08-23T05:12:36.871Z\",\n          \"bucket_end\": \"1989-04-06T06:05:07.563Z\",\n          \"label\": \"string\",\n          \"total\": 4484\n        },\n        {\n          \"bucket_start\": \"1960-03-16T20:46:12.947Z\",\n          \"bucket_end\": \"1954-07-31T22:14:01.731Z\",\n          \"label\": \"string\",\n          \"total\": 3617\n        }\n      ]\n    },\n    {\n      \"agent_id\": \"4f589cdd-7f9d-d360-4ac9-9ca25e7ad97b\",\n      \"title\": \"string\",\n      \"total\": 3788,\n      \"completed\": 2052,\n      \"failed\": 4372,\n      \"active\": 5152,\n      \"success_rate\": 2154.077029999103,\n      \"latest_run_at\": \"2011-03-18T15:53:05.201Z\",\n      \"trend\": [\n        {\n          \"bucket_start\": \"1966-11-15T00:50:47.205Z\",\n          \"bucket_end\": \"1996-02-01T16:04:19.904Z\",\n          \"label\": \"string\",\n          \"total\": 1028\n        },\n        {\n          \"bucket_start\": \"1984-07-19T14:42:18.638Z\",\n          \"bucket_end\": \"1992-12-18T02:15:56.348Z\",\n          \"label\": \"string\",\n          \"total\": 6231\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3ea0998e-a59d-4149-a1c5-c5699d592ff1",
+              "name": "Validation Error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me",
+                    "metrics",
+                    "agent-runs",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "7"
+                    },
+                    {
+                      "key": "bucket_hours",
+                      "value": "12"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    },\n    {\n      \"loc\": [\n        \"string\",\n        \"string\"\n      ],\n      \"msg\": \"string\",\n      \"type\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75402f32-e4fe-41b3-a4be-cf3f574ddd2b",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "me",
+                    "metrics",
+                    "agent-runs",
+                    "agents"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "days",
+                      "value": "7"
+                    },
+                    {
+                      "key": "bucket_hours",
+                      "value": "12"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "84e1f526-c0b0-4105-b759-ac262e35553d",
+    "name": "Toolhouse Agent Runs Metrics API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "All the API! \\o/",
+      "type": "text/plain"
+    }
+  }
+}

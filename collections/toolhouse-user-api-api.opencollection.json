@@ -1,0 +1,1664 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Toolhouse Agent Runs User API API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "User API",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get User Agent Runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/agent-runs",
+            "params": [
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "User Installed Tools"
+        },
+        {
+          "info": {
+            "name": "Get User Agent Run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/agent-runs/:run_id",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "User Installed Tools"
+        },
+        {
+          "info": {
+            "name": "Get User Agent Run Mcp Server Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/agent-runs/:run_id/mcp-server-logs",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "User Installed Tools"
+        },
+        {
+          "info": {
+            "name": "Get User Agent Run Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/agent-runs/:run_id/logs",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "User Installed Tools"
+        },
+        {
+          "info": {
+            "name": "Subscribe To Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/agents/:agent_id/subscribe",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Subscribe to a paid agent"
+        },
+        {
+          "info": {
+            "name": "Unsubscribe From Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/agents/:agent_id/unsubscribe",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Unsubscribe from a paid agent"
+        },
+        {
+          "info": {
+            "name": "List Agent Subscriptions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/subscriptions",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all agent subscriptions for the current user"
+        },
+        {
+          "info": {
+            "name": "Get Agent Subscription",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/subscriptions/:agent_id",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get subscription details for a specific agent"
+        },
+        {
+          "info": {
+            "name": "Get Agent Studio Chats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/agent-studio-chats",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all agent studio chats for the authenticated user"
+        },
+        {
+          "info": {
+            "name": "Create Agent Studio Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/agent-studio-chats",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new agent studio chat or return existing one if run_id already exists"
+        },
+        {
+          "info": {
+            "name": "Get Agent Studio Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/agent-studio-chats/:run_id",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get a specific agent studio chat by ID"
+        },
+        {
+          "info": {
+            "name": "Update Agent Studio Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/me/agent-studio-chats/:run_id",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an agent studio chat (full update)"
+        },
+        {
+          "info": {
+            "name": "Patch Agent Studio Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/me/agent-studio-chats/:run_id",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an agent studio chat (partial update)"
+        },
+        {
+          "info": {
+            "name": "Delete Agent Studio Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/me/agent-studio-chats/:run_id",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an agent studio chat (soft delete)"
+        },
+        {
+          "info": {
+            "name": "Clone Agent Studio Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/agent-studio-chats/:run_id/clone",
+            "params": [
+              {
+                "name": "run_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Clone an agent studio chat"
+        },
+        {
+          "info": {
+            "name": "Get Agent Theme Preference",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/agents/:agent_id/customizations/theme",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Agent Theme Preference"
+        },
+        {
+          "info": {
+            "name": "Upsert Agent Theme Preference",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/me/agents/:agent_id/customizations/theme",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upsert Agent Theme Preference"
+        },
+        {
+          "info": {
+            "name": "List Agent Files",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/agents/:agent_id/files",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List all files for an agent"
+        },
+        {
+          "info": {
+            "name": "Create Agent File",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/agents/:agent_id/files",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a new file reference for an agent"
+        },
+        {
+          "info": {
+            "name": "Get Agent File",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/agents/:agent_id/files/:file_id",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get a specific agent file"
+        },
+        {
+          "info": {
+            "name": "Update Agent File",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/me/agents/:agent_id/files/:file_id",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an agent file (partial update)"
+        },
+        {
+          "info": {
+            "name": "Delete Agent File",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/me/agents/:agent_id/files/:file_id",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "file_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an agent file"
+        },
+        {
+          "info": {
+            "name": "Update File Positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/me/agents/:agent_id/files/positions",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Batch update file positions for ordering"
+        },
+        {
+          "info": {
+            "name": "Get All Agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/agents",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get All Agents"
+        },
+        {
+          "info": {
+            "name": "Upsert Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/agents",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Upsert Agent"
+        },
+        {
+          "info": {
+            "name": "Get Agents List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/agents/list",
+            "params": [
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "search",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Agents List"
+        },
+        {
+          "info": {
+            "name": "Get Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/agents/:agent_id",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Agent"
+        },
+        {
+          "info": {
+            "name": "Generate Agent Upsell Description",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/agents/:agent_id/upsell-description",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Generate Agent Upsell Description"
+        },
+        {
+          "info": {
+            "name": "Check Slug Availability",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/agents/vanity/slug",
+            "params": [
+              {
+                "name": "slug",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Check Slug Availability"
+        },
+        {
+          "info": {
+            "name": "Generate Slug",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/agents/vanity/slug",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Generate Slug"
+        },
+        {
+          "info": {
+            "name": "Transfer Agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/agents/:agent_id/transfer",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Transfer agent ownership to another user (Toolhouse employees only)"
+        },
+        {
+          "info": {
+            "name": "Get Api Keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/api-keys",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all API Keys"
+        },
+        {
+          "info": {
+            "name": "Post Create Api Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/api-keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create API Key"
+        },
+        {
+          "info": {
+            "name": "Get Default Api Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/api-keys/default",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get default API Key"
+        },
+        {
+          "info": {
+            "name": "Get Api Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/api-keys/:api_key_id",
+            "params": [
+              {
+                "name": "api_key_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get API Key by ID"
+        },
+        {
+          "info": {
+            "name": "Delete Api Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/me/api-keys/:api_key_id",
+            "params": [
+              {
+                "name": "api_key_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete API Key"
+        },
+        {
+          "info": {
+            "name": "Billing Information",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/billing",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Billing Information"
+        },
+        {
+          "info": {
+            "name": "Get All Chats",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/chats",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get All Chats"
+        },
+        {
+          "info": {
+            "name": "Create Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/chats",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Chat"
+        },
+        {
+          "info": {
+            "name": "Get Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/chats/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Chat"
+        },
+        {
+          "info": {
+            "name": "Edit Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/me/chats/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Edit Chat"
+        },
+        {
+          "info": {
+            "name": "Patch Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "{{baseUrl}}/me/chats/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Patch Chat"
+        },
+        {
+          "info": {
+            "name": "Del Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/me/chats/:chat_id",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Del Chat"
+        },
+        {
+          "info": {
+            "name": "Get Chat Og Metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/chats/:chat_id/og",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get Chat Og Metadata"
+        },
+        {
+          "info": {
+            "name": "Clone Chat",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/chats/:chat_id/clone",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Clone Chat"
+        },
+        {
+          "info": {
+            "name": "Post Chat Feedback",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/chats/:chat_id/feedback",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Post Chat Feedback"
+        },
+        {
+          "info": {
+            "name": "Post Agent Run Log",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/chats/:chat_id/runs",
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new agent run log entry for a chat"
+        },
+        {
+          "info": {
+            "name": "Create Cli Auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/cli-auth"
+          },
+          "docs": "Create a new CLI auth session."
+        },
+        {
+          "info": {
+            "name": "Update Cli Auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/me/cli-auth/:cli_auth_id",
+            "params": [
+              {
+                "name": "cli_auth_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update CLI auth with user's JWT."
+        },
+        {
+          "info": {
+            "name": "Get Cli Auth",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/cli-auth/:auth_id",
+            "params": [
+              {
+                "name": "auth_id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Get and consume JWT for CLI auth."
+        },
+        {
+          "info": {
+            "name": "Get User Credits",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/credits",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "User Installed Tools"
+        },
+        {
+          "info": {
+            "name": "Use User Credits",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/credits/use",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Use User Credits"
+        },
+        {
+          "info": {
+            "name": "Get User Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/executions",
+            "params": [
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "User Installed Tools"
+        },
+        {
+          "info": {
+            "name": "Get User Log By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/executions/:log_id",
+            "params": [
+              {
+                "name": "log_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "User Installed Tools"
+        },
+        {
+          "info": {
+            "name": "Get Agent Run Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/metrics/agent-runs",
+            "params": [
+              {
+                "name": "days",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bucket_hours",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Agent Run Metrics"
+        },
+        {
+          "info": {
+            "name": "Get Agent Run Metrics Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/metrics/agent-runs/summary",
+            "params": [
+              {
+                "name": "days",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bucket_hours",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Agent Run Metrics Summary"
+        },
+        {
+          "info": {
+            "name": "Get Agent Run Metrics Volume",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/metrics/agent-runs/volume",
+            "params": [
+              {
+                "name": "days",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bucket_hours",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Agent Run Metrics Volume"
+        },
+        {
+          "info": {
+            "name": "Get Agent Run Metrics Agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/metrics/agent-runs/agents",
+            "params": [
+              {
+                "name": "days",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bucket_hours",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Agent Run Metrics Agents"
+        },
+        {
+          "info": {
+            "name": "Get Monetization Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/monetization/summary",
+            "params": [
+              {
+                "name": "period",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get monetization summary: total subscribers and earnings for the period"
+        },
+        {
+          "info": {
+            "name": "Get Monetization Subscribers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/monetization/subscribers",
+            "params": [
+              {
+                "name": "period",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get daily total subscriber count over the period"
+        },
+        {
+          "info": {
+            "name": "Get Monetization Earnings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/monetization/earnings",
+            "params": [
+              {
+                "name": "period",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get daily earnings for the period"
+        },
+        {
+          "info": {
+            "name": "Stripe Webhook",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/stripe/webhook"
+          },
+          "docs": "Get Billing Information"
+        },
+        {
+          "info": {
+            "name": "Get Stripe Sessions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/stripe/sessions",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Stripe Sessions"
+        },
+        {
+          "info": {
+            "name": "Get Schedule List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/schedules",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Schedule List"
+        },
+        {
+          "info": {
+            "name": "Create Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/schedules",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Schedule"
+        },
+        {
+          "info": {
+            "name": "Get Onboarding Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/schedules/onboarding",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Onboarding Schedule"
+        },
+        {
+          "info": {
+            "name": "Text To Cron",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/schedules/text-to-cron",
+            "params": [
+              {
+                "name": "cron",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Text To Cron"
+        },
+        {
+          "info": {
+            "name": "Get Schedule By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/schedules/:schedule_id",
+            "params": [
+              {
+                "name": "schedule_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Schedule By Id"
+        },
+        {
+          "info": {
+            "name": "Edit Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "{{baseUrl}}/me/schedules/:schedule_id",
+            "params": [
+              {
+                "name": "schedule_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Edit Schedule"
+        },
+        {
+          "info": {
+            "name": "Del Schedule",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/me/schedules/:schedule_id",
+            "params": [
+              {
+                "name": "schedule_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Del Schedule"
+        },
+        {
+          "info": {
+            "name": "Get User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Gets the current user"
+        },
+        {
+          "info": {
+            "name": "Get Vibe Services",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/vibe/services"
+          },
+          "docs": "Get Vibe Services"
+        },
+        {
+          "info": {
+            "name": "Get Vibe Agent Prompt",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/agents/:agent_id/vibe",
+            "params": [
+              {
+                "name": "agent_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "service_name",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Vibe Agent Prompt"
+        },
+        {
+          "info": {
+            "name": "Fetch Redemption Count",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/vip",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Fetch Redemption Count"
+        },
+        {
+          "info": {
+            "name": "Redeem Code",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/vip",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Redeem Code"
+        },
+        {
+          "info": {
+            "name": "Search Mcp Servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/mcp-registry/servers",
+            "params": [
+              {
+                "name": "queries",
+                "value": "",
+                "type": "query",
+                "description": "optional search query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Search Mcp Servers"
+        },
+        {
+          "info": {
+            "name": "Get Mcp Servers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/mcp-servers"
+          },
+          "docs": "Get Mcp Servers"
+        },
+        {
+          "info": {
+            "name": "Get Smithery Mcp Server Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/mcp-servers/details",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Get Smithery Mcp Server Details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

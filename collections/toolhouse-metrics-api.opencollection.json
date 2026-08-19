@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Toolhouse Agent Runs Metrics API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Metrics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Agent Run Metrics",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/metrics/agent-runs",
+            "params": [
+              {
+                "name": "days",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bucket_hours",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Agent Run Metrics"
+        },
+        {
+          "info": {
+            "name": "Get Agent Run Metrics Summary",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/metrics/agent-runs/summary",
+            "params": [
+              {
+                "name": "days",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bucket_hours",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Agent Run Metrics Summary"
+        },
+        {
+          "info": {
+            "name": "Get Agent Run Metrics Volume",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/metrics/agent-runs/volume",
+            "params": [
+              {
+                "name": "days",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bucket_hours",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Agent Run Metrics Volume"
+        },
+        {
+          "info": {
+            "name": "Get Agent Run Metrics Agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/metrics/agent-runs/agents",
+            "params": [
+              {
+                "name": "days",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "bucket_hours",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get Agent Run Metrics Agents"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

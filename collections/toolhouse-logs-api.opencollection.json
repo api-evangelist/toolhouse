@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Toolhouse Agent Runs Logs API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get User Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/executions",
+            "params": [
+              {
+                "name": "next_cursor",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "User Installed Tools"
+        },
+        {
+          "info": {
+            "name": "Get User Log By Id",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/executions/:log_id",
+            "params": [
+              {
+                "name": "log_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "User Installed Tools"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

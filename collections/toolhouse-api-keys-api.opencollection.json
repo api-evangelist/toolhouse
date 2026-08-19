@@ -1,0 +1,111 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Toolhouse Agent Runs API Keys API",
+    "version": "0.1.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "API Keys",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Api Keys",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/api-keys",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all API Keys"
+        },
+        {
+          "info": {
+            "name": "Post Create Api Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "{{baseUrl}}/me/api-keys",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create API Key"
+        },
+        {
+          "info": {
+            "name": "Get Default Api Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/api-keys/default",
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get default API Key"
+        },
+        {
+          "info": {
+            "name": "Get Api Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "{{baseUrl}}/me/api-keys/:api_key_id",
+            "params": [
+              {
+                "name": "api_key_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get API Key by ID"
+        },
+        {
+          "info": {
+            "name": "Delete Api Key",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "{{baseUrl}}/me/api-keys/:api_key_id",
+            "params": [
+              {
+                "name": "api_key_id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete API Key"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
