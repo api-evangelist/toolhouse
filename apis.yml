@@ -51,6 +51,8 @@ apis:
   humanURL: https://docs.toolhouse.ai/toolhouse
   baseURL: https://agents.toolhouse.ai
   tags:
+  - APIKeys
+  tags_raw:
   - API Keys
   properties:
   - type: OpenAPI
@@ -65,6 +67,8 @@ apis:
   humanURL: https://docs.toolhouse.ai/toolhouse
   baseURL: https://agents.toolhouse.ai
   tags:
+  - Back Office
+  tags_raw:
   - Backoffice
   properties:
   - type: OpenAPI
@@ -131,6 +135,16 @@ apis:
     url: rules/toolhouse-rules.yml
 name: Toolhouse
 tags:
+- Agent Infrastructure
+- AI Agents
+- AI Workers
+- Backend-as-a-Service
+- MCP
+- MCP Discovery
+- RAG
+- Tools
+- Workers API
+tags_raw:
 - Agent Infrastructure
 - AI Agents
 - AI Workers
