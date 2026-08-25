@@ -3,9 +3,12 @@
   "feeds": [
     {
       "source": "https://toolhouse.ai/blog",
-      "error": "HTTPError"
+      "feed_url": "https://toolhouse.ai/blog",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "fetched": "2026-08-06T14:08:46Z",
+  "fetched": "2026-08-22T20:20:02Z",
   "post_count": 34
 }
