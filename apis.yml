@@ -22,9 +22,8 @@ apis:
     type: Documentation
   - url: https://docs.toolhouse.ai/toolhouse/developers/attachments
     type: Documentation
-  description: >-
-    The Toolhouse Workers API (historically the "Agents API") enables HTTP execution of any deployed Toolhouse
-    worker. Workers defined via the Agent Editor or as code are reachable at https://agents.toolhouse.ai/{agent_id}
+  description: The Toolhouse Workers API (historically the "Agents API") enables HTTP execution of any
+    deployed Toolhouse worker. Workers defined via the Agent Editor or as code are reachable at https://agents.toolhouse.ai/{agent_id}
     with POST to start a new task, PUT /{agent_id}/{run_id} to continue an existing conversation, and
     GET /{agent_id}/{run_id} to retrieve full history. NDJSON variants under /ndjson/ stream the worker's
     output plus out-of-band tool-call and debug signals. Conversation continuity is keyed by the X-Toolhouse-Run-ID
@@ -106,7 +105,7 @@ apis:
   - type: SpectralRules
     url: rules/toolhouse-rules.yml
 - aid: toolhouse:toolhouse-sdk-api-api
-  name: Toolhouse SDK API API
+  name: Toolhouse SDK API
   description: The SDK API API from Toolhouse — 20 operation(s) for sdk api.
   humanURL: https://docs.toolhouse.ai/toolhouse
   baseURL: https://agents.toolhouse.ai
@@ -120,7 +119,7 @@ apis:
   - type: SpectralRules
     url: rules/toolhouse-rules.yml
 - aid: toolhouse:toolhouse-user-api-api
-  name: Toolhouse User API API
+  name: Toolhouse User API
   description: The User API API from Toolhouse — 58 operation(s) for user api.
   humanURL: https://docs.toolhouse.ai/toolhouse
   baseURL: https://agents.toolhouse.ai
@@ -255,8 +254,8 @@ common:
 - url: https://docs.toolhouse.ai/toolhouse/sitemap.md
   name: Toolhouse Documentation Sitemap
   type: Sitemap
-  description: Markdown sitemap covering the entire docs.toolhouse.ai corpus including developer
-    references, integrations, and capabilities pages.
+  description: Markdown sitemap covering the entire docs.toolhouse.ai corpus including developer references,
+    integrations, and capabilities pages.
 - url: https://docs.toolhouse.ai/toolhouse/llms-full.txt
   name: Toolhouse LLMs.txt
   type: LlmsText
@@ -265,8 +264,8 @@ common:
 - url: https://github.com/toolhouseai/toolhouse-sdk-python
   name: Toolhouse Python SDK
   type: SDKs
-  description: Official Python SDK for integrating Toolhouse tools and agent invocations into Python
-    applications (latest release v1.3.1).
+  description: Official Python SDK for integrating Toolhouse tools and agent invocations into Python applications
+    (latest release v1.3.1).
 - url: https://github.com/toolhouseai/toolhouse-sdk-typescript
   name: Toolhouse TypeScript SDK
   type: SDKs
@@ -294,8 +293,7 @@ common:
 - url: https://github.com/toolhouseai/fastlane-demo
   name: Fastlane Demo
   type: SampleApplication
-  description: Demonstration project showing how Fastlane helps publishers monetize content with AI
-    workers.
+  description: Demonstration project showing how Fastlane helps publishers monetize content with AI workers.
 - url: https://github.com/toolhouseai/toolhouse-assessment
   name: Toolhouse Assessment
   type: Tools
@@ -311,8 +309,8 @@ common:
 - url: https://docs.toolhouse.ai/toolhouse/developers/workers-api
   name: Toolhouse Workers API Documentation
   type: Documentation
-  description: Developer documentation for the Toolhouse Workers API used to invoke deployed workers
-    over HTTP with text and NDJSON streaming, stateful run IDs, and conversation continuation.
+  description: Developer documentation for the Toolhouse Workers API used to invoke deployed workers over
+    HTTP with text and NDJSON streaming, stateful run IDs, and conversation continuation.
 - url: https://docs.toolhouse.ai/toolhouse/developers/authentication
   name: Toolhouse Authentication Documentation
   type: Authentication
@@ -326,8 +324,7 @@ common:
 - url: https://toolhouse.ai/blog/introducing-mcp-discovery-effortless-agent-superpowers-in-toolhouse
   name: Introducing MCP Discovery
   type: Article
-  description: Announcement of MCP Discovery for effortless agent capability expansion through MCP
-    servers.
+  description: Announcement of MCP Discovery for effortless agent capability expansion through MCP servers.
 - url: https://toolhouse.ai/blog/introducing-toolhouse-rag-free-yourself-from-rag-complexity
   name: Toolhouse RAG Announcement
   type: Article
@@ -345,18 +342,18 @@ common:
 - url: plans/toolhouse-plans-pricing.yml
   name: Toolhouse Plans And Pricing
   type: Plans
-  description: API Commons Plans 0.1 description of Toolhouse's published pricing tiers (Business,
-    Business Max, Enterprise) reconciled against toolhouse.ai/pricing on 2026-05-22.
+  description: API Commons Plans 0.1 description of Toolhouse's published pricing tiers (Business, Business
+    Max, Enterprise) reconciled against toolhouse.ai/pricing on 2026-05-22.
 - url: rate-limits/toolhouse-rate-limits.yml
   name: Toolhouse Rate Limits
   type: RateLimits
-  description: API Commons Rate Limits 0.1 description of Toolhouse's credit-based quotas, per-tier
-    request defaults, schedule minimum interval, and attachment constraints.
+  description: API Commons Rate Limits 0.1 description of Toolhouse's credit-based quotas, per-tier request
+    defaults, schedule minimum interval, and attachment constraints.
 - url: finops/toolhouse-finops.yml
   name: Toolhouse FinOps
   type: FinOps
-  description: FOCUS-aligned FinOps framework definition mapping Toolhouse credit consumption and
-    operational meters for cost allocation and unit economics.
+  description: FOCUS-aligned FinOps framework definition mapping Toolhouse credit consumption and operational
+    meters for cost allocation and unit economics.
 - url: json-ld/toolhouse-context.jsonld
   name: Toolhouse JSON-LD Context
   type: JSONLD
@@ -454,32 +451,53 @@ common:
   url: https://github.com/toolhouseai/toolhouse-mcp
   type: MCPServer
 created: '2026-03-26'
-modified: '2026-05-22'
+modified: '2026-09-16'
 position: Consuming
 segments:
 - AI Agents
 - AI Workers
 - Agent Infrastructure
-description: |-
-  Toolhouse is a Backend-as-a-Service platform for building, deploying, and managing "AI workers"
-  (Toolhouse's current product noun, used interchangeably with "AI agents"). The homepage frames the value
-  proposition as "Turn your AI chats into affordable and reliable AI workers that do work while you're
+description: 'Toolhouse is a Backend-as-a-Service platform for building, deploying, and managing "AI workers"
+
+  (Toolhouse''s current product noun, used interchangeably with "AI agents"). The homepage frames the
+  value
+
+  proposition as "Turn your AI chats into affordable and reliable AI workers that do work while you''re
+
   busy," and the docs define a worker as "a system that carries out a task with three components: a trigger,
+
   a process that may include specialized skills, and tools or systems it can connect to." Builders describe
-  a task in plain language in the Agent Editor and ship a worker to production; developers can do the same
-  programmatically via SDKs. Every worker is automatically wired into Toolhouse's pre-integrated
+
+  a task in plain language in the Agent Editor and ship a worker to production; developers can do the
+  same
+
+  programmatically via SDKs. Every worker is automatically wired into Toolhouse''s pre-integrated
+
   capabilities, including web and social media search, scraping, Toolhouse RAG, persistent memory, the
+
   Virtual Computer code-execution sandbox, image generation/editing and vision, document parsing, file
+
   download, and MCP Discovery for connecting to thousands of MCP servers at runtime. The platform exposes
+
   a Workers API (agents.toolhouse.ai) for invoking deployed workers over REST with text and NDJSON
-  streaming and stateful conversation continuity (X-Toolhouse-Run-ID), a Platform API for full worker and
+
+  streaming and stateful conversation continuity (X-Toolhouse-Run-ID), a Platform API for full worker
+  and
+
   run lifecycle management, scheduling (10-minute minimum cadence), metrics, monetization, and integrations,
-  plus no-code workflow integration through Zapier and Toolhouse n8n Nodes. Toolhouse runs on a broad model
+
+  plus no-code workflow integration through Zapier and Toolhouse n8n Nodes. Toolhouse runs on a broad
+  model
+
   substrate including OpenAI, Anthropic, Together AI, Groq, and NVIDIA model offerings. The current public
+
   pricing surface is Business ($500/mo, 25,000 credits, 50 workers), Business Max ($1,200/mo, 80,000
+
   credits, 500 workers), and custom Enterprise — all plans include "free unlimited tokens" and a 14-day
+
   free trial. Toolhouse reports 7,000+ teams on the platform and 40+ integrations and is backed by
-  NextGenerationEU funding.
+
+  NextGenerationEU funding.'
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
