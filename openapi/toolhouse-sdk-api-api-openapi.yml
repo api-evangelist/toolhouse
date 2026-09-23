@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Toolhouse Agent Runs SDK API API
+  title: Toolhouse SDK API
   description: All the API! \o/
   version: 0.1.0
 tags:
@@ -319,7 +319,26 @@ paths:
       tags:
       - SDK API
       summary: Patch Chat
-      description: "Patches a chat.\n\nThis endpoint allows users to update specific fields of a chat identified by its `chat_id`.\n\n- **chat_id**: The unique identifier of the chat to be patched. This field cannot be updated.\n- **request**: A ChatModel object containing the fields to be updated. Only fields that are provided\n  will be updated. The ID of the user who owns the chat and the chat's ID cannot be updated.\n\n**Responses:**\n- 200: Returns the updated ChatModel.\n- 404: If the chat is not found.\n- 500: If there is an internal server error."
+      description: 'Patches a chat.
+
+
+        This endpoint allows users to update specific fields of a chat identified by its `chat_id`.
+
+
+        - **chat_id**: The unique identifier of the chat to be patched. This field cannot be updated.
+
+        - **request**: A ChatModel object containing the fields to be updated. Only fields that are provided
+
+        will be updated. The ID of the user who owns the chat and the chat''s ID cannot be updated.
+
+
+        **Responses:**
+
+        - 200: Returns the updated ChatModel.
+
+        - 404: If the chat is not found.
+
+        - 500: If there is an internal server error.'
       operationId: patch_chat_v1_agents__chat_id__patch
       security:
       - HTTPBearer: []
@@ -903,47 +922,211 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    VibeCoderListResponse:
+    AgentFileModel:
       properties:
-        services:
-          items:
-            $ref: '#/components/schemas/Service'
-          type: array
-          title: Services
+        filename:
+          type: string
+          maxLength: 255
+          minLength: 1
+          title: Filename
+          description: Original filename
+        mime_type:
+          type: string
+          title: Mime Type
+          description: MIME type of the file
+        storage_url:
+          type: string
+          minLength: 1
+          format: uri
+          title: Storage Url
+          description: External URL where the file is hosted
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Whether the file is active
+          default: true
+        position:
+          type: integer
+          minimum: 0.0
+          title: Position
+          description: Order position for deterministic injection
+          default: 0
+        auth:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Auth
+          description: Authentication configuration for accessing the file
+        id:
+          type: string
+          format: uuid
+          title: Id
+        agent_id:
+          type: string
+          format: uuid
+          title: Agent Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
       type: object
       required:
-      - services
-      title: VibeCoderListResponse
-    AgentRunUpdateRequest:
+      - filename
+      - mime_type
+      - storage_url
+      - id
+      - agent_id
+      - created_at
+      title: AgentFileModel
+      description: Full model with database fields (ORM model)
+    UserAuthenticated:
       properties:
-        message:
+        user_id:
           type: string
-          title: Message
+          title: User Id
+        api_key:
+          type: string
+          title: Api Key
+        authorization_header:
+          type: string
+          title: Authorization Header
+        tier:
+          type: string
+          title: Tier
       type: object
       required:
-      - message
-      title: AgentRunUpdateRequest
-    ValidationError:
+      - user_id
+      - api_key
+      - authorization_header
+      - tier
+      title: UserAuthenticated
+      description: User Authenticated
+    CliVersionResponse:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
+        installed_version:
           type: string
-          title: Message
-        type:
+          title: Installed Version
+        latest_version:
           type: string
-          title: Error Type
+          title: Latest Version
+        is_update_available:
+          type: boolean
+          title: Is Update Available
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - installed_version
+      - latest_version
+      - is_update_available
+      title: CliVersionResponse
+    AgentRequest:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prompt
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        original_chat_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Original Chat Id
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        history:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: History
+          default: []
+        public:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Public
+          default: true
+        rag:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Rag
+        system_prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: System Prompt
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+        mcp_servers:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Mcp Servers
+        tools:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Tools
+          description: List of tool slugs available to the agent
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        price_in_cents:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Price In Cents
+        trial_period_in_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Trial Period In Days
+        upsell_description:
+          anyOf:
+          - $ref: '#/components/schemas/UpsellDescription'
+          - type: 'null'
+        count_runs:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Count Runs
+      type: object
+      required:
+      - id
+      title: AgentRequest
     AgentModel:
       properties:
         id:
@@ -1076,530 +1259,6 @@ components:
       - id
       - user_id
       title: AgentModel
-    Schedule:
-      properties:
-        id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        chat_id:
-          type: string
-          format: uuid
-          title: Chat Id
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-        last_ran_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Last Ran At
-        active:
-          type: boolean
-          title: Active
-          default: true
-        archived:
-          type: boolean
-          title: Archived
-          default: false
-        cadence:
-          type: string
-          title: Cadence
-        toolhouse_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Toolhouse Id
-          default: default
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        title:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Title
-        chat_archived:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Chat Archived
-        callback_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Callback Url
-      type: object
-      required:
-      - user_id
-      - chat_id
-      - cadence
-      title: Schedule
-    AgentRun:
-      properties:
-        id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Id
-        chat_id:
-          type: string
-          format: uuid
-          title: Chat Id
-        user_id:
-          type: string
-          title: User Id
-        schedule_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Schedule Id
-        status:
-          type: string
-          enum:
-          - queued
-          - in_progress
-          - completed
-          - failed
-          title: Status
-        results:
-          anyOf:
-          - items:
-              additionalProperties: true
-              type: object
-            type: array
-          - type: 'null'
-          title: Results
-          default: []
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-        toolhouse_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Toolhouse Id
-          default: default
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        callback_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Callback Url
-        error:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Error
-      type: object
-      required:
-      - chat_id
-      - user_id
-      - status
-      title: AgentRun
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    AgentFileModel:
-      properties:
-        filename:
-          type: string
-          maxLength: 255
-          minLength: 1
-          title: Filename
-          description: Original filename
-        mime_type:
-          type: string
-          title: Mime Type
-          description: MIME type of the file
-        storage_url:
-          type: string
-          minLength: 1
-          format: uri
-          title: Storage Url
-          description: External URL where the file is hosted
-        enabled:
-          type: boolean
-          title: Enabled
-          description: Whether the file is active
-          default: true
-        position:
-          type: integer
-          minimum: 0.0
-          title: Position
-          description: Order position for deterministic injection
-          default: 0
-        auth:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Auth
-          description: Authentication configuration for accessing the file
-        id:
-          type: string
-          format: uuid
-          title: Id
-        agent_id:
-          type: string
-          format: uuid
-          title: Agent Id
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-      type: object
-      required:
-      - filename
-      - mime_type
-      - storage_url
-      - id
-      - agent_id
-      - created_at
-      title: AgentFileModel
-      description: Full model with database fields (ORM model)
-    UpsellDescription:
-      properties:
-        description:
-          type: string
-          title: Description
-        use_cases:
-          items:
-            type: string
-          type: array
-          title: Use Cases
-      type: object
-      required:
-      - description
-      - use_cases
-      title: UpsellDescription
-    ScheduleUpdateRequest:
-      properties:
-        active:
-          type: boolean
-          title: Active
-          default: true
-        cadence:
-          type: string
-          title: Cadence
-        toolhouse_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Toolhouse Id
-          default: default
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        chat_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Chat Id
-        callback_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Callback Url
-      type: object
-      required:
-      - cadence
-      title: ScheduleUpdateRequest
-    CliVersionResponse:
-      properties:
-        installed_version:
-          type: string
-          title: Installed Version
-        latest_version:
-          type: string
-          title: Latest Version
-        is_update_available:
-          type: boolean
-          title: Is Update Available
-      type: object
-      required:
-      - installed_version
-      - latest_version
-      - is_update_available
-      title: CliVersionResponse
-    UserFeedbackRequest:
-      properties:
-        user_feedback:
-          type: string
-          enum:
-          - approved
-          - rejected
-          - pending
-          title: User Feedback
-      type: object
-      required:
-      - user_feedback
-      title: UserFeedbackRequest
-    ScheduleRequest:
-      properties:
-        chat_id:
-          type: string
-          format: uuid
-          title: Chat Id
-        cadence:
-          type: string
-          title: Cadence
-        toolhouse_id:
-          type: string
-          title: Toolhouse Id
-          default: default
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        callback_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Callback Url
-      type: object
-      required:
-      - chat_id
-      - cadence
-      title: ScheduleRequest
-    UserAuthenticated:
-      properties:
-        user_id:
-          type: string
-          title: User Id
-        api_key:
-          type: string
-          title: Api Key
-        authorization_header:
-          type: string
-          title: Authorization Header
-        tier:
-          type: string
-          title: Tier
-      type: object
-      required:
-      - user_id
-      - api_key
-      - authorization_header
-      - tier
-      title: UserAuthenticated
-      description: User Authenticated
-    Service:
-      properties:
-        name:
-          type: string
-          title: Name
-        url:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Url
-      type: object
-      required:
-      - name
-      - url
-      title: Service
-    AgentRunRequest:
-      properties:
-        chat_id:
-          type: string
-          format: uuid
-          title: Chat Id
-        schedule_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Schedule Id
-        toolhouse_id:
-          type: string
-          title: Toolhouse Id
-          default: default
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        callback_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Callback Url
-      type: object
-      required:
-      - chat_id
-      title: AgentRunRequest
-    AgentRequest:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        prompt:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Prompt
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        original_chat_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Original Chat Id
-        title:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Title
-        history:
-          anyOf:
-          - items:
-              additionalProperties: true
-              type: object
-            type: array
-          - type: 'null'
-          title: History
-          default: []
-        public:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Public
-          default: true
-        rag:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Rag
-        system_prompt:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: System Prompt
-        model:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Model
-        mcp_servers:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Mcp Servers
-        tools:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Tools
-          description: List of tool slugs available to the agent
-        slug:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Slug
-        price_in_cents:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Price In Cents
-        trial_period_in_days:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Trial Period In Days
-        upsell_description:
-          anyOf:
-          - $ref: '#/components/schemas/UpsellDescription'
-          - type: 'null'
-        count_runs:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Count Runs
-      type: object
-      required:
-      - id
-      title: AgentRequest
     AgentRequestPartial:
       properties:
         id:
@@ -1703,17 +1362,23 @@ components:
           - type: 'null'
       type: object
       title: AgentRequestPartial
-    ScheduleListResponse:
+    VibeCoderPromptResponse:
       properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Schedule'
-          type: array
-          title: Data
+        prompt:
+          type: string
+          title: Prompt
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
       type: object
       required:
-      - data
-      title: ScheduleListResponse
+      - prompt
+      - url
+      title: VibeCoderPromptResponse
+      description: Vibe Coder Response
     AgentRunResponse:
       properties:
         id:
@@ -1791,6 +1456,54 @@ components:
       - chat_id
       - status
       title: AgentRunResponse
+    ScheduleUpdateRequest:
+      properties:
+        active:
+          type: boolean
+          title: Active
+          default: true
+        cadence:
+          type: string
+          title: Cadence
+        toolhouse_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        chat_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Chat Id
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+      type: object
+      required:
+      - cadence
+      title: ScheduleUpdateRequest
+    AgentRunUpdateRequest:
+      properties:
+        message:
+          type: string
+          title: Message
+      type: object
+      required:
+      - message
+      title: AgentRunUpdateRequest
     AgentFileListResponse:
       properties:
         data:
@@ -1803,17 +1516,102 @@ components:
       - data
       title: AgentFileListResponse
       description: API response wrapper for multiple files
-    AgentRunListResponse:
+    UpsellDescription:
       properties:
-        data:
+        description:
+          type: string
+          title: Description
+        use_cases:
           items:
-            $ref: '#/components/schemas/AgentRun'
+            type: string
           type: array
-          title: Data
+          title: Use Cases
       type: object
       required:
-      - data
-      title: AgentRunListResponse
+      - description
+      - use_cases
+      title: UpsellDescription
+    AgentRun:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        user_id:
+          type: string
+          title: User Id
+        schedule_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Schedule Id
+        status:
+          type: string
+          enum:
+          - queued
+          - in_progress
+          - completed
+          - failed
+          title: Status
+        results:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: Results
+          default: []
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        toolhouse_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+      type: object
+      required:
+      - chat_id
+      - user_id
+      - status
+      title: AgentRun
     BaseKV:
       properties:
         key:
@@ -1828,6 +1626,175 @@ components:
       required:
       - key
       title: BaseKV
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    UserFeedbackRequest:
+      properties:
+        user_feedback:
+          type: string
+          enum:
+          - approved
+          - rejected
+          - pending
+          title: User Feedback
+      type: object
+      required:
+      - user_feedback
+      title: UserFeedbackRequest
+    Schedule:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        last_ran_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Ran At
+        active:
+          type: boolean
+          title: Active
+          default: true
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+        cadence:
+          type: string
+          title: Cadence
+        toolhouse_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        chat_archived:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Chat Archived
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+      type: object
+      required:
+      - user_id
+      - chat_id
+      - cadence
+      title: Schedule
+    AgentRunListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AgentRun'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AgentRunListResponse
+    AgentRunRequest:
+      properties:
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        schedule_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Schedule Id
+        toolhouse_id:
+          type: string
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+      type: object
+      required:
+      - chat_id
+      title: AgentRunRequest
+    ScheduleListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Schedule'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: ScheduleListResponse
+    VibeCoderListResponse:
+      properties:
+        services:
+          items:
+            $ref: '#/components/schemas/Service'
+          type: array
+          title: Services
+      type: object
+      required:
+      - services
+      title: VibeCoderListResponse
     CliTelemetryEvents:
       properties:
         session_id:
@@ -1844,6 +1811,27 @@ components:
       - session_id
       - events
       title: CliTelemetryEvents
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     AgentRunAPIResponse:
       properties:
         data:
@@ -1852,11 +1840,11 @@ components:
       required:
       - data
       title: AgentRunAPIResponse
-    VibeCoderPromptResponse:
+    Service:
       properties:
-        prompt:
+        name:
           type: string
-          title: Prompt
+          title: Name
         url:
           type: string
           maxLength: 2083
@@ -1865,10 +1853,41 @@ components:
           title: Url
       type: object
       required:
-      - prompt
+      - name
       - url
-      title: VibeCoderPromptResponse
-      description: Vibe Coder Response
+      title: Service
+    ScheduleRequest:
+      properties:
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        cadence:
+          type: string
+          title: Cadence
+        toolhouse_id:
+          type: string
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+      type: object
+      required:
+      - chat_id
+      - cadence
+      title: ScheduleRequest
   securitySchemes:
     HTTPBearer:
       type: http

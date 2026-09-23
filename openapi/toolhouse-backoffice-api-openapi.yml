@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Toolhouse Agent Runs Backoffice API
+  title: Toolhouse Backoffice API
   description: All the API! \o/
   version: 0.1.0
 tags:
@@ -416,7 +416,6 @@ paths:
       tags:
       - Backoffice
       summary: Perform Cleanup Tasks
-      description: Perform Cleanup Tasks
       operationId: perform_cleanup_tasks_backoffice_cleanup_post
       responses:
         '200':
@@ -443,52 +442,32 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    User:
+    UserCreate:
       properties:
-        id:
-          type: string
-          title: Id
-        auth_id:
-          type: string
-          title: Auth Id
-        email:
-          type: string
-          title: Email
-        created_at:
+        first_name:
           anyOf:
           - type: string
-            format: date-time
           - type: 'null'
-          title: Created At
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        verified:
+          type: boolean
+          title: Verified
+          default: false
       type: object
       required:
-      - id
-      - auth_id
       - email
-      title: User
-      description: User
-    UpdateMonthlyCreditAllowance:
-      properties:
-        amount:
-          type: integer
-          title: Amount
-      type: object
-      required:
-      - amount
-      title: UpdateMonthlyCreditAllowance
-      description: Update Monthly Credit Allowance
-    ScheduleListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Schedule'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: ScheduleListResponse
-    BaseApiKey:
+      title: UserCreate
+      description: User model for the backend API.
+    ApiKey:
       properties:
         id:
           type: integer
@@ -503,60 +482,17 @@ components:
           type: boolean
           title: Archived
           default: false
+        api_key:
+          type: string
+          title: Api Key
       type: object
       required:
       - id
       - user_id
       - name
-      title: BaseApiKey
-    AgentExecutionCredits:
-      properties:
-        user_id:
-          type: string
-          title: User Id
-        total_executions:
-          type: integer
-          title: Total Executions
-        allowed_monthly_executions:
-          type: integer
-          title: Allowed Monthly Executions
-        reset_datetime:
-          type: string
-          format: date-time
-          title: Reset Datetime
-        last_reset_datetime:
-          type: string
-          format: date-time
-          title: Last Reset Datetime
-          default: '2026-05-15T16:42:26.132612Z'
-      type: object
-      required:
-      - user_id
-      - total_executions
-      - allowed_monthly_executions
-      - reset_datetime
-      title: AgentExecutionCredits
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - api_key
+      title: ApiKey
+      description: API Key
     ScheduleBackofficeRequest:
       properties:
         id:
@@ -569,51 +505,6 @@ components:
       required:
       - id
       title: ScheduleBackofficeRequest
-    MCPServer:
-      properties:
-        qualified_name:
-          type: string
-          title: Qualified Name
-          description: Fully qualified server name
-        display_name:
-          type: string
-          title: Display Name
-          description: Display name for the server
-        description:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Description
-          description: Server description
-        use_count:
-          type: integer
-          minimum: 0.0
-          title: Use Count
-          description: Number of times the server has been used
-        is_remote:
-          type: boolean
-          title: Is Remote
-          description: True if server is designed to run remotely
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-          description: Creation timestamp
-        homepage:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Homepage
-          description: Link to Smithery server page
-      type: object
-      required:
-      - qualified_name
-      - display_name
-      - use_count
-      - is_remote
-      - created_at
-      title: MCPServer
-      description: MCP Server model for database storage
     AgentRun:
       properties:
         id:
@@ -695,31 +586,147 @@ components:
       - user_id
       - status
       title: AgentRun
-    UserCreate:
+    BaseApiKey:
       properties:
-        first_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: First Name
-        last_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Last Name
-        email:
+        id:
+          type: integer
+          title: Id
+        user_id:
           type: string
-          format: email
-          title: Email
-        verified:
+          title: User Id
+        name:
+          type: string
+          title: Name
+        archived:
           type: boolean
-          title: Verified
+          title: Archived
           default: false
       type: object
       required:
+      - id
+      - user_id
+      - name
+      title: BaseApiKey
+    UpdateMonthlyCreditAllowance:
+      properties:
+        amount:
+          type: integer
+          title: Amount
+      type: object
+      required:
+      - amount
+      title: UpdateMonthlyCreditAllowance
+      description: Update Monthly Credit Allowance
+    ScheduleListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Schedule'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: ScheduleListResponse
+    MCPServer:
+      properties:
+        qualified_name:
+          type: string
+          title: Qualified Name
+          description: Fully qualified server name
+        display_name:
+          type: string
+          title: Display Name
+          description: Display name for the server
+        description:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Description
+          description: Server description
+        use_count:
+          type: integer
+          minimum: 0.0
+          title: Use Count
+          description: Number of times the server has been used
+        is_remote:
+          type: boolean
+          title: Is Remote
+          description: True if server is designed to run remotely
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+          description: Creation timestamp
+        homepage:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Homepage
+          description: Link to Smithery server page
+      type: object
+      required:
+      - qualified_name
+      - display_name
+      - use_count
+      - is_remote
+      - created_at
+      title: MCPServer
+      description: MCP Server model for database storage
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    User:
+      properties:
+        id:
+          type: string
+          title: Id
+        auth_id:
+          type: string
+          title: Auth Id
+        email:
+          type: string
+          title: Email
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+      type: object
+      required:
+      - id
+      - auth_id
       - email
-      title: UserCreate
-      description: User model for the backend API.
+      title: User
+      description: User
     Schedule:
       properties:
         id:
@@ -800,41 +807,33 @@ components:
       - chat_id
       - cadence
       title: Schedule
-    ApiKey:
+    AgentExecutionCredits:
       properties:
-        id:
-          type: integer
-          title: Id
         user_id:
           type: string
           title: User Id
-        name:
+        total_executions:
+          type: integer
+          title: Total Executions
+        allowed_monthly_executions:
+          type: integer
+          title: Allowed Monthly Executions
+        reset_datetime:
           type: string
-          title: Name
-        archived:
-          type: boolean
-          title: Archived
-          default: false
-        api_key:
+          format: date-time
+          title: Reset Datetime
+        last_reset_datetime:
           type: string
-          title: Api Key
+          format: date-time
+          title: Last Reset Datetime
+          default: '2026-05-15T16:42:26.132612Z'
       type: object
       required:
-      - id
       - user_id
-      - name
-      - api_key
-      title: ApiKey
-      description: API Key
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      - total_executions
+      - allowed_monthly_executions
+      - reset_datetime
+      title: AgentExecutionCredits
   securitySchemes:
     HTTPBearer:
       type: http

@@ -1,17 +1,11 @@
 {
   "provider": "toolhouse",
   "sources": [
-    "toolhouse-agent-runs-api-openapi.yml",
-    "toolhouse-api-keys-api-openapi.yml",
-    "toolhouse-backoffice-api-openapi.yml",
-    "toolhouse-logs-api-openapi.yml",
-    "toolhouse-metrics-api-openapi.yml",
-    "toolhouse-sdk-api-api-openapi.yml",
-    "toolhouse-user-api-api-openapi.yml"
+    "_original/toolhouse-openapi-original.yml"
   ],
   "outputs": [
-    "toolhouse-agent-runs-api-openapi.yml",
     "toolhouse-api-keys-api-openapi.yml",
+    "toolhouse-agent-runs-api-openapi.yml",
     "toolhouse-backoffice-api-openapi.yml",
     "toolhouse-logs-api-openapi.yml",
     "toolhouse-metrics-api-openapi.yml",
@@ -21,6 +15,25 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "toolhouse-openapi-original.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "toolhouse-openapi-original.yml: declared missing tag: API Keys",
+    "toolhouse-openapi-original.yml: declared missing tag: Agent Runs",
+    "toolhouse-openapi-original.yml: declared missing tag: Backoffice",
+    "toolhouse-openapi-original.yml: declared missing tag: Logs",
+    "toolhouse-openapi-original.yml: declared missing tag: Metrics",
+    "toolhouse-openapi-original.yml: declared missing tag: SDK API",
+    "toolhouse-openapi-original.yml: declared missing tag: User API",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "toolhouse-agent-runs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toolhouse-api-keys-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toolhouse-backoffice-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toolhouse-logs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toolhouse-metrics-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toolhouse-sdk-api-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "toolhouse-user-api-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
