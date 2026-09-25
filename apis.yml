@@ -183,6 +183,8 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/toolhouse.png
 access: 3rd-Party
 common:
+- type: VendorFacets
+  url: vendor-facets/toolhouse-vendor-facets.yml
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/toolhouse/overview
 - type: AgenticAccess
