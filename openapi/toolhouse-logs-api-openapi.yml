@@ -82,6 +82,15 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -103,34 +112,6 @@ components:
       - msg
       - type
       title: ValidationError
-    ToolExecutionLogsResponse:
-      properties:
-        logs:
-          items:
-            $ref: '#/components/schemas/ToolExecutionLog'
-          type: array
-          title: Logs
-        next_cursor:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - logs
-      - next_cursor
-      title: ToolExecutionLogsResponse
-      description: Tool Execution Log Response
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     ToolExecutionLog:
       properties:
         user_id:
@@ -180,6 +161,25 @@ components:
       - id
       title: ToolExecutionLog
       description: Tool Execution Log
+    ToolExecutionLogsResponse:
+      properties:
+        logs:
+          items:
+            $ref: '#/components/schemas/ToolExecutionLog'
+          type: array
+          title: Logs
+        next_cursor:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - logs
+      - next_cursor
+      title: ToolExecutionLogsResponse
+      description: Tool Execution Log Response
   securitySchemes:
     HTTPBearer:
       type: http

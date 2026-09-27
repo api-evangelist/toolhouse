@@ -141,6 +141,47 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ApiKeyCreate:
+      properties:
+        name:
+          type: string
+          title: Name
+      type: object
+      required:
+      - name
+      title: ApiKeyCreate
+      description: API Key Create
+    ApiKeyHidden:
+      properties:
+        id:
+          type: integer
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        name:
+          type: string
+          title: Name
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+      type: object
+      required:
+      - id
+      - user_id
+      - name
+      title: ApiKeyHidden
+      description: API Key Hidden
     ApiKey:
       properties:
         id:
@@ -167,16 +208,6 @@ components:
       - api_key
       title: ApiKey
       description: API Key
-    ApiKeyCreate:
-      properties:
-        name:
-          type: string
-          title: Name
-      type: object
-      required:
-      - name
-      title: ApiKeyCreate
-      description: API Key Create
     ValidationError:
       properties:
         loc:
@@ -198,37 +229,6 @@ components:
       - msg
       - type
       title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ApiKeyHidden:
-      properties:
-        id:
-          type: integer
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        name:
-          type: string
-          title: Name
-        archived:
-          type: boolean
-          title: Archived
-          default: false
-      type: object
-      required:
-      - id
-      - user_id
-      - name
-      title: ApiKeyHidden
-      description: API Key Hidden
   securitySchemes:
     HTTPBearer:
       type: http

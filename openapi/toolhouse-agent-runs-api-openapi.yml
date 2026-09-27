@@ -153,24 +153,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    AgentRunViewListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AgentRunView'
-          type: array
-          title: Data
-        next_cursor:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: AgentRunViewListResponse
     AgentRunView:
       properties:
         id:
@@ -260,6 +242,33 @@ components:
       - title
       - chat_archived
       title: AgentRunView
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    AgentRunViewListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AgentRunView'
+          type: array
+          title: Data
+        next_cursor:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: AgentRunViewListResponse
     McpServerLog:
       properties:
         id:
@@ -304,6 +313,27 @@ components:
       - start_time
       - end_time
       title: McpServerLog
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     AgentRunLog:
       properties:
         id:
@@ -358,36 +388,6 @@ components:
       - agent_id
       - type
       title: AgentRunLog
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
   securitySchemes:
     HTTPBearer:
       type: http
