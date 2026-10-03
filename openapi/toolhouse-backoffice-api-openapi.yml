@@ -442,30 +442,16 @@ paths:
       - HTTPBearer: []
 components:
   schemas:
-    User:
+    UpdateMonthlyCreditAllowance:
       properties:
-        id:
-          type: string
-          title: Id
-        auth_id:
-          type: string
-          title: Auth Id
-        email:
-          type: string
-          title: Email
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
+        amount:
+          type: integer
+          title: Amount
       type: object
       required:
-      - id
-      - auth_id
-      - email
-      title: User
-      description: User
+      - amount
+      title: UpdateMonthlyCreditAllowance
+      description: Update Monthly Credit Allowance
     AgentExecutionCredits:
       properties:
         user_id:
@@ -493,162 +479,6 @@ components:
       - allowed_monthly_executions
       - reset_datetime
       title: AgentExecutionCredits
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    UpdateMonthlyCreditAllowance:
-      properties:
-        amount:
-          type: integer
-          title: Amount
-      type: object
-      required:
-      - amount
-      title: UpdateMonthlyCreditAllowance
-      description: Update Monthly Credit Allowance
-    Schedule:
-      properties:
-        id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        chat_id:
-          type: string
-          format: uuid
-          title: Chat Id
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-        last_ran_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Last Ran At
-        active:
-          type: boolean
-          title: Active
-          default: true
-        archived:
-          type: boolean
-          title: Archived
-          default: false
-        cadence:
-          type: string
-          title: Cadence
-        toolhouse_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Toolhouse Id
-          default: default
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        title:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Title
-        chat_archived:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Chat Archived
-        callback_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Callback Url
-      type: object
-      required:
-      - user_id
-      - chat_id
-      - cadence
-      title: Schedule
-    ScheduleListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Schedule'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: ScheduleListResponse
-    UserCreate:
-      properties:
-        first_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: First Name
-        last_name:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Last Name
-        email:
-          type: string
-          format: email
-          title: Email
-        verified:
-          type: boolean
-          title: Verified
-          default: false
-      type: object
-      required:
-      - email
-      title: UserCreate
-      description: User model for the backend API.
-    BaseApiKey:
-      properties:
-        id:
-          type: integer
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        name:
-          type: string
-          title: Name
-        archived:
-          type: boolean
-          title: Archived
-          default: false
-      type: object
-      required:
-      - id
-      - user_id
-      - name
-      title: BaseApiKey
     AgentRun:
       properties:
         id:
@@ -730,7 +560,43 @@ components:
       - user_id
       - status
       title: AgentRun
-    ApiKey:
+    ScheduleBackofficeRequest:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+      type: object
+      required:
+      - id
+      title: ScheduleBackofficeRequest
+    User:
+      properties:
+        id:
+          type: string
+          title: Id
+        auth_id:
+          type: string
+          title: Auth Id
+        email:
+          type: string
+          title: Email
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+      type: object
+      required:
+      - id
+      - auth_id
+      - email
+      title: User
+      description: User
+    BaseApiKey:
       properties:
         id:
           type: integer
@@ -745,50 +611,37 @@ components:
           type: boolean
           title: Archived
           default: false
-        api_key:
-          type: string
-          title: Api Key
       type: object
       required:
       - id
       - user_id
       - name
-      - api_key
-      title: ApiKey
-      description: API Key
-    ScheduleBackofficeRequest:
+      title: BaseApiKey
+    UserCreate:
       properties:
-        id:
+        first_name:
           anyOf:
           - type: string
-            format: uuid
           - type: 'null'
-          title: Id
+          title: First Name
+        last_name:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Last Name
+        email:
+          type: string
+          format: email
+          title: Email
+        verified:
+          type: boolean
+          title: Verified
+          default: false
       type: object
       required:
-      - id
-      title: ScheduleBackofficeRequest
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - email
+      title: UserCreate
+      description: User model for the backend API.
     MCPServer:
       properties:
         qualified_name:
@@ -834,6 +687,153 @@ components:
       - created_at
       title: MCPServer
       description: MCP Server model for database storage
+    Schedule:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        last_ran_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Ran At
+        active:
+          type: boolean
+          title: Active
+          default: true
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+        cadence:
+          type: string
+          title: Cadence
+        toolhouse_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        chat_archived:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Chat Archived
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+      type: object
+      required:
+      - user_id
+      - chat_id
+      - cadence
+      title: Schedule
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ApiKey:
+      properties:
+        id:
+          type: integer
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        name:
+          type: string
+          title: Name
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+        api_key:
+          type: string
+          title: Api Key
+      type: object
+      required:
+      - id
+      - user_id
+      - name
+      - api_key
+      title: ApiKey
+      description: API Key
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    ScheduleListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/Schedule'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: ScheduleListResponse
   securitySchemes:
     HTTPBearer:
       type: http

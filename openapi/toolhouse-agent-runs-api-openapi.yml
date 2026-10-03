@@ -242,15 +242,6 @@ components:
       - title
       - chat_archived
       title: AgentRunView
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
     AgentRunViewListResponse:
       properties:
         data:
@@ -269,6 +260,69 @@ components:
       - data
       - next_cursor
       title: AgentRunViewListResponse
+    AgentRunLog:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        agent_id:
+          type: string
+          format: uuid
+          title: Agent Id
+        run_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Run Id
+        type:
+          type: string
+          enum:
+          - local
+          - agent_stream
+          - agent_run
+          - agent_studio
+          - agent_studio_v3
+          title: Type
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        start_time:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start Time
+        end_time:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End Time
+      type: object
+      required:
+      - user_id
+      - agent_id
+      - type
+      title: AgentRunLog
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     McpServerLog:
       properties:
         id:
@@ -334,60 +388,6 @@ components:
       - msg
       - type
       title: ValidationError
-    AgentRunLog:
-      properties:
-        id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        agent_id:
-          type: string
-          format: uuid
-          title: Agent Id
-        run_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Run Id
-        type:
-          type: string
-          enum:
-          - local
-          - agent_stream
-          - agent_run
-          - agent_studio
-          - agent_studio_v3
-          title: Type
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-        start_time:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Start Time
-        end_time:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: End Time
-      type: object
-      required:
-      - user_id
-      - agent_id
-      - type
-      title: AgentRunLog
   securitySchemes:
     HTTPBearer:
       type: http
