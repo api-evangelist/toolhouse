@@ -2435,155 +2435,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    AgentExecutionCredits:
-      properties:
-        user_id:
-          type: string
-          title: User Id
-        total_executions:
-          type: integer
-          title: Total Executions
-        allowed_monthly_executions:
-          type: integer
-          title: Allowed Monthly Executions
-        reset_datetime:
-          type: string
-          format: date-time
-          title: Reset Datetime
-        last_reset_datetime:
-          type: string
-          format: date-time
-          title: Last Reset Datetime
-          default: '2026-05-15T16:42:26.132612Z'
-      type: object
-      required:
-      - user_id
-      - total_executions
-      - allowed_monthly_executions
-      - reset_datetime
-      title: AgentExecutionCredits
-    ApiKeyCreate:
-      properties:
-        name:
-          type: string
-          title: Name
-      type: object
-      required:
-      - name
-      title: ApiKeyCreate
-      description: API Key Create
-    AgentStudioChatUpdate:
-      properties:
-        run_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Run Id
-        visibility:
-          anyOf:
-          - $ref: '#/components/schemas/ChatVisibility'
-          - type: 'null'
-        title:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Title
-        archived:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Archived
-      type: object
-      title: AgentStudioChatUpdate
-    AgentSubscriptionListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AgentSubscriptionResponse'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: AgentSubscriptionListResponse
-    RunVolumeRow:
-      properties:
-        bucket_start:
-          type: string
-          format: date-time
-          title: Bucket Start
-        bucket_end:
-          type: string
-          format: date-time
-          title: Bucket End
-        label:
-          type: string
-          title: Label
-        total:
-          type: integer
-          title: Total
-        completed:
-          type: integer
-          title: Completed
-        failed:
-          type: integer
-          title: Failed
-        active:
-          type: integer
-          title: Active
-      type: object
-      required:
-      - bucket_start
-      - bucket_end
-      - label
-      - total
-      - completed
-      - failed
-      - active
-      title: RunVolumeRow
-    StripeResponseSuccess:
-      properties:
-        success:
-          type: boolean
-          title: Success
-      type: object
-      required:
-      - success
-      title: StripeResponseSuccess
-      description: Stripe Response Success
-    AgentSubscribeResponse:
-      properties:
-        checkout_url:
-          type: string
-          title: Checkout Url
-      type: object
-      required:
-      - checkout_url
-      title: AgentSubscribeResponse
-    AgentRunTrendPoint:
-      properties:
-        bucket_start:
-          type: string
-          format: date-time
-          title: Bucket Start
-        bucket_end:
-          type: string
-          format: date-time
-          title: Bucket End
-        label:
-          type: string
-          title: Label
-        total:
-          type: integer
-          title: Total
-      type: object
-      required:
-      - bucket_start
-      - bucket_end
-      - label
-      - total
-      title: AgentRunTrendPoint
     StripeSession:
       properties:
         price_id:
@@ -2598,53 +2449,27 @@ components:
       - session_url
       title: StripeSession
       description: Stripe Session
-    CliAuthInsertModel:
+    StripeResponseSuccess:
       properties:
-        jwt:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Jwt
-      type: object
-      title: CliAuthInsertModel
-    StripeSessionResponse:
-      properties:
-        sessions_urls:
-          items:
-            $ref: '#/components/schemas/StripeSession'
-          type: array
-          title: Sessions Urls
-        billing_portal_url:
-          type: string
-          title: Billing Portal Url
+        success:
+          type: boolean
+          title: Success
       type: object
       required:
-      - sessions_urls
-      - billing_portal_url
-      title: StripeSessionResponse
-      description: Stripe Session Response
-    HTTPValidationError:
+      - success
+      title: StripeResponseSuccess
+      description: Stripe Response Success
+    ScheduleRequest:
       properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ScheduleUpdateRequest:
-      properties:
-        active:
-          type: boolean
-          title: Active
-          default: true
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
         cadence:
           type: string
           title: Cadence
         toolhouse_id:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Toolhouse Id
           default: default
         vars:
@@ -2654,12 +2479,6 @@ components:
             type: object
           - type: 'null'
           title: Vars
-        chat_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Chat Id
         callback_url:
           anyOf:
           - type: string
@@ -2669,322 +2488,66 @@ components:
           title: Callback Url
       type: object
       required:
+      - chat_id
       - cadence
-      title: ScheduleUpdateRequest
-    VipCodeRedeemed:
+      title: ScheduleRequest
+    ApiKeyCreate:
       properties:
-        redeemed:
-          type: boolean
-          title: Redeemed
+        name:
+          type: string
+          title: Name
       type: object
       required:
-      - redeemed
-      title: VipCodeRedeemed
-    AgentFileUpdateRequest:
+      - name
+      title: ApiKeyCreate
+      description: API Key Create
+    AgentFileModel:
       properties:
         filename:
-          anyOf:
-          - type: string
-            maxLength: 255
-            minLength: 1
-          - type: 'null'
+          type: string
+          maxLength: 255
+          minLength: 1
           title: Filename
+          description: Original filename
         mime_type:
-          anyOf:
-          - type: string
-          - type: 'null'
+          type: string
           title: Mime Type
+          description: MIME type of the file
         storage_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
+          type: string
+          minLength: 1
+          format: uri
           title: Storage Url
+          description: External URL where the file is hosted
         enabled:
-          anyOf:
-          - type: boolean
-          - type: 'null'
+          type: boolean
           title: Enabled
+          description: Whether the file is active
+          default: true
         position:
-          anyOf:
-          - type: integer
-            minimum: 0.0
-          - type: 'null'
+          type: integer
+          minimum: 0.0
           title: Position
+          description: Order position for deterministic injection
+          default: 0
         auth:
           anyOf:
           - additionalProperties: true
             type: object
           - type: 'null'
           title: Auth
-      type: object
-      title: AgentFileUpdateRequest
-      description: Request model for updating an agent file (all fields optional)
-    ScheduleListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Schedule'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: ScheduleListResponse
-    MonetizationSummary:
-      properties:
-        total_subscribers:
-          type: integer
-          title: Total Subscribers
-          description: Current active/trialing subscriber count (not period-filtered)
-        total_earnings_cents:
-          type: integer
-          title: Total Earnings Cents
-          description: Total earnings in cents within the requested period
-      type: object
-      required:
-      - total_subscribers
-      - total_earnings_cents
-      title: MonetizationSummary
-    DailyEarnings:
-      properties:
-        date:
-          type: string
-          format: date
-          title: Date
-        earnings_cents:
-          type: integer
-          title: Earnings Cents
-      type: object
-      required:
-      - date
-      - earnings_cents
-      title: DailyEarnings
-    AgentSubscriptionResponse:
-      properties:
-        agent_id:
-          type: string
-          title: Agent Id
-        agent_title:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Agent Title
-        agent_slug:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Agent Slug
-        subscription_status:
-          type: string
-          enum:
-          - incomplete
-          - incomplete_expired
-          - trialing
-          - active
-          - past_due
-          - canceled
-          - unpaid
-          - paused
-          title: Subscription Status
-        trial_end:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Trial End
-        cancel_at_period_end:
-          type: boolean
-          title: Cancel At Period End
-          default: false
-        subscription_period_end:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Subscription Period End
-      type: object
-      required:
-      - agent_id
-      - subscription_status
-      title: AgentSubscriptionResponse
-    VipCodeRequest:
-      properties:
-        vip_code:
-          type: string
-          title: Vip Code
-      type: object
-      required:
-      - vip_code
-      title: VipCodeRequest
-    VipCodeRedemptionCount:
-      properties:
-        redemption_count:
-          type: integer
-          title: Redemption Count
-        vip_code:
-          type: string
-          title: Vip Code
-      type: object
-      required:
-      - redemption_count
-      - vip_code
-      title: VipCodeRedemptionCount
-    AgentRunMetricsResponse:
-      properties:
-        total_runs:
-          type: integer
-          title: Total Runs
-        completed_runs:
-          type: integer
-          title: Completed Runs
-        failed_runs:
-          type: integer
-          title: Failed Runs
-        active_runs:
-          type: integer
-          title: Active Runs
-        success_rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Success Rate
-        failure_rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Failure Rate
-        days:
-          type: integer
-          title: Days
-        bucket_hours:
-          type: integer
-          title: Bucket Hours
-        chart_rows:
-          items:
-            $ref: '#/components/schemas/RunVolumeRow'
-          type: array
-          title: Chart Rows
-        agent_rows:
-          items:
-            $ref: '#/components/schemas/AgentRunBreakdownRow'
-          type: array
-          title: Agent Rows
-      type: object
-      required:
-      - total_runs
-      - completed_runs
-      - failed_runs
-      - active_runs
-      - success_rate
-      - failure_rate
-      - days
-      - bucket_hours
-      - chart_rows
-      - agent_rows
-      title: AgentRunMetricsResponse
-    ServerWithConnections:
-      properties:
-        connections:
-          items:
-            $ref: '#/components/schemas/MCPServerConnection'
-          type: array
-          title: Connections
-        qualifiedName:
-          type: string
-          title: Qualifiedname
-          description: Fully qualified server name
-        displayName:
-          type: string
-          title: Displayname
-          description: Display name for the server
-        description:
-          type: string
-          title: Description
-          description: Server description
-        iconUrl:
-          anyOf:
-          - type: string
-            maxLength: 2083
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Iconurl
-          description: URL to the server icon
-      type: object
-      required:
-      - connections
-      - qualifiedName
-      - displayName
-      - description
-      title: ServerWithConnections
-    RunVolumeResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/RunVolumeRow'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: RunVolumeResponse
-    BucketHours:
-      type: integer
-      enum:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 6
-      - 8
-      - 12
-      - 24
-      title: BucketHours
-    AgentRunView:
-      properties:
+          description: Authentication configuration for accessing the file
         id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Id
-        chat_id:
           type: string
           format: uuid
-          title: Chat Id
-        user_id:
+          title: Id
+        agent_id:
           type: string
-          title: User Id
-        schedule_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Schedule Id
-        status:
-          type: string
-          enum:
-          - queued
-          - in_progress
-          - completed
-          - failed
-          title: Status
-        results:
-          anyOf:
-          - items:
-              additionalProperties: true
-              type: object
-            type: array
-          - type: 'null'
-          title: Results
-          default: []
+          format: uuid
+          title: Agent Id
         created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
+          type: string
+          format: date-time
           title: Created At
         updated_at:
           anyOf:
@@ -2992,45 +2555,16 @@ components:
             format: date-time
           - type: 'null'
           title: Updated At
-        toolhouse_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Toolhouse Id
-          default: default
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        callback_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Callback Url
-        error:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Error
-        title:
-          type: string
-          title: Title
-        chat_archived:
-          type: boolean
-          title: Chat Archived
       type: object
       required:
-      - chat_id
-      - user_id
-      - status
-      - title
-      - chat_archived
-      title: AgentRunView
+      - filename
+      - mime_type
+      - storage_url
+      - id
+      - agent_id
+      - created_at
+      title: AgentFileModel
+      description: Full model with database fields (ORM model)
     AgentFilePositionUpdate:
       properties:
         file_id:
@@ -3047,63 +2581,6 @@ components:
       - position
       title: AgentFilePositionUpdate
       description: Request model for batch position updates
-    Service:
-      properties:
-        name:
-          type: string
-          title: Name
-        url:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Url
-      type: object
-      required:
-      - name
-      - url
-      title: Service
-    AgentThemePreferenceResponse:
-      properties:
-        agent_id:
-          type: string
-          format: uuid
-          title: Agent Id
-        theme_color:
-          type: string
-          pattern: ^#[0-9A-F]{6}$
-          title: Theme Color
-        updated_at:
-          type: string
-          format: date-time
-          title: Updated At
-      type: object
-      required:
-      - agent_id
-      - theme_color
-      - updated_at
-      title: AgentThemePreferenceResponse
-    AgentListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AgentListItem'
-          type: array
-          title: Data
-        next_cursor:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Next Cursor
-        total_count:
-          type: integer
-          title: Total Count
-      type: object
-      required:
-      - data
-      - next_cursor
-      - total_count
-      title: AgentListResponse
     AgentRequestPartial:
       properties:
         id:
@@ -3207,6 +2684,754 @@ components:
           - type: 'null'
       type: object
       title: AgentRequestPartial
+    MonetizationSubscribersResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DailyTotalSubscribers'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: MonetizationSubscribersResponse
+    AgentSubscribeResponse:
+      properties:
+        checkout_url:
+          type: string
+          title: Checkout Url
+      type: object
+      required:
+      - checkout_url
+      title: AgentSubscribeResponse
+    VibeCoderPromptResponse:
+      properties:
+        prompt:
+          type: string
+          title: Prompt
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+      type: object
+      required:
+      - prompt
+      - url
+      title: VibeCoderPromptResponse
+      description: Vibe Coder Response
+    AgentFileCreateRequest:
+      properties:
+        filename:
+          type: string
+          maxLength: 255
+          minLength: 1
+          title: Filename
+          description: Original filename
+        mime_type:
+          type: string
+          title: Mime Type
+          description: MIME type of the file
+        storage_url:
+          type: string
+          minLength: 1
+          format: uri
+          title: Storage Url
+          description: External URL where the file is hosted
+        enabled:
+          type: boolean
+          title: Enabled
+          description: Whether the file is active
+          default: true
+        position:
+          type: integer
+          minimum: 0.0
+          title: Position
+          description: Order position for deterministic injection
+          default: 0
+        auth:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Auth
+          description: Authentication configuration for accessing the file
+      type: object
+      required:
+      - filename
+      - mime_type
+      - storage_url
+      title: AgentFileCreateRequest
+      description: Request model for creating a new agent file
+    CliAuthModel:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        user_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: User Id
+        jwt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Jwt
+      type: object
+      required:
+      - id
+      title: CliAuthModel
+    AgentRunBreakdownResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AgentRunBreakdownRow'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AgentRunBreakdownResponse
+    AgentRunTrendPoint:
+      properties:
+        bucket_start:
+          type: string
+          format: date-time
+          title: Bucket Start
+        bucket_end:
+          type: string
+          format: date-time
+          title: Bucket End
+        label:
+          type: string
+          title: Label
+        total:
+          type: integer
+          title: Total
+      type: object
+      required:
+      - bucket_start
+      - bucket_end
+      - label
+      - total
+      title: AgentRunTrendPoint
+    VibeCoderListResponse:
+      properties:
+        services:
+          items:
+            $ref: '#/components/schemas/Service'
+          type: array
+          title: Services
+      type: object
+      required:
+      - services
+      title: VibeCoderListResponse
+    RunVolumeResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/RunVolumeRow'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: RunVolumeResponse
+    AgentRequest:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Prompt
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        original_chat_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Original Chat Id
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        history:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: History
+          default: []
+        public:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Public
+          default: true
+        rag:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Rag
+        system_prompt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: System Prompt
+        model:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Model
+        mcp_servers:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Mcp Servers
+        tools:
+          anyOf:
+          - items:
+              type: string
+            type: array
+          - type: 'null'
+          title: Tools
+          description: List of tool slugs available to the agent
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        price_in_cents:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Price In Cents
+        trial_period_in_days:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Trial Period In Days
+        upsell_description:
+          anyOf:
+          - $ref: '#/components/schemas/UpsellDescription'
+          - type: 'null'
+        count_runs:
+          anyOf:
+          - type: integer
+          - type: 'null'
+          title: Count Runs
+      type: object
+      required:
+      - id
+      title: AgentRequest
+    DailyTotalSubscribers:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+        total_subscribers:
+          type: integer
+          title: Total Subscribers
+      type: object
+      required:
+      - date
+      - total_subscribers
+      title: DailyTotalSubscribers
+    VipCodeRedemptionCount:
+      properties:
+        redemption_count:
+          type: integer
+          title: Redemption Count
+        vip_code:
+          type: string
+          title: Vip Code
+      type: object
+      required:
+      - redemption_count
+      - vip_code
+      title: VipCodeRedemptionCount
+    AgentRunView:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        chat_id:
+          type: string
+          format: uuid
+          title: Chat Id
+        user_id:
+          type: string
+          title: User Id
+        schedule_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Schedule Id
+        status:
+          type: string
+          enum:
+          - queued
+          - in_progress
+          - completed
+          - failed
+          title: Status
+        results:
+          anyOf:
+          - items:
+              additionalProperties: true
+              type: object
+            type: array
+          - type: 'null'
+          title: Results
+          default: []
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        toolhouse_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+        error:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Error
+        title:
+          type: string
+          title: Title
+        chat_archived:
+          type: boolean
+          title: Chat Archived
+      type: object
+      required:
+      - chat_id
+      - user_id
+      - status
+      - title
+      - chat_archived
+      title: AgentRunView
+    StripeSessionResponse:
+      properties:
+        sessions_urls:
+          items:
+            $ref: '#/components/schemas/StripeSession'
+          type: array
+          title: Sessions Urls
+        billing_portal_url:
+          type: string
+          title: Billing Portal Url
+      type: object
+      required:
+      - sessions_urls
+      - billing_portal_url
+      title: StripeSessionResponse
+      description: Stripe Session Response
+    UpsellDescription:
+      properties:
+        description:
+          type: string
+          title: Description
+        use_cases:
+          items:
+            type: string
+          type: array
+          title: Use Cases
+      type: object
+      required:
+      - description
+      - use_cases
+      title: UpsellDescription
+    DailyEarnings:
+      properties:
+        date:
+          type: string
+          format: date
+          title: Date
+        earnings_cents:
+          type: integer
+          title: Earnings Cents
+      type: object
+      required:
+      - date
+      - earnings_cents
+      title: DailyEarnings
+    ApiKey:
+      properties:
+        id:
+          type: integer
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        name:
+          type: string
+          title: Name
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+        api_key:
+          type: string
+          title: Api Key
+      type: object
+      required:
+      - id
+      - user_id
+      - name
+      - api_key
+      title: ApiKey
+      description: API Key
+    MCPServerConnection:
+      properties:
+        type:
+          type: string
+          title: Type
+        url:
+          anyOf:
+          - type: string
+            maxLength: 2083
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Url
+        configSchema:
+          additionalProperties: true
+          type: object
+          title: Configschema
+          default: {}
+      type: object
+      required:
+      - type
+      title: MCPServerConnection
+    AgentRunMetricsResponse:
+      properties:
+        total_runs:
+          type: integer
+          title: Total Runs
+        completed_runs:
+          type: integer
+          title: Completed Runs
+        failed_runs:
+          type: integer
+          title: Failed Runs
+        active_runs:
+          type: integer
+          title: Active Runs
+        success_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Success Rate
+        failure_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Failure Rate
+        days:
+          type: integer
+          title: Days
+        bucket_hours:
+          type: integer
+          title: Bucket Hours
+        chart_rows:
+          items:
+            $ref: '#/components/schemas/RunVolumeRow'
+          type: array
+          title: Chart Rows
+        agent_rows:
+          items:
+            $ref: '#/components/schemas/AgentRunBreakdownRow'
+          type: array
+          title: Agent Rows
+      type: object
+      required:
+      - total_runs
+      - completed_runs
+      - failed_runs
+      - active_runs
+      - success_rate
+      - failure_rate
+      - days
+      - bucket_hours
+      - chart_rows
+      - agent_rows
+      title: AgentRunMetricsResponse
+    AgentFileResponse:
+      properties:
+        data:
+          $ref: '#/components/schemas/AgentFileModel'
+      type: object
+      required:
+      - data
+      title: AgentFileResponse
+      description: API response wrapper for a single file
+    AgentSubscriptionListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AgentSubscriptionResponse'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AgentSubscriptionListResponse
+    BillingInformationSubscription:
+      properties:
+        user_id:
+          type: string
+          title: User Id
+        stripe_customer_id:
+          type: string
+          title: Stripe Customer Id
+        plan_type:
+          type: string
+          enum:
+          - trial
+          - pay_as_you_go
+          - subscription
+          title: Plan Type
+        tier:
+          type: string
+          enum:
+          - sandbox
+          - pro
+          - business
+          - enterprise
+          title: Tier
+          default: sandbox
+        subscription_period_start:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Subscription Period Start
+        subscription_period_end:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Subscription Period End
+        subscription_status:
+          anyOf:
+          - type: string
+            enum:
+            - incomplete
+            - incomplete_expired
+            - trialing
+            - active
+            - past_due
+            - canceled
+            - unpaid
+            - paused
+          - type: 'null'
+          title: Subscription Status
+        interval:
+          anyOf:
+          - type: string
+            enum:
+            - day
+            - week
+            - month
+            - year
+          - type: 'null'
+          title: Interval
+        cancel_at_period_end:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Cancel At Period End
+        price_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Price Id
+      type: object
+      required:
+      - user_id
+      - stripe_customer_id
+      - plan_type
+      title: BillingInformationSubscription
+      description: Billing Information Response
+    ChatVisibility:
+      type: string
+      enum:
+      - public
+      - private
+      title: ChatVisibility
+    AgentStudioChat:
+      properties:
+        run_id:
+          type: string
+          format: uuid
+          title: Run Id
+        visibility:
+          $ref: '#/components/schemas/ChatVisibility'
+        title:
+          type: string
+          title: Title
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+        deployed:
+          type: boolean
+          title: Deployed
+          default: false
+        user_id:
+          type: string
+          title: User Id
+        created_at:
+          type: string
+          format: date-time
+          title: Created At
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+        last_ran_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Ran At
+        sandbox_agent_id:
+          type: string
+          format: uuid
+          title: Sandbox Agent Id
+      type: object
+      required:
+      - run_id
+      - visibility
+      - title
+      - user_id
+      - created_at
+      - updated_at
+      - sandbox_agent_id
+      title: AgentStudioChat
+    ScheduleUpdateRequest:
+      properties:
+        active:
+          type: boolean
+          title: Active
+          default: true
+        cadence:
+          type: string
+          title: Cadence
+        toolhouse_id:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Toolhouse Id
+          default: default
+        vars:
+          anyOf:
+          - additionalProperties:
+              type: string
+            type: object
+          - type: 'null'
+          title: Vars
+        chat_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Chat Id
+        callback_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Callback Url
+      type: object
+      required:
+      - cadence
+      title: ScheduleUpdateRequest
+    AgentStudioChatUpdate:
+      properties:
+        run_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Run Id
+        visibility:
+          anyOf:
+          - $ref: '#/components/schemas/ChatVisibility'
+          - type: 'null'
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        archived:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Archived
+      type: object
+      title: AgentStudioChatUpdate
     Schedule:
       properties:
         id:
@@ -3331,177 +3556,162 @@ components:
       - start_time
       - end_time
       title: McpServerLog
-    DailyTotalSubscribers:
+    ServerWithConnections:
       properties:
-        date:
-          type: string
-          format: date
-          title: Date
-        total_subscribers:
-          type: integer
-          title: Total Subscribers
-      type: object
-      required:
-      - date
-      - total_subscribers
-      title: DailyTotalSubscribers
-    ChatVisibility:
-      type: string
-      enum:
-      - public
-      - private
-      title: ChatVisibility
-    VibeCoderListResponse:
-      properties:
-        services:
+        connections:
           items:
-            $ref: '#/components/schemas/Service'
+            $ref: '#/components/schemas/MCPServerConnection'
           type: array
-          title: Services
+          title: Connections
+        qualifiedName:
+          type: string
+          title: Qualifiedname
+          description: Fully qualified server name
+        displayName:
+          type: string
+          title: Displayname
+          description: Display name for the server
+        description:
+          type: string
+          title: Description
+          description: Server description
+        iconUrl:
+          anyOf:
+          - type: string
+            maxLength: 2083
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Iconurl
+          description: URL to the server icon
       type: object
       required:
-      - services
-      title: VibeCoderListResponse
-    AgentSubscribeRequest:
+      - connections
+      - qualifiedName
+      - displayName
+      - description
+      title: ServerWithConnections
+    VipCodeRequest:
       properties:
-        success_url:
+        vip_code:
           type: string
-          title: Success Url
-        cancel_url:
-          type: string
-          title: Cancel Url
+          title: Vip Code
       type: object
       required:
-      - success_url
-      - cancel_url
-      title: AgentSubscribeRequest
-    AgentStudioChat:
+      - vip_code
+      title: VipCodeRequest
+    ValidationError:
       properties:
-        run_id:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
           type: string
-          format: uuid
-          title: Run Id
-        visibility:
-          $ref: '#/components/schemas/ChatVisibility'
-        title:
+          title: Message
+        type:
           type: string
-          title: Title
-        archived:
-          type: boolean
-          title: Archived
-          default: false
-        deployed:
-          type: boolean
-          title: Deployed
-          default: false
-        user_id:
-          type: string
-          title: User Id
-        created_at:
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    RunVolumeRow:
+      properties:
+        bucket_start:
           type: string
           format: date-time
-          title: Created At
-        updated_at:
+          title: Bucket Start
+        bucket_end:
           type: string
           format: date-time
-          title: Updated At
-        last_ran_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Last Ran At
-        sandbox_agent_id:
+          title: Bucket End
+        label:
           type: string
-          format: uuid
-          title: Sandbox Agent Id
-      type: object
-      required:
-      - run_id
-      - visibility
-      - title
-      - user_id
-      - created_at
-      - updated_at
-      - sandbox_agent_id
-      title: AgentStudioChat
-    AgentListItem:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        title:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Title
-        slug:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Slug
-        public:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Public
-        user_id:
-          type: string
-          title: User Id
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-        last_ran_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Last Ran At
-        count_runs:
+          title: Label
+        total:
           type: integer
-          title: Count Runs
-          default: 0
+          title: Total
+        completed:
+          type: integer
+          title: Completed
+        failed:
+          type: integer
+          title: Failed
+        active:
+          type: integer
+          title: Active
       type: object
       required:
-      - id
-      - user_id
-      title: AgentListItem
-    MonetizationSubscribersResponse:
+      - bucket_start
+      - bucket_end
+      - label
+      - total
+      - completed
+      - failed
+      - active
+      title: RunVolumeRow
+    TransferAgentRequest:
+      properties:
+        recipient_email:
+          type: string
+          title: Recipient Email
+          description: Email of the recipient user
+      type: object
+      required:
+      - recipient_email
+      title: TransferAgentRequest
+    AgentRunViewListResponse:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/DailyTotalSubscribers'
+            $ref: '#/components/schemas/AgentRunView'
+          type: array
+          title: Data
+        next_cursor:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: AgentRunViewListResponse
+    MonetizationEarningsResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/DailyEarnings'
           type: array
           title: Data
       type: object
       required:
       - data
-      title: MonetizationSubscribersResponse
-    BillingInformationSubscription:
+      title: MonetizationEarningsResponse
+    UserWithTier:
       properties:
-        user_id:
+        id:
           type: string
-          title: User Id
-        stripe_customer_id:
+          title: Id
+        auth_id:
           type: string
-          title: Stripe Customer Id
-        plan_type:
+          title: Auth Id
+        email:
           type: string
-          enum:
-          - trial
-          - pay_as_you_go
-          - subscription
-          title: Plan Type
+          title: Email
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
         tier:
           type: string
           enum:
@@ -3511,152 +3721,13 @@ components:
           - enterprise
           title: Tier
           default: sandbox
-        subscription_period_start:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Subscription Period Start
-        subscription_period_end:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Subscription Period End
-        subscription_status:
-          anyOf:
-          - type: string
-            enum:
-            - incomplete
-            - incomplete_expired
-            - trialing
-            - active
-            - past_due
-            - canceled
-            - unpaid
-            - paused
-          - type: 'null'
-          title: Subscription Status
-        interval:
-          anyOf:
-          - type: string
-            enum:
-            - day
-            - week
-            - month
-            - year
-          - type: 'null'
-          title: Interval
-        cancel_at_period_end:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Cancel At Period End
-        price_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Price Id
       type: object
       required:
-      - user_id
-      - stripe_customer_id
-      - plan_type
-      title: BillingInformationSubscription
-      description: Billing Information Response
-    StripeSessionRequest:
-      properties:
-        price_ids:
-          items:
-            type: string
-          type: array
-          title: Price Ids
-        success_payment_url:
-          type: string
-          title: Success Payment Url
-        cancel_payment_url:
-          type: string
-          title: Cancel Payment Url
-        billing_url:
-          type: string
-          title: Billing Url
-        mode:
-          type: string
-          enum:
-          - subscription
-          - payment
-          title: Mode
-          default: subscription
-      type: object
-      required:
-      - price_ids
-      - success_payment_url
-      - cancel_payment_url
-      - billing_url
-      title: StripeSessionRequest
-      description: Stripe Session
-    AgentFileCreateRequest:
-      properties:
-        filename:
-          type: string
-          maxLength: 255
-          minLength: 1
-          title: Filename
-          description: Original filename
-        mime_type:
-          type: string
-          title: Mime Type
-          description: MIME type of the file
-        storage_url:
-          type: string
-          minLength: 1
-          format: uri
-          title: Storage Url
-          description: External URL where the file is hosted
-        enabled:
-          type: boolean
-          title: Enabled
-          description: Whether the file is active
-          default: true
-        position:
-          type: integer
-          minimum: 0.0
-          title: Position
-          description: Order position for deterministic injection
-          default: 0
-        auth:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Auth
-          description: Authentication configuration for accessing the file
-      type: object
-      required:
-      - filename
-      - mime_type
-      - storage_url
-      title: AgentFileCreateRequest
-      description: Request model for creating a new agent file
-    ToolExecutionLogsResponse:
-      properties:
-        logs:
-          items:
-            $ref: '#/components/schemas/ToolExecutionLog'
-          type: array
-          title: Logs
-        next_cursor:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - logs
-      - next_cursor
-      title: ToolExecutionLogsResponse
-      description: Tool Execution Log Response
+      - id
+      - auth_id
+      - email
+      title: UserWithTier
+      description: User with tier
     AgentRunMetricsSummary:
       properties:
         total_runs:
@@ -3690,295 +3761,6 @@ components:
       - success_rate
       - failure_rate
       title: AgentRunMetricsSummary
-    AgentFileModel:
-      properties:
-        filename:
-          type: string
-          maxLength: 255
-          minLength: 1
-          title: Filename
-          description: Original filename
-        mime_type:
-          type: string
-          title: Mime Type
-          description: MIME type of the file
-        storage_url:
-          type: string
-          minLength: 1
-          format: uri
-          title: Storage Url
-          description: External URL where the file is hosted
-        enabled:
-          type: boolean
-          title: Enabled
-          description: Whether the file is active
-          default: true
-        position:
-          type: integer
-          minimum: 0.0
-          title: Position
-          description: Order position for deterministic injection
-          default: 0
-        auth:
-          anyOf:
-          - additionalProperties: true
-            type: object
-          - type: 'null'
-          title: Auth
-          description: Authentication configuration for accessing the file
-        id:
-          type: string
-          format: uuid
-          title: Id
-        agent_id:
-          type: string
-          format: uuid
-          title: Agent Id
-        created_at:
-          type: string
-          format: date-time
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-      type: object
-      required:
-      - filename
-      - mime_type
-      - storage_url
-      - id
-      - agent_id
-      - created_at
-      title: AgentFileModel
-      description: Full model with database fields (ORM model)
-    ScheduleRequest:
-      properties:
-        chat_id:
-          type: string
-          format: uuid
-          title: Chat Id
-        cadence:
-          type: string
-          title: Cadence
-        toolhouse_id:
-          type: string
-          title: Toolhouse Id
-          default: default
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        callback_url:
-          anyOf:
-          - type: string
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Callback Url
-      type: object
-      required:
-      - chat_id
-      - cadence
-      title: ScheduleRequest
-    AgentRunLog:
-      properties:
-        id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        agent_id:
-          type: string
-          format: uuid
-          title: Agent Id
-        run_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Run Id
-        type:
-          type: string
-          enum:
-          - local
-          - agent_stream
-          - agent_run
-          - agent_studio
-          - agent_studio_v3
-          title: Type
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-        start_time:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Start Time
-        end_time:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: End Time
-      type: object
-      required:
-      - user_id
-      - agent_id
-      - type
-      title: AgentRunLog
-    MCPServerConnection:
-      properties:
-        type:
-          type: string
-          title: Type
-        url:
-          anyOf:
-          - type: string
-            maxLength: 2083
-            minLength: 1
-            format: uri
-          - type: 'null'
-          title: Url
-        configSchema:
-          additionalProperties: true
-          type: object
-          title: Configschema
-          default: {}
-      type: object
-      required:
-      - type
-      title: MCPServerConnection
-    CliAuthModel:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-        updated_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Updated At
-        user_id:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: User Id
-        jwt:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Jwt
-      type: object
-      required:
-      - id
-      title: CliAuthModel
-    VibeCoderPromptResponse:
-      properties:
-        prompt:
-          type: string
-          title: Prompt
-        url:
-          type: string
-          maxLength: 2083
-          minLength: 1
-          format: uri
-          title: Url
-      type: object
-      required:
-      - prompt
-      - url
-      title: VibeCoderPromptResponse
-      description: Vibe Coder Response
-    AgentFileListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AgentFileModel'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: AgentFileListResponse
-      description: API response wrapper for multiple files
-    SlugRequest:
-      properties:
-        agent:
-          type: string
-          title: Agent
-      type: object
-      required:
-      - agent
-      title: SlugRequest
-    AgentRunBreakdownRow:
-      properties:
-        agent_id:
-          type: string
-          format: uuid
-          title: Agent Id
-        title:
-          type: string
-          title: Title
-        total:
-          type: integer
-          title: Total
-        completed:
-          type: integer
-          title: Completed
-        failed:
-          type: integer
-          title: Failed
-        active:
-          type: integer
-          title: Active
-        success_rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Success Rate
-        latest_run_at:
-          type: string
-          format: date-time
-          title: Latest Run At
-        trend:
-          items:
-            $ref: '#/components/schemas/AgentRunTrendPoint'
-          type: array
-          title: Trend
-      type: object
-      required:
-      - agent_id
-      - title
-      - total
-      - completed
-      - failed
-      - active
-      - success_rate
-      - latest_run_at
-      - trend
-      title: AgentRunBreakdownRow
     ApiKeyHidden:
       properties:
         id:
@@ -4001,171 +3783,126 @@ components:
       - name
       title: ApiKeyHidden
       description: API Key Hidden
-    ApiKey:
+    AgentFileListResponse:
       properties:
-        id:
-          type: integer
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        name:
-          type: string
-          title: Name
-        archived:
-          type: boolean
-          title: Archived
-          default: false
-        api_key:
-          type: string
-          title: Api Key
-      type: object
-      required:
-      - id
-      - user_id
-      - name
-      - api_key
-      title: ApiKey
-      description: API Key
-    UpsellDescription:
-      properties:
-        description:
-          type: string
-          title: Description
-        use_cases:
+        data:
           items:
-            type: string
+            $ref: '#/components/schemas/AgentFileModel'
           type: array
-          title: Use Cases
+          title: Data
       type: object
       required:
-      - description
-      - use_cases
-      title: UpsellDescription
-    AgentRequest:
+      - data
+      title: AgentFileListResponse
+      description: API response wrapper for multiple files
+    VipCodeRedeemed:
+      properties:
+        redeemed:
+          type: boolean
+          title: Redeemed
+      type: object
+      required:
+      - redeemed
+      title: VipCodeRedeemed
+    MCPServerTool:
       properties:
         id:
           type: string
-          format: uuid
           title: Id
-        prompt:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Prompt
-        vars:
-          anyOf:
-          - additionalProperties:
-              type: string
-            type: object
-          - type: 'null'
-          title: Vars
-        original_chat_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Original Chat Id
+        publisher:
+          type: string
+          title: Publisher
+        tool_type:
+          type: string
+          title: Tool Type
+        logo:
+          type: string
+          title: Logo
         title:
+          type: string
+          title: Title
+        category:
+          type: string
+          title: Category
+        short_description:
+          type: string
+          title: Short Description
+        long_description:
+          type: string
+          title: Long Description
+        price_per_execution:
+          type: number
+          title: Price Per Execution
+        star_rating:
+          type: number
+          title: Star Rating
+        executions:
+          type: integer
+          title: Executions
+        description_for_model:
+          type: string
+          title: Description For Model
+        arguments:
+          items:
+            additionalProperties: true
+            type: object
+          type: array
+          title: Arguments
+        hidden:
+          type: boolean
+          title: Hidden
+        version:
+          type: string
+          title: Version
+        featured:
+          type: boolean
+          title: Featured
+        requires_config:
+          type: boolean
+          title: Requires Config
+        background_image:
           anyOf:
           - type: string
           - type: 'null'
-          title: Title
-        history:
+          title: Background Image
+        timeout:
+          type: integer
+          title: Timeout
+        connections:
           anyOf:
           - items:
               additionalProperties: true
               type: object
             type: array
           - type: 'null'
-          title: History
-          default: []
-        public:
-          anyOf:
-          - type: boolean
-          - type: 'null'
-          title: Public
-          default: true
-        rag:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Rag
-        system_prompt:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: System Prompt
-        model:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Model
-        mcp_servers:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Mcp Servers
-        tools:
-          anyOf:
-          - items:
-              type: string
-            type: array
-          - type: 'null'
-          title: Tools
-          description: List of tool slugs available to the agent
-        slug:
-          anyOf:
-          - type: string
-          - type: 'null'
-          title: Slug
-        price_in_cents:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Price In Cents
-        trial_period_in_days:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Trial Period In Days
-        upsell_description:
-          anyOf:
-          - $ref: '#/components/schemas/UpsellDescription'
-          - type: 'null'
-        count_runs:
-          anyOf:
-          - type: integer
-          - type: 'null'
-          title: Count Runs
+          title: Connections
+        installed:
+          type: boolean
+          title: Installed
+          readOnly: true
       type: object
       required:
       - id
-      title: AgentRequest
-    AgentFileBatchPositionRequest:
-      properties:
-        positions:
-          items:
-            $ref: '#/components/schemas/AgentFilePositionUpdate'
-          type: array
-          title: Positions
-      type: object
-      required:
-      - positions
-      title: AgentFileBatchPositionRequest
-      description: Request model for updating positions of multiple files
-    TransferAgentRequest:
-      properties:
-        recipient_email:
-          type: string
-          title: Recipient Email
-          description: Email of the recipient user
-      type: object
-      required:
-      - recipient_email
-      title: TransferAgentRequest
+      - publisher
+      - tool_type
+      - logo
+      - title
+      - category
+      - short_description
+      - long_description
+      - price_per_execution
+      - star_rating
+      - executions
+      - description_for_model
+      - arguments
+      - hidden
+      - version
+      - featured
+      - requires_config
+      - background_image
+      - timeout
+      - installed
+      title: MCPServerTool
     AgentModel:
       properties:
         id:
@@ -4298,200 +4035,102 @@ components:
       - id
       - user_id
       title: AgentModel
-    AgentRunBreakdownResponse:
+    AgentListResponse:
       properties:
         data:
           items:
-            $ref: '#/components/schemas/AgentRunBreakdownRow'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: AgentRunBreakdownResponse
-    AgentRunViewListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AgentRunView'
+            $ref: '#/components/schemas/AgentListItem'
           type: array
           title: Data
         next_cursor:
           anyOf:
           - type: string
-            format: date-time
           - type: 'null'
           title: Next Cursor
+        total_count:
+          type: integer
+          title: Total Count
       type: object
       required:
       - data
       - next_cursor
-      title: AgentRunViewListResponse
-    AgentThemePreferenceUpsertRequest:
+      - total_count
+      title: AgentListResponse
+    AgentSubscriptionResponse:
       properties:
-        theme_color:
+        agent_id:
           type: string
-          title: Theme Color
-      type: object
-      required:
-      - theme_color
-      title: AgentThemePreferenceUpsertRequest
-    UserFeedbackRequest:
-      properties:
-        user_feedback:
+          title: Agent Id
+        agent_title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Agent Title
+        agent_slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Agent Slug
+        subscription_status:
           type: string
           enum:
-          - approved
-          - rejected
-          - pending
-          title: User Feedback
-      type: object
-      required:
-      - user_feedback
-      title: UserFeedbackRequest
-    UserWithTier:
-      properties:
-        id:
-          type: string
-          title: Id
-        auth_id:
-          type: string
-          title: Auth Id
-        email:
-          type: string
-          title: Email
-        created_at:
+          - incomplete
+          - incomplete_expired
+          - trialing
+          - active
+          - past_due
+          - canceled
+          - unpaid
+          - paused
+          title: Subscription Status
+        trial_end:
           anyOf:
           - type: string
             format: date-time
           - type: 'null'
-          title: Created At
-        tier:
-          type: string
-          enum:
-          - sandbox
-          - pro
-          - business
-          - enterprise
-          title: Tier
-          default: sandbox
-      type: object
-      required:
-      - id
-      - auth_id
-      - email
-      title: UserWithTier
-      description: User with tier
-    MonetizationEarningsResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/DailyEarnings'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: MonetizationEarningsResponse
-    MCPServerTool:
-      properties:
-        id:
-          type: string
-          title: Id
-        publisher:
-          type: string
-          title: Publisher
-        tool_type:
-          type: string
-          title: Tool Type
-        logo:
-          type: string
-          title: Logo
-        title:
-          type: string
-          title: Title
-        category:
-          type: string
-          title: Category
-        short_description:
-          type: string
-          title: Short Description
-        long_description:
-          type: string
-          title: Long Description
-        price_per_execution:
-          type: number
-          title: Price Per Execution
-        star_rating:
-          type: number
-          title: Star Rating
-        executions:
-          type: integer
-          title: Executions
-        description_for_model:
-          type: string
-          title: Description For Model
-        arguments:
-          items:
-            additionalProperties: true
-            type: object
-          type: array
-          title: Arguments
-        hidden:
+          title: Trial End
+        cancel_at_period_end:
           type: boolean
-          title: Hidden
-        version:
-          type: string
-          title: Version
-        featured:
-          type: boolean
-          title: Featured
-        requires_config:
-          type: boolean
-          title: Requires Config
-        background_image:
+          title: Cancel At Period End
+          default: false
+        subscription_period_end:
           anyOf:
           - type: string
+            format: date-time
           - type: 'null'
-          title: Background Image
-        timeout:
-          type: integer
-          title: Timeout
-        connections:
-          anyOf:
-          - items:
-              additionalProperties: true
-              type: object
-            type: array
-          - type: 'null'
-          title: Connections
-        installed:
-          type: boolean
-          title: Installed
-          readOnly: true
+          title: Subscription Period End
       type: object
       required:
-      - id
-      - publisher
-      - tool_type
-      - logo
-      - title
-      - category
-      - short_description
-      - long_description
-      - price_per_execution
-      - star_rating
-      - executions
-      - description_for_model
-      - arguments
-      - hidden
-      - version
-      - featured
-      - requires_config
-      - background_image
-      - timeout
-      - installed
-      title: MCPServerTool
+      - agent_id
+      - subscription_status
+      title: AgentSubscriptionResponse
+    MonetizationSummary:
+      properties:
+        total_subscribers:
+          type: integer
+          title: Total Subscribers
+          description: Current active/trialing subscriber count (not period-filtered)
+        total_earnings_cents:
+          type: integer
+          title: Total Earnings Cents
+          description: Total earnings in cents within the requested period
+      type: object
+      required:
+      - total_subscribers
+      - total_earnings_cents
+      title: MonetizationSummary
+    BucketHours:
+      type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 6
+      - 8
+      - 12
+      - 24
+      title: BucketHours
     ToolExecutionLog:
       properties:
         user_id:
@@ -4541,36 +4180,319 @@ components:
       - id
       title: ToolExecutionLog
       description: Tool Execution Log
-    ValidationError:
+    AgentExecutionCredits:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
+        user_id:
           type: string
-          title: Message
-        type:
+          title: User Id
+        total_executions:
+          type: integer
+          title: Total Executions
+        allowed_monthly_executions:
+          type: integer
+          title: Allowed Monthly Executions
+        reset_datetime:
           type: string
-          title: Error Type
+          format: date-time
+          title: Reset Datetime
+        last_reset_datetime:
+          type: string
+          format: date-time
+          title: Last Reset Datetime
+          default: '2026-05-15T16:42:26.132612Z'
       type: object
       required:
-      - loc
-      - msg
+      - user_id
+      - total_executions
+      - allowed_monthly_executions
+      - reset_datetime
+      title: AgentExecutionCredits
+    StripeSessionRequest:
+      properties:
+        price_ids:
+          items:
+            type: string
+          type: array
+          title: Price Ids
+        success_payment_url:
+          type: string
+          title: Success Payment Url
+        cancel_payment_url:
+          type: string
+          title: Cancel Payment Url
+        billing_url:
+          type: string
+          title: Billing Url
+        mode:
+          type: string
+          enum:
+          - subscription
+          - payment
+          title: Mode
+          default: subscription
+      type: object
+      required:
+      - price_ids
+      - success_payment_url
+      - cancel_payment_url
+      - billing_url
+      title: StripeSessionRequest
+      description: Stripe Session
+    AgentSubscribeRequest:
+      properties:
+        success_url:
+          type: string
+          title: Success Url
+        cancel_url:
+          type: string
+          title: Cancel Url
+      type: object
+      required:
+      - success_url
+      - cancel_url
+      title: AgentSubscribeRequest
+    AgentFileBatchPositionRequest:
+      properties:
+        positions:
+          items:
+            $ref: '#/components/schemas/AgentFilePositionUpdate'
+          type: array
+          title: Positions
+      type: object
+      required:
+      - positions
+      title: AgentFileBatchPositionRequest
+      description: Request model for updating positions of multiple files
+    AgentThemePreferenceUpsertRequest:
+      properties:
+        theme_color:
+          type: string
+          title: Theme Color
+      type: object
+      required:
+      - theme_color
+      title: AgentThemePreferenceUpsertRequest
+    AgentThemePreferenceResponse:
+      properties:
+        agent_id:
+          type: string
+          format: uuid
+          title: Agent Id
+        theme_color:
+          type: string
+          pattern: ^#[0-9A-F]{6}$
+          title: Theme Color
+        updated_at:
+          type: string
+          format: date-time
+          title: Updated At
+      type: object
+      required:
+      - agent_id
+      - theme_color
+      - updated_at
+      title: AgentThemePreferenceResponse
+    UserFeedbackRequest:
+      properties:
+        user_feedback:
+          type: string
+          enum:
+          - approved
+          - rejected
+          - pending
+          title: User Feedback
+      type: object
+      required:
+      - user_feedback
+      title: UserFeedbackRequest
+    AgentRunLog:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        agent_id:
+          type: string
+          format: uuid
+          title: Agent Id
+        run_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Run Id
+        type:
+          type: string
+          enum:
+          - local
+          - agent_stream
+          - agent_run
+          - agent_studio
+          - agent_studio_v3
+          title: Type
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        start_time:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start Time
+        end_time:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End Time
+      type: object
+      required:
+      - user_id
+      - agent_id
       - type
-      title: ValidationError
-    AgentFileResponse:
+      title: AgentRunLog
+    AgentRunBreakdownRow:
+      properties:
+        agent_id:
+          type: string
+          format: uuid
+          title: Agent Id
+        title:
+          type: string
+          title: Title
+        total:
+          type: integer
+          title: Total
+        completed:
+          type: integer
+          title: Completed
+        failed:
+          type: integer
+          title: Failed
+        active:
+          type: integer
+          title: Active
+        success_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Success Rate
+        latest_run_at:
+          type: string
+          format: date-time
+          title: Latest Run At
+        trend:
+          items:
+            $ref: '#/components/schemas/AgentRunTrendPoint'
+          type: array
+          title: Trend
+      type: object
+      required:
+      - agent_id
+      - title
+      - total
+      - completed
+      - failed
+      - active
+      - success_rate
+      - latest_run_at
+      - trend
+      title: AgentRunBreakdownRow
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    ScheduleListResponse:
       properties:
         data:
-          $ref: '#/components/schemas/AgentFileModel'
+          items:
+            $ref: '#/components/schemas/Schedule'
+          type: array
+          title: Data
       type: object
       required:
       - data
-      title: AgentFileResponse
-      description: API response wrapper for a single file
+      title: ScheduleListResponse
+    AgentListItem:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        title:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Title
+        slug:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Slug
+        public:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Public
+        user_id:
+          type: string
+          title: User Id
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        updated_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Updated At
+        last_ran_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Last Ran At
+        count_runs:
+          type: integer
+          title: Count Runs
+          default: 0
+      type: object
+      required:
+      - id
+      - user_id
+      title: AgentListItem
+    Service:
+      properties:
+        name:
+          type: string
+          title: Name
+        url:
+          type: string
+          maxLength: 2083
+          minLength: 1
+          format: uri
+          title: Url
+      type: object
+      required:
+      - name
+      - url
+      title: Service
     AgentStudioChatCreate:
       properties:
         run_id:
@@ -4596,6 +4518,84 @@ components:
       - visibility
       - title
       title: AgentStudioChatCreate
+    CliAuthInsertModel:
+      properties:
+        jwt:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Jwt
+      type: object
+      title: CliAuthInsertModel
+    AgentFileUpdateRequest:
+      properties:
+        filename:
+          anyOf:
+          - type: string
+            maxLength: 255
+            minLength: 1
+          - type: 'null'
+          title: Filename
+        mime_type:
+          anyOf:
+          - type: string
+          - type: 'null'
+          title: Mime Type
+        storage_url:
+          anyOf:
+          - type: string
+            minLength: 1
+            format: uri
+          - type: 'null'
+          title: Storage Url
+        enabled:
+          anyOf:
+          - type: boolean
+          - type: 'null'
+          title: Enabled
+        position:
+          anyOf:
+          - type: integer
+            minimum: 0.0
+          - type: 'null'
+          title: Position
+        auth:
+          anyOf:
+          - additionalProperties: true
+            type: object
+          - type: 'null'
+          title: Auth
+      type: object
+      title: AgentFileUpdateRequest
+      description: Request model for updating an agent file (all fields optional)
+    SlugRequest:
+      properties:
+        agent:
+          type: string
+          title: Agent
+      type: object
+      required:
+      - agent
+      title: SlugRequest
+    ToolExecutionLogsResponse:
+      properties:
+        logs:
+          items:
+            $ref: '#/components/schemas/ToolExecutionLog'
+          type: array
+          title: Logs
+        next_cursor:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - logs
+      - next_cursor
+      title: ToolExecutionLogsResponse
+      description: Tool Execution Log Response
   securitySchemes:
     HTTPBearer:
       type: http

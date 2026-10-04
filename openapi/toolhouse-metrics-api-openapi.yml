@@ -164,62 +164,6 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
-    RunVolumeResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/RunVolumeRow'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: RunVolumeResponse
-    BucketHours:
-      type: integer
-      enum:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 6
-      - 8
-      - 12
-      - 24
-      title: BucketHours
-    AgentRunMetricsSummary:
-      properties:
-        total_runs:
-          type: integer
-          title: Total Runs
-        completed_runs:
-          type: integer
-          title: Completed Runs
-        failed_runs:
-          type: integer
-          title: Failed Runs
-        active_runs:
-          type: integer
-          title: Active Runs
-        success_rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Success Rate
-        failure_rate:
-          anyOf:
-          - type: number
-          - type: 'null'
-          title: Failure Rate
-      type: object
-      required:
-      - total_runs
-      - completed_runs
-      - failed_runs
-      - active_runs
-      - success_rate
-      - failure_rate
-      title: AgentRunMetricsSummary
     RunVolumeRow:
       properties:
         bucket_start:
@@ -255,49 +199,39 @@ components:
       - failed
       - active
       title: RunVolumeRow
-    AgentRunBreakdownResponse:
+    ValidationError:
       properties:
-        data:
+        loc:
           items:
-            $ref: '#/components/schemas/AgentRunBreakdownRow'
+            anyOf:
+            - type: string
+            - type: integer
           type: array
-          title: Data
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
       type: object
       required:
-      - data
-      title: AgentRunBreakdownResponse
-    AgentRunTrendPoint:
-      properties:
-        bucket_start:
-          type: string
-          format: date-time
-          title: Bucket Start
-        bucket_end:
-          type: string
-          format: date-time
-          title: Bucket End
-        label:
-          type: string
-          title: Label
-        total:
-          type: integer
-          title: Total
-      type: object
-      required:
-      - bucket_start
-      - bucket_end
-      - label
-      - total
-      title: AgentRunTrendPoint
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    BucketHours:
+      type: integer
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 6
+      - 8
+      - 12
+      - 24
+      title: BucketHours
     AgentRunBreakdownRow:
       properties:
         agent_id:
@@ -345,27 +279,62 @@ components:
       - latest_run_at
       - trend
       title: AgentRunBreakdownRow
-    ValidationError:
+    AgentRunMetricsSummary:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
+        total_runs:
+          type: integer
+          title: Total Runs
+        completed_runs:
+          type: integer
+          title: Completed Runs
+        failed_runs:
+          type: integer
+          title: Failed Runs
+        active_runs:
+          type: integer
+          title: Active Runs
+        success_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Success Rate
+        failure_rate:
+          anyOf:
+          - type: number
+          - type: 'null'
+          title: Failure Rate
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - total_runs
+      - completed_runs
+      - failed_runs
+      - active_runs
+      - success_rate
+      - failure_rate
+      title: AgentRunMetricsSummary
+    AgentRunTrendPoint:
+      properties:
+        bucket_start:
+          type: string
+          format: date-time
+          title: Bucket Start
+        bucket_end:
+          type: string
+          format: date-time
+          title: Bucket End
+        label:
+          type: string
+          title: Label
+        total:
+          type: integer
+          title: Total
+      type: object
+      required:
+      - bucket_start
+      - bucket_end
+      - label
+      - total
+      title: AgentRunTrendPoint
     AgentRunMetricsResponse:
       properties:
         total_runs:
@@ -419,6 +388,37 @@ components:
       - chart_rows
       - agent_rows
       title: AgentRunMetricsResponse
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
+    AgentRunBreakdownResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AgentRunBreakdownRow'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: AgentRunBreakdownResponse
+    RunVolumeResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/RunVolumeRow'
+          type: array
+          title: Data
+      type: object
+      required:
+      - data
+      title: RunVolumeResponse
   securitySchemes:
     HTTPBearer:
       type: http

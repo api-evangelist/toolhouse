@@ -153,6 +153,45 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
+    AgentRunViewListResponse:
+      properties:
+        data:
+          items:
+            $ref: '#/components/schemas/AgentRunView'
+          type: array
+          title: Data
+        next_cursor:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Next Cursor
+      type: object
+      required:
+      - data
+      - next_cursor
+      title: AgentRunViewListResponse
     AgentRunView:
       properties:
         id:
@@ -242,24 +281,6 @@ components:
       - title
       - chat_archived
       title: AgentRunView
-    AgentRunViewListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AgentRunView'
-          type: array
-          title: Data
-        next_cursor:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: AgentRunViewListResponse
     AgentRunLog:
       properties:
         id:
@@ -367,27 +388,6 @@ components:
       - start_time
       - end_time
       title: McpServerLog
-    ValidationError:
-      properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
-          type: string
-          title: Message
-        type:
-          type: string
-          title: Error Type
-      type: object
-      required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
   securitySchemes:
     HTTPBearer:
       type: http
