@@ -183,6 +183,9 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/toolhouse.png
 access: 3rd-Party
 common:
+- type: CapabilityMap
+  url: capabilities/toolhouse-capability-edges.yml
+  name: Toolhouse Business Capability Map
 - type: VendorFacets
   url: vendor-facets/toolhouse-vendor-facets.yml
 - type: PostmanWorkspace
