@@ -463,27 +463,32 @@ components:
       - user_id
       - name
       title: BaseApiKey
-    ValidationError:
+    ApiKey:
       properties:
-        loc:
-          items:
-            anyOf:
-            - type: string
-            - type: integer
-          type: array
-          title: Location
-        msg:
+        id:
+          type: integer
+          title: Id
+        user_id:
           type: string
-          title: Message
-        type:
+          title: User Id
+        name:
           type: string
-          title: Error Type
+          title: Name
+        archived:
+          type: boolean
+          title: Archived
+          default: false
+        api_key:
+          type: string
+          title: Api Key
       type: object
       required:
-      - loc
-      - msg
-      - type
-      title: ValidationError
+      - id
+      - user_id
+      - name
+      - api_key
+      title: ApiKey
+      description: API Key
     AgentExecutionCredits:
       properties:
         user_id:
@@ -536,42 +541,26 @@ components:
       - email
       title: UserCreate
       description: User model for the backend API.
-    ApiKey:
+    ScheduleListResponse:
       properties:
-        id:
-          type: integer
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        name:
-          type: string
-          title: Name
-        archived:
-          type: boolean
-          title: Archived
-          default: false
-        api_key:
-          type: string
-          title: Api Key
+        data:
+          items:
+            $ref: '#/components/schemas/Schedule'
+          type: array
+          title: Data
       type: object
       required:
-      - id
-      - user_id
-      - name
-      - api_key
-      title: ApiKey
-      description: API Key
-    UpdateMonthlyCreditAllowance:
+      - data
+      title: ScheduleListResponse
+    HTTPValidationError:
       properties:
-        amount:
-          type: integer
-          title: Amount
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
       type: object
-      required:
-      - amount
-      title: UpdateMonthlyCreditAllowance
-      description: Update Monthly Credit Allowance
+      title: HTTPValidationError
     User:
       properties:
         id:
@@ -596,26 +585,6 @@ components:
       - email
       title: User
       description: User
-    HTTPValidationError:
-      properties:
-        detail:
-          items:
-            $ref: '#/components/schemas/ValidationError'
-          type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    ScheduleListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/Schedule'
-          type: array
-          title: Data
-      type: object
-      required:
-      - data
-      title: ScheduleListResponse
     MCPServer:
       properties:
         qualified_name:
@@ -661,6 +630,16 @@ components:
       - created_at
       title: MCPServer
       description: MCP Server model for database storage
+    UpdateMonthlyCreditAllowance:
+      properties:
+        amount:
+          type: integer
+          title: Amount
+      type: object
+      required:
+      - amount
+      title: UpdateMonthlyCreditAllowance
+      description: Update Monthly Credit Allowance
     AgentRun:
       properties:
         id:
@@ -754,6 +733,27 @@ components:
       required:
       - id
       title: ScheduleBackofficeRequest
+    ValidationError:
+      properties:
+        loc:
+          items:
+            anyOf:
+            - type: string
+            - type: integer
+          type: array
+          title: Location
+        msg:
+          type: string
+          title: Message
+        type:
+          type: string
+          title: Error Type
+      type: object
+      required:
+      - loc
+      - msg
+      - type
+      title: ValidationError
     Schedule:
       properties:
         id:

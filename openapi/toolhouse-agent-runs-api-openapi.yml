@@ -153,6 +153,113 @@ paths:
                 $ref: '#/components/schemas/HTTPValidationError'
 components:
   schemas:
+    McpServerLog:
+      properties:
+        id:
+          type: string
+          format: uuid
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        agent_id:
+          type: string
+          format: uuid
+          title: Agent Id
+        run_id:
+          type: string
+          format: uuid
+          title: Run Id
+        tool_name:
+          type: string
+          title: Tool Name
+        tool_call_id:
+          type: string
+          title: Tool Call Id
+        start_time:
+          type: string
+          format: date-time
+          title: Start Time
+        end_time:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End Time
+      type: object
+      required:
+      - id
+      - user_id
+      - agent_id
+      - run_id
+      - tool_name
+      - tool_call_id
+      - start_time
+      - end_time
+      title: McpServerLog
+    AgentRunLog:
+      properties:
+        id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Id
+        user_id:
+          type: string
+          title: User Id
+        agent_id:
+          type: string
+          format: uuid
+          title: Agent Id
+        run_id:
+          anyOf:
+          - type: string
+            format: uuid
+          - type: 'null'
+          title: Run Id
+        type:
+          type: string
+          enum:
+          - local
+          - agent_stream
+          - agent_run
+          - agent_studio
+          - agent_studio_v3
+          title: Type
+        created_at:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Created At
+        start_time:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: Start Time
+        end_time:
+          anyOf:
+          - type: string
+            format: date-time
+          - type: 'null'
+          title: End Time
+      type: object
+      required:
+      - user_id
+      - agent_id
+      - type
+      title: AgentRunLog
+    HTTPValidationError:
+      properties:
+        detail:
+          items:
+            $ref: '#/components/schemas/ValidationError'
+          type: array
+          title: Detail
+      type: object
+      title: HTTPValidationError
     ValidationError:
       properties:
         loc:
@@ -174,24 +281,6 @@ components:
       - msg
       - type
       title: ValidationError
-    AgentRunViewListResponse:
-      properties:
-        data:
-          items:
-            $ref: '#/components/schemas/AgentRunView'
-          type: array
-          title: Data
-        next_cursor:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Next Cursor
-      type: object
-      required:
-      - data
-      - next_cursor
-      title: AgentRunViewListResponse
     AgentRunView:
       properties:
         id:
@@ -281,113 +370,24 @@ components:
       - title
       - chat_archived
       title: AgentRunView
-    AgentRunLog:
+    AgentRunViewListResponse:
       properties:
-        id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        agent_id:
-          type: string
-          format: uuid
-          title: Agent Id
-        run_id:
-          anyOf:
-          - type: string
-            format: uuid
-          - type: 'null'
-          title: Run Id
-        type:
-          type: string
-          enum:
-          - local
-          - agent_stream
-          - agent_run
-          - agent_studio
-          - agent_studio_v3
-          title: Type
-        created_at:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Created At
-        start_time:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: Start Time
-        end_time:
-          anyOf:
-          - type: string
-            format: date-time
-          - type: 'null'
-          title: End Time
-      type: object
-      required:
-      - user_id
-      - agent_id
-      - type
-      title: AgentRunLog
-    HTTPValidationError:
-      properties:
-        detail:
+        data:
           items:
-            $ref: '#/components/schemas/ValidationError'
+            $ref: '#/components/schemas/AgentRunView'
           type: array
-          title: Detail
-      type: object
-      title: HTTPValidationError
-    McpServerLog:
-      properties:
-        id:
-          type: string
-          format: uuid
-          title: Id
-        user_id:
-          type: string
-          title: User Id
-        agent_id:
-          type: string
-          format: uuid
-          title: Agent Id
-        run_id:
-          type: string
-          format: uuid
-          title: Run Id
-        tool_name:
-          type: string
-          title: Tool Name
-        tool_call_id:
-          type: string
-          title: Tool Call Id
-        start_time:
-          type: string
-          format: date-time
-          title: Start Time
-        end_time:
+          title: Data
+        next_cursor:
           anyOf:
           - type: string
             format: date-time
           - type: 'null'
-          title: End Time
+          title: Next Cursor
       type: object
       required:
-      - id
-      - user_id
-      - agent_id
-      - run_id
-      - tool_name
-      - tool_call_id
-      - start_time
-      - end_time
-      title: McpServerLog
+      - data
+      - next_cursor
+      title: AgentRunViewListResponse
   securitySchemes:
     HTTPBearer:
       type: http
