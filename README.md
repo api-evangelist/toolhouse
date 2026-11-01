@@ -64,167 +64,207 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Toolhouse is a Backend-as-a-Service platform for building, deploying, and managing "AI workers" (Toolhouse's current product noun, used interchangeably with "AI agents"). The homepage frames the value proposition as "Turn your AI chats into affordable and reliable AI workers that do work while you're busy," and the docs define a worker as "a system that carries out a task with three components: a trigger, a process that may include specialized skills, and tools or systems it can connect to." Builders describe a task in plain language and ship a worker to production; developers can invoke any worker over HTTP via the Workers API at `agents.toolhouse.ai`. Every worker is wired into pre-integrated capabilities including Toolhouse RAG, web and social media search, scraping, the Virtual Computer (Python sandbox), image generation/editing, vision, document parsing, file download, memory, and MCP Discovery.
+Toolhouse is a Backend-as-a-Service platform for building, deploying, and managing "AI workers"
+(Toolhouse's current product noun, used interchangeably with "AI agents"). The homepage frames the value
+proposition as "Turn your AI chats into affordable and reliable AI workers that do work while you're
+busy," and the docs define a worker as "a system that carries out a task with three components: a trigger,
+a process that may include specialized skills, and tools or systems it can connect to." Builders describe
+a task in plain language in the Agent Editor and ship a worker to production; developers can do the same
+programmatically via SDKs. Every worker is automatically wired into Toolhouse's pre-integrated
+capabilities, including web and social media search, scraping, Toolhouse RAG, persistent memory, the
+Virtual Computer code-execution sandbox, image generation/editing and vision, document parsing, file
+download, and MCP Discovery for connecting to thousands of MCP servers at runtime. The platform exposes
+a Workers API (agents.toolhouse.ai) for invoking deployed workers over REST with text and NDJSON
+streaming and stateful conversation continuity (X-Toolhouse-Run-ID), a Platform API for full worker and
+run lifecycle management, scheduling (10-minute minimum cadence), metrics, monetization, and integrations,
+plus no-code workflow integration through Zapier and Toolhouse n8n Nodes. Toolhouse runs on a broad model
+substrate including OpenAI, Anthropic, Together AI, Groq, and NVIDIA model offerings. The current public
+pricing surface is Business ($500/mo, 25,000 credits, 50 workers), Business Max ($1,200/mo, 80,000
+credits, 500 workers), and custom Enterprise — all plans include "free unlimited tokens" and a 14-day
+free trial. Toolhouse reports 7,000+ teams on the platform and 40+ integrations and is backed by
+NextGenerationEU funding.
 
-**Website:** [https://toolhouse.ai](https://toolhouse.ai)
-**Documentation:** [https://docs.toolhouse.ai/toolhouse](https://docs.toolhouse.ai/toolhouse)
-**GitHub Org:** [https://github.com/toolhouseai](https://github.com/toolhouseai)
-**Pricing:** Business $500/mo (25k credits) · Business Max $1,200/mo (80k credits) · Enterprise custom · all plans include free unlimited tokens.
+**Areas:** Agent Infrastructure · AI Agents · AI Workers · Backend-as-a-Service · MCP · MCP Discovery · RAG · Tools · Workers API
 
-## Scope
+## Toolhouse on APIs.io
 
-- **Type:** Index
-- **Position:** Consumer
-- **Access:** 3rd-Party
+Everything profiled for Toolhouse is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/toolhouse/](https://apis.io/providers/toolhouse/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (8)
 
-Agent Infrastructure, AI Agents, AI Workers, Backend as a Service, MCP, MCP Discovery, RAG, Tools, Workers API
+- [Toolhouse Workers API](https://apis.io/apis/toolhouse/workers-api/) — The Toolhouse Workers API (historically the "Agents API") enables HTTP execution of any deployed Toolhouse worker. Workers defined via the Agent Editor or…
+- [Toolhouse Agent Runs API](https://apis.io/apis/toolhouse/toolhouse-agent-runs-api/) — The Agent Runs API from Toolhouse — 4 operation(s) for agent runs.
+- [Toolhouse API Keys API](https://apis.io/apis/toolhouse/toolhouse-api-keys-api/) — The API Keys API from Toolhouse — 3 operation(s) for api keys.
+- [Toolhouse Backoffice API](https://apis.io/apis/toolhouse/toolhouse-backoffice-api/) — The Backoffice API from Toolhouse — 15 operation(s) for backoffice.
+- [Toolhouse Logs API](https://apis.io/apis/toolhouse/toolhouse-logs-api/) — The Logs API from Toolhouse — 2 operation(s) for logs.
+- [Toolhouse Metrics API](https://apis.io/apis/toolhouse/toolhouse-metrics-api/) — The Metrics API from Toolhouse — 4 operation(s) for metrics.
+- [Toolhouse SDK API](https://apis.io/apis/toolhouse/toolhouse-sdk-api-api/) — The SDK API API from Toolhouse — 20 operation(s) for sdk api.
+- [Toolhouse User API](https://apis.io/apis/toolhouse/toolhouse-user-api-api/) — The User API API from Toolhouse — 58 operation(s) for user api.
 
-## APIs
+### Published properties
 
-### Toolhouse Platform API
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-Management and orchestration capabilities for AI workers and connected tools. Endpoints cover user profile and billing, API key lifecycle, worker definition and deployment, agent-run management with paginated listing and per-run logs (including MCP server logs), Agent Studio chat sessions, agent file management, agent subscriptions and monetization, transfer, scheduled execution via cron (10-minute minimum), MCP server and MCP registry configuration, integrations and auth connections, OAuth callback handling, Stripe webhook and session handling, and an agent-runs metrics surface for usage, volume, and per-agent summary reporting. Authentication is HTTPBearer with per-user API keys.
+#### MCP servers (1)
 
-**Human URL:** [https://docs.toolhouse.ai/toolhouse](https://docs.toolhouse.ai/toolhouse)
+Model Context Protocol servers that expose the API to agents.
 
-**Tags:** Agent Runs, AI Agents, AI Workers, Agent Studio, API Keys, Billing, Credits, Integrations, Management, Metrics, Monetization, Schedules, SDK
+- [MCP Server](https://apis.io/servers/toolhouse/mcp-server/)
 
-**Properties:**
-- [Documentation](https://docs.toolhouse.ai/toolhouse)
-- [OpenAPI](openapi/toolhouse-openapi-original.yml)
-- [SpectralRules](rules/toolhouse-rules.yml)
-- [Naftiko Capabilities](capabilities/)
+#### Agentic access (1)
 
-### Toolhouse Workers API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-HTTP execution surface for any deployed worker at `https://agents.toolhouse.ai`. `POST /{agent_id}` starts a new task, `PUT /{agent_id}/{run_id}` continues an existing conversation, and `GET /{agent_id}/{run_id}` retrieves the full history. NDJSON variants under `/ndjson/` stream the worker's output plus out-of-band tool-call and debug signals. Conversation continuity is keyed by the `X-Toolhouse-Run-ID` response header. Attachments are supported via URL (30-second download timeout) or base64-encoded direct upload (10 MB max per attachment). Public workers require no authentication; private workers use HTTPBearer with a Toolhouse API key.
+- [Toolhouse Agentic Access](https://apis.io/agentic-access/toolhouse/toolhouse-agentic-access/)
 
-**Human URL:** [https://docs.toolhouse.ai/toolhouse/developers/workers-api](https://docs.toolhouse.ai/toolhouse/developers/workers-api)
+#### JSON Schema (1)
 
-**Base URL:** `https://agents.toolhouse.ai`
+The data models the API reads and writes.
 
-**Tags:** AI Agents, AI Workers, Attachments, Conversations, Execution, Statefulness, Streaming
+- [Toolhouse Agent](https://apis.io/schemas/toolhouse/toolhouse-agent/)
 
-## SDKs & Integrations
+#### JSON Structure (1)
 
-| Name | URL |
-|---|---|
-| Python SDK (v1.3.1) | [toolhouseai/toolhouse-sdk-python](https://github.com/toolhouseai/toolhouse-sdk-python) |
-| TypeScript SDK | [toolhouseai/toolhouse-sdk-typescript](https://github.com/toolhouseai/toolhouse-sdk-typescript) |
-| Client (JavaScript) | [toolhouseai/client](https://github.com/toolhouseai/client) |
-| MCP Server | [toolhouseai/toolhouse-mcp](https://github.com/toolhouseai/toolhouse-mcp) |
-| MCP Distributed | [toolhouseai/mcp-distributed](https://github.com/toolhouseai/mcp-distributed) |
-| n8n Nodes | [toolhouseai/n8n-nodes-toolhouse](https://github.com/toolhouseai/n8n-nodes-toolhouse) |
-| Examples | [toolhouseai/toolhouse-examples](https://github.com/toolhouseai/toolhouse-examples) |
-| Fastlane Demo | [toolhouseai/fastlane-demo](https://github.com/toolhouseai/fastlane-demo) |
-| Toolhouse Assessment | [toolhouseai/toolhouse-assessment](https://github.com/toolhouseai/toolhouse-assessment) |
-| Teleprompter | [toolhouseai/toolhouse-teleprompter](https://github.com/toolhouseai/toolhouse-teleprompter) |
-| Agentic Labs | [toolhouseai/toolhouse-agenticlabs](https://github.com/toolhouseai/toolhouse-agenticlabs) |
+Data models expressed in JSON Structure.
 
-## Artifacts
+- [Toolhouse Agent Structure](https://apis.io/json-structure/toolhouse/toolhouse-agent-structure/)
 
-### OpenAPI Specifications
+#### JSON-LD (1)
 
-| File | Description |
-|---|---|
-| [openapi/toolhouse-openapi-original.yml](openapi/toolhouse-openapi-original.yml) | Toolhouse Platform API — OpenAPI 3.1 (60+ endpoints) |
+Linked-data contexts for the provider's vocabulary.
 
-### Spectral Rules
+- [Toolhouse Context](https://apis.io/jsonld/toolhouse/toolhouse-context/)
 
-| File | Description |
-|---|---|
-| [rules/toolhouse-rules.yml](rules/toolhouse-rules.yml) | Spectral ruleset enforcing Toolhouse API conventions |
+#### Vocabulary (1)
 
-### Naftiko Capabilities
+The provider's domain terms, defined.
 
-| File | Description |
-|---|---|
-| [capabilities/toolhouse-user-api.yaml](capabilities/toolhouse-user-api.yaml) | User API capability (78 operations) |
-| [capabilities/toolhouse-sdk-api.yaml](capabilities/toolhouse-sdk-api.yaml) | Toolhouse SDK API capability (`/v1/` surface) |
-| [capabilities/toolhouse-agent-runs.yaml](capabilities/toolhouse-agent-runs.yaml) | Agent runs capability |
-| [capabilities/toolhouse-api-keys.yaml](capabilities/toolhouse-api-keys.yaml) | API key lifecycle capability |
-| [capabilities/toolhouse-backoffice.yaml](capabilities/toolhouse-backoffice.yaml) | Backoffice capability |
-| [capabilities/toolhouse-logs.yaml](capabilities/toolhouse-logs.yaml) | Logs capability |
-| [capabilities/toolhouse-metrics.yaml](capabilities/toolhouse-metrics.yaml) | Metrics capability |
+- [Toolhouse Vocabulary](https://apis.io/vocabularies/toolhouse/toolhouse-vocabulary/)
 
-### JSON Schema
+#### Examples (2)
 
-| File | Description |
-|---|---|
-| [json-schema/toolhouse-agent-schema.json](json-schema/toolhouse-agent-schema.json) | JSON Schema for the Toolhouse Agent / Worker entity |
+Example requests and responses.
 
-### JSON Structure
+- [Toolhouse List Agents Example](https://apis.io/examples/toolhouse/toolhouse-list-agents-example/)
+- [Toolhouse Upsert Agent Example](https://apis.io/examples/toolhouse/toolhouse-upsert-agent-example/)
 
-| File | Description |
-|---|---|
-| [json-structure/toolhouse-agent-structure.json](json-structure/toolhouse-agent-structure.json) | Structured documentation of the Toolhouse Agent / Worker model |
+#### Collections (14)
 
-### JSON-LD Context
+Postman and Open Collection request collections.
 
-| File | Description |
-|---|---|
-| [json-ld/toolhouse-context.jsonld](json-ld/toolhouse-context.jsonld) | JSON-LD context (AIWorker, Agent, WorkerRun, AgentRun, Tool, Schedule, ApiKey, McpServer) |
+- [Toolhouse Agent Runs API](https://apis.io/collections/toolhouse/open-toolhouse-agent-runs-api/)
+- [Toolhouse Agent Runs API Keys API](https://apis.io/collections/toolhouse/open-toolhouse-api-keys-api/)
+- [Toolhouse Agent Runs Backoffice API](https://apis.io/collections/toolhouse/open-toolhouse-backoffice-api/)
+- [Toolhouse Agent Runs Logs API](https://apis.io/collections/toolhouse/open-toolhouse-logs-api/)
+- [Toolhouse Agent Runs Metrics API](https://apis.io/collections/toolhouse/open-toolhouse-metrics-api/)
+- [Toolhouse Agent Runs SDK API API](https://apis.io/collections/toolhouse/open-toolhouse-sdk-api-api/)
+- [Toolhouse Agent Runs User API API](https://apis.io/collections/toolhouse/open-toolhouse-user-api-api/)
+- [Toolhouse Agent Runs API](https://apis.io/collections/toolhouse/postman-toolhouse-agent-runs-api/)
+- [Toolhouse Agent Runs API Keys API](https://apis.io/collections/toolhouse/postman-toolhouse-api-keys-api/)
+- [Toolhouse Agent Runs Backoffice API](https://apis.io/collections/toolhouse/postman-toolhouse-backoffice-api/)
+- [Toolhouse Agent Runs Logs API](https://apis.io/collections/toolhouse/postman-toolhouse-logs-api/)
+- [Toolhouse Agent Runs Metrics API](https://apis.io/collections/toolhouse/postman-toolhouse-metrics-api/)
+- [Toolhouse Agent Runs SDK API API](https://apis.io/collections/toolhouse/postman-toolhouse-sdk-api-api/)
+- [Toolhouse Agent Runs User API API](https://apis.io/collections/toolhouse/postman-toolhouse-user-api-api/)
 
-### Examples
+#### Governance rules (2)
 
-| File | Description |
-|---|---|
-| [examples/toolhouse-list-agents-example.json](examples/toolhouse-list-agents-example.json) | GET /me/agents — list agents response |
-| [examples/toolhouse-upsert-agent-example.json](examples/toolhouse-upsert-agent-example.json) | POST /me/agents — create agent request/response |
+Spectral rulesets for the provider's contracts.
 
-### Vocabulary
+- [Toolhouse — jsonschema rules](https://apis.io/rules/toolhouse/toolhouse-jsonschema-spectral-rules/)
+- [Toolhouse API Rules](https://apis.io/rules/toolhouse/toolhouse-rules/)
 
-| File | Description |
-|---|---|
-| [vocabulary/toolhouse-vocabulary.yml](vocabulary/toolhouse-vocabulary.yml) | Domain vocabulary and taxonomy for the Toolhouse platform |
+#### Security (2)
 
-### Plans, Rate Limits, and FinOps
+Authentication, trust centre, and vulnerability disclosure.
 
-| File | Description |
-|---|---|
-| [plans/toolhouse-plans-pricing.yml](plans/toolhouse-plans-pricing.yml) | API Commons Plans 0.1 — Business / Business Max / Enterprise tiers (reconciled 2026-05-22) |
-| [rate-limits/toolhouse-rate-limits.yml](rate-limits/toolhouse-rate-limits.yml) | API Commons Rate Limits 0.1 — credit quotas, schedule floor, attachment caps |
-| [finops/toolhouse-finops.yml](finops/toolhouse-finops.yml) | FOCUS-aligned FinOps framework for worker_run_credits and operational meters |
+- [Toolhouse Authentication](https://apis.io/security/toolhouse/toolhouse-authentication/)
+- [Toolhouse Domain Security](https://apis.io/security/toolhouse/toolhouse-domain-security/)
 
-## Common Properties
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Toolhouse Plans Pricing](https://apis.io/plans/toolhouse/toolhouse-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Toolhouse Rate Limits](https://apis.io/rate-limits/toolhouse/toolhouse-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Toolhouse Finops](https://apis.io/finops/toolhouse/toolhouse-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://toolhouse.ai/)
 - [Documentation](https://docs.toolhouse.ai/toolhouse)
-- [Documentation Sitemap](https://docs.toolhouse.ai/toolhouse/sitemap.md)
-- [LLMs.txt](https://docs.toolhouse.ai/toolhouse/llms-full.txt)
-- [Blog](https://toolhouse.ai/blog)
 - [Pricing](https://toolhouse.ai/pricing)
-- [Login](https://app.toolhouse.ai)
-- [About](https://toolhouse.ai/about)
-- [GitHub Organization](https://github.com/toolhouseai)
-- [Privacy Policy](https://toolhouse.ai/privacy)
-- [Terms of Service](https://toolhouse.ai/tos)
-- [Twitter](https://x.com/toolhouseai)
-- [LinkedIn](https://www.linkedin.com/company/toolhouseai)
-- [Discord](https://discord.com/invite/xPvyBxhHtu)
-- [YouTube](https://youtube.com/@toolhouseai)
 - [Support](https://help.toolhouse.ai/)
+- [Changelog](https://toolhouse.ai/blog/toolhouse-changelog-august-2025)
+- [Blog](https://toolhouse.ai/blog)
+- [Terms of service](https://toolhouse.ai/tos)
+- [Privacy policy](https://toolhouse.ai/privacy)
+- [GitHub](https://github.com/toolhouseai)
 - [Status](https://toolhouse.betteruptime.com/)
 
-## Notable Findings (2026-05-22 Refresh)
+## API Evangelist rating
 
-- Toolhouse has rebranded around **"AI workers"** as the primary product noun (used interchangeably with "AI agents" in docs).
-- Public pricing has been restructured: the previously published **Basic (free)** and **Pro ($10/mo)** tiers are gone. The entry tier is now **Business at $500/mo** (25,000 credits, 50 workers, 30-day logs). **Business Max** is $1,200/mo (80,000 credits, 500 workers, 1-year logs). All plans include **free unlimited tokens**.
-- Workers API host is `agents.toolhouse.ai` with text + NDJSON streaming, stateful run IDs via `X-Toolhouse-Run-ID`, and 10 MB attachment uploads.
-- Schedule cadence floor is **10 minutes** per worker schedule.
-- Tavily is now an Official Partner integration; 100+ integrations available across the gallery (GitHub, Stripe, Salesforce, HubSpot, Slack, Notion, Google Workspace, etc.).
-- Toolhouse reports **7,000+ teams** on the platform and is backed by NextGenerationEU funding.
-- Python SDK latest release **v1.3.1** (Dec 23, 2024) — hand-written, not OpenAPI-generated.
-- The previously listed `toolhouse-cli` repo is no longer in the public GitHub org listing.
+**Kin Score 50.3** — developing · rubric 0.25.0 · scored 2026-10-23
 
-## Timestamps
+| Facet | Score |
+|---|---|
+| Discoverability | 71.7 |
+| Contract quality | 51.7 |
+| Contract governance | 27.3 |
+| Operational transparency | 44.7 |
+| Developer ergonomics | 46.4 |
+| Access clarity | 44.7 |
 
-- **Created:** 2026-03-26
-- **Modified:** 2026-05-22
+**Agent readiness 27.3** — agent-aware
 
-## Maintainers
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Regulatory alignment 24.5** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/toolhouse/](https://apis.io/providers/toolhouse/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Toolhouse: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/toolhouse/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
